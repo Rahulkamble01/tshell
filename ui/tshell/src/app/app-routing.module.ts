@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
-  {path:'',component:SignupComponent}
+  {}
 ];
 
 @NgModule({
@@ -11,3 +10,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routingComponent=[ ]
