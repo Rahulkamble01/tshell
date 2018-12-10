@@ -68,22 +68,4 @@ public class Skill {
 		this.testCount = testCount;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Skill [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", searchCount=");
-		builder.append(searchCount);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", testCount=");
-		builder.append(testCount);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
 }
