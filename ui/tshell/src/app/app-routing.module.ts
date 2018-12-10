@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 
 const routes: Routes = [
-  {}
+  { path: '', component: ContributeQuestionComponent }
 ];
 
 @NgModule({
@@ -10,4 +11,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponent=[ ]
+export const routingComponent = []
