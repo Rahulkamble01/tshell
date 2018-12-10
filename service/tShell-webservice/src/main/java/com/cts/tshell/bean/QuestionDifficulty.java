@@ -35,16 +35,4 @@ public class QuestionDifficulty {
 		this.difficulty = difficulty;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("QuestionDifficulty [id=");
-		builder.append(id);
-		builder.append(", difficulty=");
-		builder.append(difficulty);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
 }

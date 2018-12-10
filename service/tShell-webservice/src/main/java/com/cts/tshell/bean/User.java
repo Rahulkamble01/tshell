@@ -1,11 +1,17 @@
 package com.cts.tshell.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -24,8 +30,9 @@ public class User {
 
 	@Column(name = "us_password")
 	private String password;
-
-	@Column(name = "us_ur_id")
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="us_ur_id")	
 	private Role role;
 
 	@Column(name = "us_emp_id")
@@ -79,25 +86,6 @@ public class User {
 
 	public void setEmpId(int empId) {
 		this.empId = empId;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append(", empId=");
-		builder.append(empId);
-		builder.append("]");
-		return builder.toString();
 	}
 
 	
