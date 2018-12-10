@@ -1,0 +1,92 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+          <label>Skills</label>
+          <select style="margin-left: 10px;" formControlName="skills" class="form-control-lg">
+            <option>Java</option>
+            <option>Oracle</option>
+            <option>Spring</option>
+            <option>C</option>
+            <option>Mongo DB</option>
+          </select>
+
+          <label style="margin-left: 20px;">Topics</label>
+          <select style="margin-left: 10px;" formControlName="topics" class="form-control-lg">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+      
+          <div class="md-form">
+              <label for="form10">Question</label>
+            <i class="fa fa-pencil prefix"></i>
+            <textarea type="text" id="form10" class="md-textarea form-control" rows="3"></textarea>
+           
+          </div>
+
+          <div class="row">
+            <div class="col" formArrayName="options">
+              <h3>Options</h3>
+              <div *ngFor="let option of options.controls; let i=index">
+                <!-- The repeated alias template -->
+                <label>
+                  <input type="text" [formControlName]="i" >
+                  <button (click)="removeOption(i)">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                </label>
+              </div>
+              <button (click)="addOption()" class="btn btn-primary">Add option</button>
+            </div>
+
+            <div class="col" formArrayName="answers">
+              <h3>Answers</h3>
+              <!-- <button (click)="addAnswer()">Add answer</button> -->
+
+              <div *ngFor="let option of answers.controls; let i=index">
+                <!-- The repeated alias template -->
+                <label>
+                  <input type="checkbox" [formControlName]="i" >
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+          <button type="submit" style="margin-top: 3px;" class="btn btn-primary">Submit</button>
+        </form>
+        <div>
+          <label>Want to upload Questions in bulk? Upload your questions as in the
+            <a href="./assets/Questions Format.csv">template</a> format.</label>
+          <input type="file" class="file">
+          <input type="submit" style="margin-top: 2px;" value="Upload" class="btn btn-primary">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+
+<p>
+  Form Value: {{ profileForm.value | json }}
+</p>
+
+
+
+
+
+
+
+<!-- 
+  Copyright 2017-2018 Google Inc. All Rights Reserved.
+  Use of this source code is governed by an MIT-style license that
+  can be found in the LICENSE file at http://angular.io/license
+  -->
