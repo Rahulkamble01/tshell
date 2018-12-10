@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddskillComponent } from './addskill/addskill.component';
+
 
 const routes: Routes = [
-  {}
+  {path:"", component:AddskillComponent}
 ];
 
 @NgModule({
@@ -10,4 +12,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponent=[ ]
