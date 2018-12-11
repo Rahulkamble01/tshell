@@ -1,0 +1,232 @@
+.sidenav {
+  height: 100%;
+  width: 330px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  background-color: #e1eeff;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 20px;
+
+}
+
+.questions {
+  margin-left: 330px;
+  padding: 0px 30px;
+}
+
+#myModalBtn {
+  display: none;
+}
+
+/* Until  767.98px is reached */
+@media (max-width: 767.98px) {
+  #sideNav {
+    display: none;
+  }
+
+  .questions {
+    margin-left: 2px;
+  }
+
+  #myModalBtn {
+    display: block;
+  }
+
+  #countdowntimer {
+    font-size: 10px;
+    font-weight: 100;
+  }
+
+  #timer {
+    font-size: 14px;
+    font-weight: 100;
+  }
+
+  .header-legends {
+    font-size: 14px;
+  }
+
+  .header-legends h5 {
+    font-size: 14px;
+  }
+
+  .test-name {
+    padding-top: 4px;
+  }
+
+}
+
+/*When Media size is 767.98 -- I-pad / tablets */
+@media (min-width: 767.98px) {
+  .sidenav {
+    width: 250px;
+  }
+
+  .questions {
+    margin-left: 250px;
+  }
+
+  #myModalBtn {
+    display: none;
+  }
+
+  .header-legends {
+    font-size: 15px;
+  }
+
+  .header-legends h5 {
+    font-size: 15px;
+  }
+
+
+}
+
+/* When Media size is 767.98 -- Laptops and above*/
+@media (min-width: 992px) {
+  .sidenav {
+    width: 330px;
+  }
+
+  .questions {
+    margin-left: 330px;
+  }
+}
+
+.test-name {
+  padding-top: 20px;
+}
+
+#timer {
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 25px;
+  text-align: center;
+  color: #f07c22;
+
+}
+
+#countdowntimer {
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 25px;
+  text-align: center;
+  color: #f07c22;
+
+}
+
+.header-legends {
+  font-size: 17px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.span-blocks {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.scroll-questions {
+  height: 350px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.legends {
+  display: block;
+  font-weight: 500;
+  color: rgb(61, 61, 61);
+}
+
+.legend-buttons {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  width: 38px;
+  height: 35px;
+  margin-left: 5px;
+  margin-right: 6px;
+  margin-bottom: 10px;
+
+}
+
+#style-1::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: rgb(204, 204, 204);
+}
+
+#style-1::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgb(204, 204, 204);
+}
+
+#style-1::-webkit-scrollbar-thumb {
+
+
+  /* border-radius: 10px;
+          background-color: #FFF;
+          background-image: -webkit-gradient(linear,
+                                             40% 0%,
+                                             75% 84%,
+                                             from(#4D9C41),
+                                             to(#19911D),
+                                             color-stop(.6,#54DE5D))*/
+
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: rgb(60, 177, 255);
+}
+
+.quest{
+  display: inline-flex;
+  align-items: center;
+  font-weight: 450;
+  font-size: 20px;
+  letter-spacing: 0.7px;
+}
+.question-buttons {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  /* padding: .375rem .75rem; */
+  font-size: 1rem;
+  line-height: 1.5;
+  /* border-radius: .25rem; */
+  /* transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
+  /* background-color: white; */
+  width: 35px;
+  height: 40px;
+  margin-bottom: 10px;
+
+}
+
+.question-legends {
+  display: inline-block;
+  font-weight: 550;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 45px;
+  height: 40px; 
+  padding: 5px;
+}

@@ -1,0 +1,85 @@
+
+<div class="container-fluid navbar-dark bg-light">
+    <div class="row">
+      <div class="col-5 col-sm-5 col-md-5 col-lg-5"> </div>
+     
+      <div class="col-3 col-sm-3 col-md-3 col-lg-3 header-legends">
+        <h5>Answered Questions</h5>
+        <div id="countdowntimer"><span id="countdowntimer">25</span></div>
+      </div>
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1"></div>
+      <div class=" col-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="header-legends" ><h5>Time Remaining</h5></div>
+         <div id="countdowntimer" id="timer"></div>
+      </div>
+     
+    </div>
+    </div>
+
+    <div id="sideNav">
+   <div class="sidenav">
+          <h3 class="border-bottom border-dark pb-3 ">QUESTIONS</h3>
+          <div class="p-1 scroll-questions" id="style-1">
+            <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
+            <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let quest of questions">
+              <button type="button" class="question-buttons btn-dark">{{quest}}</button>
+            </span>
+          </div>
+          <div class="legends pt-4">
+            <span class="legend-buttons btn-dark"> </span> Not Visited
+            <span class="legend-buttons btn-success"> </span> Answered
+            <span class="legend-buttons btn-danger"> </span> Skipped
+          </div>
+        </div>
+  
+      </div>
+      <div class="questions">
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-12 col-md-12">
+    <a  class="btn btn-primary " id="myModalBtn">Launch demo modal</a>
+          <div class="row">
+       
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="display-question ">
+                <h3 class="border-bottom border-dark pb-3 test-name ">JAVA ENTRY LEVEL TEST</h3>
+              </div>
+          <div class="quest pt-1">
+            <span class="question-legends btn-danger">Q12</span>
+            <div class="quest pl-3"> How do margin, border and padding fit together in the box model?</div>
+          </div>
+          <div class="quest pt-1">
+              <span class="question-legends btn-danger">Q12</span>
+              <div class="quest pl-3"> How do margin, border and padding fit together in the box model?</div>
+            </div>
+         
+        </div>
+       
+      </div>
+    </div>
+    </div>
+  </div>
+
+  </div>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">QUESTIONS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
