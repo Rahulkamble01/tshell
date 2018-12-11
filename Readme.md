@@ -1,3 +1,2 @@
-# tShell
-
-This project was created with Angular and Spring MVC by CHN18IJ002.
+# tShell - Release 1
+This branch consists of release 1 version of code.
