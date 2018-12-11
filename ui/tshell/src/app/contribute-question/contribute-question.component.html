@@ -17,11 +17,11 @@
             <div>
               <label>Topics</label>
               <select formControlName="topic" class="form-control" name="topic" id="topic">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option>Spring</option>
+                <option>Hibernate</option>
+                <option>OOPS</option>
+                <option>Exception Handling</option>
+                <option>JDBC</option>
               </select>
 
             </div>
@@ -52,9 +52,7 @@
                   <span class="input-group-append" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
 
                     <input type="text" [formControlName]="i" class="form-control" name="options" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
-                    <div *ngIf="profileForm.get('option[i]').touched && profileForm.get('option[i]').invalid">
-                      <div *ngIf="profileForm.get('option[i]').errors.required" class="alert alert-danger">Option is required</div>
-                    </div>
+                    
                     <button (click)="removeOption(i)" class="btn btn-danger btn-sm" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8 ">
                       <i class="fas fa-minus"></i>
                     </button>
