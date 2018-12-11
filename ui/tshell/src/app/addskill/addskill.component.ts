@@ -19,12 +19,12 @@ export class AddskillComponent implements OnInit {
         {
             e.preventDefault();
     
-            var controlForm = $('.controls form:first'),
+            var newinput = $('.controls .topics'),
                 currentEntry = $(this).parents('.entry:first'),
-                newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                newEntry = $(currentEntry.clone()).appendTo(newinput);
     
             newEntry.find('input').val('');
-            controlForm.find('.entry:not(:last) .btn-add')
+            newinput.find('.entry:not(:last) .btn-add')
                 .removeClass('btn-add').addClass('btn-remove')
                 .removeClass('btn-success').addClass('btn-danger')
                 .html('<span class="fa fa-minus"></span>');
