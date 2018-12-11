@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
@@ -9,39 +10,43 @@ import { ConfirmEqualValidatorDirective } from './signup/confirm-equal-validator
 
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
+import { LearnerLoginComponent } from './learner-login/learner-login.component';
 
 
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
+  declarations: [
+    AppComponent,
 
 
-        LoginComponent,
+    LoginComponent,
+    LearnerLoginComponent,
+    AdminSignupComponent,
 
-        AdminSignupComponent,
+    SignupComponent,
+    ConfirmEqualValidatorDirective
 
-        SignupComponent,
-        ConfirmEqualValidatorDirective
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
 
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
 
-        FormsModule,
-        ReactiveFormsModule,
-
-        HttpClientModule
-
-
+    HttpClientModule
 
 
 
-    ],
-    providers: [AuthService],
-    bootstrap: [AppComponent]
+
+
+  ],
+  providers: [AuthService],
+  bootstrap: [AppComponent]
+
+
+
 })
 export class AppModule { }
