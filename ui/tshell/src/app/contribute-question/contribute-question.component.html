@@ -1,74 +1,98 @@
-
-
 <div class="container">
   <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="col">
+      <div class="card" style="background-color: #fbfbfb">
+        <div class="card-body">
+          <form [formGroup]="profileForm">
 
-          <label>Skills</label>
-          <select style="margin-left: 10px;" formControlName="skills" class="form-control-lg">
-            <option>Java</option>
-            <option>Oracle</option>
-            <option>Spring</option>
-            <option>C</option>
-            <option>Mongo DB</option>
-          </select>
+            <h3>Adding question for "Angular" </h3>
+            <!-- <select formControlName="skills" class="form-control">
+                <option>Java</option>
+                <option>Oracle</option>
+                <option>Spring</option>
+                <option>C</option>
+                <option>Mongo DB</option>
+              </select> -->
 
-          <label style="margin-left: 20px;">Topics</label>
-          <select style="margin-left: 10px;" formControlName="topics" class="form-control-lg">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-      
-          <div class="md-form">
+            <div>
+              <label>Topics</label>
+              <select formControlName="topic" class="form-control" name="topic" id="topic">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+
+            </div>
+
+
+            <div class="md-form">
               <label for="form10">Question</label>
-            <i class="fa fa-pencil prefix"></i>
-            <textarea type="text" id="form10" class="md-textarea form-control" rows="3"></textarea>
-           
-          </div>
+              <i class="fa fa-pencil prefix"></i>
+              <textarea type="text" id="form10" class="md-textarea form-control" name="question" rows="10" formControlName="question"></textarea>
+              <div *ngIf="profileForm.get('question').touched && profileForm.get('question').invalid">
+                <div *ngIf="profileForm.get('question').errors.required" class="alert alert-danger">Question is required</div>
+              </div>
+            </div>
 
-          <div class="row">
-            <div class="col" formArrayName="options">
-              <h3>Options</h3>
-              <div *ngFor="let option of options.controls; let i=index">
-                <!-- The repeated alias template -->
-                <label>
-                  <input type="text" [formControlName]="i" >
-                  <button (click)="removeOption(i)">
-                      <span class="glyphicon glyphicon-minus"></span>
+            <div class="row">
+               
+              <div class="col-lg-10 col-sm-10  col-md-10 col-9 " formArrayName="options">
+                  
+                <label style="margin-right:4px; ">Add Options </label>
+                <span>
+                  <button (click)="addOption()" class="btn btn-primary" [disabled]="count==4" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8">
+                    <i class="fas fa-plus"> </i>
                   </button>
-                </label>
+
+                </span>
+
+                <div *ngFor="let option of options.controls; let i=index">
+                  <span class="input-group-append" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
+
+                    <input type="text" [formControlName]="i" class="form-control" name="options" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
+                    <div *ngIf="profileForm.get('option[i]').touched && profileForm.get('option[i]').invalid">
+                      <div *ngIf="profileForm.get('option[i]').errors.required" class="alert alert-danger">Option is required</div>
+                    </div>
+                    <button (click)="removeOption(i)" class="btn btn-danger btn-sm" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8 ">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </span>
+                </div> 
+                <span *ngIf="count==4" ><span style="color:red">*</span>Max 5 Options allowed</span>
               </div>
-              <button (click)="addOption()" class="btn btn-primary">Add option</button>
+              
+              
+
+              <div class="col-lg-2 col-sm-2 col-md-2 col-3" formArrayName="solution" style="text-align: center ; ">
+                <label style="padding-top: 10px">Correct </label>
+                <div *ngFor="let option of solution.controls; let i=index">
+                  <label>
+                    <input type="checkbox" [formControlName]="i" style="zoom: 2; " name="solution">
+                  </label>
+
+                </div>
+              </div>
+             
             </div>
 
-            <div class="col" formArrayName="answers">
-              <h3>Answers</h3>
-              <!-- <button (click)="addAnswer()">Add answer</button> -->
 
-              <div *ngFor="let option of answers.controls; let i=index">
-                <!-- The repeated alias template -->
-                <label>
-                  <input type="checkbox" [formControlName]="i" >
-                </label>
-              </div>
-            </div>
-          </div>
+            <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-primary" style="float: right" [disabled]="!profileForm.valid">Add Question</button>
+          </form>
 
-
-          <button type="submit" style="margin-top: 3px;" class="btn btn-primary">Submit</button>
-        </form>
-        <div>
-          <label>Want to upload Questions in bulk? Upload your questions as in the
-            <a href="./assets/Questions Format.csv">template</a> format.</label>
-          <input type="file" class="file">
-          <input type="submit" style="margin-top: 2px;" value="Upload" class="btn btn-primary">
         </div>
       </div>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top: 10px;background-color: #fbfbfb">
+    <h3>Want to upload Questions in bulk? Upload your questions as in the
+      <a href="./assets/Questions Format.csv">template</a> format.</h3>
+    <div>
+      <input type="file" class="file" accept=".csv">
+      <input type="submit" style="margin-top: 2px;" value="Upload" class="btn btn-primary">
     </div>
   </div>
 </div>
@@ -78,15 +102,3 @@
 <p>
   Form Value: {{ profileForm.value | json }}
 </p>
-
-
-
-
-
-
-
-<!-- 
-  Copyright 2017-2018 Google Inc. All Rights Reserved.
-  Use of this source code is governed by an MIT-style license that
-  can be found in the LICENSE file at http://angular.io/license
-  -->

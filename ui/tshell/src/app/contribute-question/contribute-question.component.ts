@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ContributeQuestionService } from '../contribute-question.service';
 
 
 @Component({
@@ -11,44 +12,20 @@ import { NgForm } from '@angular/forms';
 })
 export class ContributeQuestionComponent implements OnInit {
 
-  myGroup: any;
-
-  cities: any;
-
-
+  count=0;
+ 
   ngOnInit() {
-
-    // this.myGroup = new FormArray([
-    //   this.options = new FormControl()
-    // ]);
-    // console.log(this.myGroup);
-
   }
 
-  // questionForm= new FormGroup({
-  //   skills: new FormControl(''),
-  //   topics:new FormControl(''),
-  //   question: new FormControl(''),
-  //   options:new FormControl(''),
-  //   answers:new FormControl('')
-
-  // });
-
-
-
-  // submit(skills: string, topics: string, question: string, options, answers: string) {
-
-  //   console.log(options.value);
-  // }
-
   profileForm = this.fb.group({
-    skills: ['',],
-    topics: [''],
-    question:[''],
+    skill: ['Java'],
+    user:['1'],
+    topic: ['',Validators.required],
+    question:['',Validators.required],
     options: this.fb.array([
-      this.fb.control('')
+      this.fb.control('',[Validators.required])
     ]),
-    answers: this.fb.array([
+    solution: this.fb.array([
       this.fb.control('')
     ]),
   });
@@ -56,32 +33,37 @@ export class ContributeQuestionComponent implements OnInit {
   get options() {
     return this.profileForm.get('options') as FormArray;
   }
-  get answers(){
-    return this.profileForm.get('answers') as FormArray;
+  get solution(){
+    return this.profileForm.get('solution') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private contributeQuestionService:ContributeQuestionService) { }
 
   addOption() {
-    this.options.push(this.fb.control(''));
-    this.answers.push(this.fb.control(''));
+      if(this.count < 4){
+        this.options.push(this.fb.control(''));
+        this.solution.push(this.fb.control(''));
+        this.count++;
+      }
+      
   }
   
   removeOption(index){
    console.log("Removing option");
    const control = <FormArray>this.profileForm.controls['options'];
-   const control1 = <FormArray>this.profileForm.controls['answers'];
+   const control1 = <FormArray>this.profileForm.controls['solution'];
    // remove the chosen row
    control.removeAt(index);
    control1.removeAt(index);
-
+   this.count--;
+   console.log(this.count);
   }
 
   onSubmit() {
-    
     console.log(this.profileForm.value);
+    this.contributeQuestionService.addQuestion(this.profileForm.value)
+    .subscribe(data => {
+      console.log("Response: "+data)
+    });
   }
-
-
-
 }
