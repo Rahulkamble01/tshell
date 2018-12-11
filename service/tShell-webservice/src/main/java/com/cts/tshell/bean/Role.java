@@ -17,7 +17,7 @@ public class Role {
 	private int id;
 	
 	@Column(name="ur_role")
-	private String role;
+	private String name;
 
 	public int getId() {
 		return id;
@@ -27,24 +27,12 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getRole() {
-		return role;
+	public String getName() {
+		return name;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Role [id=");
-		builder.append(id);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append("]");
-		return builder.toString();
-	}
-	
 	
 }

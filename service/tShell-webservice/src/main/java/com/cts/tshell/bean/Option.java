@@ -1,10 +1,14 @@
 package com.cts.tshell.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +22,9 @@ public class Option {
 
 	@Column(name = "op_description")
 	private String description;
-
-	@Column(name = "op_qu_id")
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="op_qu_id")
 	private Question question;
 
 	public int getId() {
@@ -44,19 +49,6 @@ public class Option {
 
 	public void setQuestion(Question question) {
 		this.question = question;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Option [id=");
-		builder.append(id);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", question=");
-		builder.append(question);
-		builder.append("]");
-		return builder.toString();
 	}
 
 }
