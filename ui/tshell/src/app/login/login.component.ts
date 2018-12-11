@@ -15,29 +15,25 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private service: AuthService) { }
 
   form = new FormGroup({
-    name: new FormControl(
-      '', [Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(30)
+    employeeId: new FormControl(
+      '', [Validators.required
       ]),
 
     password: new FormControl(
-      '', [Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(8)
+      '', [Validators.required
       ])
   })
 
   ngOnInit() {
   }
 
-  check(name: string, password: string) {
+  check(employeeId: string, password: string) {
     console.log("inside check");
-    if (name == 'abc' && password == '123') {
-      console.log(name);
+    if (employeeId == '123' && password == '123') {
+      console.log(employeeId);
       console.log(password);
       this.service.login();
-      //this.router.navigate(['/authenticate']);
+      this.router.navigate(['/authenticate']);
     }
     else {
       this.service.logout();
