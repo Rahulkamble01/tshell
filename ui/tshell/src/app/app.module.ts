@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
     SignupComponent,
     ConfirmEqualValidatorDirective,
     HeaderComponent,
-    LearnerHomepageComponent
+    LearnerHomepageComponent,
+    UserprofileComponent
   ],
 
   imports: [

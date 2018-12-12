@@ -4,6 +4,7 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
 import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { LoginComponent } from './login/login.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
+  { path: "userprofile",component:UserprofileComponent},
 ]
 
 @NgModule({
