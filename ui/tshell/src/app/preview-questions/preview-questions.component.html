@@ -1,0 +1,37 @@
+<div class="container">
+  <div *ngFor="let number of [1,2,3,4,5,6]">
+    <div class="card">
+      <div class="card-header">
+        {{number}}. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the
+        train?
+      </div>
+      <div class="card-body">
+        <div><span class="option">1.</span> 120 metres</div>
+        <div><span class="option">2.</span> 180 metres</div>
+        <div><span class="option">3.</span> 324 metres</div>
+        <div><span class="option">4.</span> 150 metres</div>
+      </div>
+      <div class="card-footer">
+        <span class="answer">Answer:</span> Option <span class="correctOption">4</span>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="background-color: #fbfbfb">
+    <div class="card-header">
+      7. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?<br>
+    </div>
+    <div class="card-body">
+      <div><span class="option">1.</span> True</div>
+      <div><span class="option">2.</span> False</div>
+    </div>
+    <div class="card-footer">
+      <span class="answer">Answer:</span> Option <span class="correctOption">2</span>
+    </div>
+  </div>
+
+  <div class="col-12 text-center action">
+    <button type="submit" class="btn btn-primary" (click)="confirm()">Confirm</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="abort()">Abort</button>
+  </div>
+  <div></div>
+</div>
