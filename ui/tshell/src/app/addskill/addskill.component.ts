@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 declare var $: any;
 
 @Component({
@@ -9,33 +13,30 @@ declare var $: any;
 })
 export class AddskillComponent implements OnInit {
 
-  constructor() { }
+
+  addskillform = new FormGroup({
+    skillName: new FormControl(
+      '',
+      [Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(10),
+      
+      ]),
+    topicName: new FormControl(
+      '',
+      [Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(15)]),
+  });
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  
+
 
   ngOnInit() {
     
-    $(function()
-    {
-        $(document).on('click', '.btn-add', function(e)
-        {
-            e.preventDefault();
     
-            var newinput = $('.controls .topics'),
-                currentEntry = $(this).parents('.entry:first'),
-                newEntry = $(currentEntry.clone()).appendTo(newinput);
-    
-            newEntry.find('input').val('');
-            newinput.find('.entry:not(:last) .btn-add')
-                .removeClass('btn-add').addClass('btn-remove')
-                .removeClass('btn-success').addClass('btn-danger')
-                .html('<span class="fa fa-minus"></span>');
-        }).on('click', '.btn-remove', function(e)
-        {
-        $(this).parents('.entry:first').remove();
-    
-        e.preventDefault();
-        return false;
-      });
-    });
   }
  
  

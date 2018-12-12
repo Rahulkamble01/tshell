@@ -5,10 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "skill")
+
+
 public class Skill {
 
 	@Id
@@ -27,6 +31,10 @@ public class Skill {
 
 	@Column(name = "sk_test_count")
 	private int testCount;
+	
+
+
+
 
 	public int getId() {
 		return id;
