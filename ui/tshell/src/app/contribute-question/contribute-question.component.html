@@ -3,9 +3,9 @@
     <div class="col">
       <div class="card" style="background-color: #fbfbfb">
         <div class="card-body">
-          <form [formGroup]="profileForm">
+          <form [formGroup]="questionForm">
 
-            <h3>Adding question for "Angular" </h3>
+            <h3>Adding question for "Java" </h3>
             <!-- <select formControlName="skills" class="form-control">
                 <option>Java</option>
                 <option>Oracle</option>
@@ -31,15 +31,15 @@
               <label for="form10">Question</label>
               <i class="fa fa-pencil prefix"></i>
               <textarea type="text" id="form10" class="md-textarea form-control" name="question" rows="10" formControlName="question"></textarea>
-              <div *ngIf="profileForm.get('question').touched && profileForm.get('question').invalid">
-                <div *ngIf="profileForm.get('question').errors.required" class="alert alert-danger">Question is required</div>
+              <div *ngIf="questionForm.get('question').touched && questionForm.get('question').invalid">
+                <div *ngIf="questionForm.get('question').errors.required" class="alert alert-danger">Question is required</div>
               </div>
             </div>
 
             <div class="row">
-               
+
               <div class="col-lg-10 col-sm-10  col-md-10 col-9 " formArrayName="options">
-                  
+
                 <label style="margin-right:4px; ">Add Options </label>
                 <span>
                   <button (click)="addOption()" class="btn btn-primary" [disabled]="count==4" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8">
@@ -51,32 +51,33 @@
                 <div *ngFor="let option of options.controls; let i=index">
                   <span class="input-group-append" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
 
-                    <input type="text" [formControlName]="i" class="form-control" name="options" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
-                    
+                    <input type="text" [formControlName]="i" class="form-control" name="options" [required]="'!options.valid'" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
                     <button (click)="removeOption(i)" class="btn btn-danger btn-sm" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8 ">
                       <i class="fas fa-minus"></i>
                     </button>
                   </span>
-                </div> 
-                <span *ngIf="count==4" ><span style="color:red">*</span>Max 5 Options allowed</span>
+                </div>
+                <span *ngIf="count==4">
+                  <span style="color:red">*</span>Max 5 Options allowed</span>
               </div>
-              
-              
+
+
 
               <div class="col-lg-2 col-sm-2 col-md-2 col-3" formArrayName="solution" style="text-align: center ; ">
                 <label style="padding-top: 10px">Correct </label>
                 <div *ngFor="let option of solution.controls; let i=index">
                   <label>
-                    <input type="checkbox" [formControlName]="i" style="zoom: 2; " name="solution">
+                    <input type="checkbox" [formControlName]="i" style="zoom: 2;" name="solution" (change)="check($event)" >
+
                   </label>
 
                 </div>
               </div>
-             
+
             </div>
 
 
-            <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-primary" style="float: right" [disabled]="!profileForm.valid">Add Question</button>
+            <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-primary" style="float: right" [disabled]="!(questionForm.valid && isChecked==true)">Add Question</button>
           </form>
 
         </div>
@@ -98,5 +99,5 @@
 
 
 <p>
-  Form Value: {{ profileForm.value | json }}
+  Form Value: {{ questionForm.value | json }}
 </p>

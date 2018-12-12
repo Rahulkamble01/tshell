@@ -5,25 +5,26 @@ import { NgForm } from '@angular/forms';
 import { ContributeQuestionService } from '../contribute-question.service';
 
 
+
 @Component({
   selector: 'app-contribute-question',
   templateUrl: './contribute-question.component.html',
   styleUrls: ['./contribute-question.component.css']
 })
 export class ContributeQuestionComponent implements OnInit {
-
-  count=0;
- 
+  isChecked: boolean = false;
+  count = 0;
+  temp = 0;
   ngOnInit() {
   }
 
-  profileForm = this.fb.group({
+  questionForm = this.fb.group({
     skill: ['Java'],
-    user:['1'],
-    topic: ['',Validators.required],
-    question:['',Validators.required],
+    user: ['1'],
+    topic: ['', Validators.required],
+    question: ['', Validators.required],
     options: this.fb.array([
-      this.fb.control('',[Validators.required])
+      this.fb.control('', [Validators.required])
     ]),
     solution: this.fb.array([
       this.fb.control('')
@@ -31,39 +32,50 @@ export class ContributeQuestionComponent implements OnInit {
   });
 
   get options() {
-    return this.profileForm.get('options') as FormArray;
+    return this.questionForm.get('options') as FormArray;
   }
-  get solution(){
-    return this.profileForm.get('solution') as FormArray;
+  get solution() {
+    return this.questionForm.get('solution') as FormArray;
   }
 
-  constructor(private fb: FormBuilder,private contributeQuestionService:ContributeQuestionService) { }
+  constructor(private fb: FormBuilder, private contributeQuestionService: ContributeQuestionService) { }
 
   addOption() {
-      if(this.count < 4){
-        this.options.push(this.fb.control(''));
-        this.solution.push(this.fb.control(''));
-        this.count++;
-      }
-      
+    if (this.count < 4) {
+      this.options.push(this.fb.control(''));
+      this.solution.push(this.fb.control(''));
+      this.count++;
+    }
+
   }
-  
-  removeOption(index){
-   console.log("Removing option");
-   const control = <FormArray>this.profileForm.controls['options'];
-   const control1 = <FormArray>this.profileForm.controls['solution'];
-   // remove the chosen row
-   control.removeAt(index);
-   control1.removeAt(index);
-   this.count--;
-   console.log(this.count);
+
+  removeOption(index) {
+    console.log("Removing option");
+    const questionControl = <FormArray>this.questionForm.controls['options'];
+    const answerControl = <FormArray>this.questionForm.controls['solution'];
+    // remove the chosen row
+    questionControl.removeAt(index);
+    answerControl.removeAt(index);
+    this.count--;
+    console.log(this.count);
   }
 
   onSubmit() {
-    console.log(this.profileForm.value);
-    this.contributeQuestionService.addQuestion(this.profileForm.value)
-    .subscribe(data => {
-      console.log("Response: "+data)
-    });
+    console.log(this.questionForm.value);
+    this.contributeQuestionService.addQuestion(this.questionForm.value)
+      .subscribe(data => {
+        console.log("Response: " + data)
+      });
+      alert("Question submitted succesfully for Review!")
   }
+  check(event) {
+    if (event.target.checked) {
+      this.isChecked = true;
+    }
+    else {
+      this.isChecked = false;
+    }
+    console.log(this.isChecked);
+  }
+
 }
