@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.service.login();
       this.router.navigate(['/authenticate']);
     }
-    else if (employeeId == '1234' && password == '1234') {
+    else if (employeeId == '123456' && password == '123456') {
       console.log(employeeId);
       console.log(password);
       this.service.learnerLogin();
