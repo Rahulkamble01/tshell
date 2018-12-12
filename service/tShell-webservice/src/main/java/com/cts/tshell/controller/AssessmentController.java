@@ -22,5 +22,9 @@ public class AssessmentController {
 	public List<Assessment> getTop5PerformersBySkill(@PathVariable("id") int skillId){
 		return assessmentService.getTop5PerformersBySkill(skillId);
 	}
+	@GetMapping("/history")
+	public List<Assessment> getHistoryByUser(@PathVariable("id") int userId){
+		return assessmentService.getHistoryByUser(userId);
+	}
 
 }

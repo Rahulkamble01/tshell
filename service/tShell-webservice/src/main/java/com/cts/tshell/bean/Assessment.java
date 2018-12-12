@@ -24,6 +24,8 @@ import javax.persistence.Table;
 			+ "left join fetch a.skill s left join fetch "
 			+ "a.user u left join fetch u.role left join fetch a.questions q left join fetch q.questionDifficulty "
 			+ "where s.id=:skillId order by a.score desc ")
+	@NamedQuery(name="Assessment.findByUser",query="select a from Assessment a "
+	
 })
 public class Assessment {
 	

@@ -17,5 +17,9 @@ public class AssessmentService {
 	public List<Assessment> getTop5PerformersBySkill(int skillId){
 		return assessmentRepository.findTop5BySkill(skillId);
 	}
+	@Autowired
+	public List<Assessment> getHistoryByUser(int userId){
+		return assessmentRepository.findByUser(userId);
+	}
 	
 }

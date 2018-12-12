@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Routes } from '../../../node_modules/@angular/router';
+import { Router, Routes } from '@angular/router';
 import { AssessmenthistoryService } from '../assessmenthistory.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class AssessmenthistoryComponent implements OnInit {
 
   ngOnInit() {
   }
+ 
 
 }
 /*import { Component, OnInit } from '@angular/core';

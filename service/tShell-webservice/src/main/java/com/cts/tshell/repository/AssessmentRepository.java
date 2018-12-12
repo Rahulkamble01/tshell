@@ -12,5 +12,7 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Integer>
 	List<Assessment> findTop5BySkill(@Param("skillId") int id);
 	
 	Assessment findById(int id);
+	 
+	List<Assessment> findByUser(@Param("userId") int id);
 
 }
