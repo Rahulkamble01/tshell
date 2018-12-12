@@ -1,5 +1,10 @@
 package com.cts.tshell.bean;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +13,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
 import javax.persistence.ManyToOne;
+=======
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+>>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
+/*@NamedQueries({
+	@NamedQuery(name="User.findUserById",query="select u from User u "
+			+ " join fetch u.skills s"
+			+ " join fetch s.topics t"
+           + " join fetch t.questions q"	
+			+ " where u.id = :id group by s.id")
+})*/
 public class User {
 
 	@Id
@@ -33,10 +56,53 @@ public class User {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="us_ur_id")	
+<<<<<<< HEAD
+=======
+	@JsonIgnore
+>>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 	private Role role;
+	
+	@Transient
+	private String userRole;
 
 	@Column(name = "us_emp_id")
 	private int empId;
+	
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinTable(name="user_skill",
+				joinColumns= {@JoinColumn(name="uk_us_id")},
+				inverseJoinColumns= {@JoinColumn(name="uk_sk_id")}
+	)
+	private List<Skill> skills;
+
+	
+	public User() {
+		super();
+	}
+
+	
+	
+	
+	public String getUserRole() {
+		userRole=role.getName();
+		return userRole;
+	}
+
+
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
 
 	public int getId() {
 		return id;
@@ -69,8 +135,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
 
 	public Role getRole() {
 		return role;

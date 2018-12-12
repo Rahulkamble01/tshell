@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "topic")
 public class Topic {
@@ -29,6 +31,10 @@ public class Topic {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="tp_sk_id")
+<<<<<<< HEAD
+=======
+	@JsonIgnore
+>>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
