@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "user")
@@ -37,6 +36,12 @@ public class User {
 
 	@Column(name = "us_emp_id")
 	private int empId;
+	
+	@Transient
+	private String oldPassword;
+	
+	@Transient
+	private String newPassword;
 
 	public int getId() {
 		return id;
@@ -86,6 +91,22 @@ public class User {
 
 	public void setEmpId(int empId) {
 		this.empId = empId;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 
 	

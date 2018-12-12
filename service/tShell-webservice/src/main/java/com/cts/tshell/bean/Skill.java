@@ -22,7 +22,7 @@ public class Skill {
 	@Column(name = "sk_search_count")
 	private int searchCount;
 
-	@Column(name = "sk_active")
+	@Column(name = "sk_status")
 	private String status;
 
 	@Column(name = "sk_test_count")
