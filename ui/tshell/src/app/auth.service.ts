@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   isAdminLoggedIn = true;
+  isLearnerLoggedIn = false;
 
   constructor() { }
 
@@ -18,4 +19,17 @@ export class AuthService {
     console.log("Inside auth service logout()")
     this.isAdminLoggedIn = false;
   }
+
+  learnerLogin() {
+    console.log("Inside auth service login()")
+    this.isLearnerLoggedIn = true;
+  }
+
+  learnerLogout() {
+    console.log("Inside auth service logout()")
+    this.isLearnerLoggedIn = false;
+  }
+
+
+
 } 
