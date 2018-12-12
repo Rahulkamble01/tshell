@@ -1,16 +1,30 @@
 package com.cts.tshell.bean;
 
 import java.util.Date;
-
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "assessment")
+@NamedQueries({
+	@NamedQuery(name="Assessment.findTop5BySkill",query="select a from Assessment a "
+			+ "left join fetch a.skill s left join fetch "
+			+ "a.user u left join fetch u.role left join fetch a.questions q left join fetch q.questionDifficulty "
+			+ "where s.id=:skillId order by a.score desc ")
+})
 public class Assessment {
 	
 	@Id
@@ -27,11 +41,20 @@ public class Assessment {
 	@Column(name="as_score")
 	private int score;
 	
-	@Column(name="as_sk_id")
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="as_sk_id")
 	private Skill skill;
 	
-	@Column(name="as_us_id")
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="as_us_id")
 	private User user;
+	
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinTable(name="assessment_question",
+				joinColumns= {@JoinColumn(name="aq_as_id")},
+				inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
+	)
+	private List<Question> questions;
 
 	public int getId() {
 		return id;
@@ -81,24 +104,11 @@ public class Assessment {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Assessment [id=");
-		builder.append(id);
-		builder.append(", type=");
-		builder.append(type);
-		builder.append(", date=");
-		builder.append(date);
-		builder.append(", score=");
-		builder.append(score);
-		builder.append(", skill=");
-		builder.append(skill);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append("]");
-		return builder.toString();
+	public List<Question> getQuestions() {
+		return questions;
 	}
-	
-	
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}	
 }

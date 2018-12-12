@@ -22,8 +22,8 @@ public class Skill {
 	@Column(name = "sk_search_count")
 	private int searchCount;
 
-	@Column(name = "sk_status")
-	private String status;
+	@Column(name = "sk_active")
+	private String active;
 
 	@Column(name = "sk_test_count")
 	private int testCount;
@@ -52,12 +52,12 @@ public class Skill {
 		this.searchCount = searchCount;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getactive() {
+		return active;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setactive(String active) {
+		this.active = active;
 	}
 
 	public int getTestCount() {
@@ -68,22 +68,4 @@ public class Skill {
 		this.testCount = testCount;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Skill [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", searchCount=");
-		builder.append(searchCount);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", testCount=");
-		builder.append(testCount);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
 }

@@ -1,11 +1,17 @@
 package com.cts.tshell.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "question")
@@ -20,8 +26,9 @@ public class Question {
 
 	@Column(name = "qu_solution")
 	private String solution;
-
-	@Column(name = "qu_qd_id")
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="qu_qd_id")	
 	private QuestionDifficulty questionDifficulty;
 
 	@Column(name = "qu_marks")
@@ -29,8 +36,9 @@ public class Question {
 
 	@Column(name = "qu_status")
 	private String status;
-
-	@Column(name = "qu_us_id")
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="qu_us_id")
 	private User user;
 
 	public User getUser() {
@@ -87,27 +95,6 @@ public class Question {
 
 	public void setQuestionDifficulty(QuestionDifficulty questionDifficulty) {
 		this.questionDifficulty = questionDifficulty;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Question [id=");
-		builder.append(id);
-		builder.append(", question=");
-		builder.append(question);
-		builder.append(", solution=");
-		builder.append(solution);
-		builder.append(", questionDifficulty=");
-		builder.append(questionDifficulty);
-		builder.append(", marks=");
-		builder.append(marks);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append("]");
-		return builder.toString();
 	}
 
 }
