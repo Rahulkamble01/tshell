@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Topic } from '../topic';
 
-declare var $: any;
+
+
 
 @Component({
   selector: 'app-addskill',
@@ -13,6 +15,24 @@ declare var $: any;
 })
 export class AddskillComponent implements OnInit {
 
+
+  topics: Array<Topic>;
+
+  constructor(private http: HttpClient, private router: Router ) { 
+    this.topics = [];
+  }
+
+addTopic(topicname){
+  let topic = new Topic(topicname);
+  this.topics.push(topic);
+}
+
+
+
+removeTopic(topic){
+  let index = this.topics.indexOf(topic);
+  this.topics.splice(index,1);
+}
 
   addskillform = new FormGroup({
     skillName: new FormControl(
@@ -29,7 +49,7 @@ export class AddskillComponent implements OnInit {
       Validators.maxLength(15)]),
   });
 
-  constructor(private http: HttpClient, private router: Router) { }
+ 
 
   
 
