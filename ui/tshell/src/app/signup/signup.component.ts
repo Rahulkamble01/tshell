@@ -51,7 +51,7 @@ signup(employeeId:string,name:string,email:string,password:string,confirmpasswor
       console.log(data)
      
       // this.signupService.signup(data);
-        this.router.navigate(['learner-login']);
+        this.router.navigate(['login']);
        
     }
   ); 
