@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
+import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HeaderComponent } from './header/header.component';
     AdminSignupComponent,
     SignupComponent,
     ConfirmEqualValidatorDirective,
-    HeaderComponent
+    HeaderComponent,
+    LearnerHomepageComponent
   ],
 
   imports: [

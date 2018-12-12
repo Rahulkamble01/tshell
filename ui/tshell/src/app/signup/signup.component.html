@@ -10,25 +10,28 @@
         <div class="card card-inverse card-info">
           <div class="card-header">
             <div class="card-title" id="card4">Sign Up</div>
-            
+            <div id="card5"><a [routerLink]="['/login']">Login</a>
+            </div>
           </div>
           <div class="card-block">
             <form [formGroup]="form">
               <div class="form-group">
                 <br>
-
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <input type="text" class="form-control" formControlName="empId" placeholder="Employee ID" #employeeId/>
+                    <input type="text" class="form-control" formControlName="empId" placeholder="Employee ID" #empId/>
                     <div *ngIf="form.get('empId').touched && form.get('empId').invalid">
                       <div *ngIf="form.get('empId').errors.required" class="danger" style="color:red">Employee ID is required</div>
+                      <div *ngIf="form.get('empId').errors.minlength" class="danger" style="color:red">Employee ID must contain minimum 6 digits</div>
+                      <div *ngIf="form.get('empId').errors.maxlength" class="danger" style="color:red">Employee ID must contain maximum 10 digits</div>
                     </div>
                   </div>
                 </div>
 
+
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <input type="text" class="form-control" formControlName="username" placeholder="Name" #name/>
+                    <input type="text" class="form-control" formControlName="username" placeholder="UserName" #name/>
                     <div *ngIf="form.get('username').touched && form.get('username').invalid">
                       <div *ngIf="form.get('username').errors.required" class="danger" style="color:red">Name is required</div>
                     </div>
@@ -40,16 +43,17 @@
                     <input type="text" class="form-control" formControlName="email" placeholder="Email" #email/>
                     <div *ngIf="form.get('email').touched && form.get('email').invalid">
                       <div *ngIf="form.get('email').errors.required" class="danger" style="color:red">Email is required</div>
+                      <div *ngIf="form.get('email').errors.pattern" class="danger" style="color:red">Email pattern not valid</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-lg-12">
-                    <input type="password" class="form-control" formControlName="password" placeholder="Password" #password />
-                     
+                    <input type="password" class="form-control" formControlName="password" placeholder="Password" #password/>
                     <div *ngIf="form.get('password').touched && form.get('password').invalid">
-                      <div *ngIf="form.get('password').errors.required" class="danger" style="color:red">Password is required</div>
+                      <div *ngIf="form.get('password').errors.required" class="danger" style="color:red">password is required</div>
+
                     </div>
                   </div>
                 </div>
@@ -60,14 +64,11 @@
                       #confirmPassword/>
                     <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
                       <div *ngIf="form.get('confirmPassword').errors.required" class="danger" style="color:red">Password is required</div>
-                      <div *ngIf="form.get('confirmPassword').errors.minlength" class="danger" style="color:red">Password must be minimum 2 characters
-                      </div>
-                      <div *ngIf="form.get('confirmPassword').errors.maxlength" class="danger" style="color:red">Password must be maximun 10 characters
-                      </div>
-                      <div *ngIf="form.get('confirmPassword').errors.cannotContainSpace" class="danger" style="color:red">Password should not be any space
+
+                      <div *ngIf="form.get('confirmPassword').errors.cannotContainSpace" class="danger" style="color:red">Password should not have any space
                       </div>
                       <div class="help-block" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').errors?.notEqual" style="color: red">
-                        Password and confirm password does not match
+                        New password and confirm password does not match
                       </div>
                     </div>
                   </div>
@@ -75,8 +76,8 @@
 
                 <div class="form-group">
                   <div id="card6"></div>
-                  <div class="col-lg-12"><button id="btn-login" href="#" class="btn btn-primary" (click)="signup(employeeId.value,name.value,email.value,password.value,confirmpassword.value)"
-                      style="width:100%" value="submit" [routerLink]="['/login']"  [disabled]="!form.valid">Sign Up</button></div>
+                  <div class="col-lg-12"><a id="btn-login" href="#" class="btn btn-primary" (click)="signup(empId.value,name.value,email.value,password.value,confirmPassword.value)"
+                      style="width:100%" value="submit">Sign Up</a></div>
 
                   <br>
                 </div>
