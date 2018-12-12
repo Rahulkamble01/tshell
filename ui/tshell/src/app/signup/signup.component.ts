@@ -33,13 +33,11 @@ export class SignupComponent implements OnInit {
 
     password : new FormControl(
       '', [Validators.required,
-<<<<<<< HEAD
-      Validators.pattern(this.passwordPattern)]
-=======
+
         Validators.minLength(6),
          Validators.maxLength(30)
      ]
->>>>>>> register-as-a-learner
+
     
     ),
 
