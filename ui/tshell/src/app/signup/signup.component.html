@@ -52,95 +52,19 @@
                   <div class="col-lg-12">
                     <input type="text" class="form-control" formControlName="email" placeholder="Email *"  #email/>
                     <div *ngIf="form.get('email').touched && form.get('email').invalid">
-<<<<<<< HEAD
                       <div *ngIf="form.get('email').errors.required" class="danger" style="color:red">Email is required</div>
                       <div *ngIf="form.get('email').errors.pattern" class="danger" style="color:red">Email pattern not valid</div>
                     </div>
-=======
-                        <div *ngIf="form.get('email').errors.required" class="danger" style="color:red">Email is required</div>
-                        <div *ngIf="form.get('email').errors.pattern" class="danger" style="color:red">Email pattern not valid</div> 
-                 </div>
->>>>>>> register-as-a-learner
                   </div>
-                </div>
-
-                <div class="form-group">
                   <div class="col-lg-12">
-                    <input type="password" class="form-control" formControlName="password" placeholder="Password" #password/>
-                    <div *ngIf="form.get('password').touched && form.get('password').invalid">
-                      <div *ngIf="form.get('password').errors.required" class="danger" style="color:red">Password is required</div>
-
-                    </div>
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-lg-12">
                     <input type="password" class="form-control" appConfirmEqualValidator="password" formControlName="confirmPassword" placeholder="Confirm Password"
-                      #confirmPassword/>
-                    <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
-                      <div *ngIf="form.get('confirmPassword').errors.required" class="danger" style="color:red">Password is required</div>
-
-<<<<<<< HEAD
-                      <div *ngIf="form.get('confirmPassword').errors.cannotContainSpace" class="danger" style="color:red">Password should not have any space
-=======
-                  <div class="form-group">
                       <div class="col-lg-12">
-                        <input type="password" class="form-control" formControlName="password" placeholder="Password *" 
-                          #password/>
-                        <div *ngIf="form.get('password').touched && form.get('password').invalid">
-                            <div *ngIf="form.get('password').errors.required" class="danger" style="color:red">Password is required</div>
-                            <div *ngIf="form.get('password').errors.minlength" class="danger" style="color:red">Password must contain minimum 6 characters</div>
-                            <div *ngIf="form.get('password').errors.maxlength" class="danger" style="color:red">Password must contain maximum 30 characters</div>
-                          </div>
->>>>>>> register-as-a-learner
-                      </div>
                       <div class="help-block" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').errors?.notEqual" style="color: red">
-                        Password and Confirm Password does not match
-                      </div>
-<<<<<<< HEAD
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div id="card6"></div>
-                  <div class="col-lg-12"><a id="btn-login" href="#" class="btn btn-primary" (click)="signup(empId.value,name.value,email.value,password.value,confirmPassword.value)"
-                      style="width:100%" value="submit">Signup</a></div>
-
-                  <br>
-                </div>
-=======
-                      
-                      <div class="form-group">
-                          <div class="col-lg-12">
-                            <input type="password" class="form-control" appConfirmEqualValidator="password" formControlName="confirmPassword" placeholder="Confirm Password *" #confirmPassword/>
-                            <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
-                                <div *ngIf="form.get('confirmPassword').errors.required" class="danger" style="color:red">Password is required</div>
-                               
                                 <div *ngIf="form.get('confirmPassword').errors.cannotContainSpace" class="danger" style="color:red">Password should not have
                                   any space
-                                </div>
-                                <div class="help-block" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').errors?.notEqual" style="color: red">
-                                  New password and confirm password does not match
-                                </div>
-                              </div>
-                          </div>
-                          </div>
-
-                          <div class="form-group">
-                              <div id="card6"></div>
-                            <div class="col-lg-12"><a id="btn-login" href="#" class="btn btn-primary" (click)="signup(empId.value,name.value,email.value,password.value,confirmPassword.value)" style="width:100%" value="submit">Signup</a></div>
-                            
-                            <br>
-                            </div>
->>>>>>> register-as-a-learner
 
               </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </div>
   </div>
 </div>
