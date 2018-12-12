@@ -1,11 +1,21 @@
 package com.cts.tshell.bean;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "topic")
@@ -18,9 +28,26 @@ public class Topic {
 
 	@Column(name = "tp_name")
 	private String name;
-
-	@Column(name = "tp_sk_id")
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="tp_sk_id")
+	@JsonIgnore
 	private Skill skill;
+	
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinTable(name="topic_question",
+				joinColumns= {@JoinColumn(name="tq_tp_id")},
+				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
+	)
+	private List<Question> questions;
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
 
 	public int getId() {
 		return id;
@@ -44,19 +71,6 @@ public class Topic {
 
 	public void setSkill(Skill skill) {
 		this.skill = skill;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Topic [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", skill=");
-		builder.append(skill);
-		builder.append("]");
-		return builder.toString();
 	}
 
 }
