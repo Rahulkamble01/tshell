@@ -11,8 +11,7 @@ import { VALID } from '../../../node_modules/@angular/forms/src/model';
 })
 export class SignupComponent implements OnInit {
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  passwordPattern ="/^[A-Za-z]{4,20}/";
-  
+  //passwordPattern = "^([a-zA-Z0-9@*#!?]{8,12})$";
 
   form = new FormGroup({
     empId : new FormControl(
@@ -34,7 +33,13 @@ export class SignupComponent implements OnInit {
 
     password : new FormControl(
       '', [Validators.required,
+<<<<<<< HEAD
       Validators.pattern(this.passwordPattern)]
+=======
+        Validators.minLength(6),
+         Validators.maxLength(30)
+     ]
+>>>>>>> register-as-a-learner
     
     ),
 
