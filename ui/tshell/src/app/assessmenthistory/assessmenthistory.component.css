@@ -2,10 +2,7 @@
 font-size: 70px;
 background-color: rgb(186, 216, 243);
 }
-.abc{
-    padding-bottom: 0%;
-    font-size: 25px;
-}
+
 .details{
     background-color: rgb(179, 224, 255);
     font-size: 20px;
@@ -42,6 +39,7 @@ background-color: #4CAF50;
   .card1:hover{
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+    background-color: rgb(241, 241, 241);
 }
 /* .card1{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
@@ -139,4 +137,8 @@ a{
 
 .aa{
     padding:10px;
+}
+.stmt{
+    color:blue;
+    padding-left: 10px;
 }
