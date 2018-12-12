@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div class="card" style="background-color: #fbfbfb">
+      <div class="card">
         <div class="card-body">
           <form [formGroup]="questionForm">
 
@@ -37,22 +37,18 @@
             </div>
 
             <div class="row">
-
               <div class="col-lg-10 col-sm-10  col-md-10 col-9 " formArrayName="options">
-
                 <label style="margin-right:4px; ">Add Options </label>
                 <span>
                   <button (click)="addOption()" class="btn btn-primary" [disabled]="count==4" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8">
                     <i class="fas fa-plus"> </i>
                   </button>
-
                 </span>
-
                 <div *ngFor="let option of options.controls; let i=index">
-                  <span class="input-group-append" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
-
-                    <input type="text" [formControlName]="i" class="form-control" name="options" [required]="'!options.valid'" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; ">
-                    <button (click)="removeOption(i)" class="btn btn-danger btn-sm" style="padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8 ">
+                  <span class="input-group-append">
+                    <textarea [formControlName]="i" class="form-control" name="options" [required]="'!options.valid'" rows="3" id="optionText">
+                      </textarea>
+                    <button (click)="removeOption(i)" class="btn btn-danger btn-sm" id="optionButton">
                       <i class="fas fa-minus"></i>
                     </button>
                   </span>
@@ -60,26 +56,17 @@
                 <span *ngIf="count==4">
                   <span style="color:red">*</span>Max 5 Options allowed</span>
               </div>
-
-
-
               <div class="col-lg-2 col-sm-2 col-md-2 col-3" formArrayName="solution" style="text-align: center ; ">
                 <label style="padding-top: 10px">Correct </label>
                 <div *ngFor="let option of solution.controls; let i=index">
                   <label>
-                    <input type="checkbox" [formControlName]="i" style="zoom: 2;" name="solution" (change)="check($event)" >
-
+                    <input type="checkbox" [formControlName]="i" name="solution" id="solutionCheckbox" (change)="check($event)">
                   </label>
-
                 </div>
               </div>
-
             </div>
-
-
             <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-primary" style="float: right" [disabled]="!(questionForm.valid && isChecked==true)">Add Question</button>
           </form>
-
         </div>
       </div>
     </div>
@@ -91,13 +78,13 @@
       <a href="./assets/Questions Format.csv">template</a> format.</h3>
     <div>
       <input type="file" class="file" accept=".csv">
-      <input type="submit" style="margin-top: 2px;" value="Upload" class="btn btn-primary">
+      <input type="submit" value="Upload" class="btn btn-primary">
     </div>
   </div>
 </div>
-<hr>
+<!-- <hr>
 
 
 <p>
   Form Value: {{ questionForm.value | json }}
-</p>
+</p> -->

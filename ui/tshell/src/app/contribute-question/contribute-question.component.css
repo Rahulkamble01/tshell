@@ -1,0 +1,22 @@
+.container{
+    padding-top:65px;
+}
+.card{
+    background-color: #fbfbfb;
+    margin-bottom:10px; 
+}
+#optionButton{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+     zoom:0.8;
+}
+#solutionCheckbox{
+   zoom: 3;
+   margin-top:9px;
+   
+}
+#optionText{
+    margin-top:1px;
+}
