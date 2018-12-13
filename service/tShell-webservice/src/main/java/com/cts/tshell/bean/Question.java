@@ -9,23 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-<<<<<<< HEAD
-=======
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
->>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "question")
-//@NamedQueries({
-//	@NamedQuery(name="Question.totalQuestion",query="select q from Question q "
-//			+ "left join fetch q.user u left join fetch "
-//			+ "q.user u left join fetch u.role left join fetch a.questions q left join fetch q.questionDifficulty "
-//			+ "where s.id=:skillId order by a.score desc ")
-//})
+// @NamedQueries({
+// @NamedQuery(name="Question.totalQuestion",query="select q from Question q "
+// + "left join fetch q.user u left join fetch "
+// + "q.user u left join fetch u.role left join fetch a.questions q left join
+// fetch q.questionDifficulty "
+// + "where s.id=:skillId order by a.score desc ")
+// })
 
 public class Question {
 	@Id
@@ -38,14 +32,10 @@ public class Question {
 
 	@Column(name = "qu_solution")
 	private String solution;
-	
-<<<<<<< HEAD
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="qu_qd_id")	
-=======
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="qu_qd_id")
->>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_qd_id")
+
 	private QuestionDifficulty questionDifficulty;
 
 	@Column(name = "qu_marks")
@@ -53,10 +43,9 @@ public class Question {
 
 	@Column(name = "qu_status")
 	private String status;
-	
-<<<<<<< HEAD
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="qu_us_id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_us_id")
 	private User user;
 
 	public User getUser() {
@@ -66,20 +55,6 @@ public class Question {
 	public void setUser(User user) {
 		this.user = user;
 	}
-=======
-//	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-//	@JoinColumn(name="qu_us_id")
-//	@JsonIgnore
-//	private User user;
-
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
->>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 
 	public int getId() {
 		return id;
@@ -127,6 +102,6 @@ public class Question {
 
 	public void setQuestionDifficulty(QuestionDifficulty questionDifficulty) {
 		this.questionDifficulty = questionDifficulty;
-	}
+	} 
 
 }

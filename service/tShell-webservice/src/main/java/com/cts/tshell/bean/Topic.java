@@ -31,10 +31,8 @@ public class Topic {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="tp_sk_id")
-<<<<<<< HEAD
-=======
+
 	@JsonIgnore
->>>>>>> ffc510c6f816d46d9d96b95fe168d669d46600c9
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
