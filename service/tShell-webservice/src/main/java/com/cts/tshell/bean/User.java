@@ -1,5 +1,7 @@
 package com.cts.tshell.bean;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +10,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
+/*
+ * @NamedQueries({
+ * 
+ * @NamedQuery(name="User.findUserById",query="select u from User u " +
+ * " join fetch u.skills s" + " join fetch s.topics t" +
+ * " join fetch t.questions q" + " where u.id = :id group by s.id") })
+ */
 public class User {
 
 	@Id
@@ -30,13 +42,44 @@ public class User {
 
 	@Column(name = "us_password")
 	private String password;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="us_ur_id")	
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "us_ur_id")
+
+	@JsonIgnore
 	private Role role;
+
+	@Transient
+	private String userRole;
 
 	@Column(name = "us_emp_id")
 	private int empId;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "uk_sk_id") })
+	private List<Skill> skills;
+
+	public User() {
+		super();
+	}
+
+	public String getUserRole() {
+		userRole = role.getName();
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
 
 	public int getId() {
 		return id;
@@ -70,8 +113,6 @@ public class User {
 		this.password = password;
 	}
 
-
-
 	public Role getRole() {
 		return role;
 	}
@@ -88,5 +129,4 @@ public class User {
 		this.empId = empId;
 	}
 
-	
 }

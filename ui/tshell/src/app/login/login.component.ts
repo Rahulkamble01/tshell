@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       console.log(password);
       this.service.learnerLogin();
       this.router.navigate(['/assessmenthistory']);
+      this.router.navigate(['/dash']);
     }
     else {
       this.service.logout();
