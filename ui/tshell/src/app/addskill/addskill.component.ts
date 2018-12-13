@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Topic } from '../topic';
+import { Skill } from '../skill';
 
 
 
@@ -14,7 +15,10 @@ import { Topic } from '../topic';
   styleUrls: ['./addskill.component.css']
 })
 export class AddskillComponent implements OnInit {
-
+ 
+   skills:Skill []=[
+    {id:1,name:'Java'},
+   ];
 
   topics: Array<Topic>;
 
@@ -25,6 +29,7 @@ export class AddskillComponent implements OnInit {
 addTopic(topicname){
   let topic = new Topic(topicname);
   this.topics.push(topic);
+  this.clearInput();
 }
 
 
@@ -39,19 +44,31 @@ removeTopic(topic){
       '',
       [Validators.required,
       Validators.minLength(1),
-      Validators.maxLength(10),
+      Validators.maxLength(25),
+      Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
       
       ]),
     topicName: new FormControl(
       '',
-      [Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(15)]),
+      [
+      Validators.maxLength(60),
+      Validators.pattern(/^[a-zA-Z ._-]+$/),
+      ])
   });
 
- 
+  get topicName(): any { return this.addskillform.get('topicName'); }
+  clearInput() { this.topicName.reset();}
 
-  
+  submitSkill(skillName){
+    if(skillName==this.skills[0].name){
+      alert("Skill already exists");
+    }
+
+    else{
+      alert("Skill Added");
+
+    }
+  }
 
 
   ngOnInit() {

@@ -8,12 +8,10 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" style="padding-top: 2cm" role="dialog">
         <div class="modal-dialog modal-lg">
-
+            <form [formGroup]="addskillform">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-
-                 
                     <h4>
                         Add Skill
                     </h4>
@@ -24,13 +22,9 @@
 
                     <div class="container ">
 
-                        <form [formGroup]="addskillform">
-                            <!-- starting of the form -->
-
                                 <!-- starting of a row -->
-                                <div class="row">
-                                   
-                                    <div class="col-lg-4"> Name:</div>
+                                <div class="row">    
+                                    <div class="col-lg-4"> Name </div>
                                     <div class="col-lg-5"> </div>
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-2"></div>
@@ -41,35 +35,25 @@
                                 <div class="row">
                                     
                                     <div class="col-lg-12">
+
                                         <input type="text" class="form-control" formControlName="skillName" placeholder="Enter a Name" #skillName>
                                         <div *ngIf="addskillform.get('skillName').touched && addskillform.get('skillName').invalid">
-                                                <div *ngIf="addskillform.get('skillName').errors.required" class="alert" style="color:red;">* Skill Name is required</div>
-                                                <div *ngIf="addskillform.get('skillName').errors.minlength" class="alert" style="color:red;"> Skill Name must be minimum 2
+                                                <div *ngIf="addskillform.get('skillName').errors.required" class="aletry">* Skill Name is required</div>
+                                                <div *ngIf="addskillform.get('skillName').errors.minlength" class="aletry" > Skill Name must be minimum 2
                                                     characters</div>
-                                                <div *ngIf="addskillform.get('skillName').errors.maxlength" class="alert" style="color:red;"> Skill Name must be maximun 10
+                                                <div *ngIf="addskillform.get('skillName').errors.maxlength" class="aletry" > Skill Name must be maximun 25
                                                     characters</div>
-                    
+                                                    <div *ngIf="addskillform.get('skillName').errors.pattern" class="aletry" > Skill Name must not contain special charecters
+                                                        </div>
                                             </div>
                                     </div>
                                   
                                 </div> <!-- ending of a row -->
                            
-                               
-
-
+ <br>
                                 <!-- starting of a row -->
-                              
-
                                 <div class="row">
-                                
-                                    <div class="col-lg-12"> Add Topics:
-
-                                <!--      <button class="btn btn-secondary btn-sm" onclick="addItem()" style="display:inline-block;"><i class="fa fa-plus"></i></button> -->
-                                     
-                                    </div>
-                                    
-
-                                   
+                                    <div class="col-lg-12"> Add Topics </div>
                                 </div> <!-- ending of a row -->
 
 
@@ -78,16 +62,16 @@
                            
                                     <div class="col-lg-12 col-12 col-sm-12 col-md-12 buttonInside " >
                                         <span class="itwillflex">
-                                        <input type="text" class="form-control topicinput"  formControlName="topicName" #topicname  placeholder="Enter Topic">
-                                        <i id="erase" (click)="addTopic(topicname.value)" class=" btn btn-info btn-sm fa fa-plus"></i>
+                                        <input type="text"  class="form-control topicinput"  formControlName="topicName" #topicname  placeholder="Enter sub-topic and click + to add it">
+                                        <button id="erase"  [disabled]="!topicName.valid" (click)="addTopic(topicname.value)" class=" btn btn-info btn-sm fa fa-plus"></button>
                                     </span>
 
                                     <div *ngIf="addskillform.get('topicName').touched && addskillform.get('topicName').invalid">
-                                        <!--     <div *ngIf="addskillform.get('topicName').errors.required" class="alert" style="color:red;">* Topic Name is required</div> -->
-                                            <div *ngIf="addskillform.get('topicName').errors.minlength" class="alert" style="color:red;"> Topic Name must be minimum 2
+                                       
+                                            <div *ngIf="addskillform.get('topicName').errors.maxlength" class="aletry"> Topic Name must be maximun 60
                                                 characters</div>
-                                            <div *ngIf="addskillform.get('topicName').errors.maxlength" class="alert" style="color:red;"> Topic Name must be maximun 10
-                                                characters</div>
+                                                <div *ngIf="addskillform.get('topicName').errors.pattern" class="aletry" > Topic Name must not contain numbers and special charecters
+                                                    </div>
                 
                                         </div>
                                    
@@ -95,39 +79,22 @@
                                 </div> 
                                 </div>
                                 <div class="row">
-                                        <div class="col-lg-12"></div>
+                                        <div class="col-lg-12">
                                         
-                                        <ul *ngFor="let topic of topics" style="margin-bottom: 10px;">
-                                                <li class="litopic">{{topic.name}} &nbsp; <button (click)="removeTopic(topic)"><i class="fa fa-times"></i></button></li> 
+                                        <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
+                                             <li class="badge badge-primary litopic" >{{topic.name}}  <i class="fa fa-times makepointer" (click)="removeTopic(topic)"></i></li> 
                                             </ul>
     
                                     </div>
-                           
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col lg 2"></div>
-                                    <div class="col lg 1"></div>
-                                    <div class="col lg 5">
-                                        <button class="btn btn-primary"[disabled]="!addskillform.valid">Add Skill</button>
-
                                     </div>
-                                    <div class="col lg 2"></div>
-                                    <div class="col lg 2"></div>
-
-                                </div>
-                            </div>
-                        </form>
-
-
-
                     </div>
                 </div>
-
-               <!--  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>  -->
+               <div class="modal-footer">
+                <button class="btn btn-primary makecross" [disabled]="!addskillform.valid" (click)="submitSkill(skillName.value);">Save Skill</button>
+                </div>
+            
             </div>
-
+        </form>
         </div>
     </div>
 

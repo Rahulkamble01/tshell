@@ -34,17 +34,7 @@
   list-style: none;
 }
 
-.litopic{
-    background: #eaeaea;
-    color: #000;
-    border-radius: 2px;
-    cursor: default;
-    position: relative;
-    display: inline-block;
-    border: 1px solid #e5e5e6;
-    margin: 4px 4px 0 0;
-    padding: 7px;
-}
+
 
 .itwillflex{
     display:flex;
@@ -76,3 +66,31 @@
     position:relative;
     margin-bottom:10px;
   }
+
+  .makepointer{
+      cursor: pointer;
+  }
+
+  .makecross{
+      cursor: not-allowed;
+  }
+
+  .litopic{
+   
+    cursor: default;
+    position: relative;
+    display: inline-block;
+    margin: 4px 4px 0 0;
+    padding: 7px;
+    font-size:14px; 
+}
+
+.marginzero{
+    margin-bottom: 2px;
+}
+
+.aletry{
+    color: red;
+    margin-left: 5px;
+    margin-top: 5px;
+}
