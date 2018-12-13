@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddskillComponent } from './addskill/addskill.component';
+import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { TotalquestionComponent } from './totalquestion/totalquestion.component';
@@ -18,23 +19,21 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   {path:'dash', component:DashboardComponent},
   {path:'totalquestions',component:TotalquestionComponent},
+  { path: 'search-skill', component: SearchSkillComponent },
+  //{ path: 'dash', component: DashboardComponent },
+  { path: 'totalquestions', component: TotalquestionComponent },
   { path: "", component: LoginComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   { path: "assessmenthistory", component:AssessmenthistoryComponent },
-  { path: "assessmenthistory",component:AssessmenthistoryComponent},
+
   
-  {path: "recentSkills", component: RecentlyAddedSkillsComponent}
+  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
+  { path: "", component: RecentlyAddedSkillsComponent },
+ 
 ]
-
-
-
-
-
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

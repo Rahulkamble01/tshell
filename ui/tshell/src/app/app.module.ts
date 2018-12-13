@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
+import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '../../node_modules/@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmEqualValidatorDirective } from './signup/confirm-equal-validator-directive';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
@@ -30,6 +31,7 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
     MostSearchedSkillsComponent,
     TotalquestionComponent,
     AssessmenthistoryComponent,
+    SearchSkillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
