@@ -13,6 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "question")
+// @NamedQueries({
+// @NamedQuery(name="Question.totalQuestion",query="select q from Question q "
+// + "left join fetch q.user u left join fetch "
+// + "q.user u left join fetch u.role left join fetch a.questions q left join
+// fetch q.questionDifficulty "
+// + "where s.id=:skillId order by a.score desc ")
+// })
+
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +32,10 @@ public class Question {
 
 	@Column(name = "qu_solution")
 	private String solution;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="qu_qd_id")	
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_qd_id")
+
 	private QuestionDifficulty questionDifficulty;
 
 	@Column(name = "qu_marks")
@@ -34,9 +43,9 @@ public class Question {
 
 	@Column(name = "qu_status")
 	private String status;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="qu_us_id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_us_id")
 	private User user;
 
 	public User getUser() {
@@ -93,6 +102,6 @@ public class Question {
 
 	public void setQuestionDifficulty(QuestionDifficulty questionDifficulty) {
 		this.questionDifficulty = questionDifficulty;
-	}
+	} 
 
 }

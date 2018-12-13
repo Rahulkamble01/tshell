@@ -52,4 +52,22 @@ public class UserController {
 		 */
 		// return "Saved";
 	}
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cts.tshell.bean.User;
+import com.cts.tshell.service.UserService;
+
+@RequestMapping("/rest/user/")
+@RestController
+public class UserController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@GetMapping("/get/{id}")
+	public User getUserById(@PathVariable("id") int id) {
+		return userService.findUserById(id);
+	}
+	
 }
