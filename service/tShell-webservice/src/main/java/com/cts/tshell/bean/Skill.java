@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,7 +27,11 @@ public class Skill {
 	private int searchCount;
 
 	@Column(name = "sk_active")
-	private String status;
+
+
+
+	private String active;
+
 
 	@Column(name = "sk_test_count")
 	private int testCount;	
@@ -69,12 +71,12 @@ public class Skill {
 		this.searchCount = searchCount;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getactive() {
+		return active;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setactive(String active) {
+		this.active = active;
 	}
 
 	public int getTestCount() {
