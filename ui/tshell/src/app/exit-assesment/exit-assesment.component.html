@@ -1,103 +1,142 @@
-
 <div class="container-fluid navbar-dark bg-light">
-    <div class="row">
-      <div class="col-5 col-sm-5 col-md-5 col-lg-5"> </div>
-     
-      <div class="col-3 col-sm-3 col-md-3 col-lg-3 header-legends">
-        <h5>Answered Questions</h5>
-        <div id="countdowntimer"><span id="countdowntimer">25</span></div>
-      </div>
-      <div class="col-1 col-sm-1 col-md-1 col-lg-1"></div>
-      <div class=" col-3 col-sm-3 col-md-3 col-lg-3">
-        <div class="header-legends" ><h5>Time</h5></div>
-        <div *ngIf="config.duration" id="countdowntimer">{{ellapsedTime}} / {{duration}}</div>
-        <!-- <div id="countdowntimer" id="timer"></div> -->
-      </div>
-     
+  <div class="row">
+    <div class="col-5 col-sm-5 col-md-5 col-lg-5">
+      <h2>tShell</h2>
     </div>
+
+
+    <div class="col-1 col-sm-1 col-md-1 col-lg-1"></div>
+    <div class=" col-3 col-sm-3 col-md-3 col-lg-3">
+
+      <!-- <div id="countdowntimer" id="timer"></div> -->
     </div>
-    
-    <div id="sideNav">
-   <div class="sidenav">
-          <h3 class="border-bottom border-dark pb-3 ">QUESTIONS</h3>
-          <div class="p-1 scroll-questions" id="style-1">
-            <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
-            <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let quest of questions">
-              <button type="button" class="question-buttons btn-dark">{{quest}}</button>
-            </span>
-          </div>
-          <div class="legends pt-2">
-            <span class="legend-buttons btn-dark"> </span> Not Visited
-            <span class="legend-buttons btn-success"> </span> Answered
-            <span class="legend-buttons btn-danger"> </span> Skipped
-          </div>
-        </div>
-  
-      </div>
+
+  </div>
+</div>
+
+<div id="sideNav">
+  <div class="sidenav">
+    <div class=" badge badge-info float-right"></div>
+    <h3 class=" border-bottom border-dark pb-3 text-center "> Question {{pager.index + 1}} of {{pager.count}}. </h3>
+    <div class="p-1 scroll-questions" id="style-1">
+      <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
+      <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
+        <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
+          (click)="goTo(index)">{{index + 1}}</button>
+      </span>
+    </div>
+    <div class="legends pt-2">
+      <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
+      <span class="answered-legend-buttons default-cursor"> </span> Answered
+    </div>
+    <div><button class="btn btn-primary btn-block pt-1" (click)="onSubmit();" >Submit Test</button></div>
+  </div>
+
+</div>
+<!--
+
       <div class="col-6 text-right">
         Select Quiz:
         <select [(ngModel)]="quizName" (change)="loadQuiz(quizName)">
           <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
         </select>
       </div>
-      <div class="questions">
-<div class="container-fluid" >
-  <div class="row">
-    <div class="col-12 col-sm-12 col-lg-12 col-md-12">
-    <a  class="btn btn-primary " id="myModalBtn">Launch demo modal</a>
-          <div class="row">
-       
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+
+-->
+
+<div class="questions">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-lg-12 col-md-12">
+        <button type="button" class="btn btn-primary btn-block" id="mobileQuestionView" data-toggle="modal" data-target="#exampleModal">
+          Navigate Questions
+        </button>
+        <!-- <a class="btn btn-primary " id="myModalBtn">Launch demo modal</a> -->
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div *ngIf="config.duration" class="mt-2 badge badge-info float-right">Time: {{ellapsedTime}} /
+              {{duration}}</div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="display-question ">
-                <h3 class="border-bottom border-dark pb-3 test-name ">JAVA ENTRY LEVEL TEST</h3>
+
+              <h3 class="border-bottom border-dark pb-3 test-name ">Java Entry Level Test</h3>
+            </div>
+
+
+            <div *ngFor="let question of filteredQuestions;">
+              <div class="quest pt-1">
+                <span class="question-legends btn-danger">Q{{pager.index + 1}}</span>
+                <div class="quest pl-3">{{question.name}}</div>
               </div>
 
 
-              <div *ngFor="let question of filteredQuestions;">
-          <div class="quest pt-1">
-            <span class="question-legends btn-danger">Q{{pager.index + 1}}</span>
-            <div class="quest pl-3" >{{question.name}}</div>
-          </div>
+              <div class="options-div pt-4">
+                <span class="answer-legends btn-success">A. </span>
+                <div class="example-radio-group ">
+                  <div class=" option-container " *ngFor="let option of question.options">
+                    <!-- <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="favoriteSeason"  [(ngModel)]="option.selected" (change)="onSelect(question, option);" > <label [attr.for]="option.id">{{option.name}}</label> -->
 
-                  
-        <div class="options-div pt-4">
-          <span class="answer-legends btn-success">ANS </span>
-          <div class="example-radio-group ">
-          <div class=" option-container " *ngFor="let option of question.options">
-            <!-- <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="favoriteSeason"  [(ngModel)]="option.selected" (change)="onSelect(question, option);" > <label [attr.for]="option.id">{{option.name}}</label> -->
-           <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="option.selected" (change)="onSelect(question, option);" ><label [attr.for]="option.id">{{option.name}} </label>
-          
-          </div>
-          </div>
-      </div>
-    </div>
+                    <!-- <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"  /><label for="{{option.id}}" >{{option.name}}</label>-->
+
+                    <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);">
+                    <label for="{{option.id}}">{{option.name}}</label>
+                  </div>
+                </div>
+              </div>
 
 
 
 
-          <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>
-          <div class="text-center">
-            <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0);">First</button>
-            <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
-            <button class="btn btn-primary" (click)="goTo(pager.index + 1);">Next</button>
-            <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Last</button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-center" id="exampleModalLabel"> Question {{pager.index + 1}} of
+                        {{pager.count}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                      <div class="scroll-questions" id="style-1">
+                        <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
+                        <span class="col-lg-1 col-sm-1 modal-span-blocks" *ngFor="let question of quiz.questions; let index = index;">
+                          <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
+                            (click)="goTo(index)" data-dismiss="modal">{{index + 1}}</button>
+                        </span>
+                      </div>
+                      <div class="modal-legends pt-2">
+                        <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
+                        <span class="answered-legend-buttons default-cursor"> </span> Answered
+                      </div>
+                      <div><button class="btn btn-primary btn-block pt-1" (click)="onSubmit();">Submit Test</button></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+            <div class="text-center float-right navigate-buttons-div">
+
+              <button class="btn btn-default previous-nav-button" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+              <button class="btn btn-primary next-nav-button" (click)="goTo(pager.index + 1);">Next</button>
+             
+            </div>
             <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
-          </div>
-         <!--   <label class="custom-radio quest pl-3">One
-                <input type="radio" checked="checked" name="radio">
-                <span class="checkmark"></span>
-              </label> -->
-
-           <!--   <div class="example-radio-group pl-3 option-radio-group" >
-                  <div class="example-radio-button option-radio-button" *ngFor="let season of seasons" >
-                    <label class="option-radio-label" >
-                      <div class="option-radio-container">
-                        <div class="option-radio-outer-circle"></div>
-                        <div class="option-radio-inner-circle"></div>
-                        <div class="option-radio-ripple option-ripple">
 
 
-                        </div>
+
+            <!--div>
                         <input type="radio" class="option-radio-input cdk-visually-hidden" [(ngModel)]="favoriteSeason" [value]="season">
                       </div>
                       <div class="option-radio-label-content">{{season}}</div>
@@ -106,34 +145,34 @@
                   </div>
                 </div>
                 <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div> -->
-       
-      </div>
-       
+
+
+
+          </div>
+        </div>
       </div>
     </div>
+
+  </div>
+
+
+  <!-- 
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">QUESTIONS</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
-  </div>
-
-  </div>
-
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">QUESTIONS</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+  </div> -->

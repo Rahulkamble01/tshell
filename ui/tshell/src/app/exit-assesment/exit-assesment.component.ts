@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import * as bootstrap from 'bootstrap';
 import { Option, Question, Quiz, QuizConfig } from '../models/index';
 import { ExitAssesmentService } from '../exit-assesment.service';
 
 
-declare var countdown: any;
+// declare var countdown: any;
 
 @Component({
   selector: 'app-exit-assesment',
@@ -43,39 +41,20 @@ export class ExitAssesmentComponent implements OnInit {
   endTime: Date;
   ellapsedTime = '00:00';
   duration = '';
-
+  responseanswer: any;
 
 
   title = 'cognilearn';
 
   type = 'checkbox';
-  // tslint:disable-next-line:max-line-length
-  questions: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
-  // i: number;
 
-  favoriteSeason: string;
-  seasons: string[] = [
-    // tslint:disable-next-line:max-line-length
-    'Provide lsc',
-    // tslint:disable-next-line:max-line-length
-    'Provide labels to ientify all form controls, including text fields, checkboxes, radio buttons, and drop-down menus. In most cases, this is done by using the <label> element',
-    'Summer',
-    // tslint:disable-next-line:max-line-length
-    'Provide labels to identify all form contrls, including text fields, checkboxes, radio buttons, and drop-down menus. In most cases, this is done by using the <label> element'];
   constructor(private quizService: ExitAssesmentService) { }
 
   ngOnInit() {
+    /*
     $(document).ready(function () {
       countdown(2);
-    });
-
-
-    $(document).ready(function () {
-      $('#myModalBtn').click(function () {
-        $('#myModal .modal-body').html($('#sideNav').html());
-        $('#myModal').modal('show');
-      });
-    });
+    });*/
 
     this.quizes = this.quizService.getAll();
     this.quizName = this.quizes[0].id;
@@ -119,7 +98,14 @@ export class ExitAssesmentComponent implements OnInit {
 
   onSelect(question: Question, option: Option) {
     if (question.questionTypeId === 1) {
-      question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
+      question.options.forEach((x) => {
+        x.visited = true;
+        if (x.id !== option.id) {
+          console.log('option ' + option.id + ' x.id : ' + x.id);
+          x.selected = false;
+          console.log('inside on Select selected : ' + x.selected);
+        }
+      });
     }
 
     if (this.config.autoMove) {
@@ -133,9 +119,15 @@ export class ExitAssesmentComponent implements OnInit {
       this.mode = 'quiz';
     }
   }
-
+  updateVisited() {
+    return 'Visited';
+  }
   isAnswered(question: Question) {
     return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+  };
+
+  isVisited(question: Question) {
+    return question.options.find(x => x.visited) ? 'Visited' : 'Not Visited';
   };
 
   isCorrect(question: Question) {
