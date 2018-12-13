@@ -19,6 +19,7 @@ import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ChartsModule } from 'ng2-charts';
 
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
@@ -42,7 +43,8 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
     SignupComponent,
     ConfirmEqualValidatorDirective,
     HeaderComponent,
-    LearnerHomepageComponent
+    LearnerHomepageComponent,
+    UserprofileComponent
   ],
 
   imports: [

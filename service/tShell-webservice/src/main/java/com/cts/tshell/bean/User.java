@@ -64,6 +64,12 @@ public class User {
 
 	@Column(name = "us_emp_id")
 	private int empId;
+	
+	@Transient
+	private String oldPassword;
+	
+	@Transient
+	private String newPassword;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -139,5 +145,20 @@ public class User {
 		this.empId = empId;
 	}
 
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 
 }
