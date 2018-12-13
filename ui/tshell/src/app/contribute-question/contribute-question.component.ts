@@ -16,51 +16,73 @@ export class ContributeQuestionComponent implements OnInit {
   }
   userFile: any = File;
   uploadForm: any = FormGroup;
-  profileForm = this.fb.group({
-    skills: [''],
-    topics: [''],
-    question: [''],
-    options: this.fb.array([
-      this.fb.control('')
-    ]),
-    answers: this.fb.array([
-      this.fb.control('')
-    ]),
-  });
-
-  get options() {
-    return this.profileForm.get('options') as FormArray;
-  }
-  get answers() {
-    return this.profileForm.get('answers') as FormArray;
-  }
-
+  isChecked: boolean = false;
+  count = 0;
+  temp = 0;
   constructor(private fb: FormBuilder, private contributeQuestionService: ContributeQuestionService, private router: Router) {
     this.uploadForm = fb.group({
       csvFile: ['', Validators.required]
     })
   }
-
+  questionForm = this.fb.group({
+    skill: ['Java'],
+    user: ['1'],
+    topic: ['', Validators.required],
+    question: ['', Validators.required],
+    options: this.fb.array([
+      this.fb.control('', [Validators.required])
+    ]),
+    solution: this.fb.array([
+      this.fb.control('')
+    ]),
+  });
+  get options() {
+    return this.questionForm.get('options') as FormArray;
+  }
+  get solution() {
+    return this.questionForm.get('solution') as FormArray;
+  }
   addOption() {
-    this.options.push(this.fb.control(''));
-    this.answers.push(this.fb.control(''));
+    if (this.count < 4) {
+      this.options.push(this.fb.control(''));
+      this.solution.push(this.fb.control(''));
+      this.count++;
+    }
+
   }
 
   removeOption(index) {
     console.log("Removing option");
-    const control = <FormArray>this.profileForm.controls['options'];
-    const control1 = <FormArray>this.profileForm.controls['answers'];
+    const questionControl = <FormArray>this.questionForm.controls['options'];
+    const answerControl = <FormArray>this.questionForm.controls['solution'];
     // remove the chosen row
-    control.removeAt(index);
-    control1.removeAt(index);
-
+    questionControl.removeAt(index);
+    answerControl.removeAt(index);
+    this.count--;
+    console.log(this.count);
   }
+
+  onSubmit() {
+    console.log(this.questionForm.value);
+    this.contributeQuestionService.addQuestion(this.questionForm.value)
+      .subscribe(data => {
+        console.log("Response: " + data)
+      });
+    alert("Question submitted succesfully for Review!")
+  }
+  check(event) {
+    if (event.target.checked) {
+      this.isChecked = true;
+    }
+    else {
+      this.isChecked = false;
+    }
+    console.log(this.isChecked);
+  }
+
   onSelectFile(event) {
     const file = event.target.files[0];
     this.userFile = file;
-  }
-  onSubmit() {
-    console.log(this.profileForm.value);
   }
   upload() {
     console.log('File Upload method is called!');

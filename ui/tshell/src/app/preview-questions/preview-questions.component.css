@@ -30,3 +30,13 @@
     color:#1a1a1a;
     font-weight: 500;
 }
+.checkBox{
+    float: right;
+    width: 25px;
+    height:25px;
+}
+.invalid-alert{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

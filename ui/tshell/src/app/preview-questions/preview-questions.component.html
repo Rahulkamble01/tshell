@@ -1,9 +1,12 @@
 <div class="container">
-  <div *ngFor="let number of [1,2,3,4,5,6]">
+  <div *ngFor="let number of [1,2,3]">
     <div class="card">
       <div class="card-header">
         {{number}}. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the
         train?
+        <span class="checkBox">
+          <input type="checkbox">
+        </span>
       </div>
       <div class="card-body">
         <div><span class="option">1.</span> 120 metres</div>
@@ -16,9 +19,64 @@
       </div>
     </div>
   </div>
-  <div class="card" style="background-color: #fbfbfb">
+  <div class="card">
+    <div class="card-header invalid-alert">
+      <span>Question can't be empty!</span>
+      <span class="checkBox">
+        <input type="checkbox">
+      </span>
+    </div>
+    <div class="card-body">
+      <div><span class="option">1.</span> While</div>
+      <div><span class="option">2.</span> For</div>
+      <div><span class="option">3.</span> For Each</div>
+      <div><span class="option">4.</span> None of the above</div>
+    </div>
+    <div class="card-footer">
+      <span class="answer">Answer:</span> Option<span class="correctOption">2</span>
+    </div>
+  </div>
+  <div class="card">
     <div class="card-header">
-      7. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?<br>
+      5. What shape is the moon?
+      <span class="checkBox">
+        <input type="checkbox">
+      </span>
+    </div>
+    <div class="card-body">
+      <div><span class="option">1.</span> Round</div>
+      <div><span class="option">2.</span> Square</div>
+      <div class="invalid-alert"><span class="option ">3.</span>Option should not be empty.</div>
+      <div><span class="option">4.</span> None of the above</div>
+    </div>
+    <div class="card-footer">
+      <span class="answer">Answer:</span> Option <span class="correctOption">1</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      6. Which one of these is a conditional statement?
+      <span class="checkBox">
+        <input type="checkbox">
+      </span>
+    </div>
+    <div class="card-body">
+      <div><span class="option">1.</span> for</div>
+      <div><span class="option">2.</span> while</div>
+      <div><span class="option">3.</span> do while</div>
+      <div><span class="option">4.</span> None of the above</div>
+    </div>
+    <div class="card-footer invalid-alert">
+      "Answer should not be Empty"<span class="correctOption"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      7. The moon is square?
+      <span class="checkBox">
+        <input type="checkbox">
+      </span>
     </div>
     <div class="card-body">
       <div><span class="option">1.</span> True</div>
