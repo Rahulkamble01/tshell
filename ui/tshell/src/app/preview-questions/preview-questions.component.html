@@ -46,7 +46,7 @@
     <div class="card-body">
       <div><span class="option">1.</span> Round</div>
       <div><span class="option">2.</span> Square</div>
-      <div class="invalid-alert"><span class="option ">3.</span>Option should not be empty.</div>
+      <div class="invalid-alert"><span class="option ">3.</span>Option should not be empty!</div>
       <div><span class="option">4.</span> None of the above</div>
     </div>
     <div class="card-footer">
@@ -67,7 +67,7 @@
       <div><span class="option">4.</span> None of the above</div>
     </div>
     <div class="card-footer invalid-alert">
-      "Answer should not be Empty"<span class="correctOption"></span>
+      Answer should not be empty!<span class="correctOption"></span>
     </div>
   </div>
 
@@ -88,7 +88,10 @@
   </div>
 
   <div class="col-12 text-center action">
-    <button type="submit" class="btn btn-primary" (click)="confirm()">Confirm</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="abort()">Approve All</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="abort()">Approve</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="abort()">Reject</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="confirm()">Submit for Review</button>&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary" (click)="abort()">Abort</button>
   </div>
   <div></div>
