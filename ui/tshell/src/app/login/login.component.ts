@@ -10,7 +10,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+message:string;
+status:boolean=false;
 
   constructor(private router: Router, private service: AuthService) { }
 
@@ -23,6 +24,19 @@ export class LoginComponent implements OnInit {
       '', [Validators.required
       ])
   })
+
+ forms= new FormGroup({
+   employeeid : new FormControl(
+     '',
+      Validators.required
+   ),
+   email : new FormControl(
+    '',
+     Validators.required
+  ),
+  
+
+ })
 
   ngOnInit() {
   }
@@ -39,5 +53,12 @@ export class LoginComponent implements OnInit {
       this.service.logout();
       this.router.navigate(['/login']);
     }
+  }
+  sendMail(){
+    this.message="Mail sent";
+    this.status=true;
+  }
+  close(){
+    this.message="";
   }
 }
