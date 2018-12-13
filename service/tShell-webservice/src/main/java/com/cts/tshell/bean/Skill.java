@@ -1,10 +1,14 @@
 package com.cts.tshell.bean;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,10 +27,29 @@ public class Skill {
 	private int searchCount;
 
 	@Column(name = "sk_active")
+
 	private String active;
 
+
+
+
+
+
+
+
 	@Column(name = "sk_test_count")
-	private int testCount;
+	private int testCount;	
+	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
+	private List<Topic> topics;
+
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
 
 	public int getId() {
 		return id;
@@ -51,6 +74,7 @@ public class Skill {
 	public void setSearchCount(int searchCount) {
 		this.searchCount = searchCount;
 	}
+
 
 	public String getActive() {
 		return active;

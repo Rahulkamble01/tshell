@@ -49,7 +49,7 @@ CREATE  TABLE IF NOT EXISTS `tShell`.`skill` (
   `sk_id` INT NOT NULL AUTO_INCREMENT ,
   `sk_name` VARCHAR(45) NOT NULL ,
   `sk_search_count` INT NULL ,
-  `sk_status` VARCHAR(45) NOT NULL ,
+  `sk_active` VARCHAR(45) NOT NULL ,
   `sk_test_count` INT NULL ,
   PRIMARY KEY (`sk_id`) )
 ENGINE = InnoDB;
@@ -149,7 +149,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `tShell`.`option` ;
 
 CREATE  TABLE IF NOT EXISTS `tShell`.`option` (
-  `op_id` INT NOT NULL ,
+  `op_id` INT NOT NULL AUTO_INCREMENT ,
   `op_description` VARCHAR(45) NOT NULL ,
   `op_qu_id` INT NOT NULL ,
   PRIMARY KEY (`op_id`) ,
@@ -193,7 +193,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `tShell`.`user_skill` ;
 
 CREATE  TABLE IF NOT EXISTS `tShell`.`user_skill` (
-  `uk_id` INT NOT NULL ,
+  `uk_id` INT NOT NULL AUTO_INCREMENT ,
   `uk_us_id` INT NOT NULL ,
   `uk_sk_id` INT NOT NULL ,
   PRIMARY KEY (`uk_id`) ,

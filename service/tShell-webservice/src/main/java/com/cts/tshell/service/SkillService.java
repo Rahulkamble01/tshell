@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.repository.SkillRepository;
 
@@ -51,8 +52,23 @@ public class SkillService {
 			skill.setActive("True");
 		}
 
+
 		skillRepository.save(skill);
 		LOGGER.debug("Skill details are {}", skill);
 		LOGGER.info("end");
 	}
+
+	
+	
+	/*@Autowired
+	public void setSkillRepository(SkillRepository skillRepository) {
+		this.skillRepository = skillRepository;
+	}
+	
+	@Transactional
+	public List<Skill> getSkills(){
+		return skillRepository.findById();
+	}
+*/
+
 }
