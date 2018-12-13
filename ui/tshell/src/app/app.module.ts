@@ -2,10 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
-=======
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
->>>>>>> rel1
 import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 
 
@@ -22,25 +19,19 @@ import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { ChartsModule } from 'ng2-charts';
 
-<<<<<<< HEAD
-=======
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
->>>>>>> rel1
 
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
-=======
     AssessmenthistoryComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
     RecentlyAddedSkillsComponent,
->>>>>>> rel1
     
     LoginComponent,
     AdminSignupComponent,
