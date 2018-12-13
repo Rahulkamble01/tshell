@@ -1,0 +1,61 @@
+<div class="container">
+
+      <div class="alert alert-danger" *ngIf="!service.isAdminLoggedIn" style="text-align: center;">
+        <div data-dismiss="alert">Invalid Name or Password!!!</div>
+    </div>
+
+  <div class="row">
+    <div class="col-lg-1 "></div>
+    <div class="col-lg-10 col-md-10 col-xl-10 ">
+      <div id="loginbox" class="mainbox col-lg-6 offset-md-3 col-md-8 offset-sm-2 col-sm-12">
+        <div class="card card-inverse card-info">
+
+          <div class="card-header">
+            <div class="card-title" id="card1">Login</div>
+
+          </div>
+          <div class="card-block" id="card2">
+            <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
+            <form [formGroup]="form">
+              <div class="form-group">
+                <div class="col-lg-12">
+                  <input type="text" class="form-control" formControlName="employeeId" name="employeeId" 
+                  placeholder="Employee ID" #employeeId/>
+                </div>
+                <div *ngIf="form.get('employeeId').touched && form.get('name').invalid">
+                  <div *ngIf="form.get('employeeId').errors.required" class="danger" id="card8">
+                    Employee ID is required</div>
+                 
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-12">
+                  <input type="password" class="form-control" name="password" formControlName="password"
+                   placeholder="Password" #password/>
+                </div>
+                <div *ngIf="form.get('password').touched && form.get('password').invalid">
+                  <div *ngIf="form.get('password').errors.required" class="danger" id="card8">
+                    Password is required</div>
+               
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-lg-12"><button id="btn-login" class="btn btn-primary" id="card7"
+                (click)="check(employeeId.value,password.value)"> Login</button>
+                </div>
+                <div id="card3"><a href="#">Forgot password?</a>
+                </div>
+
+                <div id="card3">Don't have an account!
+                  <a [routerLink]="['/signup']">Signup Here</a>&nbsp;
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+</div>
