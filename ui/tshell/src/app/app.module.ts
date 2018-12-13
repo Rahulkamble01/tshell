@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ConfirmEqualValidatorDirective,
     HeaderComponent,
     ResetPasswordComponent,
+    
   
   ],
 
