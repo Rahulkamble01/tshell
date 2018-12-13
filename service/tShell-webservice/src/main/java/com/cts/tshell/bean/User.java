@@ -1,7 +1,14 @@
 package com.cts.tshell.bean;
 
+<<<<<<< HEAD
+
 import java.util.List;
 
+
+=======
+import java.util.List;
+
+>>>>>>> rel1
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +17,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
+
+import javax.persistence.ManyToOne;
+
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+=======
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+>>>>>>> rel1
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,11 +61,21 @@ public class User {
 
 	@Column(name = "us_password")
 	private String password;
+<<<<<<< HEAD
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="us_ur_id")	
+
+
+	@JsonIgnore
+
+=======
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_ur_id")
 
 	@JsonIgnore
+>>>>>>> rel1
 	private Role role;
 
 	@Transient

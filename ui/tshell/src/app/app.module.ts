@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 
 
@@ -24,6 +25,10 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    TotalquestionComponent,
+    AssessmenthistoryComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,

@@ -9,6 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+<<<<<<< HEAD
+
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+=======
+>>>>>>> rel1
 import javax.persistence.Table;
 
 @Entity
@@ -32,9 +39,18 @@ public class Question {
 
 	@Column(name = "qu_solution")
 	private String solution;
+<<<<<<< HEAD
+	
+
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="qu_qd_id")	
+
+	
+=======
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
+>>>>>>> rel1
 
 	private QuestionDifficulty questionDifficulty;
 
@@ -43,9 +59,16 @@ public class Question {
 
 	@Column(name = "qu_status")
 	private String status;
+<<<<<<< HEAD
+	
+
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="qu_us_id")
+=======
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_us_id")
+>>>>>>> rel1
 	private User user;
 
 	public User getUser() {
@@ -55,6 +78,10 @@ public class Question {
 	public void setUser(User user) {
 		this.user = user;
 	}
+<<<<<<< HEAD
+
+=======
+>>>>>>> rel1
 
 	public int getId() {
 		return id;
