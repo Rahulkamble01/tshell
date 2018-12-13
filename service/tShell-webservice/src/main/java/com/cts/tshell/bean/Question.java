@@ -9,12 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "question")
+//@NamedQueries({
+//	@NamedQuery(name="Question.totalQuestion",query="select q from Question q "
+//			+ "left join fetch q.user u left join fetch "
+//			+ "q.user u left join fetch u.role left join fetch a.questions q left join fetch q.questionDifficulty "
+//			+ "where s.id=:skillId order by a.score desc ")
+//})
+
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +38,12 @@ public class Question {
 	@Column(name = "qu_solution")
 	private String solution;
 	
+
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="qu_qd_id")	
+
+	
+
 	private QuestionDifficulty questionDifficulty;
 
 	@Column(name = "qu_marks")
@@ -37,6 +52,7 @@ public class Question {
 	@Column(name = "qu_status")
 	private String status;
 	
+
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="qu_us_id")
 	private User user;
@@ -48,6 +64,7 @@ public class Question {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 
 	public int getId() {
 		return id;
