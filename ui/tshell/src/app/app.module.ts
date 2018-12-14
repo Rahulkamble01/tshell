@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AdminHomepageComponent } from './admin-homepage/admin-homepage.componen
     HeaderComponent,
     ResetPasswordComponent,
     LearnerHomepageComponent,
-    AdminHomepageComponent
+    AdminHomepageComponent,
+    ChangepasswordComponent
   ],
 
   imports: [

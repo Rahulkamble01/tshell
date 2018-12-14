@@ -6,6 +6,7 @@ import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   { path: "reset", component: ResetPasswordComponent },
-  { path: "admin-homepage", component: AdminHomepageComponent }
+  { path: "admin-homepage", component: AdminHomepageComponent },
+  { path: "changepassword", component: ChangepasswordComponent }
 ]
 
 @NgModule({
