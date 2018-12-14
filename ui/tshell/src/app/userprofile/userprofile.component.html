@@ -42,17 +42,32 @@
           </div>
           <div class="col-lg-10 col-sm-10 col-12 col-md-10" style="padding:10px;">
             <div class="row">
-              <div class="col-lg-10 col-sm-10 col-10 col-md-10">
+              <div class="col-lg-9 col-sm-9 col-12 col-md-9">
                 <span style="font-size:35px; font-weight: bold;">
                   Soumyadeep Paul<span style="font-size:20px;">(729714)  </span>
-                </span>
+                  <span class="badge badge-info"  style="font-size:15px;">
+                    {{role}}</span></span>
                 <span style="color:blue;">
                   <br>soumyadeep.paul@cognizant.com
                 </span>
               </div>
-              <div class="col-lg-2 col-sm-2 col-2 col-md-2">
-               <!--  <a href=""><i class="fas fa-user-edit " style="font-size:30px;float:right;color:#2374ed;"></i></a> -->
-              </div>
+              <div class="col-lg-3 col-sm-3 col-12 col-md-3">
+                <select class="btn btn-info dropdown-toggle" [(ngModel)]="role">
+                    <option value="Learner" class="dropdown-item">Change role</option>
+                    <option value="Learner" class="dropdown-item">Learner</option>
+                    <option value="Admin" class="dropdown-item">Admin</option>
+                    <option value="SME" class="dropdown-item">SME</option>
+                </select>  
+                <!-- <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Current Role
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"[(ngModel)]="role" >
+                        <a class="dropdown-item" href="#">Admin</a>
+                        <a class="dropdown-item" href="#">SME</a>
+                        </div>
+                    </div>
+              </div> -->
             </div>
             <br>
            

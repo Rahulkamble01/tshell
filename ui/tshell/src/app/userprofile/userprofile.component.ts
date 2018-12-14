@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserprofileComponent implements OnInit {
 
+  role="Learner";
+
   constructor() { }
 
   ngOnInit() {
