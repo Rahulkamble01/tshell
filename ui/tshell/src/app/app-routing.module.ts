@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
+import { ViewstudentComponent } from './viewstudent/viewstudent.component';
 
 const routes: Routes = [
   {path:"addskill", component:AddskillComponent},
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: "learner-homepage", component: LearnerHomepageComponent },
   { path: "userprofile",component:UserprofileComponent},
   { path: "assessmenthistory", component:AssessmenthistoryComponent },  
-  {path: "recentSkills", component: RecentlyAddedSkillsComponent}
+  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
+  {path: "viewprofile", component:ViewstudentComponent}
 ]
 
 @NgModule({

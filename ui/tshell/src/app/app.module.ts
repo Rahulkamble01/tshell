@@ -23,6 +23,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ChartsModule } from 'ng2-charts';
 
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
+import { ViewstudentComponent } from './viewstudent/viewstudent.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
     ConfirmEqualValidatorDirective,
     HeaderComponent,
     LearnerHomepageComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    ViewstudentComponent
   ],
 
   imports: [
