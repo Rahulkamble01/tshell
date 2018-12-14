@@ -11,6 +11,8 @@ import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
     SignupComponent,
     ConfirmEqualValidatorDirective,
     HeaderComponent,
+    ResetPasswordComponent,
     LearnerHomepageComponent
+
   ],
 
   imports: [
@@ -29,7 +33,7 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
