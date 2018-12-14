@@ -1,8 +1,17 @@
 {
+<<<<<<< HEAD
     "/tShell-webservice/*" : {
         "target":"http://localhost:8080",
         "secure":false,
         "loglevel":"debug",
         "changeOrigin" : true
+=======
+    "/tShell-webservice/*": {
+        "target" : "http://localhost:8080",
+        "secure" : false,
+        "loglevel" : "debug",
+        "changeOrigin":true
+
+>>>>>>> search-and-display-existing-questions-with-order-of-highest-match-forSME
     }
 }

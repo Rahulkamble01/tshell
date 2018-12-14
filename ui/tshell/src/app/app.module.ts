@@ -1,17 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { SearchSkillComponent } from './search-skill/search-skill.component';
+import { SearchExistingQuestionsComponent } from './search-existing-questions/search-existing-questions.component';
+import { NgForm } from '@angular/forms';
+import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
+import { ContributeQuestionService } from './contribute-question.service';
+import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component'
 import { TotalquestionComponent } from './totalquestion/totalquestion.component';
-
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmEqualValidatorDirective } from './signup/confirm-equal-validator-directive';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
@@ -26,45 +29,63 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ChartsModule } from 'ng2-charts';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
 import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
+import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        AddskillComponent,
-        DashboardComponent,
-        MostSearchedSkillsComponent,
-        TotalquestionComponent,
-        AssessmenthistoryComponent,
-        SearchSkillComponent,
-        DashboardComponent,
-        MostSearchedSkillsComponent,
-        TotalquestionComponent,
-        RecentlyAddedSkillsComponent,
+  declarations: [
+    AppComponent,
+    AddskillComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    TotalquestionComponent,
+    AssessmenthistoryComponent,
+    SearchSkillComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    TotalquestionComponent,
+    RecentlyAddedSkillsComponent,
+    LoginComponent,
+    AdminSignupComponent,
+    SignupComponent,
+    ConfirmEqualValidatorDirective,
+    HeaderComponent,
+    ResetPasswordComponent,
+    LearnerHomepageComponent,
+    AdminHomepageComponent,
+    ChangepasswordComponent,
+    UserprofileComponent,
+    ViewlearnerComponent,
+    AppComponent,
+    SearchExistingQuestionsComponent,
+    ContributeQuestionComponent,
+    PreviewQuestionsComponent,
+    DashboardComponent,
+    HeaderComponent,
+    MostSearchedSkillsComponent,
+    TotalquestionComponent,
+    RecentlyAddedSkillsComponent,
+    LoginComponent,
+    AdminSignupComponent,
+    SignupComponent,
+    ConfirmEqualValidatorDirective,
+    LearnerHomepageComponent,
+    CountOfQuestionsToReviewComponent
 
-        LoginComponent,
-        AdminSignupComponent,
-        SignupComponent,
-        ConfirmEqualValidatorDirective,
-        HeaderComponent,
-        ResetPasswordComponent,
-        LearnerHomepageComponent,
-        AdminHomepageComponent,
-        ChangepasswordComponent,
-        UserprofileComponent,
-        ViewlearnerComponent
-    ],
+  ],
 
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        ChartsModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ChartsModule,
+  ],
+  providers: [
+    ContributeQuestionService, AuthService
+  ],
 
-    ],
-    providers: [AuthService],
-    bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 
 })
 export class AppModule { }

@@ -8,13 +8,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="service.isLearnerLoggedIn">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Questions <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Skills <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Tests <span class="sr-only">(current)</span></a>
