@@ -12,7 +12,7 @@ import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
+import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 
 
 @NgModule({
@@ -24,8 +24,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ConfirmEqualValidatorDirective,
     HeaderComponent,
     ResetPasswordComponent,
-    LearnerHomepageComponent
-
+    LearnerHomepageComponent,
+    AdminHomepageComponent
   ],
 
   imports: [

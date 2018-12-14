@@ -55,6 +55,12 @@ status:boolean=false;
       this.service.learnerLogin();
       this.router.navigate(['/learner-homepage']);
     }
+     else if (employeeId == '654321' && password == '654321') {
+      console.log(employeeId);
+      console.log(password);
+      this.service.login();
+      this.router.navigate(['/admin-homepage']);
+    }
     else {
       this.service.logout();
       this.router.navigate(['/login']);
