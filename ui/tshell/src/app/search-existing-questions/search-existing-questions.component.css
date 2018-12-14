@@ -1,0 +1,252 @@
+a{
+    color:rgb(105, 104, 104);
+}
+.addOptionBtn{
+    font-size: 12px;
+    height: 19px;
+    padding:0px 0px;
+    width:19px;
+}
+.approveBtnCmn{
+    text-align: center;
+}
+.rejectBtnCmn{
+    text-align: center;
+}
+.existingQuestion{
+    border-bottom:solid;
+    border-color:lightgrey;
+    border-width:1px;
+}
+/* .lhsApproveBtn{
+    font-size: 14px;
+    padding:0px 4px;
+    width:100%;   
+} */
+
+.lhsApproveRejectBtnSpan{
+    float: right;
+}
+.lhsNoteSpan{
+    float: right;
+    color:gray;
+}
+.lhsOptionLabelCol{
+    text-align: center;
+}
+/* .lhsRejectBtn{
+    font-size: 14px;  
+    padding:0px 4px;
+    width:100%;
+} */
+/* .nxtQuestionBtn{
+    padding:0;
+   width:100%
+} */
+.nxtQuestionCol{
+    text-align: right;
+}
+.optionList{
+    font-size:13px;
+}
+.preQuestionCol{
+    border-right: solid;
+    border-right-color: lightgrey; 
+    border-width:1px;
+   
+}
+/*.preQuestionBtn{
+    padding:0;
+    width:100%
+}*/
+.questionDef{
+    font-size:12px;
+}
+.revQuestionHeader{
+    text-align: center;
+}
+.rhsApproveBtn{
+    font-size: 13px;
+    padding:0px 4px;  
+}
+.rhsNoteSpan{
+    float:right;
+    color:gray;
+}
+.rhsOptionsBtn{
+    font-size:13px;
+}
+.rhsOptionsBtnSpan{
+    float:right;
+}
+.rhsQId{
+    font-size:13px;
+}
+.rhsQIdLabel{
+    font-size:13px;
+}
+.rhsRejectBtn{
+    font-size: 13px;
+    padding:0px 4px;   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .header {
+    text-align: center;
+}
+
+.cmn0pt9 {
+    text-align: center;
+    font-size: 25px;
+    background-color: orangered;
+}
+
+.cmn0pt9:hover {
+    cursor: pointer;
+}
+
+.cmn1 {
+    background-color: aquamarine;
+}
+
+.cmn2 {
+    background-color: aquamarine;
+}
+
+.cmn2pt1 {
+    text-align: center;
+    font-size: 25px;
+    background-color: orangered;
+}
+
+.cmn2pt1:hover {
+    cursor: pointer;
+}
+
+.cmn2pt3 {
+    background-color: aquamarine;
+}
+
+.cmn2pt4 {
+    background-color: aquamarine;
+}
+
+.cmn3 {
+    background-color: beige;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.cmn4 {
+    background-color: rgb(245, 245, 80);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cmn5 {
+    background-color: rgb(245, 245, 80);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cmn6 {
+    background-color: rgb(245, 245, 80);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cmn7 {
+    background-color: rgb(245, 245, 80);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cmn8 {
+    background-color: beige;
+}
+
+.cmn9 {
+    background-color: aliceblue;
+    text-align: center !important;
+    color: blue;
+}
+
+.existingQuestionId{
+    background-color:rgb(189, 189, 189);
+    border-radius: 4px;
+    border-radius: 4px;
+    font-size:15px;
+    font-weight:450;
+}
+
+.existingQuestion{
+    background-color:wheat;
+    border-radius: 4px;
+    border-radius: 4px;
+    font-size:18px;
+    font-weight:500;
+}
+
+.questionIdInput {
+    background: none;
+    border: none;
+    width: 40px;
+}
+
+.row2 {
+    margin-top: 10px;
+    background-color: gainsboro;
+}
+
+.row2pt9{
+    background-color:aliceblue;
+    width:100%;
+    height: 300px;
+    overflow-y: auto;
+    margin:0px;
+}
+
+.row3{
+    margin-top:10px;
+    padding-right:23px;
+    padding-left:23px;
+   
+}
+
+.searchAnchor {
+    border: solid;
+    border-width: 1px;
+}
+
+.searchSpan:hover {
+    background-color: steelblue;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+.skillInput {
+    background: none;
+    border: none;
+}
+
+.topicInput {
+    background: none;
+    border: none;
+} */
