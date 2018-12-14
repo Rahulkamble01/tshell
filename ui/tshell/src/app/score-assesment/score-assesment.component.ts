@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-score-assesment',
@@ -42,7 +43,7 @@ export class ScoreAssesmentComponent implements OnInit {
   totalOutOf: number = 0;
   overallpecent: number = 0;
   overallClass: any;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.topics.forEach(x => {
@@ -72,6 +73,10 @@ export class ScoreAssesmentComponent implements OnInit {
       this.overallClass = 'bg-success';
     }
     console.log('Percent' + this.topics[4].name + 'Percent' + this.topics[4].class);
+  }
+
+  homePage() {
+    this.router.navigate(['/learner-homepage']);
   }
 
 
