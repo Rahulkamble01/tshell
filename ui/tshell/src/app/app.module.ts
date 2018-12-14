@@ -1,16 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '../../node_modules/@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmEqualValidatorDirective } from './signup/confirm-equal-validator-directive';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
+import { HomeComponent } from './home/home.component';
+import { SearchResultComponent, NgbdModalContentComponent } from './search-result/search-result.component';
+import { AddskillComponent } from './addskill/addskill.component';
+import { SkillpageComponent } from './skillpage/skillpage.component';
 
 
 @NgModule({
@@ -21,7 +26,12 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
     SignupComponent,
     ConfirmEqualValidatorDirective,
     HeaderComponent,
-    LearnerHomepageComponent
+    LearnerHomepageComponent,
+    HomeComponent,
+    SearchResultComponent,
+    AddskillComponent,
+    NgbdModalContentComponent,
+    SkillpageComponent
   ],
 
   imports: [
@@ -29,10 +39,11 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
-
+  entryComponents: [NgbdModalContentComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
