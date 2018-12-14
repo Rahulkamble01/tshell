@@ -90,10 +90,10 @@
                   <div class=" option-container " *ngFor="let option of question.options">
                     <!-- <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="favoriteSeason"  [(ngModel)]="option.selected" (change)="onSelect(question, option);" > <label [attr.for]="option.id">{{option.name}}</label> -->
 
-                    <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"   (change)="onSelect(question, option);" /><label for="{{option.id}}" >{{option.name}}</label>
+                    <!-- <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"   (change)="onSelect(question, option);" /><label for="{{option.id}}" >{{option.name}}</label> -->
 
-                    <!-- <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);">
-                    <label for="{{option.id}}">{{option.name}}</label> -->
+                    <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);">
+                    <label for="{{option.id}}">{{option.name}}</label>
                   </div>
                 </div>
               </div>
@@ -170,7 +170,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" (click)="onSubmit();">Submit Test</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit();">Submit Test</button>
         </div>
       </div>
     </div>
