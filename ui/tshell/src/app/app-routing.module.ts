@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
-  { path: "searchresult", component: SearchResultComponent },
+  { path: "skills", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent }
 ];

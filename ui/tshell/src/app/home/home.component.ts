@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   searchSkillByName(skillName) {
     alert(skillName);
-    this.router.navigate(['/searchresult']);
+    this.router.navigate(['/skills']);
   }
 
 }
