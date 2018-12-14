@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 message:string;
 status:boolean=false;
 
-  constructor(private router: Router, private service: AuthService) { }
+  constructor(private router: Router, public service: AuthService) { }
 
   form = new FormGroup({
     employeeId: new FormControl(

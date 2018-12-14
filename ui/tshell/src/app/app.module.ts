@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TestComponent } from './top5AccessedTest/test.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { SearchExistingQuestionsComponent } from './search-existing-questions/search-existing-questions.component';
@@ -26,6 +27,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { ChartsModule } from 'ng2-charts';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
 import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
@@ -34,6 +36,7 @@ import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-revie
 @NgModule({
   declarations: [
     AppComponent,
+  TestComponent,
     AddskillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
@@ -69,8 +72,10 @@ import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-revie
     SignupComponent,
     ConfirmEqualValidatorDirective,
     LearnerHomepageComponent,
-    CountOfQuestionsToReviewComponent
-
+    CountOfQuestionsToReviewComponent,
+    TotalquestionComponent,
+    QuestiongraphComponent,
+    UserprofileComponent
   ],
 
   imports: [

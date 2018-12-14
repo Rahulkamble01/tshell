@@ -2,12 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { TotalquestionsService } from '../totalquestions.service';
 
 @Component({
-  selector: 'app-totalquestion',
-  templateUrl: './totalquestion.component.html',
-  styleUrls: ['./totalquestion.component.css']
+  selector: 'app-questiongraph',
+  templateUrl: './questiongraph.component.html',
+  styleUrls: ['./questiongraph.component.css']
 })
-export class TotalquestionComponent implements OnInit {
+export class QuestiongraphComponent implements OnInit {
   userdata:any=[];
+  chartOptions = {
+    responsive: true
+  };
+  chartData = [
+    { data: [330, 800, 260, 54,432], label: 'Total Question' },
+   
+  ];
+
+  chartLabels = ['Java:330 ', 'Angular:800', 'Spring:260', 'Css:54','html:432'];
+
+
+  
+ 
+
+ 
+  onChartClick(event) {
+    console.log(event);
+  }
 
   constructor(private totalquestion : TotalquestionsService) { }
 
@@ -19,7 +37,13 @@ export class TotalquestionComponent implements OnInit {
           let count=0;
           for(let j=0;j<data.skills[i].topics.length;j++){           
             count=count+data.skills[i].topics[j].questions.length;
-          }         
+          }  
+          
+          // this.chartData[0].data[i]=count;
+          // this.chartLabels[i]=data.skills[i].name+': '+count;
+
+
+
           this.userdata[i]={
             skill:{
               name:data.skills[i].name,
@@ -31,5 +55,11 @@ export class TotalquestionComponent implements OnInit {
       }
     );
   }  
+  // chartData = [
+  //   { data: [], label: 'Total Question' },
+   
+  // ];
+
+  // chartLabels = [];
 
 }

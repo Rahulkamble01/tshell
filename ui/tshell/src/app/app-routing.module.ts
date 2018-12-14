@@ -20,10 +20,15 @@ import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistor
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
 import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
+import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
+import { TestComponent } from './top5AccessedTest/test.component';
 
 const routes: Routes = [
   { path: "addskill", component: AddskillComponent },
   { path: "login", component: LoginComponent },
+  { path: "learner-homepage", component: LearnerHomepageComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: "addskill", component: AddskillComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -39,6 +44,8 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
+  { path: 'totalquestions', component: TotalquestionComponent },
+  { path: "graph", component: QuestiongraphComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
@@ -48,7 +55,11 @@ const routes: Routes = [
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
   { path: "viewprofile", component: ViewlearnerComponent },
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
-  { path: "questions", component: CountOfQuestionsToReviewComponent }
+  { path: "questions", component: CountOfQuestionsToReviewComponent },
+  { path: "userprofile", component: UserprofileComponent },
+  { path: "assessmenthistory", component: AssessmenthistoryComponent },
+  { path: "recentSkills", component: RecentlyAddedSkillsComponent },
+  { path: "top5AccessedTest", component: TestComponent }
 ]
 
 @NgModule({
