@@ -53,7 +53,9 @@ status:boolean=false;
       console.log(employeeId);
       console.log(password);
       this.service.learnerLogin();
-      this.router.navigate(['/learner-homepage']);
+    /*   this.router.navigate(['/assessmenthistory']); */
+      this.router.navigate(['/dash']);
+    /*   this.router.navigate(['/learner-homepage']); */
     }
      else if (employeeId == '654321' && password == '654321') {
       console.log(employeeId);

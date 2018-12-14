@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,21 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+  user1: User []=[
+    {
+      name:"Harsh",
+      username:"123456",
+      pasword:"123456",
+      role:"Admin",
+   },
+    {
+    name:"Rahul",
+    username:"12345",
+    pasword:"12345",
+    role:"Learner"
+  }];
 
 
 
