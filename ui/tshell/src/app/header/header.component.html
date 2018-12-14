@@ -35,9 +35,14 @@
            
         </div>
       </li>
+      <!-- <button type="button" class="btn btn-primary" style="margin-bottom: 5%">
+        ReviewQuestions <span class="badge badge-light">74</span>
+      </button> -->
+      <li ><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/countreviewquestion">Question<span class="badge" style="color:red">75</span></a></li>
         <li ><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login"><i class="fas fa-sign-in-alt"></i>Login</a></li>
         <li><a  class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup"><i class="fas fa-user-plus"></i>Signup</a></li>
         <li><a  class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/login"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+       
      </ul> 
   </div>
 

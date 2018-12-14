@@ -19,6 +19,7 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
 import { ChartsModule } from 'ng2-charts';
 
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
+import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
     SignupComponent,
     ConfirmEqualValidatorDirective,
     HeaderComponent,
-    LearnerHomepageComponent
+    LearnerHomepageComponent,
+    CountOfQuestionsToReviewComponent
   ],
 
   imports: [

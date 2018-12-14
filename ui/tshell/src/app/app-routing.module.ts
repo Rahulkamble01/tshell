@@ -8,6 +8,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { LoginComponent } from './login/login.component';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
+import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 
 const routes: Routes = [
   {path:'dash', component:DashboardComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   {path: "", component: RecentlyAddedSkillsComponent},
-  {path: "recentSkills", component: RecentlyAddedSkillsComponent}
+  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
+  {path: "countreviewquestion", component:CountOfQuestionsToReviewComponent}
 ]
 
 
