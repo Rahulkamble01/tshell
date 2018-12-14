@@ -1,0 +1,42 @@
+.container{
+    padding-top:65px;
+}
+.card{
+    background-color: #fbfbfb;
+    margin-bottom:10px; 
+}
+#optionButton{
+    margin-top: 18px;
+    margin-left: 5px;
+     zoom:1.5;
+     color: #007bff;
+}
+#optionButton:hover{
+    cursor: pointer;
+    color: red;
+}
+.checkbox-container {
+    width: 83px;
+    height: 88px;
+}
+
+.checkmark{
+    height: 25px;
+    width:25px;
+  
+}
+
+  
+#optionText{
+    margin-top:1px;
+}
+.fa-edit{
+    color:  #007bff;
+    margin-left: 4px;
+}
+.addOption{
+    margin-right: 3px;
+}
+.addButton{
+    margin-top: 5px;
+}
