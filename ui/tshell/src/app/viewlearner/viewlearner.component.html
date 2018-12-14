@@ -1,3 +1,11 @@
+<!-- <form #imageForm=ngForm>
+    <img [src]="imageUrl" style="width : 150px; height: 150px; border-radius: 50%">
+    <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+   
+  </form> 
+
+ -->
+
 <div class="container-fluid" style="padding:15px;">
 			
   <div class="row" style="margin-top:15px;">
@@ -10,16 +18,23 @@
             <div class="row">
               <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
               <div class="col-lg-12 col-md-10 col-sm-10 col-8">
-                <div class="avatar-upload">
-                  <div class="avatar-edit">
-                      <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                      <label for="imageUpload"></label>
+                
+                  <div class="avatar-upload">
+                      <form #imageForm=ngForm>
+                    <div class="avatar-edit">
+                        <input type="file" id="imageUpload" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                        <!-- <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" /> -->
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <!-- <div id="imagePreview" style="background-image: url(https://www.loopconnect.net/images/main/avatar.png);">
+                         
+                        </div> -->
+                        <img [src]="imageUrl" id="imagePreview" STYLE="border-radius:50%;height:100%;width:100%;background-image: url(https://www.loopconnect.net/images/main/avatar.png);"/>
+                    </div>
+                  </form>
                   </div>
-                  <div class="avatar-preview">
-                      <div id="imagePreview" style="background-image: url(https://www.loopconnect.net/images/main/avatar.png);">
-                      </div>
-                  </div>
-              </div>
+                
               </div>
               <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
             </div>
@@ -27,7 +42,7 @@
           </div>
           <div class="col-lg-10 col-sm-10 col-12 col-md-10" style="padding:10px;">
             <div class="row">
-              <div class="col-lg-10 col-sm-10 col-10 col-md-10">
+              <div class="col-lg-9 col-sm-9 col-9 col-md-9">
                 <span style="font-size:35px; font-weight: bold;">
                   Harsh Gupta<span style="font-size:20px;">(729696)  </span>
                 </span>
@@ -36,7 +51,7 @@
                   <br>harsh.gupta@cognizant.com
                 </span>
               </div>
-              <div class="col-lg-2 col-sm-2 col-2 col-md-2">
+              <div class="col-lg-3 col-sm-3 col-3 col-md-3">
                <!--  <a href=""><i class="fas fa-user-edit " style="font-size:30px;float:right;color:#2374ed;"></i></a> -->
               </div>
             </div>
@@ -52,7 +67,7 @@
             <span class="badge badge-secondary viewskills">Python</span>
             <span class="badge badge-secondary viewskills">PHP</span>
             <span class="badge badge-secondary viewskills">MYSQL</span></h4>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">

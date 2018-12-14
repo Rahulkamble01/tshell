@@ -19,13 +19,14 @@
 
   
   </div>-->
- <div class="collapse navbar-collapse" id="navbar1">
+ <div class="collapse navbar-collapse" id="navbar1" >
     <b style="color: white;font-size:30px;">
         &nbsp;tShell</b>
     <ul class="navbar-nav ml-auto ">
 
         <li ><a class="nav-item btn btn-dark col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/dash">Dashboard</a></li>
-        <li ><a class="nav-item btn btn-dark col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/userprofile">Users</a></li>
+
+        <li ><a class="nav-item btn btn-dark col-12" routerLink="/userprofile">Users</a></li>
      
       <li class="nav-item dropdown" *ngIf="service.isLearnerLoggedIn">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 

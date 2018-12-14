@@ -23,7 +23,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ChartsModule } from 'ng2-charts';
 
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
-import { ViewstudentComponent } from './viewstudent/viewstudent.component';
+import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { ViewstudentComponent } from './viewstudent/viewstudent.component';
     HeaderComponent,
     LearnerHomepageComponent,
     UserprofileComponent,
-    ViewstudentComponent
+    ViewlearnerComponent
   ],
 
   imports: [
