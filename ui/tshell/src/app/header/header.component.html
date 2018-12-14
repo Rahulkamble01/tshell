@@ -1,46 +1,100 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark pay-nav">
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark pay-nav">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" 
-  aria-controls="navbarCollapse"
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
     aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
- <!-- <div class="collapse navbar-collapse" id="navbarCollapse" >
-    
-      <b style="color: white;font-size:30px;">
-        &nbsp;tShell</b>
 
-      <ul class="navbar-nav ml-auto"> 
-
-        <li><a class="nav-item btn btn-dark col-12"  [routerLink]="['/login']" style="color:white;"><i class="fas fa-store-alt"></i> Login</a></li>
-        <li><a class="nav-item btn btn-dark col-12" [routerLink]="['/signup']" style="color:white;"><i class="fas fa-user-circle"></i> Signup </a></li>
-
-      </ul>
-
-  
-  </div>-->
- <div class="collapse navbar-collapse" id="navbar1">
+  <div class="collapse navbar-collapse" id="navbar1">
     <b style="color: white;font-size:30px;">
-        &nbsp;tShell</b>
-    <ul class="navbar-nav ml-auto ">
-     
-<li class="nav-item dropdown" *ngIf="service.isLearnerLoggedIn">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-        aria-haspopup="true" aria-expanded="false" style="color:white;">
-          Harsh
+        &nbsp;<i class="fab fa-tumblr" style="font-size: 30px;"></i>Shell</b>
+    <ul class="navbar-nav ml-auto">
+
+       <li class="nav-item active" *ngIf="service.isLearnerLoggedIn">
+        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active" *ngIf="service.isLearnerLoggedIn">
+        <a class="nav-link" href="#">Questions</a>
+      </li>
+      <li class="nav-item active" *ngIf="service.isLearnerLoggedIn">
+        <a class="nav-link" href="#">Skills</a>
+      </li>
+       <li class="nav-item active" *ngIf="service.isLearnerLoggedIn">
+        <a class="nav-link" href="#">Tests</a>
+      </li>
+       <li class="nav-item active" *ngIf="service.isLearnerLoggedIn">
+        <a class="nav-link" href="#">Users</a>
+      </li>
+          
+      <li class="nav-item dropdown" *ngIf="service.isLearnerLoggedIn">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" style="color:white;">
+          Profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item">View Profile</a>
           <a class="dropdown-item">Change Password</a>
-           
         </div>
       </li>
-        <li ><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login"><i class="fas fa-sign-in-alt"></i>Login</a></li>
-        <li><a  class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup"><i class="fas fa-user-plus"></i>Signup</a></li>
-        <li><a  class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/login"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-     </ul> 
+  
+      <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login">
+        <i class="fas fa-sign-in-alt"></i> Login</a></li>
+      <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup">
+        <i class="fas fa-user-plus"></i> Signup</a></li>
+      <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/login">
+      <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+      
+    </ul>
   </div>
 
-
-  
 </nav>
+-->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"> <b style="color: white;font-size:30px;">
+        &nbsp;tShell</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="service.isLearnerLoggedIn">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Questions <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Skills <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Tests <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Users <span class="sr-only">(current)</span></a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">View Profile</a>
+          <a class="dropdown-item" href="#">Change Password</a>
+        </div>
+      </li>
+     
+    </ul>
+   
+  </div>
+   <ul class="navbar-nav ml-auto">
+     <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login">
+        <i class="fas fa-sign-in-alt"></i> Login</a></li>
+      <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup">
+        <i class="fas fa-user-plus"></i> Signup</a></li>
+      <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/login">
+      <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+  </ul>
+</nav> 
