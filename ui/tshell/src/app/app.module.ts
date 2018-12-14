@@ -7,10 +7,14 @@ import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.componen
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { InstructionComponent } from './instruction/instruction.component';
+import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 @NgModule({
   declarations: [
     AppComponent,
     ExitAssesmentComponent,
+    InstructionComponent,
+    ScoreAssesmentComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,8 +4,6 @@ export class Option {
     name: string;
     isAnswer: boolean;
     selected: boolean;
-    visited: boolean;
-    counter: number;
 
     constructor(data: any) {
         data = data || {};

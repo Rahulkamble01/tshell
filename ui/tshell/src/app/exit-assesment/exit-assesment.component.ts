@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Option, Question, Quiz, QuizConfig } from '../models/index';
 import { ExitAssesmentService } from '../exit-assesment.service';
+import { Router } from '@angular/router';
 
 
 // declare var countdown: any;
@@ -20,7 +21,7 @@ export class ExitAssesmentComponent implements OnInit {
     'allowBack': true,
     'allowReview': true,
     'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 2000,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'duration': 1200,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
     'richText': false,
@@ -48,7 +49,7 @@ export class ExitAssesmentComponent implements OnInit {
 
   type = 'checkbox';
 
-  constructor(private quizService: ExitAssesmentService) { }
+  constructor(private quizService: ExitAssesmentService, private router: Router) { }
 
   ngOnInit() {
     /*
@@ -98,8 +99,7 @@ export class ExitAssesmentComponent implements OnInit {
 
   onSelect(question: Question, option: Option) {
     if (question.questionTypeId === 1) {
-      question.options.forEach((x) => {
-        x.visited = true;
+           question.options.forEach((x) => {
         if (x.id !== option.id) {
           console.log('option ' + option.id + ' x.id : ' + x.id);
           x.selected = false;
@@ -119,16 +119,13 @@ export class ExitAssesmentComponent implements OnInit {
       this.mode = 'quiz';
     }
   }
-  updateVisited() {
-    return 'Visited';
-  }
+
+
   isAnswered(question: Question) {
     return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
   };
 
-  isVisited(question: Question) {
-    return question.options.find(x => x.visited) ? 'Visited' : 'Not Visited';
-  };
+
 
   isCorrect(question: Question) {
     return question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
@@ -141,6 +138,7 @@ export class ExitAssesmentComponent implements OnInit {
     // Post your data to the server here. answers contains the questionId and the users' answer.
     console.log(this.quiz.questions);
     this.mode = 'result';
+    this.router.navigate(['/assesmentscore']);
   }
 
 

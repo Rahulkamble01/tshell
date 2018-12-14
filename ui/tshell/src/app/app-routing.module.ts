@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
+import { InstructionComponent } from './instruction/instruction.component';
+import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 
 const routes: Routes = [
-  { path: '', component: ExitAssesmentComponent }
+  { path: 'assesment', component: ExitAssesmentComponent },
+  { path: 'instruction', component: InstructionComponent },
+  { path: 'assesmentscore', component: ScoreAssesmentComponent }
 ];
 
 @NgModule({

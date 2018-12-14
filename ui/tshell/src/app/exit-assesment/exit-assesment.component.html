@@ -1,23 +1,28 @@
-<div class="container-fluid navbar-dark bg-light">
+<!-- <div class="container-fluid navbar-dark bg-light">
   <div class="row">
     <div class="col-5 col-sm-5 col-md-5 col-lg-5">
       <h2>tShell</h2>
     </div>
-
+    
 
     <div class="col-1 col-sm-1 col-md-1 col-lg-1"></div>
     <div class=" col-3 col-sm-3 col-md-3 col-lg-3">
 
-      <!-- <div id="countdowntimer" id="timer"></div> -->
+       <div id="countdowntimer" id="timer"></div> 
     </div>
 
   </div>
-</div>
+</div> -->
 
+
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">tShell</span>
+  </nav>
+<!--****************       RIGHT SIDE FIXED  QUESTION PALLETTE     ****************************************-->
 <div id="sideNav">
   <div class="sidenav">
     <div class=" badge badge-info float-right"></div>
-    <h3 class=" border-bottom border-dark pb-3 text-center "> Question {{pager.index + 1}} of {{pager.count}}. </h3>
+    <h3 class=" border-bottom border-dark pb-4 text-center "> Question {{pager.index + 1}} of {{pager.count}}. </h3>
     <div class="p-1 scroll-questions" id="style-1">
       <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
       <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
@@ -29,7 +34,7 @@
       <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
       <span class="answered-legend-buttons default-cursor"> </span> Answered
     </div>
-    <div><button class="btn btn-primary btn-block pt-1" (click)="onSubmit();" >Submit Test</button></div>
+    <div><button class="btn btn-success btn-block pt-1 mt-3" data-toggle="modal" data-target="#submitConfirmation">Submit Test</button></div>
   </div>
 
 </div>
@@ -48,13 +53,19 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12 col-md-12">
-        <button type="button" class="btn btn-primary btn-block" id="mobileQuestionView" data-toggle="modal" data-target="#exampleModal">
-          Navigate Questions
-        </button>
-        <!-- <a class="btn btn-primary " id="myModalBtn">Launch demo modal</a> -->
+
+
+        <!--****************       MOBILEVIEW   QUESTION PALLETTE MODAL TOGGLE BUTTON *****************************-->
+        <button type="button" class="btn btn-success btn-block mt-2" id="mobileQuestionView" data-toggle="modal" data-target="#questionPallete">
+          Navigate Between Questions
+        </button> <!-- <a class="btn btn-primary " id="myModalBtn">Launch demo modal</a> -->
+
+
+
+        <!--****************       DISPLAYING QUESTIONS  *****************************-->
         <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <div *ngIf="config.duration" class="mt-2 badge badge-info float-right">Time: {{ellapsedTime}} /
+            <div *ngIf="config.duration" class="mt-2 badge badge-info time-badge float-right">Time: {{ellapsedTime}} /
               {{duration}}</div>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -70,6 +81,8 @@
                 <div class="quest pl-3">{{question.name}}</div>
               </div>
 
+              <!--********************************       DISPLAYING OPTIONS  *****************************-->
+
 
               <div class="options-div pt-4">
                 <span class="answer-legends btn-success">A. </span>
@@ -77,24 +90,23 @@
                   <div class=" option-container " *ngFor="let option of question.options">
                     <!-- <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="favoriteSeason"  [(ngModel)]="option.selected" (change)="onSelect(question, option);" > <label [attr.for]="option.id">{{option.name}}</label> -->
 
-                    <!-- <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"  /><label for="{{option.id}}" >{{option.name}}</label>-->
+                    <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"   (change)="onSelect(question, option);" /><label for="{{option.id}}" >{{option.name}}</label>
 
-                    <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);">
-                    <label for="{{option.id}}">{{option.name}}</label>
+                    <!-- <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);">
+                    <label for="{{option.id}}">{{option.name}}</label> -->
                   </div>
                 </div>
               </div>
 
 
+<!--********************************       DISPLAYING QUEST  PALLETTE VIA MODAL IN MOBILE VIEW  *****************************-->
 
-
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              <div class="modal fade" id="questionPallete" tabindex="-1" role="dialog" aria-labelledby="questionPalleteLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title text-center" id="exampleModalLabel"> Question {{pager.index + 1}} of
-                        {{pager.count}}</h5>
+                      <h5 class="modal-title text-center" id="questionPalleteModalLabel"> Question {{pager.index + 1}} of  {{pager.count}}</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -112,7 +124,7 @@
                         <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
                         <span class="answered-legend-buttons default-cursor"> </span> Answered
                       </div>
-                      <div><button class="btn btn-primary btn-block pt-1" (click)="onSubmit();">Submit Test</button></div>
+                      <div><button class="btn btn-success btn-block pt-1" data-toggle="modal" data-dismiss="modal" data-target="#submitConfirmation">Submit Test</button></div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -124,30 +136,15 @@
             </div>
 
 
+<!--********************************       NAVIGATION BUTTONS  *****************************-->
 
-
-            <div class="text-center float-right navigate-buttons-div">
+            <div class="text-center float-right navigate-buttons-div mb-3">
 
               <button class="btn btn-default previous-nav-button" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
               <button class="btn btn-primary next-nav-button" (click)="goTo(pager.index + 1);">Next</button>
-             
+
             </div>
             <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
-
-
-
-            <!--div>
-                        <input type="radio" class="option-radio-input cdk-visually-hidden" [(ngModel)]="favoriteSeason" [value]="season">
-                      </div>
-                      <div class="option-radio-label-content">{{season}}</div>
-                    </label>
-                   
-                  </div>
-                </div>
-                <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div> -->
-
-
-
           </div>
         </div>
       </div>
@@ -155,24 +152,44 @@
 
   </div>
 
-
-  <!-- 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
+ 
+  <!-- Confirm the submission of test with the user -->
+  <div class="modal fade" id="submitConfirmation" tabindex="-1" role="dialog" aria-labelledby="submitConfirmationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">QUESTIONS</h5>
+          <h5 class="modal-title" id="submitConfirmationLabel"> Submit Confirmation</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+        <h5> You are about to submit the test.</h5>
+        <p>Once you press Submit Test your resonses will be submitted and you cannot return back to the test.</p>
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="onSubmit();">Submit Test</button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
+
+<!-- 
+  <div class="result" *ngIf="mode=='result'">
+      <h2>Quiz Result</h2>
+      <div *ngFor="let question of quiz.questions; let index = index">
+        <div class="result-question">
+          <h5>{{index + 1}}. {{question.name}}</h5>
+          <div class="row">
+            <div class="col-6 option-container" *ngFor="let Option of question.options">
+              <input id="{{Option.id}}" type="checkbox" disabled="disabled" [value]="Option.selected" /> {{Option.name}}
+              
+            </div>
+          </div>
+          <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+        </div>
+      </div>
+      <h4 class="alert alert-info text-center">You may close this window now.</h4>
+    </div> -->

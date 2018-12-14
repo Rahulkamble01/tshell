@@ -25,7 +25,13 @@
 
 
 .test-name {
-  padding-top: 20px;
+  padding-top: 2px;
+}
+
+.time-badge {
+  width: 150px;
+  height: 19px;
+  vertical-align: middle;
 }
 
 #timer {
@@ -88,7 +94,7 @@
 .navigate-buttons-div {
   display: flex;
   padding-top: 20px;
-    padding-right: .5rem;
+  padding-right: .5rem;
 }
 
 .previous-nav-button {
@@ -318,7 +324,7 @@
   }
 
   .test-name {
-    padding-top: 4px;
+    padding-top: 2px;
   }
 
 }
