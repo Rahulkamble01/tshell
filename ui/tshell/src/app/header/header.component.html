@@ -16,11 +16,14 @@
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
+      <!--<li class="nav-item active">
         <a class="nav-link" href="#">Tests <span class="sr-only">(current)</span></a>
-      </li>
+      </li>-->
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/login']">Login <span class="sr-only">(current)</span></a>
       </li>
 
       <li class="nav-item dropdown active">
@@ -36,6 +39,8 @@
     </ul>
   </div>
   <ul class="navbar-nav ml-auto">
+    <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/"><i class="fas fa-home"></i>
+        Home</a></li>
     <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login">
         <i class="fas fa-sign-in-alt"></i> Login</a></li>
     <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup">

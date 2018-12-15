@@ -76,26 +76,19 @@
     
 
 
-
+<!-- 
  <div class="container-fluid">
   <div class="font-weight-bold h3  d-flex justify-content-center">Total number of question contributed</div>
   <div class="col-11">
   <div class="row  p-3 mb-2 bg-light text-dark">      
-
-    
-    <div class="card col-lg-2 col-md-4 col-12 col-sm-6" *ngFor="let u of userdata">
+          <div class="card col-lg-2 col-md-4 col-12 col-sm-6" *ngFor="let skill of userdata.skills">
               <div class="card-body border border-primary rounded ">
-                <div >
-                    <!-- *ngFor="let topic of skill.topics -->
-                <div class="card-title d-flex justify-content-center border-bottom font-weight-bold w-100 p-3 h1">{{u.skill.count}}</div>
+                <div *ngFor="let topic of skill.topics">
+                <div class="card-title d-flex justify-content-center border-bottom font-weight-bold w-100 p-3 h1" >{{topic.questions.length}}</div>
               </div> 
-                  <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-center font-weight-light font-italic">{{u.skill.name}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-center font-weight-light font-italic">{{skill.name}}</h6>
                 </div>
-          </div>  
-        
-        
+          </div>     
     </div>
     </div>
-    </div> 
-    
-    
+		</div>    -->

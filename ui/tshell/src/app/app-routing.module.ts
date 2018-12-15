@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddskillComponent } from './addskill/addskill.component';
 import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { SearchExistingQuestionsComponent } from './search-existing-questions/search-existing-questions.component';
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
@@ -20,15 +19,14 @@ import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistor
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
 import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
-import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
-import { TestComponent } from './top5AccessedTest/test.component';
+import { HomeComponent } from './home/home.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { AddskillComponent } from './addskill/addskill.component';
+import { SkillpageComponent } from './skillpage/skillpage.component';
 
 const routes: Routes = [
   { path: "addskill", component: AddskillComponent },
   { path: "login", component: LoginComponent },
-  { path: "learner-homepage", component: LearnerHomepageComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: "addskill", component: AddskillComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -40,12 +38,13 @@ const routes: Routes = [
   { path: 'preview', component: PreviewQuestionsComponent },
   { path: 'dash', component: DashboardComponent },
   { path: 'totalquestions', component: TotalquestionComponent },
-  { path: "", component: LoginComponent },
+  { path: "skills", component: SearchResultComponent },
+  { path: "addskill", component: AddskillComponent },
+  { path: "skillpage", component: SkillpageComponent },
+  { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
-  { path: 'totalquestions', component: TotalquestionComponent },
-  { path: "graph", component: QuestiongraphComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
@@ -55,12 +54,8 @@ const routes: Routes = [
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
   { path: "viewprofile", component: ViewlearnerComponent },
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
-  { path: "questions", component: CountOfQuestionsToReviewComponent },
-  { path: "userprofile", component: UserprofileComponent },
-  { path: "assessmenthistory", component: AssessmenthistoryComponent },
-  { path: "recentSkills", component: RecentlyAddedSkillsComponent },
-  { path: "top5AccessedTest", component: TestComponent }
-]
+  { path: "questions", component: CountOfQuestionsToReviewComponent }
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

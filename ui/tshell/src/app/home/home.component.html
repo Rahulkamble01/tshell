@@ -1,0 +1,32 @@
+<!-- Navigation -->
+<header>
+  <div id="carouselExampleIndicators" class="carousel slide try" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below Add More i  you want -->
+      <div class="carousel-item car1 active" style="background-image: url('assets/images/home.jpg'); height: 601px;">
+        <div class="carousel-caption d.block">
+          <h3>Test Yourself with tShell</h3>
+          <p class="mb-0">We simplified way to test your Skills,</p>
+          <p class="mt-0">so you can focus on what's important to you.</p>
+          <form action=""  >
+            <input name="searchSkill" autocomplete="off" #searchSkill><br>
+            <button type="submit" class="btn btn-primary" (click)="searchSkillByName(searchSkill.value)">Search Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+</header>
