@@ -36,11 +36,13 @@ import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TestComponent } from './top5AccessedTest/test.component';
-
-
+import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
+import { InstructionComponent } from './instruction/instruction.component';
+import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 @NgModule({
   declarations: [
     AppComponent,
+
     AddskillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
@@ -84,7 +86,11 @@ import { TestComponent } from './top5AccessedTest/test.component';
     NgbdModalContentComponent,
     SkillpageComponent,
     QuestiongraphComponent,
-    TestComponent
+    TestComponent,
+    ExitAssesmentComponent,
+    InstructionComponent,
+    ScoreAssesmentComponent,
+
   ],
 
   imports: [
@@ -97,7 +103,10 @@ import { TestComponent } from './top5AccessedTest/test.component';
     NgbModule
   ],
   providers: [
-    ContributeQuestionService, AuthService
+    ContributeQuestionService, 
+    AuthService,
+    HttpClientModule,
+
   ],
   entryComponents: [NgbdModalContentComponent],
   bootstrap: [AppComponent]

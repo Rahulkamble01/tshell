@@ -23,6 +23,10 @@ import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
+import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
+import { InstructionComponent } from './instruction/instruction.component';
+import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+
 
 const routes: Routes = [
   { path: "addskill", component: AddskillComponent },
@@ -54,11 +58,17 @@ const routes: Routes = [
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
   { path: "viewprofile", component: ViewlearnerComponent },
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
-  { path: "questions", component: CountOfQuestionsToReviewComponent }
-  ];
+  { path: "questions", component: CountOfQuestionsToReviewComponent },
+  { path: 'assesment', component: ExitAssesmentComponent },
+  { path: 'instruction', component: InstructionComponent },
+  { path: 'assesmentscore', component: ScoreAssesmentComponent }
+];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
