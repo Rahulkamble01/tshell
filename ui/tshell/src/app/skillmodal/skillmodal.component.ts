@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class SkillmodalComponent implements OnInit {
   add: boolean;
+  item: any;
+  @Input() name: any;
   skills: any = [
     {
       id: 1,
@@ -56,7 +58,7 @@ export class SkillmodalComponent implements OnInit {
     skillName: new FormControl(
       '',
       [Validators.required,
-      Validators.minLength(1),
+      Validators.minLength(2),
       Validators.maxLength(25),
       Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
 
@@ -64,6 +66,7 @@ export class SkillmodalComponent implements OnInit {
     topicName: new FormControl(
       '',
       [
+        Validators.minLength(2),
         Validators.maxLength(60),
         Validators.pattern(/^[a-zA-Z ._-]+$/),
       ])
@@ -87,13 +90,16 @@ export class SkillmodalComponent implements OnInit {
 
   submitSkill(skillName) {
     if (skillName == this.skills[0].name) {
-      alert("Skill already exists");
+      alert("Skill already updated");
     } else {
       alert("Skill Added");
 
     }
   }
   ngOnInit() {
+    if (this.add == false) {
+
+    }
   }
 
 }

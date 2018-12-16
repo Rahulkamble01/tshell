@@ -120,6 +120,12 @@ export class SearchResultComponent implements OnInit {
   editSkillModel(item) {
     console.log(item);
     const modalRef = this.modalService.open(SkillmodalComponent);
+    this.skills.forEach(element => {
+      if (element.id == item.id) {
+        modalRef.componentInstance.item = element;
+        // alert(JSON.stringify(modalRef.componentInstance.item));
+      }
+    });
     modalRef.componentInstance.name = item.name;
     modalRef.componentInstance.add = false;
   }
