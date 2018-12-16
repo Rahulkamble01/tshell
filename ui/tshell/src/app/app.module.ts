@@ -13,9 +13,10 @@ import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { HomeComponent } from './home/home.component';
-import { SearchResultComponent, NgbdModalContentComponent } from './search-result/search-result.component';
+import { SearchResultComponent} from './search-result/search-result.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
+import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 
 
 @NgModule({
@@ -30,8 +31,8 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
     HomeComponent,
     SearchResultComponent,
     AddskillComponent,
-    NgbdModalContentComponent,
-    SkillpageComponent
+    SkillpageComponent,
+    SkillmodalComponent
   ],
 
   imports: [
@@ -43,7 +44,7 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
     NgbModule
   ],
   providers: [AuthService],
-  entryComponents: [NgbdModalContentComponent],
+  entryComponents: [SkillmodalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

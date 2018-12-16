@@ -15,8 +15,10 @@
       <p class="row search-heading text-center mb-0 mt-1 pl-3">Search Result for <span> "html"</span></p>
     </div>
     <div class="col-lg-2 col-md-2 col-12 col-sm-12">
-      <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" data-toggle="modal"
-        data-target="#addskillmodal"> Skill</button></div>
+      <!-- <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" data-toggle="modal"
+        data-target="#addskillmodal"> Skill</button></div> -->
+      <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" (click)="addSkillModel()"> Skill</button>
+    </div>
   </div>
 </div>
 
@@ -114,11 +116,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="addskillmodal" style="padding-top: 2cm" role="dialog" #addskillmodal>
+<!-- <div class="modal fade" id="addskillmodal" style="padding-top: 2cm" role="dialog" #addskillmodal>
   <div class="modal-dialog modal-lg">
-    <form [formGroup]="addskillform">
+    <form [formGroup]="addskillform"> -->
       <!-- Modal content-->
-      <div class="modal-content">
+      <!-- <div class="modal-content">
         <div class="modal-header">
           <h4>
             Add Skill
@@ -128,19 +130,20 @@
         </div>
         <div class="modal-body">
 
-          <div class="container ">
+          <div class="container "> -->
 
             <!-- starting of a row -->
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-lg-4"> Name </div>
               <div class="col-lg-5"> </div>
               <div class="col-lg-1"></div>
               <div class="col-lg-2"></div>
-            </div> <!-- ending of a row -->
+            </div>  -->
+            <!-- ending of a row -->
 
 
             <!-- starting of a row -->
-            <div class="row">
+            <!-- <div class="row">
 
               <div class="col-lg-12">
 
@@ -160,16 +163,18 @@
                 </div>
               </div>
 
-            </div> <!-- ending of a row -->
+            </div>  -->
+            <!-- ending of a row -->
 
-            <br>
+            <!-- <br> -->
             <!-- starting of a row -->
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-lg-12"> Add Topics </div>
-            </div> <!-- ending of a row -->
+            </div>  -->
+            <!-- ending of a row -->
 
 
-
+<!-- 
             <div class="row ">
 
               <div class="col-lg-12 col-12 col-sm-12 col-md-12 buttonInside ">
@@ -212,4 +217,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
