@@ -39,16 +39,21 @@ import { TestComponent } from './top5AccessedTest/test.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+import { PasswordMachingValidatorDirective } from './changepassword/password-matching-validator.directive';
+import { PasswordNotEqualValidatorDirective } from './changepassword/password-not-equal-validator.directive';
+import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 @NgModule({
   declarations: [
     AppComponent,
-
+PasswordMachingValidatorDirective,
+PasswordNotEqualValidatorDirective,
     AddskillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
+    SkillmodalComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,

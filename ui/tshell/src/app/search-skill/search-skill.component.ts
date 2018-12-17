@@ -7,25 +7,25 @@ import { DeactivateActivateSkillService } from '../deactivate-activate-skill.ser
   styleUrls: ['./search-skill.component.css']
 })
 export class SearchSkillComponent implements OnInit {
-  list :any[];
-  constructor(private skillSearch:DeactivateActivateSkillService) { }
+  list: any[] = [];
+  constructor(private skillSearch: DeactivateActivateSkillService) { }
 
   ngOnInit() {
   }
-  getSkill(name){
+  getSkill(name) {
     this.skillSearch.gettingSkill(name).subscribe(
       data => {
-    this.list=data; 
-    console.log(data);
+        this.list = data;
+        console.log(data);
       }
     );
   }
-  toggllingSkill(id,name){
+  toggllingSkill(id, name) {
     this.skillSearch.toggleSkill(id).subscribe(
       data => {
         this.skillSearch.gettingSkill(name).subscribe(
           data => {
-            this.list=data; 
+            this.list = data;
           }
         );
       }
