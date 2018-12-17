@@ -61,7 +61,10 @@ const routes: Routes = [
   { path: "questions", component: CountOfQuestionsToReviewComponent },
   { path: 'assesment', component: ExitAssesmentComponent },
   { path: 'instruction', component: InstructionComponent },
-  { path: 'assesmentscore', component: ScoreAssesmentComponent }
+  { path: 'assesmentscore', component: ScoreAssesmentComponent },
+  { path: "skills", component: SearchResultComponent },
+  { path: "addskill", component: AddskillComponent },
+  { path: "skillpage", component: SkillpageComponent }
 ];
 
 

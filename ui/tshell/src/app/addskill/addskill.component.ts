@@ -26,7 +26,10 @@ export class AddskillComponent implements OnInit {
       Validators.minLength(1),
       Validators.maxLength(25),
       Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
+<<<<<<< HEAD
       
+=======
+>>>>>>> neoskills
 
       ]),
     topicName: new FormControl(

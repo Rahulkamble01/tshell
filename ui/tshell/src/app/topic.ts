@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export class Topic{
 
     name: string;
@@ -6,5 +7,11 @@ export class Topic{
     constructor(name){
         this.name = name;
       
+=======
+export class Topic {
+    name: string;
+    constructor(name) {
+        this.name = name;
+>>>>>>> neoskills
     }
 }

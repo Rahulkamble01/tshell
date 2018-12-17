@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as $ from 'jquery';
+<<<<<<< HEAD
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -170,6 +171,10 @@ export class NgbdModalContentComponent {
 }
 
 
+=======
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
+>>>>>>> neoskills
 
 @Component({
   selector: 'app-search-result',
@@ -243,6 +248,7 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {
   }
 
+<<<<<<< HEAD
   addTopic(topicname) {
     let topic = new Topic(topicname);
     this.topics.push(topic);
@@ -264,6 +270,29 @@ export class SearchResultComponent implements OnInit {
 
     }
   }
+=======
+  // addTopic(topicname) {
+  //   let topic = new Topic(topicname);
+  //   this.topics.push(topic);
+  //   this.clearInput();
+  // }
+  // removeTopic(topic) {
+  //   let index = this.topics.indexOf(topic);
+  //   this.topics.splice(index, 1);
+  // }
+
+  // get topicName(): any { return this.addskillform.get('topicName'); }
+  // clearInput() { this.topicName.reset(); }
+
+  // submitSkill(skillName) {
+  //   if (skillName == this.skills[0].name) {
+  //     alert("Skill already exists");
+  //   } else {
+  //     alert("Skill Added");
+
+  //   }
+  // }
+>>>>>>> neoskills
 
   toggllingSkill(skill) {
     if (skill.active) {
@@ -283,9 +312,26 @@ export class SearchResultComponent implements OnInit {
 
   editSkillModel(item) {
     console.log(item);
+<<<<<<< HEAD
     const modalRef = this.modalService.open(NgbdModalContentComponent);
     modalRef.componentInstance.name = item.name;
     modalRef.componentInstance.name = item.name;
+=======
+    const modalRef = this.modalService.open(SkillmodalComponent);
+    this.skills.forEach(element => {
+      if (element.id == item.id) {
+        modalRef.componentInstance.item = element;
+        // alert(JSON.stringify(modalRef.componentInstance.item));
+      }
+    });
+    modalRef.componentInstance.name = item.name;
+    modalRef.componentInstance.add = false;
+  }
+
+  addSkillModel(add: boolean = true) {
+    const modalRef = this.modalService.open(SkillmodalComponent);
+    modalRef.componentInstance.add = add;
+>>>>>>> neoskills
   }
 
 }

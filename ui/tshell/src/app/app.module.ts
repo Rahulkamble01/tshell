@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,12 +15,15 @@ import { TotalquestionComponent } from './totalquestion/totalquestion.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmEqualValidatorDirective } from './signup/confirm-equal-validator-directive';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
+
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
@@ -39,9 +41,12 @@ import { TestComponent } from './top5AccessedTest/test.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+
+import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './changepassword/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './changepassword/password-not-equal-validator.directive';
-import { SkillmodalComponent } from './skillmodal/skillmodal.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +100,8 @@ PasswordNotEqualValidatorDirective,
     ExitAssesmentComponent,
     InstructionComponent,
     ScoreAssesmentComponent,
+    SkillpageComponent,
+    SkillmodalComponent
 
   ],
 
@@ -111,9 +118,8 @@ PasswordNotEqualValidatorDirective,
     ContributeQuestionService, 
     AuthService,
     HttpClientModule,
-
   ],
-  entryComponents: [NgbdModalContentComponent],
-  bootstrap: [AppComponent]
+  entryComponents: [SkillmodalComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
