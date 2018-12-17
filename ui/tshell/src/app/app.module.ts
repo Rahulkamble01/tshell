@@ -33,7 +33,7 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
 import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
-import { SearchResultComponent, NgbdModalContentComponent } from './search-result/search-result.component';
+import { SearchResultComponent} from './search-result/search-result.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
@@ -93,7 +93,6 @@ PasswordNotEqualValidatorDirective,
     HomeComponent,
     SearchResultComponent,
     AddskillComponent,
-    NgbdModalContentComponent,
     SkillpageComponent,
     QuestiongraphComponent,
     TestComponent,

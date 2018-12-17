@@ -96,13 +96,6 @@ export class SkillmodalComponent implements OnInit {
 
     }
   }
-<<<<<<< HEAD
-
-  toggllingSkill(){}
-  editSkillModel(){}
-
-=======
->>>>>>> neoskills
   ngOnInit() {
     if (this.add == false) {
 
