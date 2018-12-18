@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
 import { Option, Question, Quiz, QuizConfig } from '../models/index';
 import { ExitAssesmentService } from '../exit-assesment.service';
 import { Router } from '@angular/router';
@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-exit-assesment',
   templateUrl: './exit-assesment.component.html',
-  styleUrls: ['./exit-assesment.component.css']
+  styleUrls: ['./exit-assesment.component.css'],
 })
-export class ExitAssesmentComponent implements OnInit {
+export class ExitAssesmentComponent implements OnInit, OnDestroy {
   json: any = [
     {
       'id': 1, 'name': 'Asp.Net Quiz', 'description': 'Asp.Net Quiz (contains webform, mvc, web API, etc.)',
@@ -57,7 +57,8 @@ export class ExitAssesmentComponent implements OnInit {
 
   type = 'checkbox';
 
-  constructor(private quizService: ExitAssesmentService, private router: Router) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private quizService: ExitAssesmentService, private router: Router, private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
     /*
@@ -65,6 +66,9 @@ export class ExitAssesmentComponent implements OnInit {
       countdown(2);
     });*/
 
+    // this.el.nativeElement.style.color = 'blue';
+    // this.renderer.setStyle(this.el.nativeElement, 'color', 'blue');
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', 'white');
     // this.quizes = this.quizService.getAll();
     // this.quizName = this.quizes[0].id;
     // this.loadQuiz(this.quizName);
@@ -160,8 +164,13 @@ export class ExitAssesmentComponent implements OnInit {
     console.log(this.quiz.questions);
     this.mode = 'result';
     this.router.navigate(['/assesmentscore']);
+
   }
 
+  ngOnDestroy() {
+    // this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'red';
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', '#989D9E');
+  }
 
 
 

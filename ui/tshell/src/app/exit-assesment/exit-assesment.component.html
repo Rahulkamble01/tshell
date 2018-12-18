@@ -34,7 +34,7 @@
       <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
       <span class="answered-legend-buttons default-cursor"> </span> Answered
     </div>
-    <div><button class="btn btn-success btn-block pt-1 mt-3" data-toggle="modal" data-target="#submitConfirmation">Submit Test</button></div>
+    <div><button class="btn btn-ts-primary btn-block pt-1 mt-3" data-toggle="modal" data-target="#submitConfirmation">Submit Test</button></div>
   </div>
 
 </div>
@@ -49,14 +49,14 @@
 
 -->
 
-<div class="questions">
+<div class="questions qbody ">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12 col-md-12">
 
 
         <!--****************       MOBILEVIEW   QUESTION PALLETTE MODAL TOGGLE BUTTON *****************************-->
-        <button type="button" class="btn btn-success btn-block mt-2" id="mobileQuestionView" data-toggle="modal" data-target="#questionPallete">
+        <button type="button" class="btn btn-ts-primary btn-block mt-2" id="mobileQuestionView" data-toggle="modal" data-target="#questionPallete">
           Navigate Between Questions
         </button> <!-- <a class="btn btn-primary " id="myModalBtn">Launch demo modal</a> -->
 
@@ -107,7 +107,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title text-center" id="questionPalleteModalLabel"> Question {{pager.index + 1}} of  {{pager.count}}</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="close  btn btn-ts-cancel" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -124,10 +124,10 @@
                         <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
                         <span class="answered-legend-buttons default-cursor"> </span> Answered
                       </div>
-                      <div><button class="btn btn-success btn-block pt-1" data-toggle="modal" data-dismiss="modal" data-target="#submitConfirmation">Submit Test</button></div>
+                      <div><button class="btn btn-ts-primary btn-block pt-1" data-toggle="modal" data-dismiss="modal" data-target="#submitConfirmation">Submit Test</button></div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
@@ -140,8 +140,8 @@
 
             <div class="text-center float-right navigate-buttons-div mb-3">
 
-              <button class="btn btn-default previous-nav-button" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
-              <button class="btn btn-primary next-nav-button" (click)="goTo(pager.index + 1);">Next</button>
+              <button class="btn btn-ts-primary previous-nav-button" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+              <button class="btn btn-ts-primary next-nav-button" (click)="goTo(pager.index + 1);">Next</button>
 
             </div>
             <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
@@ -159,7 +159,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="submitConfirmationLabel"> Submit Confirmation</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close btn btn-ts-cancel" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -169,8 +169,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit();">Submit Test</button>
+          <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-ts-primary" data-dismiss="modal" (click)="onSubmit();">Submit Test</button>
         </div>
       </div>
     </div>
@@ -193,3 +193,4 @@
       </div>
       <h4 class="alert alert-info text-center">You may close this window now.</h4>
     </div> -->
+</div>
