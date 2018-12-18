@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class InstructionComponent implements OnInit {
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer2) { }
   ngOnInit() {
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', 'white');
   }
   startAssesment(){
   this.router.navigate(['/assesment']);
