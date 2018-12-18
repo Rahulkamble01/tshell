@@ -115,7 +115,7 @@ PasswordNotEqualValidatorDirective,
     NgbModule
   ],
   providers: [
-    ContributeQuestionService, 
+    ContributeQuestionService,
     AuthService,
     HttpClientModule,
   ],

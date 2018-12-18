@@ -2,6 +2,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 <!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="./../../assets/js/d3graph.js">
 <div class="container">
   <div class="row">
     <div class="col-lg-2 col-md-2 col-12"></div>
@@ -17,7 +18,8 @@
     <div class="col-lg-2 col-md-2 col-12 col-sm-12">
       <!-- <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" data-toggle="modal"
         data-target="#addskillmodal"> Skill</button></div> -->
-      <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" (click)="addSkillModel()"> Skill</button>
+      <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" (click)="addSkillModel()">
+        Skill</button>
     </div>
   </div>
 </div>
@@ -63,7 +65,8 @@
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12">
-                  <a href="#" [routerLink]="[ '/skillpage', item ]" class="btn btn-primary " style="float:left">View Skill
+                  <a href="#" [routerLink]="[ '/skillpage', item ]" class="btn btn-primary " style="float:left">View
+                    Skill
                   </a>
                   <a href="#" [routerLink]="[ '/instruction' ]" class="btn btn-primary " style="float:right">Take test
                   </a>
@@ -80,12 +83,8 @@
       </div>
 
     </div>
-    <div class="col-lg-6 col-md-6 col-12 col-sm-12 " style="background-color: white;">
-
-      <img src="../../assets/images/graph.png" width="96%" height="100%">
-
-
-
+    <div class="col-lg-6 col-md-6 col-12 col-sm-12 " id="graphID">
+            <!-- <img src="../../assets/images/graph.png" width="96%" height="100%"> -->
 
     </div>
     <!----------------------------------->
@@ -119,8 +118,8 @@
 <!-- <div class="modal fade" id="addskillmodal" style="padding-top: 2cm" role="dialog" #addskillmodal>
   <div class="modal-dialog modal-lg">
     <form [formGroup]="addskillform"> -->
-      <!-- Modal content-->
-      <!-- <div class="modal-content">
+<!-- Modal content-->
+<!-- <div class="modal-content">
         <div class="modal-header">
           <h4>
             Add Skill
@@ -132,18 +131,18 @@
 
           <div class="container "> -->
 
-            <!-- starting of a row -->
-            <!-- <div class="row">
+<!-- starting of a row -->
+<!-- <div class="row">
               <div class="col-lg-4"> Name </div>
               <div class="col-lg-5"> </div>
               <div class="col-lg-1"></div>
               <div class="col-lg-2"></div>
             </div>  -->
-            <!-- ending of a row -->
+<!-- ending of a row -->
 
 
-            <!-- starting of a row -->
-            <!-- <div class="row">
+<!-- starting of a row -->
+<!-- <div class="row">
 
               <div class="col-lg-12">
 
@@ -164,14 +163,14 @@
               </div>
 
             </div>  -->
-            <!-- ending of a row -->
+<!-- ending of a row -->
 
-            <!-- <br> -->
-            <!-- starting of a row -->
-            <!-- <div class="row">
+<!-- <br> -->
+<!-- starting of a row -->
+<!-- <div class="row">
               <div class="col-lg-12"> Add Topics </div>
             </div>  -->
-            <!-- ending of a row -->
+<!-- ending of a row -->
 
 
 <!-- 
