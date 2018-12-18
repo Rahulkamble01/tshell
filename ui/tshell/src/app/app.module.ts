@@ -45,6 +45,7 @@ import { ScoreAssesmentComponent } from './score-assesment/score-assesment.compo
 import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './changepassword/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './changepassword/password-not-equal-validator.directive';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -100,8 +101,8 @@ PasswordNotEqualValidatorDirective,
     InstructionComponent,
     ScoreAssesmentComponent,
     SkillpageComponent,
-    SkillmodalComponent
-
+    SkillmodalComponent,
+    FooterComponent
   ],
 
   imports: [

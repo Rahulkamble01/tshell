@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" style="">
 
-      <div class="alert alert-danger" *ngIf="!service.isAdminLoggedIn" style="text-align: center;">
+       <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
         <div data-dismiss="alert">Invalid Name or Password!!!</div>
-    </div>
+    </div> 
 
   <div class="row">
     <div class="col-lg-1 "></div>
@@ -40,7 +40,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-lg-12"><button id="btn-login" class="btn btn-primary" id="card7"
+                <div class="col-lg-12"><button id="btn-login" class="btn btn-ts-primary" id="card7"
                 (click)="check(employeeId.value,password.value)"> Login</button>
                 </div>
                 <div style="float: right; font-size: 100%;" class="btn forgotPassword" data-toggle="modal" data-target="#forgotModal">Forgot password?

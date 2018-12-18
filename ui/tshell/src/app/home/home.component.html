@@ -1,23 +1,43 @@
 <!-- Navigation -->
-<header>
-  <div id="carouselExampleIndicators" class="carousel slide try" data-ride="carousel">
+<header style="padding-bottom: 4%" class="bg-light">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-      <div class="carousel-item car1 active" style="background-image: url('assets/images/home.jpg'); height: 601px;">
-        <div class="carousel-caption d.block">
-          <h3 class="pb-0 mb-0">Test Yourself with</h3>
-          <img src="./../../assets/images/tshell2.png" alt="" class="pt-0 mt-0">
-          <h2>tShell</h2>
 
-          <p class="mb-0">We simplified way to test your Skills,</p>
-          <p class="mt-0">so you can focus on what's important to you.</p>
-          <form action="">
-            <input name="searchSkill" autocomplete="off" class="form-control custom-control-inline" #searchSkill value="Search Skill">
-            <button type="submit" class="btn btn-primary d-inline-flex" (click)="searchSkillByName(searchSkill.value)">Search
-              Now</button>
-          </form>
+  <!-- Slide One - Set the background image for this slide in the line below -->
+     
+       <div class="carousel-item active" style="background-image: url('./assets/images/skilltest.jpg')">
+        <div class="carousel-caption">
+          <div class="textcustomize">Test Yourself With tShell
+         </div>
+          <button class="btn takeTest offset">
+            Take test .&nbsp;. &nbsp;<i class="fas fa-pencil-alt blink"></i> </button>
+        </div>
+      </div>
+
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item " style="background-image: url('./assets/images/compete.jpg')">
+        <div class="carousel-caption">
+          <div class="textcustomize">Compete With Experts
+         </div>
+          <button class="btn btn-primary takeTest offset">
+            Take test .&nbsp;. &nbsp;<i class="fas fa-pencil-alt blink"></i> </button>
+        </div>
+      </div>
+     
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style=" background-image: url('./assets/images/navigate.jpg')">
+        <div class="carousel-caption ">
+          <div class="textcustomize" style="height: 180px;">Easily Navigate And Find Related Skills
+          </div>
+         <!--  <span> -->
+          <button class="btn btn-primary takeTest offset">
+              Take test .&nbsp;. &nbsp;<i class="fas fa-pencil-alt blink"></i> </button>
+           <!--  </span> -->
         </div>
       </div>
     </div>
@@ -30,7 +50,36 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
+  <div class="container" style="margin-top:4%;margin-bottom: 1%;"> 
+    <div class="card-group">
+      <div class="card bg-white ts-card" style="margin-left:5%;">
+        <div class="card-body text-center">
+          <p class="card-text"><i class="fas fa-trophy" style="font-size:50px;color: #0e5bd6"></i></p>
+          <hr>
+          <p class="card-text" style="font-size:20px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Compete with the top performers and mark your name on  board.</p>
+          <hr>
+        </div>
+      </div>
+      <div class="card bg-white ts-card" style="margin-left:5%;">
+        <div class="card-body text-center">
+          <p class="card-text"><i class="fas fa-graduation-cap" style="font-size:50px;color: #0e5bd6"></i></p>
+          <hr>
+        <!--  <p class="card-text">know your status at anytime with tShell.</p> -->
+        
+         <p class="card-text " style="font-size:20px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Upgrade your skills by taking test on specific skill available on tShell platform.</p>
+        <hr>
+        </div>
+      </div>
+      <div class="card bg-white ts-card" style="margin-left:5%;">
+        <div class="card-body text-center">
+          <p class="card-text"><i class="fas fa-cogs" style="font-size:50px;color: #0e5bd6"></i></p>
+          <hr>
+          <p class="card-text" style="font-size:20px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Checkout the updated questions and skills for the users.</p>
+          <hr>
+      </div>
+      </div>  
+     </div>
+    </div>
 
 
 </header>
