@@ -25,6 +25,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-revie
     MostSearchedSkillsComponent,
     TotalquestionComponent,
     RecentlyAddedSkillsComponent,
-    
+    HeaderComponent,
     LoginComponent,
     AdminSignupComponent,
     SignupComponent,
