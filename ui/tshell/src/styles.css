@@ -3,7 +3,7 @@
 body {
   background-color: #dee2e6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-image: url("./assets/images/im1.jpg");
+  /*background-image: url("./assets/images/im1.jpg");*/
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
