@@ -71,43 +71,44 @@
     <div class="card-footer">
       <span class="answer">Answer:</span> Option <span class="correctOption">4</span>
     </div>
-    <div *ngFor="let number of [5,6,7]">
-      <div class="card">
-        <div class="card-header" data-toggle="collapse" data-target="#content">
-          {{number}}. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the
-          train?
-        </div>
-        <div id="content">
-          <div class="card-body">
-            <div><span class="option">1.</span> 120 metres</div>
-            <div><span class="option">2.</span> 180 metres</div>
-            <div><span class="option">3.</span> 324 metres</div>
-            <div><span class="option">4.</span> 150 metres</div>
-          </div>
-          <div class="card-footer">
-            <span class="answer">Answer:</span> Option <span class="correctOption">4</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        8. The moon is square?
-      </div>
-      <div class="card-body">
-        <div><span class="option">1.</span> True</div>
-        <div><span class="option">2.</span> False</div>
-      </div>
-      <div class="card-footer">
-        <span class="answer">Answer:</span> Option <span class="correctOption">2</span>
-      </div>
-    </div>
-
-    <div class="col-12 text-center action">
-      <button type="submit" class="btn btn-ts-primary" (click)="confirm()">Approve and Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="submit" class="btn btn-ts-primary" (click)="confirm()">Submit for Review</button>&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="submit" class="btn btn-ts-primary" (click)="abort()">Retry</button>
-    </div>
-    <div></div>
   </div>
+  <div *ngFor="let number of [5,6,7]">
+    <div class="card">
+      <div class="card-header" data-toggle="collapse" data-target="#content">
+        {{number}}. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the
+        train?
+      </div>
+      <div id="content">
+        <div class="card-body">
+          <div><span class="option">1.</span> 120 metres</div>
+          <div><span class="option">2.</span> 180 metres</div>
+          <div><span class="option">3.</span> 324 metres</div>
+          <div><span class="option">4.</span> 150 metres</div>
+        </div>
+        <div class="card-footer">
+          <span class="answer">Answer:</span> Option <span class="correctOption">4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      8. The moon is square?
+    </div>
+    <div class="card-body">
+      <div><span class="option">1.</span> True</div>
+      <div><span class="option">2.</span> False</div>
+    </div>
+    <div class="card-footer">
+      <span class="answer">Answer:</span> Option <span class="correctOption">2</span>
+    </div>
+  </div>
+
+  <div class="col-12 text-center action">
+    <button type="submit" class="btn btn-ts-primary" (click)="confirm()">Approve and Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-ts-primary" (click)="confirm()">Submit for Review</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-ts-primary" (click)="abort()">Retry</button>
+  </div>
+  <div></div>
+</div>
