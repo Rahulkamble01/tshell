@@ -4,8 +4,11 @@ body{
     background-color: #dee2e6;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.homebody121{
+  min-height: 81.5vh !important;
+}
 /* HEADER */
-li a:hover {
+ li a:hover {
     background-color: #989D9E;
     color: white;
     border-radius: .2rem;
@@ -13,7 +16,7 @@ li a:hover {
  }
  li{
      margin-left: 0.5rem;
- }
+ } 
   /*  li a {
     display: block;
     color: white;
@@ -22,10 +25,10 @@ li a:hover {
     text-decoration: none;
   }  */
 
-  .active {
+   .active {
     background-color: #989D9E;
     border-radius: .2rem;
-  }
+  } 
 
   .btn-dark{
       background-color: #242628;
@@ -35,6 +38,7 @@ li a:hover {
   a{
       color: white;
   }
+
 
 /* BUTTONS */
 /*Custom buttons*/
@@ -49,11 +53,11 @@ li a:hover {
     border: 0;
     padding: 7.5px 30px 7.5px 30px;
     font-size: 1em;
-  }
+  } 
   
   .btn:hover {
   box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.20);
-  }
+  } 
   
   .btn-ts-lg {
     padding: 10px 37.5px 10px 37.5px;
@@ -75,6 +79,7 @@ li a:hover {
   }
   .btn-ts-primary:hover {
     background-color: #217dbb;
+    color:white;
   }
   .btn-ts-primary:active {
     -moz-box-shadow: inset 0 0 100px #196090;
@@ -146,19 +151,15 @@ li a:hover {
 
 .ts-card {
     padding: 10px 15px;
-  }
-  .ts-card:hover {
-    text-decoration: none;
-    transform: scale(1.01);
     box-shadow: 2px 2px 18px 6px rgba(0, 0, 0, 0.20);
-    transition-delay: 100ms; 
-     border-top:3px solid #0e5bd6; 
-  } 
+  }
+
 
 
 
 /* FOOTER */
 footer{
+    
     background-color: #242628;
      /* position: fixed; 
     
@@ -168,6 +169,8 @@ footer{
      /* margin-right: -15px;
      margin-left: -15px; */
      width: 100%;
+
+
  }
  
  footer p {
