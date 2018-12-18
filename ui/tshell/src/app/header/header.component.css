@@ -1,0 +1,20 @@
+ #navbarSupportedContent .navbar-nav  li >  a {
+	text-transform: capitalize;
+	color: #ccc;
+	transition: background-color .2s, color .2s;
+	
+	
+}
+#navbarSupportedContent .navbar-nav  li > a :hover {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+#navbarSupportedContent .navbar-nav  li >  a :focus {
+		background-color: #3a3a3a;
+		color: #fff;
+	}
+
+#navbarSupportedContent .navbar-nav  li.active >  a {
+	background-color: #3a3a3a;
+	color: #fff;
+}

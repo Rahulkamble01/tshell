@@ -10,14 +10,16 @@ import { LoginComponent } from './login/login.component';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
 
 const routes: Routes = [
-  {path:'dash', component:DashboardComponent},
-  {path:'totalquestions',component:TotalquestionComponent},
   { path: "", component: LoginComponent },
+  
+  
+ 
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
-  {path: "", component: RecentlyAddedSkillsComponent},
+  {path:'dash', component:DashboardComponent},
+  {path:'totalquestions',component:TotalquestionComponent},
   {path: "recentSkills", component: RecentlyAddedSkillsComponent}
 ]
 
