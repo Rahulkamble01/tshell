@@ -76,16 +76,15 @@ export class SearchResultComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) {
     this.topics = [];
-    $(function() {
-    // let w = document.getElementById("graphID").offsetWidth;
-    // let h = document.getElementById("graphID").offsetHeight;
-    // console.log(w, h);
-    // abc(w, h);
-    abc();
-  });
   }
 
   ngOnInit() {
+    $("#graphID").ready(function () {
+      console.log("inside abc");
+      var w = document.getElementById("graphID").offsetWidth;
+      var h = document.getElementById("graphID").offsetHeight;
+      abc(d3);
+    });
   }
 
   toggllingSkill(skill) {
