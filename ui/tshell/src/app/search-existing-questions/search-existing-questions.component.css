@@ -10,12 +10,15 @@ a{
 .approveBtnCmn{
     text-align: center;
 }
+.baseRow{
+    padding-top: 20px;
+}
 .rejectBtnCmn{
     text-align: center;
 }
 .existingQuestion{
     border-bottom:solid;
-    border-color:lightgrey;
+    border-color:rgb(177, 176, 176);
     border-width:1px;
 }
 /* .lhsApproveBtn{
@@ -65,16 +68,26 @@ a{
 .revQuestionHeader{
     text-align: center;
 }
+/* --------- this code is for custom styling of the buttons specified below --------------
 .rhsApproveBtn{
     font-size: 13px;
-    padding:0px 4px;  
-}
+    padding:2px 4px;  
+} */
 .rhsNoteSpan{
     float:right;
     color:gray;
 }
 .rhsOptionsBtn{
+    color:#007bff;
+    box-shadow:none;
     font-size:13px;
+}
+.rhsOptionsBtn:hover{
+    color:#0056b3;
+    text-decoration: underline;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow:none;
 }
 .rhsOptionsBtnSpan{
     float:right;
@@ -85,168 +98,18 @@ a{
 .rhsQIdLabel{
     font-size:13px;
 }
-.rhsRejectBtn{
+/* --------- this code is for custom styling of the buttons specified below --------------
+ .rhsRejectBtn{
     font-size: 13px;
-    padding:0px 4px;   
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .header {
-    text-align: center;
-}
-
-.cmn0pt9 {
-    text-align: center;
-    font-size: 25px;
-    background-color: orangered;
-}
-
-.cmn0pt9:hover {
-    cursor: pointer;
-}
-
-.cmn1 {
-    background-color: aquamarine;
-}
-
-.cmn2 {
-    background-color: aquamarine;
-}
-
-.cmn2pt1 {
-    text-align: center;
-    font-size: 25px;
-    background-color: orangered;
-}
-
-.cmn2pt1:hover {
-    cursor: pointer;
-}
-
-.cmn2pt3 {
-    background-color: aquamarine;
-}
-
-.cmn2pt4 {
-    background-color: aquamarine;
-}
-
-.cmn3 {
-    background-color: beige;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.cmn4 {
-    background-color: rgb(245, 245, 80);
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.cmn5 {
-    background-color: rgb(245, 245, 80);
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.cmn6 {
-    background-color: rgb(245, 245, 80);
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.cmn7 {
-    background-color: rgb(245, 245, 80);
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.cmn8 {
-    background-color: beige;
-}
-
-.cmn9 {
-    background-color: aliceblue;
-    text-align: center !important;
-    color: blue;
-}
-
-.existingQuestionId{
-    background-color:rgb(189, 189, 189);
-    border-radius: 4px;
-    border-radius: 4px;
-    font-size:15px;
-    font-weight:450;
-}
-
-.existingQuestion{
-    background-color:wheat;
-    border-radius: 4px;
-    border-radius: 4px;
-    font-size:18px;
-    font-weight:500;
-}
-
-.questionIdInput {
-    background: none;
-    border: none;
-    width: 40px;
-}
-
-.row2 {
-    margin-top: 10px;
-    background-color: gainsboro;
-}
-
-.row2pt9{
-    background-color:aliceblue;
-    width:100%;
-    height: 300px;
-    overflow-y: auto;
-    margin:0px;
-}
-
-.row3{
-    margin-top:10px;
-    padding-right:23px;
-    padding-left:23px;
-   
-}
-
-.searchAnchor {
-    border: solid;
-    border-width: 1px;
-}
-
-.searchSpan:hover {
-    background-color: steelblue;
-    cursor: pointer;
-    color: whitesmoke;
-}
-
-.skillInput {
-    background: none;
-    border: none;
-}
-
-.topicInput {
-    background: none;
-    border: none;
+    padding:2px 4px;   
 } */
+/* .reviewQuestionsContainer{
+    padding-top:80px;
+} */
+.searchSpan{
+    color:rgb(146, 146, 146);
+}
+.searchSpan:hover{
+    cursor: pointer;
+    color:rgb(119, 119, 119);
+}
