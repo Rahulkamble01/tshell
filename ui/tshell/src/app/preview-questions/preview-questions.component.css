@@ -10,6 +10,7 @@
     font-weight: 500;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
+    cursor: pointer;
 }
 .card-body{
     margin-left: 20px ;

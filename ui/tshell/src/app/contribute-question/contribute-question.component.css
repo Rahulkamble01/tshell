@@ -25,7 +25,9 @@
     width:25px;
   
 }
-
+a{
+    color: #007bff;
+}
   
 #optionText{
     margin-top:1px;
