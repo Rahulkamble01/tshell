@@ -75,7 +75,7 @@ export class ScoreAssesmentComponent implements OnInit {
   }
 
   homePage() {
-    this.router.navigate(['/learner-homepage']);
+    this.router.navigate(['/']);
   }
 
 
