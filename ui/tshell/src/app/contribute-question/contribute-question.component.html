@@ -32,7 +32,7 @@
               <div class="col-lg-10 col-sm-10  col-md-10 col-9 " formArrayName="options">
                 <label class="addOption">Add Options </label>
                 <span>
-                  <button (click)="addOption()" class="btn btn-primary" [disabled]="count==4" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8">
+                  <button (click)="addOption()" class="btn btn-ts-primary" [disabled]="count==4" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8">
                     <i class="fas fa-plus"> </i>
                   </button>
                 </span>
@@ -56,7 +56,7 @@
                 </div>
               </div>
             </div>
-            <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-primary addButton" style="float: right"
+            <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-ts-primary addButton" style="float: right"
               [disabled]="!(questionForm.valid && isChecked==true)" >Add Question</button>
           </form>
         </div>
@@ -69,7 +69,7 @@
     <form [formGroup]="uploadForm" (ngSubmit)="upload()">
       <div class="form-group row align-items-center justify-content-center">
         <input type="file" formControlName="csvFile" accept=".csv" (change)="onSelectFile($event)" style="height: 100%">
-        <button type="submit" style="margin-top: 2px;" [disabled]="!uploadForm.valid" class="btn btn-primary">Upload</button>
+        <button type="submit" style="margin-top: 2px;" [disabled]="!uploadForm.valid" class="btn btn-ts-primary">Upload</button>
       </div>
     </form>
   </div>

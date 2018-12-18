@@ -3,7 +3,9 @@
 body{
     background-color: #dee2e6;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
 }
+
 .homebody121{
   min-height: 81.5vh !important;
 }
@@ -44,7 +46,7 @@ body{
 /*Custom buttons*/
 .btn {
     color: #fff;
-    background-color: transparent;
+     background-color: transparent;
     outline: 0;
     -moz-transition: background-color 0.3s ease;
     -o-transition: background-color 0.3s ease;
@@ -179,4 +181,6 @@ footer{
      padding-top:20px;
      padding-bottom:20px; 
  }
+
+
 

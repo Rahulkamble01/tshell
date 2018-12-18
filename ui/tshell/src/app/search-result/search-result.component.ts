@@ -35,24 +35,6 @@ export class SearchResultComponent implements OnInit {
           user: { id: 3, name: 'Vijay Kumar' }
         }
       ]
-    }, {
-      id: 2,
-      name: 'HTML',
-      active: false,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
     }];
 
   topics: Array<Topic>;

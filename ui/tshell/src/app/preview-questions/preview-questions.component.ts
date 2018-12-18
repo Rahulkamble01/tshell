@@ -12,11 +12,11 @@ export class PreviewQuestionsComponent implements OnInit {
 
   ngOnInit() {
   }
-  confirm(){
+  review(){
     alert('Questions are submitted successfully for Review!');
     this.router.navigate(['']);
   }
-  abort(){
+  retry(){
     alert('No Questions are posted!');
     this.router.navigate(['']);
   }
