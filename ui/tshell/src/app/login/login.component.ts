@@ -10,7 +10,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+message:string;
+status:boolean=false;
 
   constructor(private router: Router, private service: AuthService) { }
 
@@ -23,6 +24,19 @@ export class LoginComponent implements OnInit {
       '', [Validators.required
       ])
   })
+
+ forms= new FormGroup({
+   employeeid : new FormControl(
+     '',
+      Validators.required
+   ),
+   email : new FormControl(
+    '',
+     Validators.required
+  ),
+  
+
+ })
 
   ngOnInit() {
   }
@@ -39,11 +53,27 @@ export class LoginComponent implements OnInit {
       console.log(employeeId);
       console.log(password);
       this.service.learnerLogin();
+    /*   this.router.navigate(['/assessmenthistory']); */
       this.router.navigate(['/dash']);
+    /*   this.router.navigate(['/learner-homepage']); */
+    }
+     else if (employeeId == '654321' && password == '654321') {
+      console.log(employeeId);
+      console.log(password);
+      this.service.login();
+      this.router.navigate(['/admin-homepage']);
     }
     else {
       this.service.logout();
       this.router.navigate(['/login']);
     }
+  }
+  sendMail(){
+    console.log('This is check!');
+    this.message="Mail sent";
+    this.status=true;
+  }
+  close(){
+    this.message="";
   }
 }

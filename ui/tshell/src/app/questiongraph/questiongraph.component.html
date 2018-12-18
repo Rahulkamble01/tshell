@@ -1,0 +1,89 @@
+
+
+
+   
+<!-- 
+<div class=" col-sm-12 col-lg-6" style="width: 50% ;">
+
+    <canvas 
+        baseChart
+        [chartType]="'radar'"
+        [datasets]="chartData"
+       [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartClick)="onChartClick($event)">
+    </canvas>
+  </div>
+
+     <div class=" col-sm-12 col-lg-6" >
+ 
+            <canvas
+           
+                baseChart
+                [chartType]="'bar'"
+                [datasets]="chartData"
+               [labels]="chartLabels" 
+                [legend]="true"
+                (chartClick)="onChartClick($event)">
+            </canvas>
+          </div>
+-->
+<div class="row">
+  
+       
+               <!--    <div class=" col-lg-4 ">
+                      <div class="h4  d-flex justify-content-center">Total number of question contributed</div>
+                            <canvas
+                            
+                                baseChart
+                                [chartType]="'bar'"
+                                [datasets]="chartData"
+                                [labels]="chartLabels" 
+                                [legend]="false"
+                                (chartClick)="onChartClick($event)">
+                            </canvas> 
+                      
+               </div>-->
+       
+   
+
+
+     
+       
+           
+                    <div class="h4  d-flex justify-content-center" style="padding-left:5opx;">Total Number of Questions Contributed</div>
+                      
+                    <canvas
+                        
+                            baseChart
+                            [chartType]="'radar'"
+                            [datasets]="chartData"
+                            [labels]="chartLabels" 
+                            [legend]="false"
+                            (chartClick)="onChartClick($event)"  >
+                        </canvas>
+                    
+                  
+        
+   
+          <!--     <div class="col-lg-4 ">
+             <div class="h4  d-flex justify-content-center">Total number of question contributed</div>
+                    <canvas
+                    
+                        baseChart
+                        [chartType]="'radar'"
+                        [datasets]="chartData"
+                        [labels]="chartLabels" 
+                        [legend]="true"
+                        (chartClick)="onChartClick($event)"  >
+                    </canvas> 
+                </div>-->
+              
+       
+
+ 
+</div>
+
+
+

@@ -1,20 +1,11 @@
- #navbarSupportedContent .navbar-nav  li >  a {
-	text-transform: capitalize;
-	color: #ccc;
-	transition: background-color .2s, color .2s;
-	
-	
+.dropdown-menu {
+    background-color: #242628 !important;
 }
-#navbarSupportedContent .navbar-nav  li > a :hover {
-    background-color: #3a3a3a;
-    color: #fff;
+.dropdown-item {
+    color: rgba(255,255,255,.5) !important;
 }
-#navbarSupportedContent .navbar-nav  li >  a :focus {
-		background-color: #3a3a3a;
-		color: #fff;
-	}
-
-#navbarSupportedContent .navbar-nav  li.active >  a {
-	background-color: #3a3a3a;
-	color: #fff;
+.dropdown-item:hover {
+    color: white !important;
+    text-decoration: white;
+    background-color: inherit !important;
 }
