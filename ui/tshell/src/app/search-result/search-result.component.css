@@ -56,7 +56,8 @@ body {
 #graphID{
   overflow-y: scroll;
   overflow-x: scroll;
-  background-color: azure
+  background-color: azure;
+  min-height:  501px; 
 }
 
 .slimScrollDiv {
@@ -258,3 +259,9 @@ body {
   margin: 0px;
 }
 /*  */
+.skilledit{
+  font-size: 26px;
+  color: black;
+  cursor: pointer;
+
+}
