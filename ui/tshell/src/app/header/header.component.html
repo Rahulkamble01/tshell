@@ -92,7 +92,8 @@
         <i class="fas fa-sign-out-alt"></i>Logout</a></li>-->
   </ul>
    <ul class="navbar-nav ml-auto">
-   <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/">
+   <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" (click)="check(employeeId.value,password.value)" routerLink="/login">
         <i class="fas fa-sign-out-alt"></i>Logout</a></li>
   </ul>
-</nav>
+</nav> 
+ 
