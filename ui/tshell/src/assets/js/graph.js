@@ -1,8 +1,7 @@
-abc(d3);
+abc(d3,w,h);
 
-function abc(d3) {
+function abc(d3,w1,h1) {
 
-  // console.log(w, h) 
   !(function () {
     "use strict"
 
@@ -42,9 +41,9 @@ function abc(d3) {
     }
 
     function setSize(data) {
-      width = document.querySelector("#graphID").clientWidth;
-      height = document.querySelector("#graphID").clientHeight;
-
+      width = w1;
+      height = h1;
+      console.log(width, height);
       margin = {
         top: 0,
         left: 0,

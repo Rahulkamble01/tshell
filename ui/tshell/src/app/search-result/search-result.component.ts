@@ -83,7 +83,7 @@ export class SearchResultComponent implements OnInit {
       console.log("inside abc");
       var w = document.getElementById("graphID").offsetWidth;
       var h = document.getElementById("graphID").offsetHeight;
-      abc(d3);
+      abc(d3, w, h);
     });
   }
 
