@@ -9,3 +9,7 @@
     text-decoration: white;
     background-color: inherit !important;
 }
+
+.body {
+    line-height: 0 !important;
+}
