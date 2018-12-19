@@ -14,10 +14,10 @@ export class PreviewQuestionsComponent implements OnInit {
   }
   review(){
     alert('Questions are submitted successfully for Review!');
-    this.router.navigate(['']);
+    this.router.navigate(['/contributeQuestion']);
   }
   retry(){
     alert('No Questions are posted!');
-    this.router.navigate(['']);
+    this.router.navigate(['/contributeQuestion']);
   }
 }
