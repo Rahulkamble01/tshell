@@ -1,60 +1,182 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#242628; padding: 0px 16px">
-    <a class="navbar-brand" href="#"><img src="./assets/images/logotshell.png" height="40px" width="120px"> </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ng-container *ngIf="service.isLearnerLoggedIn; else elseTemplate">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item  ">
-            <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Profile
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" [routerLink]="['/viewprofile']">View Profile</a>
-              <a class="dropdown-item" [routerLink]="['/changepassword']">Change Password</a>
+<nav class="body navbar navbar-expand-lg navbar-dark" style="background-color:#242628; padding: 0px 16px;">
+  <a class="navbar-brand" href="#"><img src="./assets/images/logotshell.png" height="40px" width="120px"> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="body collapse navbar-collapse" id="navbarSupportedContent">
+    <ng-container *ngIf="service.isLearnerLoggedIn; else elseTemplate">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item  ">
+          <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Profile
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['/viewprofile']">View Profile</a>
+            <a class="dropdown-item"   #exampleModal data-target="#exampleModal" data-toggle="modal" (click)="getData();">Change Password</a>
+          </div>
+        </li>
+        <li><a class="nav-item btn btn-light col-12" routerLink="/" (click)="check(employeeId.value,password.value)">
+            <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+      </ul>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <ul class="navbar-nav ml-auto" style="margin-top: 11px">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Skills <span class="sr-only">(current)</span></a> &nbsp;
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']"> Login</a>&nbsp;
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/signup']"> Signup</a>&nbsp;
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+</nav>
+
+
+<!-- --------------------changepassword------------------- -->
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change
+          Your Password
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+
+            <input type="password" onsubmit="return validateForm()" name="oldpassword" formControlName="oldpassword"
+              #oldpassword class="form-control" id="recipient-name" placeholder="Enter Current Password">
+            <span style="color: red">{{message}}</span>
+            <span id="errfn"></span>
+            <div *ngIf="form.get('oldpassword').touched && form.get('oldpassword').invalid">
+              <div *ngIf="form.get('oldpassword').errors.required" class="danger" style="color:red">Password is
+                required</div>
+              <div *ngIf="form.get('oldpassword').errors.minlength" class="danger" style="color:red">Password must be
+                minimum 3
+                characters</div>
+              <div *ngIf="form.get('oldpassword').errors.maxlength" class="danger" style="color:red">Password must be
+                maximun 10
+                characters</div>
+              <div *ngIf="form.get('oldpassword').errors.cannotContainSpace" class="danger" style="color:red">Password
+                should not be
+                any space
+              </div>
             </div>
-          </li>
-          <li><a class="nav-item btn btn-light col-12" routerLink="/">
-              <i class="fas fa-sign-out-alt"></i>Logout</a></li>
-  
-        </ul>
-      </ng-container>
-      <ng-template #elseTemplate>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mt-2 mb-0 pb-0 ">
-            <a class="nav-link " routerLink="/">Skills <span class="sr-only">(current)</span></a> &nbsp;
-          </li>
-          <li class="nav-item mt-2 mb-0 pb-0 ">
-            <a class="nav-link " routerLink="/login"> Login</a>&nbsp;
-          </li>
-          <li class="nav-item mt-2 mb-0 pb-0 ">
-            <a class="nav-link " routerLink="/signup"> Signup</a>&nbsp;
-          </li>
-  
-        </ul>
-      </ng-template>
-  
-  
+          </div>
+          <div class="form-group">
+
+            <input type="password" formControlName="newpassword" name="newpassword" #newpassword
+              appPasswordNotEqualValidator="oldpassword" class="form-control" id="recipient-name" placeholder="Enter New Password">
+            <div *ngIf="form.get('newpassword').touched && form.get('newpassword').invalid">
+              <div *ngIf="form.get('newpassword').errors.required" class="danger" style="color:red">Password is
+                required</div>
+              <div *ngIf="form.get('newpassword').errors.passwordPattern" class="danger" style="color:red">Password is
+                required</div>
+              <div *ngIf="form.get('newpassword').errors.minlength" class="danger" style="color:red">Password must be
+                minimum 3
+                characters</div>
+              <div *ngIf="form.get('newpassword').errors.maxlength" class="danger" style="color:red">Password must be
+                maximun 10
+                characters</div>
+              <div *ngIf="form.get('newpassword').errors.cannotContainSpace" class="danger" style="color:red">Password
+                should not be contain
+                any space
+              </div>
+              <div class="help-block" *ngIf="form.get('newpassword').touched && !(form.get('newpassword').errors?.notEqual)"
+                style="color: red">
+                password and new password should not be same
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" formControlName="confirmpassword" name="confirmpassword" #confirmpassword
+              appConfirmEqualValidator="newpassword" class="form-control" id="recipient-name" placeholder="Enter New Password Again">
+            <div *ngIf="form.get('confirmpassword').touched && form.get('confirmpassword').invalid">
+              <div *ngIf="form.get('confirmpassword').errors.required" class="danger" style="color:red">Password is
+                required</div>
+              <div *ngIf="form.get('confirmpassword').errors.passwordPattern" class="danger" style="color:red">Password
+                is
+                required</div>
+              <div *ngIf="form.get('confirmpassword').errors.minlength" class="danger" style="color:red">Password must
+                be minimum 2
+                characters</div>
+              <div *ngIf="form.get('confirmpassword').errors.maxlength" class="danger" style="color:red">Password must
+                be maximun 10
+                characters</div>
+              <div *ngIf="form.get('confirmpassword').errors.cannotContainSpace" class="danger" style="color:red">Password
+                should not be
+                any space
+              </div>
+              <div class="help-block" *ngIf="form.get('confirmpassword').touched && form.get('confirmpassword').errors?.notEqual"
+                style="color: red">
+                New password and confirm password does not match
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close
+        </button>
+        <img>
+        <button type="button" class="btn btn-ts-primary" #costumModal11 data-toggle="modal" data-dismiss="modal"
+          data-target="#costumModal11" (click)="savePassword(oldpassword.value, newpassword.value, confirmpassword.value);">
+          Save Password
+        </button>
+      </div>
     </div>
-  
-  
-  
-  </nav>
-  
+  </div>
+</div>
+
+<!--   --------------------Message Model----------------------->
+
+
+<div id="costumModal11" class="modal" style="padding-top: 120px;" data-easein="bounceUpIn" tabindex="-1" role="dialog"
+  aria-labelledby="costumModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          ×
+        </button>
+        <h3>
+          Your Password is Changed Successfully.
+
+          <div style="font-size:100px;">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </h3>
+      </div>
+
+    </div>
+  </div>
+</div>

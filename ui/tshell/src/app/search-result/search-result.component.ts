@@ -7,6 +7,7 @@ import * as $ from 'jquery';
 import * as d3 from 'd3';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
+import { AuthService } from '../auth.service';
 
 declare var abc: any;
 
@@ -56,7 +57,7 @@ export class SearchResultComponent implements OnInit {
       ])
   });
 
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) {
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService) {
     this.topics = [];
   }
 

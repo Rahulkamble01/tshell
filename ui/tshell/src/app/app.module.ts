@@ -46,6 +46,7 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './changepassword/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './changepassword/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -113,7 +114,7 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-    
+    NgbModule
   ],
   providers: [
     ContributeQuestionService,
