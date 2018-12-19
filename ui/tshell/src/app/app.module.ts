@@ -23,7 +23,7 @@ import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
@@ -113,7 +113,7 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-    
+    NgbModule
   ],
   providers: [
     ContributeQuestionService,
