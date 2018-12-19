@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class SkillmodalComponent implements OnInit {
   add: boolean;
   item: any;
+  expression: any;
   @Input() name: any;
   skills: any = [
     {

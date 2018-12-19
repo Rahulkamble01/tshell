@@ -7,7 +7,10 @@ import { DeactivateActivateSkillService } from '../deactivate-activate-skill.ser
   styleUrls: ['./search-skill.component.css']
 })
 export class SearchSkillComponent implements OnInit {
-  list: any[] = [];
+  list: any;
+  id: any;
+  name: any;
+  active: any;
   constructor(private skillSearch: DeactivateActivateSkillService) { }
 
   ngOnInit() {
