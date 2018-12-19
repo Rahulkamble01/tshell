@@ -111,11 +111,7 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-<<<<<<< HEAD
     NgbModule
-=======
-    NgbModule    
->>>>>>> release1
   ],
   providers: [
     ContributeQuestionService,
