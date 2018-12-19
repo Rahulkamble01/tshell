@@ -13,9 +13,8 @@ export class TestComponent implements OnInit {
   ngOnInit() {
   }
   BarColors = [
-
     {
-      backgroundColor:  [
+      backgroundColor: [
         '#99ff99',
         '#99ff99',
         '#99ff99',
@@ -23,42 +22,40 @@ export class TestComponent implements OnInit {
         '#99ff99',
       ]
     }
-
-
-  ]
+  ];
 
   chartOptions = {
     responsive: true
   };
 
-  chartData = [ { data: [7,10,15,9,10], label: 'Skills' } ];
+  chartData = [{ data: [7, 10, 15, 9, 10], label: 'Skills' }];
 
-  chartLabels = ['Java', 'Sql', 'Spring','Angular','jdbc'];
+  chartLabels = ['Java', 'Sql', 'Spring', 'Angular', 'jdbc'];
 
   onChartClick(event) {
     console.log(event);
   }
-/*<--------------------------------------Top 5 Accessed Tests Working WebService Code------------------------------> 
-/*Top5AccessedTes() {
-    console.log("hello");
-    this.testService.getTestDetails().subscribe(
-      data => {
-        console.log(data);
-          data.forEach((element,index) => {
-            console.log(element.name, index);
-            this.chartLabels[index]=element.name;
-            this.chartData[0].data[index]=element.testCount;
-          });
-
-          this.chartLabels.forEach(element => {
-            console.log(element);
-          });
-      }
-    )
-  }
+  /*<--------------------------------------Top 5 Accessed Tests Working WebService Code------------------------------> 
+  /*Top5AccessedTes() {
+      console.log("hello");
+      this.testService.getTestDetails().subscribe(
+        data => {
+          console.log(data);
+            data.forEach((element,index) => {
+              console.log(element.name, index);
+              this.chartLabels[index]=element.name;
+              this.chartData[0].data[index]=element.testCount;
+            });
   
-  <---------------------------------------------------------------------------------------------------------->
-  */
+            this.chartLabels.forEach(element => {
+              console.log(element);
+            });
+        }
+      )
+    }
+    
+    <---------------------------------------------------------------------------------------------------------->
+    */
 
 
 

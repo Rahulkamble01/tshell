@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./skillpage.component.css']
 })
 export class SkillpageComponent implements OnInit {
+  active: any;
   skills: any = {
     id: null,
     name: '',

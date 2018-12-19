@@ -17,6 +17,7 @@ declare var abc: any;
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit {
+  searchSkillByName:any;
   skills: any = [
     {
       id: 1,
