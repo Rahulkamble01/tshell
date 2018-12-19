@@ -4,8 +4,12 @@ import { Router } from '@angular/router';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as $ from 'jquery';
+import * as d3 from 'd3';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
+import { AuthService } from '../auth.service';
+
+declare var abc: any;
 
 @Component({
   selector: 'app-search-result',
@@ -13,30 +17,11 @@ import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit {
-
   skills: any = [
     {
       id: 1,
       name: 'SQL',
       active: true,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
-    }, {
-      id: 2,
-      name: 'HTML',
-      active: false,
       top3: [
         {
           score: 90,
@@ -72,34 +57,18 @@ export class SearchResultComponent implements OnInit {
       ])
   });
 
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) {
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService) {
     this.topics = [];
   }
 
   ngOnInit() {
+    $("#graphID").ready(function () {
+      console.log("inside abc");
+      var w = document.getElementById("graphID").offsetWidth;
+      var h = document.getElementById("graphID").offsetHeight;
+      abc(d3, w, h);
+    });
   }
-
-  // addTopic(topicname) {
-  //   let topic = new Topic(topicname);
-  //   this.topics.push(topic);
-  //   this.clearInput();
-  // }
-  // removeTopic(topic) {
-  //   let index = this.topics.indexOf(topic);
-  //   this.topics.splice(index, 1);
-  // }
-
-  // get topicName(): any { return this.addskillform.get('topicName'); }
-  // clearInput() { this.topicName.reset(); }
-
-  // submitSkill(skillName) {
-  //   if (skillName == this.skills[0].name) {
-  //     alert("Skill already exists");
-  //   } else {
-  //     alert("Skill Added");
-
-  //   }
-  // }
 
   toggllingSkill(skill) {
     if (skill.active) {
@@ -134,5 +103,4 @@ export class SearchResultComponent implements OnInit {
     const modalRef = this.modalService.open(SkillmodalComponent);
     modalRef.componentInstance.add = add;
   }
-
 }

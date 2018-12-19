@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-score-assesment',
   templateUrl: './score-assesment.component.html',
@@ -73,8 +73,10 @@ export class ScoreAssesmentComponent implements OnInit {
     }
     console.log('Percent' + this.topics[4].name + 'Percent' + this.topics[4].class);
   }
-closewindow(){
-  this.router.navigate(['']);
-}
+
+  homePage() {
+    this.router.navigate(['/']);
+  }
+
 
 }

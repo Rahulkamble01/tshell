@@ -1,23 +1,19 @@
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="./../../assets/js/d3graph.js">
 <div class="container">
   <div class="row">
     <div class="col-lg-2 col-md-2 col-12"></div>
     <div class="col-lg-8 col-md-8 col-sm-12 col-12">
       <form class="text-center mb-0 mt-3">
         <div class="itwillflex">
-          <input name="searchSkill" autocomplete="off" class="form-control" #searchSkill>&nbsp;&nbsp;&nbsp;
+          <input name="searchSkill" placeholder="SQL" autocomplete="off" class="form-control" #searchSkill>&nbsp;&nbsp;&nbsp;
           <i id="erase1" class="fa-addskilll fas fa-search" (click)="searchSkillByName(searchSkill.value)"></i>
         </div>
       </form>
-      <p class="row search-heading text-center mb-0 mt-1 pl-3">Search Result for <span> "html"</span></p>
+      <p class="row search-heading text-center mb-0 mt-1 pl-3">Search Result for &nbsp; <span> " SQL"</span></p>
     </div>
     <div class="col-lg-2 col-md-2 col-12 col-sm-12">
-      <!-- <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" data-toggle="modal"
-        data-target="#addskillmodal"> Skill</button></div> -->
-      <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" (click)="addSkillModel()"> Skill</button>
+      <button type="button" class="btn btn-ts-primary btn-lg fa fa-plus mt-3 col-12  fa-addskilll" (click)="addSkillModel()">
+        Skill</button>
     </div>
   </div>
 </div>
@@ -30,20 +26,20 @@
       <div class="card mb-4" *ngFor="let item of skills">
         <div class="card-header ">
           <div class="row">
-            <div class="col-lg-6 col-md-6">
-              <h4 [routerLink]="[ '/skillpage', item ]" style="cursor: pointer;"> {{item.name}}</h4>
+            <div class="col-lg-3 col-md-4">
+              <h4> <span [routerLink]="[ '/skillpage', item ]" style="cursor: pointer;"> {{item.name}} </span></h4>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-9 col-md-8">
               <ng-container *ngIf="item.active; then thenTemplate; else elseTemplate">
               </ng-container>
               <ng-template #thenTemplate>
-                <input type="button" value="Deativate" class="btn btn-danger btn-sm float-right" (click)="toggllingSkill(item)" />&nbsp;&nbsp;
-                <!-- <input type="button" class="btn btn-primary btn-sm float-right ml-2" value="Add Topics" (click)="addTopicToSkill(item)"> -->
-                <input type="button" class="btn btn-primary btn-sm float-right" (click)="editSkillModel(item)" value="Edit">
+                <input type="button" value="Deativate" class="btn btn-ts-primary btn-ts-sm " (click)="toggllingSkill(item)" />&nbsp;&nbsp;
+                <i class="float-right fas fa-edit skilledit" (click)="editSkillModel(item)"></i>
+                <!-- <input type="button" class="btn-ts-primary float-right fas fa-edit" (click)="editSkillModel(item)"> -->
               </ng-template>
               <ng-template #elseTemplate>
-                <input type="button" value="Activate" class="btn btn-success btn-sm float-right" (click)="toggllingSkill(item)">
-                <input type="button" class="btn btn-primary btn-sm float-right ml-2" value="Edit" disabled>
+                <input type="button" value="Activate" class="btn btn-ts-cancel btn-ts-sm " (click)="toggllingSkill(item)">
+                <i class="float-right fas fa-edit skilledit" (click)="editSkillModel(item)" disabled></i>
               </ng-template>
             </div>
           </div>
@@ -51,21 +47,24 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-3 col-md-3">
-              <img src="../../assets/images/HTML.png" height="50px" width="50px">
+              <img [routerLink]="[ '/skillpage', item ]" style="cursor: pointer;" src="../../assets/images/HTML.png" height="50px" width="50px">
             </div>
             <div class="col-lg-9 col-md-9">
               <div class="row">
                 <div class="col-lg-12 col-md-12">
                   <p class="card-text mb-0 pb-0">Description of {{item.name}}</p>
                   <p class="card-text mb-0 pb-0 mt-0 pt-0">Additional features</p>
-                  <p class="card-text mb-0 pb-0 mt-0 pt-0">Additional features</p>
+                  <br>
+                  <p>Topics:</p>
+                  <p class="card-text mb-0 pb-0 mt-0 pt-0">topic name, topic name,topic name, topic name,topic name, topic name,topic name, topic name,topic name, topic name</p>
+                  <br>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-12">
-                  <a href="#" [routerLink]="[ '/skillpage', item ]" class="btn btn-primary " style="float:left">View Skill
+                  <a href="#" [routerLink]="[ '/skillpage', item ]" class="btn btn-ts-primary btn-ts-sm" style="float:left"><i class="fas fa-book-open"></i>
                   </a>
-                  <a href="#" [routerLink]="[ '/instruction' ]" class="btn btn-primary " style="float:right">Take test
+                  <a href="#" [routerLink]="[ '/instruction' ]" class="btn btn-ts-primary btn-ts-sm" style="float:right"><i class="fas fa-pen-nib"></i>Take test
                   </a>
 
                   <!-- <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" data-toggle="modal"
@@ -80,12 +79,8 @@
       </div>
 
     </div>
-    <div class="col-lg-6 col-md-6 col-12 col-sm-12 " style="background-color: white;">
-
-      <img src="../../assets/images/graph.png" width="96%" height="100%">
-
-
-
+    <div class="col-lg-6 col-md-6 col-12 col-sm-12 graphpart " id="graphID">
+            <!-- <img src="../../assets/images/graph.png" width="96%" height="100%"> -->
 
     </div>
     <!----------------------------------->
@@ -119,8 +114,8 @@
 <!-- <div class="modal fade" id="addskillmodal" style="padding-top: 2cm" role="dialog" #addskillmodal>
   <div class="modal-dialog modal-lg">
     <form [formGroup]="addskillform"> -->
-      <!-- Modal content-->
-      <!-- <div class="modal-content">
+<!-- Modal content-->
+<!-- <div class="modal-content">
         <div class="modal-header">
           <h4>
             Add Skill
@@ -132,18 +127,18 @@
 
           <div class="container "> -->
 
-            <!-- starting of a row -->
-            <!-- <div class="row">
+<!-- starting of a row -->
+<!-- <div class="row">
               <div class="col-lg-4"> Name </div>
               <div class="col-lg-5"> </div>
               <div class="col-lg-1"></div>
               <div class="col-lg-2"></div>
             </div>  -->
-            <!-- ending of a row -->
+<!-- ending of a row -->
 
 
-            <!-- starting of a row -->
-            <!-- <div class="row">
+<!-- starting of a row -->
+<!-- <div class="row">
 
               <div class="col-lg-12">
 
@@ -164,14 +159,14 @@
               </div>
 
             </div>  -->
-            <!-- ending of a row -->
+<!-- ending of a row -->
 
-            <!-- <br> -->
-            <!-- starting of a row -->
-            <!-- <div class="row">
+<!-- <br> -->
+<!-- starting of a row -->
+<!-- <div class="row">
               <div class="col-lg-12"> Add Topics </div>
             </div>  -->
-            <!-- ending of a row -->
+<!-- ending of a row -->
 
 
 <!-- 

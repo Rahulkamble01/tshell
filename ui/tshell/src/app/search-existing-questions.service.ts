@@ -7,10 +7,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SearchExistingQuestionsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  fetchQuestions(searchQuery):Observable<any>{
-    let urlSearchQuestions:string = '/questions/findExistingQuestions/'+searchQuery;
+  fetchQuestions(searchQuery): Observable<any> {
+    // tslint:disable-next-line:prefer-const
+    let urlSearchQuestions: string = '/questions/findExistingQuestions/' + searchQuery;
     console.log(urlSearchQuestions);
     return this.http.get<any>(urlSearchQuestions);
   }
