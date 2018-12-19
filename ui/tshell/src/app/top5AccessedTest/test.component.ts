@@ -12,12 +12,26 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
   }
+  BarColors = [
+
+    {
+      backgroundColor:  [
+        '#99ff99',
+        '#99ff99',
+        '#99ff99',
+        '#99ff99',
+        '#99ff99',
+      ]
+    }
+
+
+  ]
 
   chartOptions = {
     responsive: true
   };
 
-  chartData = [ { data: [7, 10, 15,6,10 ], label: 'Skills' } ];
+  chartData = [ { data: [7,10,15,9,10], label: 'Skills' } ];
 
   chartLabels = ['Java', 'Sql', 'Spring','Angular','jdbc'];
 

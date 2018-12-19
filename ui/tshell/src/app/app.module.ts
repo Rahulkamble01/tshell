@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
@@ -84,6 +84,7 @@ PasswordNotEqualValidatorDirective,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
     RecentlyAddedSkillsComponent,
+    HeaderComponent,
     LoginComponent,
     AdminSignupComponent,
     SignupComponent,
@@ -112,10 +113,10 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-    NgbModule
+    
   ],
   providers: [
-    ContributeQuestionService, 
+    ContributeQuestionService,
     AuthService,
     HttpClientModule,
   ],

@@ -1,97 +1,60 @@
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"> <b style="color: white;font-size:30px;">
-      &nbsp;tShell</b></a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="service.isLearnerLoggedIn">
-    <ul class="navbar-nav ml-auto">
-
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/users']">Users <span class="sr-only">(current)</span></a>
-      </li>
-
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Profile
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">View Profile</a>
-          <a class="dropdown-item" [routerLink]="['/changepassword']">Change Password</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <ul class="navbar-nav ml-auto">
-    <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login">
-        <i class="fas fa-sign-in-alt"></i> Login</a></li>
-    <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup">
-        <i class="fas fa-user-plus"></i> Signup</a></li>
-    <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/login">
-        <i class="fas fa-sign-out-alt"></i>Logout</a></li>
-  </ul>
-</nav>-->
-
-
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#242628">
-  <a class="navbar-brand" href="#"><img src="./assets/images/logotshell.png" height="40px" width="120px"> </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="service.isLearnerLoggedIn">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item  ">
-        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
-      </li>
-      <!--<li class="nav-item active">
-        <a class="nav-link" href="#">Tests <span class="sr-only">(current)</span></a>
-      </li>-->
-      <li class="nav-item ">
-        <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Profile
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/viewprofile']">View Profile</a>
-          <a class="dropdown-item" [routerLink]="['/changepassword']">Change Password</a>
-         <!-- <div class="dropdown-divider"></div>
-           <a class="dropdown-item" [routerLink]="['/login']">Logout</a>-->
-        </div>
-      </li>
-    </ul>
-  </div>
-  <ul class="navbar-nav mr-auto">
-    <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/">Skills</a></li>&nbsp;
-    <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/login">Login</a></li>&nbsp;
-    <li><a class="nav-item btn btn-dark col-12" *ngIf="!service.isLearnerLoggedIn" routerLink="/signup">Signup</a></li>
-   <!-- <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/">
-        <i class="fas fa-sign-out-alt"></i>Logout</a></li>-->
-  </ul>
-   <ul class="navbar-nav ml-auto">
-   <li><a class="nav-item btn btn-light col-12" *ngIf="service.isLearnerLoggedIn" routerLink="/">
-        <i class="fas fa-sign-out-alt"></i>Logout</a></li>
-  </ul>
-</nav>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#242628; padding: 0px 16px">
+    <a class="navbar-brand" href="#"><img src="./assets/images/logotshell.png" height="40px" width="120px"> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ng-container *ngIf="service.isLearnerLoggedIn; else elseTemplate">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item  ">
+            <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/viewprofile']">View Profile</a>
+              <a class="dropdown-item" [routerLink]="['/changepassword']">Change Password</a>
+            </div>
+          </li>
+          <li><a class="nav-item btn btn-light col-12" routerLink="/">
+              <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+  
+        </ul>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mt-2 mb-0 pb-0 ">
+            <a class="nav-link " routerLink="/">Skills <span class="sr-only">(current)</span></a> &nbsp;
+          </li>
+          <li class="nav-item mt-2 mb-0 pb-0 ">
+            <a class="nav-link " routerLink="/login"> Login</a>&nbsp;
+          </li>
+          <li class="nav-item mt-2 mb-0 pb-0 ">
+            <a class="nav-link " routerLink="/signup"> Signup</a>&nbsp;
+          </li>
+  
+        </ul>
+      </ng-template>
+  
+  
+    </div>
+  
+  
+  
+  </nav>
+  
