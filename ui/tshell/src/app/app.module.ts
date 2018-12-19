@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgForm } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { SearchExistingQuestionsComponent } from './search-existing-questions/search-existing-questions.component';
-import { NgForm } from '@angular/forms';
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { ContributeQuestionService } from './contribute-question.service';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component'
@@ -15,8 +17,6 @@ import { TotalquestionComponent } from './totalquestion/totalquestion.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmEqualValidatorDirective } from './signup/confirm-equal-validator-directive';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
@@ -41,12 +41,10 @@ import { TestComponent } from './top5AccessedTest/test.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
-
 import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './changepassword/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './changepassword/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
-
 
 @NgModule({
   declarations: [
@@ -113,7 +111,11 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
+<<<<<<< HEAD
     NgbModule
+=======
+    NgbModule    
+>>>>>>> release1
   ],
   providers: [
     ContributeQuestionService,

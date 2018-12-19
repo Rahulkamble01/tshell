@@ -18,10 +18,11 @@ body, html {
 h3{
     text-align: center;
 }
-/* i>rahul{  
+
+#success{  
     padding-top: 20px;
     color: green;
-} */
+} 
 .modal-body{
     border-radius: 0.5rem;
 }

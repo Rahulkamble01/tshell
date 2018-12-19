@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./changepassword.component.css']
 })
 export class ChangepasswordComponent implements OnInit {
-  @ViewChild('exampleModal') exampleModal:ElementRef;
+  /* @ViewChild('exampleModal') exampleModal:ElementRef;
   
   passwordPattern ="/^[A-Za-z]{4,20}/";
 
@@ -45,12 +45,12 @@ export class ChangepasswordComponent implements OnInit {
       Validators.pattern(this.passwordPattern)
     ]),
 
-  });
+  }); */
 
-  constructor(private router : Router, private service: ChangepasswordService) { }
-
+  constructor(private router : Router) { }
+  /* private service: ChangepasswordService */
   ngOnInit() {
-    this.exampleModal.nativeElement.click();
+    /* this.exampleModal.nativeElement.click(); */
   }
   
 /* 
@@ -64,14 +64,14 @@ export class ChangepasswordComponent implements OnInit {
       })
   }*/
 
-  savePassword(oldpassword: string , newpassword : string, confirmpassword : any){
+ /*  savePassword(oldpassword: string , newpassword : string, confirmpassword : any){
     if(oldpassword == "Rahul@01" && newpassword=="vishal" && confirmpassword=="vishal"){
       console.log(oldpassword);
       this.message = "Incorrect Old Password";  
       this.router.navigate(['login']);
     }
   }
- 
+  */
 
   
   /* savePassword(){
