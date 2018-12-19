@@ -8,12 +8,13 @@
   background-color: white;
 }*/
 
-:host-context(.qbody) body {
+/* :host-context(.qbody) body {
   background-color:white !important;
-}
+} */
+/* 
 body{
   background-color: white !important;
-}
+} */
 
 .sidenav {
   height: 100%;
