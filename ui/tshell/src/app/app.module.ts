@@ -33,7 +33,7 @@ import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-a
 import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
-import { SearchResultComponent} from './search-result/search-result.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
@@ -49,18 +49,13 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-PasswordMachingValidatorDirective,
-PasswordNotEqualValidatorDirective,
-    AddskillComponent,
+    PasswordNotEqualValidatorDirective,
+    PasswordMachingValidatorDirective,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
-    SkillmodalComponent,
-    DashboardComponent,
-    MostSearchedSkillsComponent,
-    TotalquestionComponent,
     RecentlyAddedSkillsComponent,
     LoginComponent,
     AdminSignupComponent,
@@ -73,27 +68,13 @@ PasswordNotEqualValidatorDirective,
     ChangepasswordComponent,
     UserprofileComponent,
     ViewlearnerComponent,
-    AppComponent,
     SearchExistingQuestionsComponent,
     ContributeQuestionComponent,
     PreviewQuestionsComponent,
-    DashboardComponent,
-    HeaderComponent,
-    MostSearchedSkillsComponent,
-    TotalquestionComponent,
-    RecentlyAddedSkillsComponent,
-    HeaderComponent,
-    LoginComponent,
-    AdminSignupComponent,
-    SignupComponent,
-    ConfirmEqualValidatorDirective,
-    LearnerHomepageComponent,
     CountOfQuestionsToReviewComponent,
-    LearnerHomepageComponent,
     HomeComponent,
     SearchResultComponent,
     AddskillComponent,
-    SkillpageComponent,
     QuestiongraphComponent,
     TestComponent,
     ExitAssesmentComponent,

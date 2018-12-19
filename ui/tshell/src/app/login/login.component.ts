@@ -10,8 +10,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-message:string;
-status:boolean=false;
+  message: string;
+  status: boolean = false;
 
   constructor(private router: Router, private service: AuthService) { }
 
@@ -23,20 +23,20 @@ status:boolean=false;
     password: new FormControl(
       '', [Validators.required
       ])
-  })
+  });
 
- forms= new FormGroup({
-   employeeid : new FormControl(
-     '',
+  forms = new FormGroup({
+    employeeid: new FormControl(
+      '',
       Validators.required
-   ),
-   email : new FormControl(
-    '',
-     Validators.required
-  ),
-  
+    ),
+    email: new FormControl(
+      '',
+      Validators.required
+    ),
 
- })
+
+  });
 
   ngOnInit() {
   }
@@ -48,32 +48,29 @@ status:boolean=false;
       console.log(password);
       this.service.login();
       this.router.navigate(['/authenticate']);
-    }
-    else if (employeeId == '123456' && password == '123456') {
+    } else if (employeeId == '123456' && password == '123456') {
       console.log(employeeId);
       console.log(password);
       this.service.learnerLogin();
-    /*   this.router.navigate(['/assessmenthistory']); */
+      /*   this.router.navigate(['/assessmenthistory']); */
       this.router.navigate(['/dash']);
-    /*   this.router.navigate(['/learner-homepage']); */
-    }
-     else if (employeeId == '654321' && password == '654321') {
+      /*   this.router.navigate(['/learner-homepage']); */
+    } else if (employeeId == '654321' && password == '654321') {
       console.log(employeeId);
       console.log(password);
       this.service.login();
       this.router.navigate(['/admin-homepage']);
-    }
-    else {
+    } else {
       this.service.logout();
       this.router.navigate(['/login']);
     }
   }
-  sendMail(){
+  sendMail() {
     console.log('This is check!');
-    this.message="Mail sent";
-    this.status=true;
+    this.message = "Mail sent";
+    this.status = true;
   }
-  close(){
-    this.message="";
+  close() {
+    this.message = "";
   }
 }
