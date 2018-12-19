@@ -29,7 +29,6 @@ import { ScoreAssesmentComponent } from './score-assesment/score-assesment.compo
 
 
 const routes: Routes = [
-  
   { path: 'dashboard', component: DashboardComponent },
   { path: 'totalquestions', component: TotalquestionComponent },
   { path: 'search-skill', component: SearchSkillComponent },

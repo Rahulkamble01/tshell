@@ -38,12 +38,12 @@ import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TestComponent } from './top5AccessedTest/test.component';
-import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
-import { InstructionComponent } from './instruction/instruction.component';
+ import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
+ import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 import { SkillmodalComponent } from './skillmodal/skillmodal.component';
-import { PasswordMachingValidatorDirective } from './changepassword/password-matching-validator.directive';
-import { PasswordNotEqualValidatorDirective } from './changepassword/password-not-equal-validator.directive';
+import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
+import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
@@ -51,6 +51,7 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
 PasswordMachingValidatorDirective,
 PasswordNotEqualValidatorDirective,
+
     AddskillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
@@ -96,9 +97,9 @@ PasswordNotEqualValidatorDirective,
     SkillpageComponent,
     QuestiongraphComponent,
     TestComponent,
-    ExitAssesmentComponent,
-    InstructionComponent,
-    ScoreAssesmentComponent,
+     ExitAssesmentComponent,
+     InstructionComponent,
+     ScoreAssesmentComponent,
     SkillpageComponent,
     SkillmodalComponent,
     FooterComponent
@@ -111,7 +112,7 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-    NgbModule    
+    NgbModule
   ],
   providers: [
     ContributeQuestionService,
