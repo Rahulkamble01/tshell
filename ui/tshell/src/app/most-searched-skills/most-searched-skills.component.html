@@ -1,13 +1,17 @@
 
-<div  class="graph" style="width: 40% ;">
-  <h5>Top Searched Skills</h5>
-  <canvas 
-      baseChart
-      [chartType]="'bar'"
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [legend]="false"
-      (chartClick)="onChartClick($event)">
-  </canvas>
-</div>
+                                
+    <div class="card card2" > 
+            <div class="h3  d-flex justify-content-center " style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Total number of question contributed</div>
+        <canvas 
+        
+            baseChart
+            [chartType]="'bar'"
+            [datasets]="chartData"
+            [labels]="chartLabels" 
+            [legend]="false" 
+            [colors]="BarColors"                              
+
+            (chartClick)="onChartClick($event)">
+        </canvas>
+        </div>
+  
