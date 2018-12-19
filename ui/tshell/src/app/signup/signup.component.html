@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container-fluid">
   <!--  <div class="alert alert-success" style="text-align: center;">
       <div data-dismiss="alert">Succcessfully Registered! Go to Login Page</div>
   </div> -->
   <div class="row">
-    <div class="col-lg-1 "></div>
-    <div class="col-lg-10 col-md-10 col-xl-10 ">
+    <div class="col-lg-8 col-12"> <br><br><h1 class="log">Test your skills with tShell...</h1></div>
+    <div class="col-lg-4 col-12">
 
-      <div id="signupbox" style=" margin-top: 30px;" class="mainbox col-lg-6 offset-md-3 col-md-8 offset-sm-2">
+      <div id="signupbox">
         <div class="card card-inverse card-info">
           <div class="card-header">
             <div class="card-title" id="card4">Signup</div>
@@ -20,7 +20,9 @@
                 <div class="form-group">
                   <div class="col-lg-12">
 
+
                     <input type="text" class="form-control" formControlName="empId" placeholder="Employee ID *" #empId/>
+
                     <div *ngIf="form.get('empId').touched && form.get('empId').invalid">
                       <div *ngIf="form.get('empId').errors.required" class="danger" style="color:red">Employee ID is required</div>
                       <div *ngIf="form.get('empId').errors.minlength" class="danger" style="color:red">Employee ID must contain minimum 6 digits</div>
@@ -33,16 +35,20 @@
 
                 <div class="form-group">
                   <div class="col-lg-12">
+
                     <input type="text" class="form-control" formControlName="username" placeholder="Name *" #name/>
                     <div *ngIf="form.get('name').touched && form.get('name').invalid">
                       <div *ngIf="form.get('name').errors.required" class="danger" style="color:red">Name is required</div>
+
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-lg-12">
+
                     <input type="text" class="form-control" formControlName="email" placeholder="Email *" #email/>
+
                     <div *ngIf="form.get('email').touched && form.get('email').invalid">
                       <div *ngIf="form.get('email').errors.required" class="danger" style="color:red">Email is required</div>
                       <div *ngIf="form.get('email').errors.pattern" class="danger" style="color:red">Email pattern not valid</div>
@@ -52,7 +58,9 @@
 
                 <div class="form-group">
                   <div class="col-lg-12">
+
                     <input type="password" class="form-control" formControlName="password" placeholder="Password *" #password/>
+
                     <div *ngIf="form.get('password').touched && form.get('password').invalid">
                       <div *ngIf="form.get('password').errors.required" class="danger" style="color:red">Password is required</div>
                       <div *ngIf="form.get('password').errors.minlength" class="danger" style="color:red">Password must contain minimum 6 characters</div>
@@ -64,7 +72,9 @@
 
                 <div class="form-group">
                   <div class="col-lg-12">
+
                     <input type="password" class="form-control" appConfirmEqualValidator="password" formControlName="confirmPassword" placeholder="Confirm Password *"
+
                       #confirmPassword/>
                     <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
                       <div *ngIf="form.get('confirmPassword').errors.required" class="danger" style="color:red">Password is required</div>
@@ -80,11 +90,13 @@
 
                 <div class="form-group">
                   <div id="card6"></div>
+
                   <div class="col-lg-12">
                     <button id="btn-login" href="#" class="btn btn-ts-primary" (click)="signup(empId.value,name.value,email.value,password.value,confirmPassword.value)"
                       style="width:100%" value="submit">Signup</button>
                   </div>
                
+
                   <br>
                 </div>
               </div>

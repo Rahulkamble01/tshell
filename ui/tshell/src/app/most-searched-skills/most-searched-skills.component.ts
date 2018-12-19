@@ -11,10 +11,28 @@ export class MostSearchedSkillsComponent implements OnInit {
 
   ngOnInit() {
   }
+  BarColors = [
+
+    {
+      backgroundColor:  [
+        '#66ffff',
+        '#66ffff',
+        '#66ffff',
+        '#66ffff',
+        
+      ]
+    }
+
+
+  ]
+
 
    
   chartOptions = {
-    responsive: true
+    responsive: true,
+    chartLabels:{
+      fontSize: 40
+    }
   };
 
   chartData = [ { data: [18500, 10000, 50000, 150000 ], label: 'Skills' } ];
@@ -24,4 +42,14 @@ export class MostSearchedSkillsComponent implements OnInit {
   onChartClick(event) {
     console.log(event);
   }
+  donutColors = [
+    {
+      backgroundColor: [
+        '#ced',
+        '#ced',
+        '#ced',
+        '#ced',
+      ]
+    }
+  ];
 }
