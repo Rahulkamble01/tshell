@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Topic } from '../topic';
+import { SkillserviceService } from '../skillservice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-skillmodal',
@@ -13,6 +15,8 @@ import { Router } from '@angular/router';
 export class SkillmodalComponent implements OnInit {
   add: boolean;
   item: any;
+  sam:any;
+  json:any;
   expression: any;
   @Input() name: any;
   skills: any = [
@@ -54,12 +58,15 @@ export class SkillmodalComponent implements OnInit {
       ]
     }];
   topics: Array<Topic> = [];
+  constructor(public activeModal: NgbActiveModal, private SkillService : SkillserviceService) { }
 
-  addskillform = new FormGroup({
+  addskillform = new FormGroup
+  ({
+    
     skillName: new FormControl(
       '',
       [Validators.required,
-      Validators.minLength(2),
+      Validators.minLength(1),
       Validators.maxLength(25),
       Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
 
@@ -71,9 +78,11 @@ export class SkillmodalComponent implements OnInit {
         Validators.maxLength(60),
         Validators.pattern(/^[a-zA-Z ._-]+$/),
       ])
+    
   });
+  
+ 
 
-  constructor(public activeModal: NgbActiveModal) { }
   addTopic(topicname) {
 
     const topic = new Topic(topicname);
@@ -89,6 +98,14 @@ export class SkillmodalComponent implements OnInit {
   get topicName(): any { return this.addskillform.get('topicName'); }
   clearInput() { this.topicName.reset(); }
 
+  showTopic(){
+    for(let topic of this.topics){
+      alert(topic.name);
+    }
+
+  }
+
+/* 
   submitSkill(skillName) {
     if (skillName == this.skills[0].name) {
       alert("Skill already updated");
@@ -97,6 +114,30 @@ export class SkillmodalComponent implements OnInit {
 
     }
   }
+ */
+  addSkill(){
+console.log("inside method");
+let topics=[];
+    for(let i=0;i< this.topics.length;i++){
+     let json = JSON.stringify({      
+     name: this.topics[i].name,
+     skill:{
+       name: this.addskillform.controls['skillName'].value,
+     }     
+    });
+    
+    topics[i]=json;
+    
+
+    //this.SkillService.addSkill(this.json).subscribe();
+  
+
+
+  }
+  console.log(topics);
+  }
+
+
   ngOnInit() {
     if (this.add == false) {
 

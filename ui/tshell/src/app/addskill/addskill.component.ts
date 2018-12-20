@@ -13,6 +13,12 @@ import { Skill } from '../skill';
 })
 export class AddskillComponent implements OnInit {
 
+  constructor(private http: HttpClient, private router: Router) {
+    this.topics = [];
+  }
+
+
+
   skills: Skill[] = [
     { id: 1, name: 'Java' },
   ];
@@ -36,10 +42,7 @@ export class AddskillComponent implements OnInit {
       ])
   });
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.topics = [];
-  }
-
+ 
   addTopic(topicname) {
     let topic = new Topic(topicname);
     this.topics.push(topic);
