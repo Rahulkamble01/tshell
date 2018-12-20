@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,7 +31,7 @@ public class Assessment {
 	@Column(name="as_type")
 	private String type;
 	
-	@Column(name="as_date")
+	@Column(name="as_start_time")
 	private Date date;
 	
 	@Column(name="as_score")
@@ -44,12 +45,13 @@ public class Assessment {
 	@JoinColumn(name="as_us_id")
 	private User user;
 	
-	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinTable(name="assessment_question",
-				joinColumns= {@JoinColumn(name="aq_as_id")},
-				inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
-	)
-	private List<Question> questions;
+//	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+//	@JoinTable(name="assessment_question",
+//				joinColumns= {@JoinColumn(name="aq_as_id")},
+//				inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
+//	)
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessment")
+	private List<AssessmentQuestion> assessmentQuestions;
 
 	public int getId() {
 		return id;
@@ -99,27 +101,12 @@ public class Assessment {
 		this.user = user;
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
+	public List<AssessmentQuestion> getAssessmentQuestions() {
+		return assessmentQuestions;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}		
-	
-	public Assessment() {
-		super();		
+	public void setAssessmentQuestions(List<AssessmentQuestion> assessmentQuestions) {
+		this.assessmentQuestions = assessmentQuestions;
 	}
 
-	public Assessment(int id, String type, Date date, float score, Skill skill, User user, List<Question> questions) {
-		super();
-		this.id = id;
-		this.type = type;
-		this.date = date;
-		this.score = score;
-		this.skill = skill;
-		this.user = user;
-		this.questions = questions;
-	}	
-		
 }

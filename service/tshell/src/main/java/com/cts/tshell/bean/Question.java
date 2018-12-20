@@ -30,11 +30,16 @@ public class Question {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
 	private QuestionDifficultyLevel questionDifficultyLevel;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_qt_id")
+	private QuestionAnswerType questionAnswerType;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "qu_us_id")
-	private User user;
+	@JoinColumn(name = "qu_created_by_us_id")
+	private User createdUser;
 
+	
 	public int getId() {
 		return id;
 	}
@@ -67,12 +72,22 @@ public class Question {
 		this.questionDifficultyLevel = questionDifficultyLevel;
 	}
 
-	public User getUser() {
-		return user;
+	public User getCreatedUser() {
+		return createdUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCreatedUser(User createdUser) {
+		this.createdUser = createdUser;
+	}
+
+	public QuestionAnswerType getQuestionAnswerType() {
+		return questionAnswerType;
+	}
+
+	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
+		this.questionAnswerType = questionAnswerType;
 	}	
+	
+	
 
 }
