@@ -10,6 +10,10 @@ export class MostSearchedSkillsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.chartLabels.push("Java");
+    this.chartLabels.push("Java1");
+    this.chartLabels.push("Java2");
+    this.chartLabels.push("Java3");
   }
   BarColors = [
 
@@ -37,7 +41,7 @@ export class MostSearchedSkillsComponent implements OnInit {
 
   chartData = [ { data: [18500, 10000, 50000, 150000 ], label: 'Skills' } ];
 
-  chartLabels = ['Java', 'Sql', 'J2EE', 'Spring'];
+  chartLabels = [];
 
   onChartClick(event) {
     console.log(event);
