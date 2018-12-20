@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators,FormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ContributeQuestionService } from '../contribute-question.service';
@@ -14,6 +14,7 @@ export class ContributeQuestionComponent implements OnInit {
 
   ngOnInit() {
   }
+  question:any;
   userFile: any = File;
   uploadForm: any = FormGroup;
   isChecked: boolean = false;
@@ -64,6 +65,17 @@ export class ContributeQuestionComponent implements OnInit {
 
   onSubmit() {
     console.log(this.questionForm.value);
+    let json=JSON.stringify({
+      user:this.questionForm.value.user,
+      skill:this.questionForm.value.skill,
+      topic:this.questionForm.value.topic,
+      question:this.questionForm.value.question,
+      options:{
+         name:this.questionForm.value.options[this.count],
+         answer:this.questionForm.value.solution[this.count]
+      }
+    })
+    console.log(json);
     this.contributeQuestionService.addQuestion(this.questionForm.value)
       .subscribe(data => {
         console.log("Response: " + data)
@@ -80,19 +92,6 @@ export class ContributeQuestionComponent implements OnInit {
     console.log(this.isChecked);
   }
 
-  onSelectFile(event) {
-    const file = event.target.files[0];
-    this.userFile = file;
-  }
-  upload() {
-    console.log('File Upload method is called!');
-    let formData = new FormData;
-    formData.append('file', this.userFile);
-    this.contributeQuestionService.uploadQuestions(formData).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-    this.router.navigate(['preview']);
-  }
+ 
+
 }

@@ -19,7 +19,7 @@
             <div class="card">
               <div class="card-body">
                 <form [formGroup]="questionForm">
-                  <h3>Adding question for "Java" </h3>
+                  <h3 >Adding question for " "</h3>
                   <div>
                     <label>Topics</label>
                     <select formControlName="topic" class="form-control" name="topic" id="topic">
@@ -33,11 +33,34 @@
                   <div class="md-form">
                     <label for="form10">Question</label>
                     <i class="fas fa-edit"></i>
-                    <textarea type="text" id="form10" class="md-textarea form-control" name="question" rows="10" formControlName="question"></textarea>
+                     <textarea type="text" id="form10" class="md-textarea form-control" name="question" rows="10" formControlName="question" ></textarea>
                     <div *ngIf="questionForm.get('question').touched && questionForm.get('question').invalid">
                       <div *ngIf="questionForm.get('question').errors.required" class="alert alert-danger">Question is required
                       </div>
                     </div>
+                    <!-- <a href="#" data-toggle="modal" data-target="#editQuestion">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a> -->
+                    <!--Question modal-->
+                    <!-- <div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"  formControlName="question" [(ngModel)]="questionForm.question">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <textarea style="height: 250px;" class="form-control" rows="3" [(ngModel)]="questions"></textarea>
+          
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-ts-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
                   </div>
 
                   <div class="row">
@@ -50,8 +73,30 @@
                       </span>
                       <div *ngFor="let option of options.controls; let i=index">
                         <span class="input-group-append">
-                          <textarea [formControlName]="i" class="form-control" name="options" [required]="'!options.valid'" rows="3" id="optionText">
+                          <textarea [formControlName]="i" class="form-control" name="options" [required]="'!options.valid'" rows="3" id="optionText" >
                             </textarea>
+                             <!-- option modal -->
+                             <!-- <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-ts-primary">Save changes</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div> -->
+
+
                           <i class="far fa-trash-alt" (click)="removeOption(i)" id="optionButton"></i>
                         </span>
                       </div>
@@ -65,6 +110,7 @@
                           <input type="checkbox" [formControlName]="i" name="solution" class="checkmark " (change)="check($event)">
                         </label>
                       </div>
+                     
                     </div>
                   </div>
                   <button type="submit" style="margin-top: 3px;" (click)="onSubmit()" class="btn btn-ts-primary addButton" style="float: right"
@@ -95,4 +141,6 @@
   </div>
 
 </section>
+
+
 <!-- ./Tabs -->
