@@ -1,23 +1,23 @@
-import {Validator, NG_VALIDATORS, AbstractControl} from '@angular/forms'
-import {Directive, Input} from '@angular/core'
+import { Validator, NG_VALIDATORS, AbstractControl } from '@angular/forms';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
-    selector :'[appConfirmEqualValidator]',
+    selector: '[appConfirmEqualValidator]',
     providers: [{
-        provide : NG_VALIDATORS,
-        useExisting : PasswordMachingValidatorDirective,
-        multi : true
-    }] 
- })
+        provide: NG_VALIDATORS,
+        useExisting: PasswordMachingValidatorDirective,
+        multi: true
+    }]
+})
 
 
-export class PasswordMachingValidatorDirective implements Validator{
+export class PasswordMachingValidatorDirective implements Validator {
     @Input() appConfirmEqualValidator: string;
-    validate(control : AbstractControl):{[key : string]: any}| null{
+    validate(control: AbstractControl): { [key: string]: any } | null {
         const controlToCompare = control.parent.get(this.appConfirmEqualValidator);
-        if(controlToCompare && controlToCompare.value !== control.value){
-        return { 'notEqual' : true };
+        if (controlToCompare && controlToCompare.value !== control.value) {
+            return { 'notEqual': true };
+        }
+        return null;
     }
-    return null;
-}
 }
