@@ -13,22 +13,22 @@ export class ViewlearnerComponent implements OnInit {
   ngOnInit() {
   }
 
-  imageUrl : string ="https://www.loopconnect.net/images/main/avatar.png";
-  fileToUpload : File = null;
+  imageUrl :  string  = "https://www.loopconnect.net/images/main/avatar.png";
+  fileToUpload :  File  =  null;
 
-  handleFileInput(file : FileList){
-  this.fileToUpload = file.item(0);
+  handleFileInput(file :  FileList) {
+    this.fileToUpload  =  file.item(0);
 
-  var reader = new FileReader();
-  reader.onload =(event:any) => {
-  this.imageUrl = event.target.result;
+    var  reader  =  new  FileReader();
+    reader.onload  = (event: any)  =>  {
+      this.imageUrl  =  event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+
+
+
   }
-  reader.readAsDataURL(this.fileToUpload);
 
-
-
-} 
- 
 
 
 }

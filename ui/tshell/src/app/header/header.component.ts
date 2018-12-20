@@ -64,13 +64,13 @@ export class HeaderComponent implements OnInit {
       })
   }*/
 
-  savePassword(oldpassword: string, newpassword: string, confirmpassword: any) {
-    if (!(oldpassword == "1234") || !(newpassword == "12345") || !(confirmpassword == "12345")) {
-      console.log(oldpassword);
-      this.message = "Incorrect Old Password";
+  // savePassword(oldpassword: string, newpassword: string, confirmpassword: any) {
+  //   if (!(oldpassword == "1234") || !(newpassword == "12345") || !(confirmpassword == "12345")) {
+  //     console.log(oldpassword);
+  //     this.message = "Incorrect Old Password";
 
-    }
-  }
+  //   }
+}
 
 
 
@@ -109,4 +109,4 @@ export class HeaderComponent implements OnInit {
     } */
 
 
-}
+

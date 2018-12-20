@@ -9,9 +9,9 @@ export class TotalquestionsService {
   url: string = "/tShell-webservice/rest/user/get/";
 
   constructor(private http: HttpClient) { }
-   
-  totalquestion(id): Observable<any>{    
+
+  totalquestion(id): Observable<any> {
     console.log(id);
-    return this.http.get<any>(this.url+1);
-}
+    return this.http.get<any>(this.url + 1);
+  }
 }
