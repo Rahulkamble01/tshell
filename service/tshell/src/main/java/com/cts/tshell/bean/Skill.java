@@ -8,11 +8,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "skill")
+@NamedQueries({
+	@NamedQuery(name = "Skill.fetchAllSkillQuestion", 
+				query = "select distinct s from Skill s " + 
+						"left join fetch s.topics t " + 
+						" "+ 
+						" " + 
+						"where s.id=:id "
+	),
+	}) 
+
 public class Skill {
 
 	@Id
@@ -36,7 +48,7 @@ public class Skill {
 	private String description;
 	
 	@Column(name = "sk_image")
-	private byte image;
+	private String image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
@@ -89,11 +101,11 @@ public class Skill {
 		this.description = description;
 	}
 
-	public byte getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "option")
+@Table(name = "`option`")
 public class Option {
 	
 	@Id
@@ -25,6 +27,7 @@ public class Option {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="op_qu_id")
+	@JsonIgnore
 	private Question question;
 	
 	@Column(name="op_is_correct")

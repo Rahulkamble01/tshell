@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "topic")
+
+
 public class Topic {
 
 	@Id
@@ -30,7 +33,8 @@ public class Topic {
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="tp_sk_id")	
+	@JoinColumn(name="tp_sk_id")
+	@JsonIgnore
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)

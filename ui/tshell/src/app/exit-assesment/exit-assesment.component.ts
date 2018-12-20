@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
-import { Option, Question, Quiz, QuizConfig } from '../models/index';
+import { Option, Question, Quiz, QuizConfig, Topic, } from '../models/index';
 import { ExitAssesmentService } from '../exit-assesment.service';
 import { Router } from '@angular/router';
 
@@ -23,6 +23,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   ];
   quizes: any[];
   quiz: Quiz = new Quiz(null);
+  topics: Topic = new Topic(null);
   mode = 'quiz';
   quizName: string;
   config: QuizConfig = {
@@ -95,7 +96,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   loadQuiz(json) {
     json.forEach(res => {
       this.quiz = new Quiz(res);
-      this.pager.count = this.quiz.questions.length;
+      this.pager.count = this.quiz.topics.questions.length;
       this.startTime = new Date();
       this.timer = setInterval(() => { this.tick(); }, 1000);
       this.duration = this.parseTime(this.config.duration);
@@ -119,10 +120,23 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     secs = (secs < 10 ? '0' : '') + secs;
     return `${mins}:${secs}`;
   }
-
+/*
   get filteredQuestions() {
     return (this.quiz.questions) ?
       this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+  }*/
+
+  
+  get filteredQuestions() {
+   // return (this.quiz.questions) ?
+     // this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+
+      this.quiz.topics.forEach(x => {
+        x.name;
+        questions.forEach(element => {
+          
+        });
+      });
   }
 
   onSelect(question: Question, option: Option) {

@@ -1,5 +1,7 @@
 package com.cts.tshell.bean;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "question")
+
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,23 +28,28 @@ public class Question {
 
 	@Column(name = "qu_question")
 	private String question;
-	
+
 	@Column(name = "qu_status")
 	private String status;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionDifficultyLevel questionDifficultyLevel;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionAnswerType questionAnswerType;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
+	@JsonIgnore
 	private User createdUser;
 
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+	private List<Option> options;
+
 	public int getId() {
 		return id;
 	}
@@ -86,8 +96,14 @@ public class Question {
 
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
-	}	
-	
-	
+	}
+
+	public List<Option> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<Option> options) {
+		this.options = options;
+	}
 
 }
