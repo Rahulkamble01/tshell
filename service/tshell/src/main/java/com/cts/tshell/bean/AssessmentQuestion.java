@@ -2,12 +2,15 @@ package com.cts.tshell.bean;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,10 +23,12 @@ public class AssessmentQuestion {
 	@Column(name="aq_id")
 	private int id;
 	
-	@Column(name="aq_as_id")
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="aq_as_id")
 	private Assessment assessment;
 	
-	@Column(name="aq_qu_id")
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="aq_qu_id")
 	private Question question;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion")
