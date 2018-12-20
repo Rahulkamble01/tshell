@@ -7,20 +7,16 @@ import { TotalquestionsService } from '../totalquestions.service';
   styleUrls: ['./totalquestion.component.css']
 })
 export class TotalquestionComponent implements OnInit {
-  userdata:any;
+  userdata: any;
 
-  constructor(private totalquestion : TotalquestionsService) { }
+  constructor(private totalquestion: TotalquestionsService) { }
 
   ngOnInit() {
     this.totalquestion.totalquestion(1).subscribe(
       data => {
-        
-    
-       this.userdata=data; 
-       
-       console.log(data);
+        this.userdata = data;
+        console.log(data);
       }
     );
-  }  
-
   }
+}

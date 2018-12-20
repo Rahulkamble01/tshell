@@ -61,6 +61,9 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   constructor(private quizService: ExitAssesmentService, private router: Router, private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.quizService.test().subscribe(data => {
+      console.log(data);
+    });
     /*
     $(document).ready(function () {
       countdown(2);

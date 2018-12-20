@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./changepassword.component.css']
 })
 export class ChangepasswordComponent implements OnInit {
+  form:any;
   /* @ViewChild('exampleModal') exampleModal:ElementRef;
-  
+
   passwordPattern ="/^[A-Za-z]{4,20}/";
 
   empid: any;
