@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "skill")
 public class Skill {
@@ -36,9 +38,10 @@ public class Skill {
 	private String description;
 	
 	@Column(name = "sk_image")
-	private byte image;
+	private byte[] image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
+	
 	private List<Topic> topics;
 
 	public int getId() {
@@ -89,11 +92,11 @@ public class Skill {
 		this.description = description;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

@@ -5,9 +5,14 @@ import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import * as d3 from 'd3';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
 import { AuthService } from '../auth.service';
+import { Skill } from '../skill';
+import { SkillserviceService } from '../skillservice.service';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
 
 declare var abc: any;
 
@@ -17,57 +22,27 @@ declare var abc: any;
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit {
-  searchSkillByName:any;
-  skills: any = [
-    {
-      id: 1,
-      name: 'SQL',
-      active: true,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
-    }];
+  name: any;
+  model: any;
+  skills: any = [];
+  allSkills: Skill[] = [];
 
   topics: Array<Topic>;
 
-  addskillform = new FormGroup({
-    skillName: new FormControl(
-      '',
-      [Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(25),
-      Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
-
-      ]),
-    topicName: new FormControl(
-      '',
-      [
-        Validators.maxLength(60),
-        Validators.pattern(/^[a-zA-Z ._-]+$/),
-      ])
-  });
-
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService) {
     this.topics = [];
-  }
 
-  ngOnInit() {
     $("#graphID").ready(function () {
       console.log("inside abc");
       var w = document.getElementById("graphID").offsetWidth;
       var h = document.getElementById("graphID").offsetHeight;
       abc(d3, w, h);
+    });
+  }
+  ngOnInit() {
+    this.skillService.getAll().subscribe(data => {
+      this.allSkills = data;
     });
   }
 
@@ -104,4 +79,30 @@ export class SearchResultComponent implements OnInit {
     const modalRef = this.modalService.open(SkillmodalComponent);
     modalRef.componentInstance.add = add;
   }
+
+  // formatter = (result: string) => result.toUpperCase();
+  // search = (text$: Observable<string>) =>
+  //   text$.pipe(
+  //     debounceTime(100),
+  //     distinctUntilChanged(),
+  //     map(term => term === '' ? []
+  //       : this.skillNameArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
+  //     ),
+
+  //   )
+  formatter = (x: { name: string }) => x.name;
+  search = (text$: Observable<string>) => text$.pipe(
+    debounceTime(100),
+    distinctUntilChanged(),
+    map(term => term === '' ? []
+      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 10)
+    )
+  )
+  itemSelected($event) {
+    this.skills = $event.item;
+    this.name = $event.item.name;
+    console.log(this.skills);
+  }
 }
+
+

@@ -23,7 +23,7 @@ import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
@@ -34,12 +34,11 @@ import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TestComponent } from './top5AccessedTest/test.component';
- import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
- import { InstructionComponent } from './instruction/instruction.component';
+import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
+import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
@@ -49,10 +48,8 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-PasswordMachingValidatorDirective,
-PasswordNotEqualValidatorDirective,
-
-    AddskillComponent,
+    PasswordMachingValidatorDirective,
+    PasswordNotEqualValidatorDirective,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
@@ -76,15 +73,14 @@ PasswordNotEqualValidatorDirective,
     CountOfQuestionsToReviewComponent,
     HomeComponent,
     SearchResultComponent,
-    AddskillComponent,
     QuestiongraphComponent,
     TestComponent,
-     ExitAssesmentComponent,
-     InstructionComponent,
-     ScoreAssesmentComponent,
+    ExitAssesmentComponent,
+    InstructionComponent,
+    ScoreAssesmentComponent,
     SkillpageComponent,
     SkillmodalComponent,
-    FooterComponent
+    FooterComponent,
   ],
 
   imports: [

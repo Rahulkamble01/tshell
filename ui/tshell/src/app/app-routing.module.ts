@@ -21,7 +21,6 @@ import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
@@ -56,7 +55,6 @@ const routes: Routes = [
   { path: 'instruction', component: InstructionComponent },
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
   { path: "skills", component: SearchResultComponent },
-  { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent }
 ];
 

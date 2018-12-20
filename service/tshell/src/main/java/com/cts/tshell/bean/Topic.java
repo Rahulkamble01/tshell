@@ -31,6 +31,7 @@ public class Topic {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="tp_sk_id")	
+	@JsonIgnore
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
