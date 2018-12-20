@@ -61,7 +61,7 @@ PasswordNotEqualValidatorDirective,
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
-    RecentlyAddedSkillsComponent,
+    
     LoginComponent,
     AdminSignupComponent,
     SignupComponent,
