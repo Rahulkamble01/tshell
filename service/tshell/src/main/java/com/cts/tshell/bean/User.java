@@ -14,10 +14,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
+@NamedQueries({
+@NamedQuery(name="User.findUserById",query=" select u from User u "
+		+ " left join u.skills s "+ " left join s.topics t "
+		+ " left join t.questions q " + " where u.id = :id ")
+})
+//@NamedQueries({
+//@NamedQuery(name="User.findUserById",query=" select count(q.id)  from User u "
+//		+ " left join u.skills s "+ " left join s.topics t "
+//		+ " left join t.questions q " + " where u.id = :id ")
+//})
+
 
 public class User {
 
@@ -36,14 +51,14 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
+	@JoinColumn(name = "us_ur_id")
 	private Role role;
 
 	@Column(name = "us_emp_id")
 	private int employeeId;
 	
 	@Column(name = "us_image")
-	private byte image;
+	private byte[] image;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -98,11 +113,19 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+//	public byte getImage() {
+//		return image;
+//	}
+//
+//	public void setImage(byte image) {
+//		this.image = image;
+//	}
+
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

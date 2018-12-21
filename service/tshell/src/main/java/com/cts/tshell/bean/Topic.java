@@ -28,9 +28,10 @@ public class Topic {
 
 	@Column(name = "tp_name")
 	private String name;
-	
+
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="tp_sk_id")	
+	@JoinColumn(name="tp_sk_id")
+	@JsonIgnore
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -38,6 +39,7 @@ public class Topic {
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
+
 	private List<Question> questions;
 
 	public int getId() {

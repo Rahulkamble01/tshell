@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "question")
@@ -29,14 +30,17 @@ public class Question {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionDifficultyLevel questionDifficultyLevel;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionAnswerType questionAnswerType;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
+	@JsonIgnore
 	private User createdUser;
 
 	
