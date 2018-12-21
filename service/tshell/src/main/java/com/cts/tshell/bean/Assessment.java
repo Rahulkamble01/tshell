@@ -2,6 +2,7 @@ package com.cts.tshell.bean;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,7 +19,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "assessment")
-
+@NamedQueries({
+	@NamedQuery(name="Assessment.findTop5BySkill",query="select a from Assessment a "
+			+ "left join fetch a.skill s left join fetch "
+			+ "a.user u left join fetch u.role left join fetch a.assessmentQuestions "
+			+ "where s.id=:skillId order by a.score desc ")
+})
 public class Assessment {	
 
 	@Id

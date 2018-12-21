@@ -260,5 +260,32 @@ body {
   font-size: 26px;
   color: black;
   cursor: pointer;
+}
+/*  */
+
+.card{
+    border: none;
+    padding:10px; 
+}
+
+.card-header{    
+    background-color: #007bff;
+    color: white;
+}
+
+.card-body,.card-header{
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.skilledit{
+  font-size: 26px;
+  color: black;
+  cursor: pointer;
 
 }
+.btn {
+  padding: 3px 4px !important;
+}
+
+
+

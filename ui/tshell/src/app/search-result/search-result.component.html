@@ -1,18 +1,29 @@
 <div class="container">
-  <div class="row">
+  <div class="row mb-0 pt-0 pb-0">
+    <div class="col-lg-1 col-md-1 col-sm-12 col-12"></div>
+    <div class="col-lg-11 col-md-11 col-sm-12 col-12">
+      <p class="mb-0">Navigation: <a [routerLink]="[ '/' ]">home</a> > <a [routerLink]="[ '/skills' ]">Search Skill</a></p>
+    </div>
+  </div>
+  <div class="row mt-0 pt-0">
     <div class="col-lg-2 col-md-2 col-12"></div>
     <div class="col-lg-8 col-md-8 col-sm-12 col-12">
       <div class="text-center mb-0 mt-3">
         <div class="itwillflex">
-
-          <input type="text" class="form-control" (selectItem)="itemSelected($event)" [(ngModel)]="model"
-            [ngbTypeahead]="search" [inputFormatter]="formatter" />
-          <!-- 
-          <input name="searchSkill" placeholder="SQL" autocomplete="off" class="form-control" #searchSkill>&nbsp;&nbsp;&nbsp;
-          <i id="erase1" class="fa-addskilll fas fa-search" (click)="searchSkillByName(searchSkill.value)"></i> -->
+          <ng-template #rt let-r="result" let-t="term">
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+          </ng-template>
+          <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
+            [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" />
         </div>
       </div>
-      <p class="row search-heading text-center mb-0 mt-1 pl-3">Search Result for &nbsp; <span> "{{name}}"</span></p>
+      <ng-container *ngIf="skills.length != 0; else searchNotFoundTemplate">
+        <p class="row search-heading text-center mb-0 mt-1 pl-3">Found Result for &nbsp; <span> "{{name}}"</span></p>
+      </ng-container>
+      <ng-template #searchNotFoundTemplate>
+        <p class="row search-heading text-center mb-0 mt-1 pl-3"></p>
+      </ng-template>
+
     </div>
     <div class="col-lg-2 col-md-2 col-12 col-sm-12">
       <button type="button" class="btn btn-ts-primary btn-lg fa fa-plus mt-3 col-12  fa-addskilll" (click)="addSkillModel()">
@@ -22,7 +33,7 @@
 </div>
 
 
-<div class="container">
+<div class="container mb-3">
   <div class="row">
     <!---------------------------------->
     <div class="col-lg-6 col-md-6 col-12 col-sm-12">
@@ -30,7 +41,7 @@
         <div class="card-header text-center">Skills</div>
       </div>
       <div *ngIf="skills.length != 0">
-        <div class="card mb-4">
+        <div class="card mb-1">
           <div class="card-header ">
             <div class="row">
               <div class="col-lg-3 col-md-4">
@@ -63,9 +74,10 @@
                     <p class="card-text mb-0 pb-0">{{skills.description}}</p>
                     <p class="card-text mb-0 pb-0 mt-0 pt-0">Additional features</p>
                     <br>
-                    <p>Topics:</p>
-                    <p class="card-text mb-0 pb-0 mt-0 pt-0">topic name, topic name,topic name, topic name,topic name,
-                      topic name,topic name, topic name,topic name, topic name</p>
+                    <p class="d-inline-flex mb-0 pb-0 mt-0 pt-0"><b>Topics: </b></p>&nbsp;&nbsp;
+                    <div class="d-inline-flex" *ngFor="let item of skills.topics">
+                      <p class="card-text mb-2 pb-0 mt-0 pt-0">{{item.name}},</p>&nbsp;&nbsp;
+                    </div>
                     <br>
                   </div>
                 </div>
@@ -87,6 +99,31 @@
           </div>
           <!-- <div class="card-footer text-muted">
         </div> -->
+        </div>
+        <div class="container-fluid mb-4 mt-0">
+          <div class="row">
+            <div class="col-12">
+            <div class="card">
+              <div class="card card-header card-header-success text-center">
+                <h4 class="text-capitalize">top 5 performers</h4>
+              </div>
+              <div class="card-body">
+                <div class="barWrapper" *ngFor="let p of toppers">
+                  <span class="progressText">
+                    <B>{{p.user.name}}</B>
+                  </span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="p.score" aria-valuemin="10"
+                      aria-valuemax="100" [ngStyle]="{'width': p.score+'%'}">
+                      {{p.score}}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

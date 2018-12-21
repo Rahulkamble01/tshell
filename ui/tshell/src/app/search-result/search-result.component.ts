@@ -26,6 +26,7 @@ export class SearchResultComponent implements OnInit {
   model: any;
   skills: any = [];
   allSkills: Skill[] = [];
+  top5: any[] = [];
 
   topics: Array<Topic>;
 
@@ -34,7 +35,6 @@ export class SearchResultComponent implements OnInit {
     this.topics = [];
 
     $("#graphID").ready(function () {
-      console.log("inside abc");
       var w = document.getElementById("graphID").offsetWidth;
       var h = document.getElementById("graphID").offsetHeight;
       abc(d3, w, h);
@@ -65,12 +65,8 @@ export class SearchResultComponent implements OnInit {
   editSkillModel(item) {
     console.log(item);
     const modalRef = this.modalService.open(SkillmodalComponent);
-    this.skills.forEach(element => {
-      if (element.id == item.id) {
-        modalRef.componentInstance.item = element;
-        // alert(JSON.stringify(modalRef.componentInstance.item));
-      }
-    });
+    modalRef.componentInstance.item = item;
+
     modalRef.componentInstance.name = item.name;
     modalRef.componentInstance.add = false;
   }
@@ -101,7 +97,11 @@ export class SearchResultComponent implements OnInit {
   itemSelected($event) {
     this.skills = $event.item;
     this.name = $event.item.name;
-    console.log(this.skills);
+    this.skillService.updateSearch($event.item).subscribe();
+    this.skillService.getSkillTopper($event.item.id).subscribe(data =>{
+      this.top5 = data;
+      console.log(this.top5);
+    });
   }
 }
 

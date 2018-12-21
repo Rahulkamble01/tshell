@@ -14,7 +14,6 @@ function abc(d3,w1,h1) {
     main()
 
     function main() {
-      console.log("indise main")
       var range = 21
       var data = {
         // nodes: d3.json("/data/neo4jdata.json", function (error, graph) {})
@@ -43,7 +42,6 @@ function abc(d3,w1,h1) {
     function setSize(data) {
       width = w1;
       height = h1;
-      console.log(width, height);
       margin = {
         top: 0,
         left: 0,
