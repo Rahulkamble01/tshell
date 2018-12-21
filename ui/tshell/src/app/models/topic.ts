@@ -6,13 +6,15 @@ export class Topic {
     questions: Question[];
 
     constructor(data: any) {
-        data = data || {};
+        data = data;
         this.id = data.id;
         this.name = data.name;
         this.questions = [];
-        data.questions.forEach(q => {
-            this.questions.push(new Question(q));
-        });
-    }
 
+        for (const q of data) {
+            this.questions.push(new Question(q.questions));
+        }
+
+
+    }
 }

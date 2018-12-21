@@ -20,7 +20,7 @@ import javax.persistence.Table;
 				query = "select distinct s from Skill s " + 
 						"left join fetch s.topics t " + 
 						" "+ 
-						" " + 
+						" " +   
 						"where s.id=:id "
 	),
 	}) 

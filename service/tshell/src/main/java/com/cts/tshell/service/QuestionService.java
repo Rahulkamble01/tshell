@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.tshell.bean.Skill;
+import com.cts.tshell.bean.Topic;
 import com.cts.tshell.repository.SkillRepository;
 import com.cts.tshell.repository.TopicRepository;
 
@@ -22,4 +23,7 @@ public class QuestionService {
 		return skillRepository.fetchAllSkillQuestion(skillId);
 	}
 	
+	public List<Topic> fetchAllQuestionsID(int id){
+		return topicRepository.getAllQuestionById(id);
+	}
 }

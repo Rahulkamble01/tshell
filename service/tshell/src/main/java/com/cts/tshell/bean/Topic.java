@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,7 +23,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "topic")
 
-
+@NamedNativeQueries({
+       @NamedNativeQuery(
+            name    =   "getAllQuestionById",
+            query   =   "select qu_id from question " +
+                        "inner join topic_question on tq_qu_id=qu_id  " +
+                        "inner join topic on tp_id = tq_tp_id " +
+                        "inner join skill on sk_id =tp_sk_id "+
+                         "where sk_id=:id "
+                        
+           )
+})
 public class Topic {
 
 	@Id
@@ -42,7 +54,7 @@ public class Topic {
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
-	private List<Question> questions;
+	private Set<Question> questions;
 
 	public int getId() {
 		return id;
@@ -68,11 +80,11 @@ public class Topic {
 		this.skill = skill;
 	}
 
-	public List<Question> getQuestions() {
+	public Set<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(List<Question> questions) {
+	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
 	}
 

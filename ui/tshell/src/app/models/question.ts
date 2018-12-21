@@ -19,9 +19,10 @@ export class Question {
         this.level = new QuestionDifficultyLevel(data.questionDifficultyLevel);
         this.answerType = new QuestionAnswerType(data.questionAnswerType);
         this.options = [];
-        data.options.forEach(o => {
-            this.options.push(new Option(o));
-        });
-
+      for ( let i = 0 ; i < data.length; i ++) {
+            for (const o of data[i]) {
+                this.options.push(new Option(o.options));
+            }
+        }
     }
 }
