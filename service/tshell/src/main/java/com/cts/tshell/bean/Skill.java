@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "skill")
 public class Skill {
@@ -39,7 +42,6 @@ public class Skill {
 	private byte[] image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-
 	private List<Topic> topics;
 
 	public int getId() {

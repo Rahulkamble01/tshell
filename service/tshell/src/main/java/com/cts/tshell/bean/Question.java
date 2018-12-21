@@ -9,13 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "question")
+//@NamedQueries({
+//@NamedQuery(name="Question.findQuestionById",query=" select distinct count(q.id),s.name from Question q "
+//		+ "  join q.createdUser u " +" join u.skills s "+ " where u.id = :id " )
+//})
+@NamedQueries({
+@NamedQuery(name="Question.findQuestionById",query=" select count(q.id),s.name from Question q "
+		+ "  join q.createdUser u  " +" join u.skills s "+ " join s.topics t join t.questions "+" where u.id = :id and t.id=q.id  group by s.name " )
+})
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,17 +38,14 @@ public class Question {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionDifficultyLevel questionDifficultyLevel;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionAnswerType questionAnswerType;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
-	@JsonIgnore
 	private User createdUser;
 
 	

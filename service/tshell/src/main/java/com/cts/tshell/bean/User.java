@@ -1,6 +1,5 @@
 package com.cts.tshell.bean;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,26 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
-@NamedQueries({
-@NamedQuery(name="User.findUserById",query=" select u from User u "
-		+ " left join u.skills s "+ " left join s.topics t "
-		+ " left join t.questions q " + " where u.id = :id ")
-})
-//@NamedQueries({
-//@NamedQuery(name="User.findUserById",query=" select count(q.id)  from User u "
-//		+ " left join u.skills s "+ " left join s.topics t "
-//		+ " left join t.questions q " + " where u.id = :id ")
-//})
-
-
 public class User {
 
 	@Id
@@ -56,10 +41,10 @@ public class User {
 
 	@Column(name = "us_emp_id")
 	private int employeeId;
-	
+
 	@Column(name = "us_image")
 	private byte[] image;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
@@ -113,13 +98,13 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-//	public byte getImage() {
-//		return image;
-//	}
-//
-//	public void setImage(byte image) {
-//		this.image = image;
-//	}
+	// public byte getImage() {
+	// return image;
+	// }
+	//
+	// public void setImage(byte image) {
+	// this.image = image;
+	// }
 
 	public byte[] getImage() {
 		return image;
@@ -135,6 +120,6 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
-	}	
+	}
 
 }
