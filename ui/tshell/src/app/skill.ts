@@ -18,6 +18,7 @@ export class Skill {
         this.active = active;
         this.description = description;
         this.topics = topics;
-        this.date_of_creation = new Date();
+        this.date_of_creation = date_of_creation;
+      
     }
 }

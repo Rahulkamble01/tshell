@@ -30,7 +30,8 @@ public class Topic {
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="tp_sk_id")	
+	@JoinColumn(name="tp_sk_id")
+	@JsonIgnore
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -72,10 +73,6 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	@Override
-	public String toString() {
-		return "Topic [id=" + id + ", name=" + name + ", skill=" + skill + ", questions=" + questions + "]";
-	}
-
+	
 	
 }

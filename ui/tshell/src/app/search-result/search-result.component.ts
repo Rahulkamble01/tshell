@@ -104,4 +104,8 @@ export class SearchResultComponent implements OnInit {
     const modalRef = this.modalService.open(SkillmodalComponent);
     modalRef.componentInstance.add = add;
   }
+
+
+
+
 }

@@ -121,12 +121,12 @@ public class Skill {
 		this.date_of_creation = date_of_creation;
 	}
 
-	@Override
+/*	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
 				+ ", testCount=" + testCount + ", description=" + description + ", image=" + Arrays.toString(image)
 				+ ", topics=" + topics + "]";
 	}
-
+*/
 	
 }

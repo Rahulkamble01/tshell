@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.tshell.bean.Skill;
-import com.cts.tshell.bean.Topic;
 import com.cts.tshell.repository.SkillRepository;
 
 @Service
@@ -18,8 +17,6 @@ public class SkillService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillService.class);
 	private SkillRepository skillRepository;
 	
-	/*@Autowired
-	private TopicRepository topicRepository;*/
 	
 	@Autowired
 	public void setSkillRepository(SkillRepository skillRepository) {
@@ -28,23 +25,24 @@ public class SkillService {
 	
 	@Transactional
 	public List<Skill> getSkills() {
-		LOGGER.info("Starting getSkill() inside SkillRepository");
-		return (List<Skill>) skillRepository.findAll();
-		
+		LOGGER.info("Starting getSkill() inside SkillService");
+		return (List<Skill>) skillRepository.findAll();	
 	}
 	
 	@Transactional
 	public void saveSkill(Skill skill){
-		for(Topic topic:skill.getTopics()){
-			
-		}
+		LOGGER.info("Starting saveSkill() inside SkillService");
+		LOGGER.debug("recived skill from controller: "+skill);
 		skillRepository.save(skill);
 	}
 	
 	
 	@Transactional
-	public void getSkillByName(String stringName){
-		skillRepository.findByName(stringName);
+	public Skill getSkillByName(String skillname){
+		
+		LOGGER.info("Starting getSkillbyName() inside SkillService");
+		LOGGER.debug("recived skillname from controller: "+skillname);
+		return skillRepository.findByName(skillname);
 	}
 	
 	

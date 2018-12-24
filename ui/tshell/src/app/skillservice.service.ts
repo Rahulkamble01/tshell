@@ -25,6 +25,4 @@ export class SkillserviceService {
     return this.http.post(this.addSkillurl, skilly, httpOptions); 
    }
 
-  
-
 }

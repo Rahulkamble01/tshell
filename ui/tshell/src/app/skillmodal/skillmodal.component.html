@@ -16,6 +16,19 @@
         <hr>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"><i class="fa fa-times"></i></button>
       </div>
+      <div [hidden]="!success" class="alert alert-success box-msg" role="alert">
+          <div class="modal-body">
+          <h3>New Skill Added</h3>
+        </div>
+        </div>
+        <div [hidden]="!fail" class="alert alert-danger box-msg" role="alert">
+            <div class="modal-body">
+            <h3>Error When Adding Skill(Skill already exists)</h3>
+          </div>
+          </div>
+
+        <div [hidden]="success"  role="alert">
+      <div [hidden]="fail"  role="alert">
       <div class="modal-body">
         <div class="container ">
           <div class="row">
@@ -28,20 +41,20 @@
           <div class="row">
             <div class="col-lg-12">
               <ng-container *ngIf="add; else else1Template">
-                <input type="text" class="form-control" formControlName="skillName" placeholder="Enter a Name"
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter a Name"
                   #skillName>
               </ng-container>
               <ng-template #else1Template>
-                <input type="text" class="form-control" formControlName="skillName" value="{{item.name}}" #skillName1>
+                <input type="text" class="form-control" formControlName="name" value="{{item.name}}" #skillName1>
               </ng-template>
 
-              <div *ngIf="addskillform.get('skillName').touched && addskillform.get('skillName').invalid">
-                <div *ngIf="addskillform.get('skillName').errors.required" class="aletry">* Skill Name is required</div>
+              <div *ngIf="addskillform.get('name').touched && addskillform.get('name').invalid">
+                <div *ngIf="addskillform.get('name').errors.required" class="aletry">* Skill Name is required</div>
 
-                <div *ngIf="addskillform.get('skillName').errors.maxlength" class="aletry"> Skill Name must be
+                <div *ngIf="addskillform.get('name').errors.maxlength" class="aletry"> Skill Name must be
                   maximun 50
                   characters</div>
-                <div *ngIf="addskillform.get('skillName').errors.pattern" class="aletry"> Skill Name must not
+                <div *ngIf="addskillform.get('name').errors.pattern" class="aletry"> Skill Name must not
                   contain special charecters
                 </div>
               </div>
@@ -55,16 +68,16 @@
         <div class="row">
           
           <div class="col-lg-12"> 
-              <input type="text" class="form-control" formControlName="skillDescription" placeholder="Enter Description">  
+              <input type="text" class="form-control" formControlName="description" placeholder="Enter Description">  
           
 
             
-              <div *ngIf="addskillform.get('skillDescription').touched && addskillform.get('skillDescription').invalid">
-                  <div *ngIf="addskillform.get('skillDescription').errors.required" class="aletry">* skill description Name is required</div>
+              <div *ngIf="addskillform.get('description').touched && addskillform.get('description').invalid">
+                  <div *ngIf="addskillform.get('description').errors.required" class="aletry">* skill description Name is required</div>
   
-                  <div *ngIf="addskillform.get('skillDescription').errors.maxlength" class="aletry"> skill Description must be maximun 400
+                  <div *ngIf="addskillform.get('description').errors.maxlength" class="aletry"> skill Description must be maximun 400
                     characters</div>
-                    <div *ngIf="addskillform.get('skillDescription').errors.minlength" class="aletry"> skill Description must be of 10
+                    <div *ngIf="addskillform.get('description').errors.minlength" class="aletry"> skill Description must be of 10
                         characters</div>
               
                 </div>
@@ -79,8 +92,10 @@
           </div>
           <div class="row">
             
-            <div class="col-lg-12"> 	<input type="file" fileread="image" accept=".jpg,.png"> </div>
-          </div>
+            <div class="col-lg-12"> 
+              	<input type="file"  fileread="image" accept=".jpg,.png" formControlName="image"  (change)="onFileChanged($event)" #image> </div>
+               
+              </div>
           <br>
           <div class="row">
             <div class="col-lg-12"> Add Topics </div>
@@ -89,7 +104,7 @@
             <div class="col-lg-12 col-12 col-sm-12 col-md-12 buttonInside ">
               <span class="itwillflex">
                 <input type="text" class="form-control topicinput" formControlName="topicName" #topicname placeholder="Enter sub-topic and click + to add it">
-                <button id="erase" (click)="addTopic(topicname.value)" class=" btn btn-ts-primary btn-ts-sm fa fa-plus"  [disabled]="!topicName.valid" ></button>
+                <button id="erase" (click)="addTopic(topicname.value)" class=" btn btn-ts-primary btn-ts-sm fa fa-plus" [disabled]="!topicName.valid" ></button>
               </span>
               <div *ngIf="addskillform.get('topicName').touched && addskillform.get('topicName').invalid">
                 <div *ngIf="addskillform.get('topicName').errors.minlength" class="aletry"> Topic Name must be
@@ -115,21 +130,17 @@
         </div>
       </div>
       <div class="modal-footer">
-
-        <!-- <ng-container *ngIf="expression; else else2Template"> -->
-            <button class="btn btn-ts-primary makecross" (click)="addSkill();">Save
+            <button class="btn btn-ts-primary makecross" (click)="addSkill();" [disabled]="!addskillform.valid" >Save
                 Skill</button>
-        <!-- </ng-container>
-        <ng-template #else2Template>
-          <button class="btn btn-ts-primary makecross" (click)="submitSkill(skillName1);">Save
-            Skill</button>
-        </ng-template>
- -->
-
- <button (click)="showTopic()" class=" btn btn-ts-primary btn-ts-sm ">helo</button>
-
-
-      </div>
+    </div>
+</div>
+</div>
     </div>
   </form>
+
+
 </div>
+
+
+
+<!-- activeModal.dismiss('Cross click') -->

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.service.SkillService;
+import com.cts.tshell.service.TopicService;
 
 @RestController
 @RequestMapping("/")
@@ -24,6 +25,12 @@ public class SkillController {
 	@Autowired
 	public void setSkillService(SkillService skillService) {
 		this.skillService = skillService;
+	}
+	private TopicService topicService;
+
+	@Autowired
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
 	}
 
 	@RequestMapping(value = "/skills", method = RequestMethod.GET)
@@ -36,23 +43,33 @@ public class SkillController {
 	
 	
 	@PostMapping("/addskill")
-	public void insertneSkill(@RequestBody Skill skill) {
+	public boolean insertneSkill(@RequestBody Skill skill) {
+		
 		LOGGER.info("starting insertneSkills" );
-			
+		boolean addStatus;
+		addStatus=false;
 		List<Topic> topics = skill.getTopics();
+		LOGGER.debug("Recived skill from Browser: "+skill );
+		LOGGER.debug("Recived topics from Browser: "+topics );
 		
-		
-		skill.setTopics(topics);
-		System.out.println(skill);
-		
-		
-	
 		skillService.saveSkill(skill);
 		
-		System.out.println(skill);
+		Skill skill2 = skillService.getSkillByName(skill.getName());
+		
+		LOGGER.debug("Recived skill from sevice: "+skill2 );
+
+		for(Topic topic:topics){
+			topic.setSkill(skill2);
+			topicService.saveTopic(topic);
+		}
+		
+		skill.setTopics(topics);
 	
-		LOGGER.debug("post details are" + skill);
-		LOGGER.info("ending insertneSkill" );
+		addStatus=true;
+		LOGGER.info("ending inserting Skill" );
+		return addStatus;
+		
+	
 		
 		
 	}
