@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "skill")
 @NamedQueries({
@@ -51,6 +53,7 @@ public class Skill {
 	private String image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
+	
 	private List<Topic> topics;
 
 	public int getId() {

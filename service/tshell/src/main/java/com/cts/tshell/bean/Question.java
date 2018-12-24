@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,6 +24,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "question")
+
+@NamedQueries({
+	@NamedQuery(name = "Question.fetchAllQuestion", 
+				query = "select q from Question q " +
+						"left join fetch q.questionDifficultyLevel t " + 
+						"left join fetch q.questionAnswerType t " + 
+						"left join fetch q.options t " + 
+						"left join fetch q.topicList t " + 
+						"where q.status ='Approved' " + 
+						"and q.id = :skillId "+ 
+						" "),
+	}) 
 
 public class Question {
 	@Id
@@ -48,7 +65,14 @@ public class Question {
 	private User createdUser;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-	private List<Option> options;
+	private Set<Option> options;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable( name = "topic_question", 
+				joinColumns = { @JoinColumn(name = "tq_qu_id")},
+				inverseJoinColumns = { @JoinColumn(name = "tq_tp_id")})
+	
+	private Set<Topic> topicList; 
 
 	public int getId() {
 		return id;
@@ -98,12 +122,20 @@ public class Question {
 		this.questionAnswerType = questionAnswerType;
 	}
 
-	public List<Option> getOptions() {
+	public Set<Option> getOptions() {
 		return options;
 	}
 
-	public void setOptions(List<Option> options) {
+	public void setOptions(Set<Option> options) {
 		this.options = options;
+	}
+
+	public Set<Topic> getTopicList() {
+		return topicList;
+	}
+
+	public void setTopicList(Set<Topic> topicList) {
+		this.topicList = topicList;
 	}
 
 }

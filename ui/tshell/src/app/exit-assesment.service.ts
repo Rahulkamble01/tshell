@@ -15,8 +15,12 @@ const httpOptions = {
 })
 export class ExitAssesmentService {
   testurl = '/tshell/test';
+  questionidurl = '/tshell/question/allquestionid/1';
   constructor(private http: HttpClient) { }
 
+  getQuestionId(): Observable<any> {
+return this.http.get(this.questionidurl);
+  }
   test(): Observable<any> {
     return this.http.get(this.testurl);
   }

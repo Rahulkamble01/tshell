@@ -9,7 +9,8 @@ import com.cts.tshell.bean.Topic;
 
 public interface TopicRepository extends JpaRepository<Topic,Integer> {
 
-	List<Topic> getAllQuestionById(@Param("id")int id);
+	
+	// long[]  getAllQuestionById(@Param("id")int id);
 //	@Query(value = "select qu_id from question  "
 //			+ "left join topic_question on tq_qu_id=qu_id  "
 //			+ "left join topic on tp_id = tq_tp_id "

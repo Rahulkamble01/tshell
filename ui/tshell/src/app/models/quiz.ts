@@ -8,7 +8,7 @@ export class Quiz {
     active: string;
     description: string;
     config: QuizConfig;
-    topics: any;
+    topics: Topic[];
 
     constructor(data: any) {
         if (data) {
@@ -16,7 +16,7 @@ export class Quiz {
             this.name = data.name;
             this.description = data.description;
             this.active = data.active;
-           // this.config = new QuizConfig(data.config);
+            this.config = new QuizConfig(data.config);
             this.topics = [];
         for (const  topic of data) {
                 this.topics.push(new Topic(topic.topics));
