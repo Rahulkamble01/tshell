@@ -1,6 +1,5 @@
 package com.cts.tshell.bean;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -41,6 +40,7 @@ public class Skill {
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
+
 
 	public int getId() {
 		return id;
@@ -105,15 +105,6 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-
-	@Override
-	public String toString() {
-		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
-				+ ", testCount=" + testCount + ", description=" + description + ", image=" + Arrays.toString(image)
-				+ ", topics=" + topics + "]";
-	}
-	
-	
 
 	
 }

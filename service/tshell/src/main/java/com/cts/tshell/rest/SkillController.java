@@ -1,6 +1,7 @@
 package com.cts.tshell.rest;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Skill;
@@ -21,8 +23,8 @@ public class SkillController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
 	private SkillService skillService;
 	private TopicService topicService;
-	
-	
+
+
 	@Autowired
 	public void setTopicService(TopicService topicService) {
 		this.topicService = topicService;
@@ -39,6 +41,17 @@ public class SkillController {
 		LOGGER.info("All Skills Available" + skillService.getSkills());
 		LOGGER.info("Returning with Skills");
 		return skillService.getSkills();
+	}
+	
+	@RequestMapping(value = "/graph", method = RequestMethod.GET)
+	public Map<String, Object> graph(@RequestParam(value = "limit", required = false) Integer limit) {
+		System.out.println("Indsude+++++++++"+limit);
+		if(limit == null){
+			limit = 100;
+		}
+		System.out.println("Indsude+++++++++++"+limit);
+		System.out.println(skillService.graph(limit));
+		return skillService.graph(limit);
 	}
 	
 	@RequestMapping(value = "/updateSkillSearch", method = RequestMethod.POST)
