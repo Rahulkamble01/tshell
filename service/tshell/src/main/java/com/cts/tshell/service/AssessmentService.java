@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,11 @@ public class AssessmentService {
 	@Autowired
 	private AssessmentRepository assessmentRepository;
 	
+	@SuppressWarnings("deprecation")
 	@Transactional
 	public List<Assessment> findTop5AssessmentBasedSkill(int skillId){
 		LOGGER.debug("SkillId : "+skillId);
-		return assessmentRepository.findTop5BySkill(skillId);
+		return assessmentRepository.findTop5BySkill(skillId, new PageRequest(0, 5));
 	}
 
 }

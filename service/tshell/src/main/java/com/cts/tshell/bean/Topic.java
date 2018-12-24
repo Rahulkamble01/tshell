@@ -73,5 +73,12 @@ public class Topic {
 		this.questions = questions;
 	}
 
+	@Override
+	public String toString() {
+		return "Topic [id=" + id + ", name=" + name + "]";
+	}
+	
+	
+
 	
 }

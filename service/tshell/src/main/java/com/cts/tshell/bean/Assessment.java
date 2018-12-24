@@ -23,7 +23,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="Assessment.findTop5BySkill",query="select a from Assessment a "
 			+ "left join fetch a.skill s left join fetch "
 			+ "a.user u left join fetch u.role left join fetch a.assessmentQuestions "
-			+ "where s.id=:skillId order by a.score desc ")
+			+ "where s.id=:skillId order by a.score desc")
 })
 public class Assessment {	
 

@@ -14,6 +14,7 @@ export class SkillserviceService {
   getAllSkillUrl = 'tShell/skills';
   updateSearchUrl = 'tShell/updateSkillSearch';
   skillToppersUrl = 'tShell/top5list/';
+  updateSkillUrl = 'tShell/addSkill';
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +24,14 @@ export class SkillserviceService {
   updateSearch(json): Observable<any> {
     return this.http.post(this.updateSearchUrl, json, httpOptions);
   }
+
+  updateSkill(json): Observable<any> {
+    console.log(json);
+    return this.http.post(this.updateSkillUrl, json, httpOptions);
+  }
+
   getSkillTopper(id): Observable<any> {
+    console.log(this.skillToppersUrl + id);
     return this.http.get(this.skillToppersUrl + id);
   }
 }

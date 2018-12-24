@@ -26,7 +26,7 @@ export class SearchResultComponent implements OnInit {
   model: any;
   skills: any = [];
   allSkills: Skill[] = [];
-  top5: any[] = [];
+  toppers: any[] = [];
 
   topics: Array<Topic>;
 
@@ -45,6 +45,12 @@ export class SearchResultComponent implements OnInit {
       this.allSkills = data;
     });
   }
+
+  // getSkillToppers() {
+  //   this.skillService.getSkillTopper().subscribe(data => {
+  //     this.toppers = data
+  //   })
+  // }
 
   toggllingSkill(skill) {
     if (skill.active) {
@@ -66,8 +72,6 @@ export class SearchResultComponent implements OnInit {
     console.log(item);
     const modalRef = this.modalService.open(SkillmodalComponent);
     modalRef.componentInstance.item = item;
-
-    modalRef.componentInstance.name = item.name;
     modalRef.componentInstance.add = false;
   }
 
@@ -98,11 +102,11 @@ export class SearchResultComponent implements OnInit {
     this.skills = $event.item;
     this.name = $event.item.name;
     this.skillService.updateSearch($event.item).subscribe();
-    this.skillService.getSkillTopper($event.item.id).subscribe(data =>{
-      this.top5 = data;
-      console.log(this.top5);
+    this.skillService.getSkillTopper($event.item.id).subscribe(data => {
+      this.toppers = data;
     });
   }
+
 }
 
 
