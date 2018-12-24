@@ -8,15 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user_role")
+@Table(name = "user_role")
 public class Role {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ur_id")
+	@Column(name = "ur_id")
 	private int id;
-	
-	@Column(name="ur_role")
+
+	@Column(name = "ur_role")
 	private String name;
 
 	public int getId() {
@@ -34,5 +34,10 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + "]";
+	}
+
 }

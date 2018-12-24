@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
-
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,15 +37,21 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
+	@JoinColumn(name = "us_ur_id")
 	private Role role;
 
 	@Column(name = "us_emp_id")
 	private int employeeId;
-	
+
 	@Column(name = "us_image")
-	private byte image;
-	
+	private byte[] image;
+
+	@Column(name = "us_signup_date")
+	private Date signupDate;
+
+	@Column(name = "us_last_login_time")
+	private Time lastLoginTime;
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
@@ -52,6 +59,22 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public Date getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(Date signupDate) {
+		this.signupDate = signupDate;
+	}
+
+	public Time getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Time lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
 
 	public void setId(int id) {
@@ -98,11 +121,11 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -112,6 +135,13 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
+				+ lastLoginTime + ", skills=" + skills + "]";
+	}
 
 }

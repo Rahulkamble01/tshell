@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { LoginService } from 'src/app/login.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   message: string;
   status: boolean = false;
 
-  constructor(private router: Router, public service: AuthService) { }
+  constructor(private router: Router, public service: AuthService,
+    public loginService: LoginService) { }
 
   form = new FormGroup({
     employeeId: new FormControl(
@@ -42,29 +44,29 @@ export class LoginComponent implements OnInit {
   }
 
   check(employeeId: string, password: string) {
-    console.log("inside check");
-    if (employeeId == '123' && password == '123') {
-      console.log(employeeId);
-      console.log(password);
-      this.service.login();
-      this.router.navigate(['/authenticate']);
-    } else if (employeeId == '123456' && password == '123456') {
-      console.log(employeeId);
-      console.log(password);
-      this.service.learnerLogin();
-      /*   this.router.navigate(['/assessmenthistory']); */
-      this.router.navigate(['/dash']);
-      /*   this.router.navigate(['/learner-homepage']); */
-    } else if (employeeId == '654321' && password == '654321') {
-      console.log(employeeId);
-      console.log(password);
-      this.service.login();
-      this.router.navigate(['/admin-homepage']);
-    } else {
-      this.service.logout();
-      this.router.navigate(['/login']);
-    }
+    console.log("Inside check() function");
+    let json = JSON.stringify({
+      employeeId: employeeId,
+      password: password
+    });
+    console.log(json);
+    this.loginService.authenticateUser(json)
+      .subscribe(data => {
+        console.log(data)
+        console.log(data.user.role.name)
+        if (data.authenticated) {
+          this.service.login();
+          this.service.setRole(data.user.role.name);
+          this.router.navigate(['/dash']);
+        }
+        else {
+          return false;
+        }
+      }
+      );
   }
+
+
   sendMail() {
     console.log('This is check!');
     this.message = "Mail sent";

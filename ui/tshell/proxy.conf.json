@@ -1,6 +1,6 @@
 {
-  "/tshell/*": {
-    "target": "http://localhost:8080",
+  "/tShell/*": {
+    "target": "http://localhost:7070",
     "secure": false,
     "loglevel": "debug",
     "changeOrigin": true

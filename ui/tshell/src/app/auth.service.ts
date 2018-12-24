@@ -5,31 +5,31 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  isAdminLoggedIn = false;
-  isLearnerLoggedIn = false;
+  loggedIn = false;
+  role: string;
 
   constructor() { }
 
   login() {
     console.log("Inside auth service login()")
-    this.isAdminLoggedIn = true;
+    this.loggedIn = true;
   }
 
   logout() {
     console.log("Inside auth service logout()")
-    this.isAdminLoggedIn = false;
+    this.loggedIn = false;
   }
 
-  learnerLogin() {
+  getloggedIn() {
     console.log("Inside learner auth service login()")
-    this.isLearnerLoggedIn = true;
+    return this.loggedIn;
   }
 
-  learnerLogout() {
-    console.log("Inside learner auth service logout()")
-    this.isLearnerLoggedIn = false;
+  getRole() {
+    return this.role;
   }
 
-
-
+  setRole(role:string) {
+    this.role = role;
+  }
 }
