@@ -7,7 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.cts.tshell.bean.Question;
 
-public interface UserRepository extends JpaRepository<Question, Integer>{	
- List<Question> findQuestionById(@Param("id")int id);
+public interface QuestionRepository extends JpaRepository<Question, Integer>{	
+ List<Question> findTotalQuestionContributedById(@Param("employeeId")int employeeId);
+// List<Question> findQuestion();
 	
 }
