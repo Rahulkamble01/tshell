@@ -1,0 +1,26 @@
+label{
+       
+       font-weight: bolder;
+        font-size: larger;
+}
+#optionButton{
+     zoom:1.5;
+     color: #3498db;
+}
+#optionButton:hover{
+    cursor: pointer;
+    color: red;
+}
+.fa-pencil-alt{
+    color: #3498db;
+}
+.container{
+    margin-bottom:40px; 
+}
+
+
+.checkmark{
+    height: 25px;
+    width:25px;
+  
+}
