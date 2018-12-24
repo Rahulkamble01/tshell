@@ -19,9 +19,7 @@ export class AddskillComponent implements OnInit {
 
 
 
-  skills: Skill[] = [
-    { id: 1, name: 'Java' },
-  ];
+
 
   topics: Array<Topic>;
 
@@ -59,7 +57,7 @@ export class AddskillComponent implements OnInit {
   get topicName(): any { return this.addskillform.get('topicName'); }
   clearInput() { this.topicName.reset(); }
 
-  submitSkill(skillName) {
+  /* submitSkill(skillName) {
     if (skillName == this.skills[0].name) {
       alert("Skill already exists");
     }
@@ -68,7 +66,7 @@ export class AddskillComponent implements OnInit {
       alert("Skill Added");
 
     }
-  }
+  } */
 
 
   ngOnInit() {

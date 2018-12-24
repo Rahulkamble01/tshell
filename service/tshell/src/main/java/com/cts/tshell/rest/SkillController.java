@@ -5,8 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,16 +36,23 @@ public class SkillController {
 	
 	
 	@PostMapping("/addskill")
-	public void insertPost(@RequestBody Skill skill) {
-	/*	System.out.println(skill);
-		int topicid=skill.getTopics().getId();	
-		Topic topic = skillService.getTopic(topicid);
-		System.out.println(topic);
-		skill.setTopic(topic);
-		LOGGER.info("starting" );*/
+	public void insertneSkill(@RequestBody Skill skill) {
+		LOGGER.info("starting insertneSkills" );
+			
+		List<Topic> topics = skill.getTopics();
+		
+		
+		skill.setTopics(topics);
+		System.out.println(skill);
+		
+		
+	
 		skillService.saveSkill(skill);
+		
+		System.out.println(skill);
+	
 		LOGGER.debug("post details are" + skill);
-		LOGGER.info("end" );
+		LOGGER.info("ending insertneSkill" );
 		
 		
 	}

@@ -48,7 +48,31 @@
             </div>
           </div>
           <br>
+          <div class="row">
+            <div class="col-lg-4"> Description	</div>
+          <div class="col-lg-8"> 	 </div>
+        </div>
+        <div class="row">
+          
+          <div class="col-lg-12"> 
+              <input type="text" class="form-control" formControlName="skillDescription" placeholder="Enter Description">  
+          
 
+            
+              <div *ngIf="addskillform.get('skillDescription').touched && addskillform.get('skillDescription').invalid">
+                  <div *ngIf="addskillform.get('skillDescription').errors.required" class="aletry">* skill description Name is required</div>
+  
+                  <div *ngIf="addskillform.get('skillDescription').errors.maxlength" class="aletry"> skill Description must be maximun 400
+                    characters</div>
+                    <div *ngIf="addskillform.get('skillDescription').errors.minlength" class="aletry"> skill Description must be of 10
+                        characters</div>
+              
+                </div>
+
+            </div>
+
+        </div>
+        <br>
           <div class="row">
               <div class="col-lg-4"> Upload a Picture	</div>
             <div class="col-lg-8"> 	 </div>

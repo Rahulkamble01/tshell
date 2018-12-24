@@ -10,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.tshell.bean.Skill;
+import com.cts.tshell.bean.Topic;
 import com.cts.tshell.repository.SkillRepository;
 
 @Service
 public class SkillService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillService.class);
 	private SkillRepository skillRepository;
+	
+	/*@Autowired
+	private TopicRepository topicRepository;*/
 	
 	@Autowired
 	public void setSkillRepository(SkillRepository skillRepository) {
@@ -31,7 +35,16 @@ public class SkillService {
 	
 	@Transactional
 	public void saveSkill(Skill skill){
+		for(Topic topic:skill.getTopics()){
+			
+		}
 		skillRepository.save(skill);
+	}
+	
+	
+	@Transactional
+	public void getSkillByName(String stringName){
+		skillRepository.findByName(stringName);
 	}
 	
 	

@@ -21,8 +21,8 @@ export class SkillserviceService {
   }
 
 
-  addSkill(json): Observable<any> {
-    return this.http.post(this.addSkillurl, json, httpOptions); 
+  addSkill(skilly): Observable<any> {
+    return this.http.post(this.addSkillurl, skilly, httpOptions); 
    }
 
   

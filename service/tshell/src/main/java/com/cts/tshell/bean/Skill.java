@@ -1,5 +1,7 @@
 package com.cts.tshell.bean;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,7 +38,10 @@ public class Skill {
 	private String description;
 	
 	@Column(name = "sk_image")
-	private byte image;
+	private byte[] image;
+	
+	@Column(name="sk_creation_date")
+	private Date date_of_creation;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
@@ -89,11 +94,12 @@ public class Skill {
 		this.description = description;
 	}
 
-	public byte getImage() {
+	
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -103,6 +109,23 @@ public class Skill {
 
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
+	}
+	
+	
+
+	public Date getDate_of_creation() {
+		return date_of_creation;
+	}
+
+	public void setDate_of_creation(Date date_of_creation) {
+		this.date_of_creation = date_of_creation;
+	}
+
+	@Override
+	public String toString() {
+		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
+				+ ", testCount=" + testCount + ", description=" + description + ", image=" + Arrays.toString(image)
+				+ ", topics=" + topics + "]";
 	}
 
 	
