@@ -7,8 +7,17 @@ export class AuthService {
 
   loggedIn = false;
   role: string;
+  employeeId: any;
 
   constructor() { }
+
+  getEmployeeId() {
+    return this.employeeId;
+  }
+
+  setEmployeeId(employeeId:any) {
+    this.employeeId = employeeId;
+  }
 
   login() {
     console.log("Inside auth service login()")
@@ -20,16 +29,12 @@ export class AuthService {
     this.loggedIn = false;
   }
 
-  getloggedIn() {
-    console.log("Inside learner auth service login()")
-    return this.loggedIn;
-  }
-
   getRole() {
     return this.role;
   }
 
-  setRole(role:string) {
+  setRole(role: string) {
     this.role = role;
   }
+
 }

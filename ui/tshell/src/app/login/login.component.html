@@ -1,3 +1,5 @@
+
+<div *ngIf="!error">
 <div class="container-fluid">
   <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
     <div data-dismiss="alert">Invalid Name or Password!!!</div>
@@ -116,4 +118,15 @@
 
 
   </div>
+
 </div>
+</div>
+
+
+<div *ngIf="error">
+  <div class="error-padding-top">
+      <div  class="no-data alert alert-danger"> 
+           System Error .Please  retry or contact Administrator
+      </div>
+  </div>
+</div> 
