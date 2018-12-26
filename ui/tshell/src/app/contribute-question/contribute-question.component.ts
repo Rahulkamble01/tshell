@@ -43,7 +43,7 @@ export class ContributeQuestionComponent implements OnInit {
     return this.questionForm.get('solution') as FormArray;
   }
   addOption() {
-    if (this.count < 4) {
+    if (this.count < 3) {
       this.options.push(this.fb.control(''));
       this.solution.push(this.fb.control(''));
       this.count++;

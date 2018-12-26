@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchExistingQuestionsService } from '../search-existing-questions.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormArray,FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search-existing-questions',
@@ -14,9 +14,9 @@ export class SearchExistingQuestionsComponent implements OnInit {
   ngOnInit() {
 
   }
-
-  /* questions:string="Which of the following are legal lines of Java code?, Which data type value is returned by all transcendental math functions?Which of these literals can be contained in float data type variable? What is the range of short data type in Java?";
-  option1:string="int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;";
+ 
+  questions:string="Which of the following are legal lines of Java code?, Which data type value is returned by all transcendental math functions?Which of these literals can be contained in float data type variable? What is the range of short data type in Java?";
+  option2:string="int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;";
   count=0;
   questionList:any;
   searchQuery:string;
@@ -41,20 +41,30 @@ export class SearchExistingQuestionsComponent implements OnInit {
       }
     )
   }
- */
+
+
+
+
+
+/* Add Option */
+
+  
+  count1 = 0;
   option: string;
   description: string = "description";
-
-
-
   option1 = {
     answer: true,
     question: {
-      id: 2,
+      id: 1,
     }
   };
 
 
+  optionForm = this.fb.group({
+    options: this.fb.array([
+     this.fb.control('')
+   ])
+ });
   addOption() {
     
     console.log('inside addOption()');
@@ -65,12 +75,32 @@ export class SearchExistingQuestionsComponent implements OnInit {
     this.service.addOption(JSON.stringify(this.option1)).subscribe(data => {
     console.log(data);
 
+    })
+  }
+  get options() {
+    return this.optionForm.get('options') as FormArray;
     }
-  )
 
+  addOptions() {
+    if(this.count<=4){
+    this.options.push(this.fb.control(''));
+    this.count++;
+  }
+}
+  removeOption(index) {
+    console.log("Removing option");
+    const optionControl = <FormArray>this.optionForm.controls['options'];
+    
+    // remove the chosen row
+    optionControl.removeAt(index);
+    this.count--;
+    console.log(this.count);
   }
 
 
+  
 
+
+ 
 }
 

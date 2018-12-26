@@ -1,8 +1,8 @@
 
+
+
 <div class="container-fluid reviewQuestionsContainer">
   <h1 class="revQuestionHeader">Review Questions</h1>
-
-
   <div class="row baseRow">
     <div class="col-12 col-sm-12 col-lg-6 mt-2 lhsCol">
       <div class="row">
@@ -44,34 +44,31 @@
       <div class="row mt-4" style="padding-right:16px;padding-left:16px;">
         <label>Options (Max 5)</label>&nbsp;
         <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" data-toggle="modal" data-target="#addOption" >
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus"> </i>
         </button>
 
 
          <!---saving the option  -->
-        <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
+              <div class="modal-content"><h5>Add Option</h5>
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"> 
                   <textarea style="height: 120px;" class="form-control"  id="exampleFormControlTextarea1" rows="3" [(ngModel)]="option"></textarea>
 
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-ts-primary"  (click)="addOption()" data-toggle="modal" data-target="#myModal"  >Save changes</button>
+                  <button type="button" class="btn btn-ts-primary" (click)="addOptions()" (click)="addOption()" data-toggle="modal" data-target="#myModal"  >Save changes</button>
                 </div>
               </div>
             </div>
-          </div>
-
-        
-      </div>
-
+          </div>  
+        </div>
 
      
 
@@ -81,6 +78,19 @@
         </div>
         <div class="col-8 col-sm-8 col-lg-8" >
           {{option}}
+          <form  [formGroup]="questionForm">
+              <div formArrayName="options">
+                  <h3>options</h3> 
+               <div *ngFor="let option of options.controls; let i=index">
+                  <span class="input-group-append">
+                    <textarea [formControlName]="i" class="form-control" name="options" [required]="'!options.valid'" rows="3" id="optionText">
+                      </textarea>
+                    <i class="far fa-trash-alt" (click)="removeOption(i)" id="optionButton"></i>
+                  </span>
+                </div>
+              </div>
+              </form>
+                
            <!--  int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;  -->
         </div>
 
@@ -99,7 +109,7 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"> 
                   <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="option"></textarea>
 
                 </div>
@@ -120,6 +130,8 @@
           <input type="checkbox">
         </div>
       </div>
+
+      
       <div class="row mt-2">
         <div class="col-1 col-sm-1 col-lg-1 text-center">
           <label>2.</label>
@@ -763,12 +775,6 @@
               </div>
           </div>
         </div>
-
-
-
-
-
-
 
       </div>
     </div>
