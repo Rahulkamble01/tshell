@@ -47,4 +47,13 @@ public class QuestionController {
 		LOGGER.info("END");
 		return questionList;
 	}
+
+	@GetMapping("/option/delete/{id}")
+	public void deleteOptionById(@PathVariable int id) {
+		LOGGER.info("start of deleteOptionById controller");
+		Option option = questionService.getOptionById(id);
+		questionService.deleteOption(option);
+		LOGGER.info("end of deleteOptionById controller");
+
+	}
 }

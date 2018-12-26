@@ -74,4 +74,19 @@ public class QuestionService {
 		return questionList;
 	}
 
+	@Transactional
+	public void deleteOption(Option option) {
+		LOGGER.info("start of delete Option");
+		optionRepository.delete(option);
+		LOGGER.debug(" (delete)Option By Id details are{}", option);
+		LOGGER.info("end of delete Option");
+	}
+
+	@Transactional
+	public Option getOptionById(int id) {
+		Option option = optionRepository.fetchOptionDetailsById(id);
+		LOGGER.debug(" Inside service......Option By Id details are{}", option);
+		return option;
+	}
+
 }
