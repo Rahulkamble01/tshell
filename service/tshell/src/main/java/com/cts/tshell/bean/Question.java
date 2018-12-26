@@ -9,12 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "question")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,14 +28,14 @@ public class Question {
 
 	@Column(name = "qu_question")
 	private String question;
-	
+
 	@Column(name = "qu_status")
 	private String status;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
 	private QuestionDifficultyLevel questionDifficultyLevel;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
 	private QuestionAnswerType questionAnswerType;
@@ -39,7 +44,6 @@ public class Question {
 	@JoinColumn(name = "qu_created_by_us_id")
 	private User createdUser;
 
-	
 	public int getId() {
 		return id;
 	}
@@ -86,8 +90,6 @@ public class Question {
 
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
-	}	
-	
-	
+	}
 
 }

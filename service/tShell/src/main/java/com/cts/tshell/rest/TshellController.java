@@ -16,15 +16,14 @@ public class TshellController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TshellController.class);
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorResponse> handleError(Exception ex) {
-		LOGGER.info("Start");
+	public ResponseEntity<ErrorResponse> handleError(Exception ex){
+		LOGGER.info("start");
 		ErrorResponse error = new ErrorResponse();
 		error.setTimestamp(ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT));
 		LOGGER.debug("error : {} ", error);
-		error.setReasonCode(HttpStatus.BAD_REQUEST.value());
-		// error.setErrorMessage(ex.getMessage());
-		error.setErrorMessage("System Error.Please Retry or Contact Administrator!!");
-		LOGGER.info("End");
-		return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
+		error.setReasonCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		//error.setErrorMessage(ex.getMessage());
+		error.setErrorMessage("System Error");
+		return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

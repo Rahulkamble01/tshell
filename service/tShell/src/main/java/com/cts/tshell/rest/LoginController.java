@@ -21,7 +21,7 @@ import com.cts.tshell.service.UserService;
 
 @ControllerAdvice
 @RestController
-public class LoginController extends TshellController{
+public class LoginController extends TshellController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
@@ -58,6 +58,7 @@ public class LoginController extends TshellController{
 			status.setUser(actualUser);
 		}
 		status.setAuthenticated(encryptedPassword.equals(actualPassword));
+		LOGGER.debug("Value of actualPassword: {} ", actualPassword);
 		LOGGER.debug("Value of status: {} ", status);
 		LOGGER.info("End");
 		return new ResponseEntity<AuthenticationStatus>(status, HttpStatus.OK);

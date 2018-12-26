@@ -1,5 +1,4 @@
 
-<div *ngIf="!error">
 <div class="container-fluid">
   <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
     <div data-dismiss="alert">Invalid Name or Password!!!</div>
@@ -20,8 +19,11 @@
             <div class="card-title" id="card1">Login</div>
 
           </div>
-          <div class="card-block" id="card2">
+          <div class="card-block" id="card2" >
             <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
+            <div *ngIf="error">
+              <app-error></app-error>
+            </div>
             <form [formGroup]="form">
               <div class="form-group">
                 <div class="col-lg-12">
@@ -120,13 +122,7 @@
   </div>
 
 </div>
-</div>
 
 
-<div *ngIf="error">
-  <div class="error-padding-top">
-      <div  class="no-data alert alert-danger"> 
-           System Error .Please  retry or contact Administrator
-      </div>
-  </div>
-</div> 
+
+
