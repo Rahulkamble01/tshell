@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TotalQuestionsService } from '../totalquestions.service';
+import { TotalQuestionsService } from '../totalQuestions.service';
 import { AuthService } from '../auth.service';
 
 @Component({

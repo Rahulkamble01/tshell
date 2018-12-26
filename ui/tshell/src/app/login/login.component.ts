@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
         if (data.authenticated) {
           this.service.login();
           this.service.setRole(data.user.role.name);
+          this.service.setEmployeeId(data.user.employeeId);
           this.router.navigate(['/dash']);
         }
         else {

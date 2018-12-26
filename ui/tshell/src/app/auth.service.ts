@@ -15,7 +15,7 @@ export class AuthService {
     return this.employeeId;
   }
 
-  setEmployeeId(employeeId) {
+  setEmployeeId(employeeId:any) {
     this.employeeId = employeeId;
   }
 
@@ -27,11 +27,6 @@ export class AuthService {
   logout() {
     console.log("Inside auth service logout()")
     this.loggedIn = false;
-  }
-
-  getloggedIn() {
-    console.log("Inside learner auth service login()")
-    return this.loggedIn;
   }
 
   getRole() {

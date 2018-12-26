@@ -29,7 +29,7 @@ import { QuestiongraphComponent } from './questiongraph/questiongraph.component'
 
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
+
   { path: 'search-skill', component: SearchSkillComponent },
   { path: 'reviewq', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },

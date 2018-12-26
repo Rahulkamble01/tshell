@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TotalQuestionsService {
+export class  TotalQuestionsService {
   url: string = "/tShell/question/contributed/";
 
   constructor(private http: HttpClient) { }
