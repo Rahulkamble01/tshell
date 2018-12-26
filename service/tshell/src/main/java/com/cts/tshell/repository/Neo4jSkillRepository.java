@@ -9,8 +9,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.cts.tshell.bean.NeoSkill;
 
-@RepositoryRestResource(collectionResourceRel = "skill", path = "skill")
-public interface Neo4jSkillRepository extends Neo4jRepository<NeoSkill, Integer>  {
+@RepositoryRestResource(collectionResourceRel = "neoSkill", path = "neoSkill")
+public interface Neo4jSkillRepository extends Neo4jRepository<NeoSkill, Long>  {
 
 	NeoSkill findByName(@Param("name")String name);
 	

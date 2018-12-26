@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
+import com.cts.tshell.converter.NeoSkillToSkill;
 import com.cts.tshell.service.SkillService;
 import com.cts.tshell.service.TopicService;
 
@@ -23,7 +24,12 @@ public class SkillController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
 	private SkillService skillService;
 	private TopicService topicService;
-
+	private NeoSkillToSkill neoSkillToSkill;
+	
+	@Autowired
+	public void setNeoSkillToSkill(NeoSkillToSkill neoSkillToSkill) {
+		this.neoSkillToSkill = neoSkillToSkill;
+	}
 
 	@Autowired
 	public void setTopicService(TopicService topicService) {
@@ -50,7 +56,7 @@ public class SkillController {
 			limit = 100;
 		}
 		System.out.println("Indsude+++++++++++"+limit);
-		System.out.println(skillService.graph(limit));
+//		System.out.println(skillService.graph(limit));
 		return skillService.graph(limit);
 	}
 	

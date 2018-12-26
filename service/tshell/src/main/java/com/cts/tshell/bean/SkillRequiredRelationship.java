@@ -14,30 +14,35 @@ public class SkillRequiredRelationship {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	private List<String> skillRequiredRelationships = new ArrayList<>();
 
 	
 	@StartNode
-	private Skill skill1;
+	private NeoSkill skill1;
 	
 	@EndNode
-	private Skill skill2;
+	private NeoSkill skill2;
 	
 	public SkillRequiredRelationship() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public SkillRequiredRelationship(Skill skill1, Skill skill2) {
+
+	public SkillRequiredRelationship(Long id, List<String> skillRequiredRelationships, NeoSkill skill1, NeoSkill skill2) {
+		super();
+		this.id = id;
+		this.skillRequiredRelationships = skillRequiredRelationships;
 		this.skill1 = skill1;
 		this.skill2 = skill2;
 	}
-	
-	public int getId() {
+
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -52,22 +57,22 @@ public class SkillRequiredRelationship {
 	}
 
 
-	public Skill getSkill1() {
+	public NeoSkill getSkill1() {
 		return skill1;
 	}
 
 
-	public void setSkill1(Skill skill1) {
+	public void setSkill1(NeoSkill skill1) {
 		this.skill1 = skill1;
 	}
 
 
-	public Skill getSkill2() {
+	public NeoSkill getSkill2() {
 		return skill2;
 	}
 
 
-	public void setSkill2(Skill skill2) {
+	public void setSkill2(NeoSkill skill2) {
 		this.skill2 = skill2;
 	}
 

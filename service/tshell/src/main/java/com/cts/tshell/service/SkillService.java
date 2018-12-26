@@ -26,13 +26,13 @@ public class SkillService {
 	private Neo4jSkillRepository neo4jSkillRepository;
 
 	@Autowired
-	public void setNeo4jSkillRepository(Neo4jSkillRepository neo4jSkillRepository) {
-		this.neo4jSkillRepository = neo4jSkillRepository;
-	}
-
-	@Autowired
 	public void setSkillRepository(SkillRepository skillRepository) {
 		this.skillRepository = skillRepository;
+	}
+	
+	@Autowired
+	public void setNeo4jSkillRepository(Neo4jSkillRepository neo4jSkillRepository) {
+		this.neo4jSkillRepository = neo4jSkillRepository;
 	}
 
 	@org.springframework.transaction.annotation.Transactional
@@ -82,7 +82,6 @@ public class SkillService {
 	@Transactional
 	public Map<String, Object> graph(int limit) {
 		System.out.println("sdfsd"+limit);
-		System.out.println("Hello\n" + neo4jSkillRepository.graph(limit));
 		Collection<NeoSkill> result = neo4jSkillRepository.graph(limit);
 		System.out.println("result "+result );
 		return toD3Format(result);
@@ -97,14 +96,11 @@ public class SkillService {
 		while (result.hasNext()) {
 			NeoSkill neoSkill = result.next();
 			System.out.println("NeoSkill "+neoSkill);
-			nodes.add(map("name", neoSkill.getName(), "label", "skill"));
+			nodes.add(map("name", neoSkill.getName(), "description", neoSkill.getDescription(), "image", neoSkill.getImage(), "active", neoSkill.getActive(), "createdOn", neoSkill.getCreatedOn()));
 			int target = i;
 			i++;
-			// for (Role role : movie.getRoles())
 			for (SkillRequiredRelationship relationship : neoSkill.getSkillRequiredRelationships()) {
-				// Map<String, Object> actor = map("title",
-				// role.getPerson().getName(), "label", "actor");
-				Map<String, Object> rSkill = map("name", relationship.getSkill2().getName(), "label", "skill");
+				Map<String, Object> rSkill = map("name", relationship.getSkill2().getName(), "description", relationship.getSkill2().getDescription(), "image", relationship.getSkill2().getImage(), "active", relationship.getSkill2().getActive(), "createdOn", relationship.getSkill2().getCreatedOn());
 				int source = nodes.indexOf(rSkill);
 				if (source == -1) {
 					nodes.add(rSkill);
@@ -116,11 +112,20 @@ public class SkillService {
 		return map("nodes", nodes, "links", rels);
 	}
 
-	@Transactional
 	private Map<String, Object> map(String key1, Object value1, String key2, Object value2) {
 		Map<String, Object> result = new HashMap<String, Object>(2);
 		result.put(key1, value1);
 		result.put(key2, value2);
+		return result;
+	}
+	
+	private Map<String, Object> map(String key1, Object value1, String key2, Object value2, String key3, Object value3, String key4, Object value4, String key5, Object value5) {
+		Map<String, Object> result = new HashMap<String, Object>(2);
+		result.put(key1, value1);
+		result.put(key2, value2);
+		result.put(key3, value3);
+		result.put(key4, value4);
+		result.put(key5, value5);
 		return result;
 	}
 	

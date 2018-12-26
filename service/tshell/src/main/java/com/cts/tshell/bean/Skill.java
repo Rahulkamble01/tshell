@@ -1,5 +1,6 @@
 package com.cts.tshell.bean;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,6 +38,9 @@ public class Skill {
 	
 	@Column(name = "sk_image")
 	private byte[] image;
+	
+	@Column(name = "sk_created_on")
+	private Date createdOn;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
@@ -105,6 +109,15 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+	
 
 	
 }
