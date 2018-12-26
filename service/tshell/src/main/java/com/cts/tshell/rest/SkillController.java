@@ -43,35 +43,44 @@ public class SkillController {
 	
 	
 	@PostMapping("/addskill")
-	public boolean insertneSkill(@RequestBody Skill skill) {
+	public int insertnewSkill(@RequestBody Skill skill) {
 		
-		LOGGER.info("starting insertneSkills" );
-		boolean addStatus;
-		addStatus=false;
-		List<Topic> topics = skill.getTopics();
-		LOGGER.debug("Recived skill from Browser: "+skill );
-		LOGGER.debug("Recived topics from Browser: "+topics );
+		LOGGER.info("starting insertnewSkills" );
 		
-		skillService.saveSkill(skill);
+		String skillName = skill.getName();
 		
-		Skill skill2 = skillService.getSkillByName(skill.getName());
+		Skill skill1=skillService.getSkillByName(skillName);
+		System.out.println("the skill we get isisisisisisisis : :"+skill1);
+		int addStatus;
 		
-		LOGGER.debug("Recived skill from sevice: "+skill2 );
+		
+		if(skill1!=null){
+			addStatus=1;
+		}
+		else{
+			List<Topic> topics = skill.getTopics();
+			LOGGER.debug("Recived skill from Browser: "+skill );
+			LOGGER.debug("Recived topics from Browser: "+topics );
+			
+			skillService.saveSkill(skill);
+			
+			Skill skill2 = skillService.getSkillByName(skill.getName());
+			
+			LOGGER.debug("Recived skill from sevice: "+skill2 );
 
-		for(Topic topic:topics){
-			topic.setSkill(skill2);
-			topicService.saveTopic(topic);
+			for(Topic topic:topics){
+				topic.setSkill(skill2);
+				topicService.saveTopic(topic);
+			}
+			
+			skill.setTopics(topics);
+		
+			addStatus=2;
+			LOGGER.info("ending inserting Skill" );
+		
 		}
 		
-		skill.setTopics(topics);
-	
-		addStatus=true;
-		LOGGER.info("ending inserting Skill" );
-		return addStatus;
-		
-	
-		
-		
+		return addStatus;	
 	}
 	
 	

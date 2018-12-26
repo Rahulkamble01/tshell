@@ -3,7 +3,7 @@ import { Skill } from '../skill';
 import { Topic } from '../topic';
 import { SkillserviceService } from '../skillservice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -16,8 +16,18 @@ export class SkillmodalComponent implements OnInit {
   add: boolean;
   item: any;
   json: any;
+  status: number = 0;
   expression: any;
   @Input() name: any;
+
+  topics: Array<Topic> = [];
+  allskills: any;
+  sameSkillName: boolean = false;
+  /*   success = false;
+    fail= false;
+     */
+
+
   skills: any = [
     {
       id: 1,
@@ -59,14 +69,9 @@ export class SkillmodalComponent implements OnInit {
 
 
 
-  topics: Array<Topic> = [];
-  allskills: any;
-  sameSkillName: boolean = false;
-  success = false;
-  fail= false;
-  
 
-  constructor(public activeModal: NgbActiveModal, private SkillService: SkillserviceService) { }
+
+  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService) { }
 
   addskillform = new FormGroup
     ({
@@ -107,54 +112,79 @@ export class SkillmodalComponent implements OnInit {
     this.topics.splice(index, 1);
   }
 
-  get topicName(): any { return this.addskillform.get('topicName'); }
-  clearInput() { this.topicName.reset(); }
+  get topicName(): any {
+    return this.addskillform.get('topicName');
+  }
 
- 
+  clearInput() {
+    this.topicName.reset();
+  }
+
+  clearAllInput() {
+    this.topics=[];
+  }
+
 
   addSkill() {
-    
-  
-    for (let i = 0; i < this.allskills.length; i++) {
+
+    console.log(this.status);
+
+    /* for (let i = 0; i < this.allskills.length; i++) {
       let userSkillname = this.addskillform.controls['name'].value;
       let dataSkillname = this.allskills[i].name;
       if (userSkillname.toUpperCase() == dataSkillname.toUpperCase()) {
         this.sameSkillName = true;
       }
-    }
+    } */
 
-    if (this.sameSkillName != true) {
+   /*  if (this.sameSkillName != true) { */
       const skill = new Skill(this.addskillform.controls['name'].value, "Active", this.addskillform.controls['description'].value, this.topics, new Date());
-      console.log(this.sameSkillName);
+     /*  console.log(this.sameSkillName); */
       console.log(skill);
       this.SkillService.addSkill(skill).subscribe(
         data => {
           console.log(data);
-         this.success=data;
+          this.status = data;
+
+          console.log(this.status);
+          /*******calling the service to fetch new list of skills**********/
+          this.SkillService.getAll().subscribe(
+            data => {
+              this.allskills = data;
+              console.log(this.allskills);
+            }
+          );
+          /************************************************************* */
+          if(this.status==2){
+            this.addskillform.reset();
+            this.clearAllInput(); 
+          }
+          
         }
       );
-    }
+   /*  }
     else {
 
-      this.fail=true;
+      this.status = 3;
+
+      console.log(this.status);
       console.log("Skill already exists");
-   
-    }
+      this.sameSkillName = false;
+
+    } */
 
   }
 
 
 
-
-
   ngOnInit() {
+
     this.SkillService.getAll().subscribe(
       data => {
         this.allskills = data;
         console.log(this.allskills);
       }
     );
-
   }
 
 }
