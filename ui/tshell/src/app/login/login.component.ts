@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   message: string;
   status: boolean = false;
 
+
   constructor(private router: Router, public service: AuthService) { }
 
   form = new FormGroup({
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit {
     } else if (employeeId == '123456' && password == '123456') {
       console.log(employeeId);
       console.log(password);
-      this.service.learnerLogin();
+      this.service.login();
       /*   this.router.navigate(['/assessmenthistory']); */
       this.router.navigate(['/dash']);
       /*   this.router.navigate(['/learner-homepage']); */
@@ -73,4 +74,5 @@ export class LoginComponent implements OnInit {
   close() {
     this.message = "";
   }
+
 }
