@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="assessment_question")
 public class AssessmentQuestion {	
@@ -25,10 +27,12 @@ public class AssessmentQuestion {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="aq_as_id")
+	@JsonIgnore
 	private Assessment assessment;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="aq_qu_id")
+	@JsonIgnore
 	private Question question;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion")

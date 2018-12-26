@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +18,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "assessment")
+@NamedQueries({ @NamedQuery(name = "Assessment.findUserHistory", query = "select distinct a from Assessment a " 
+		+ " left join a.skill " + " left join a.user u " 
+		+ " left join u.role " + " left join a.assessmentQuestions q " 
+		+ " left join q.assessmentQuestionOption o "+ " left join o.assessmentOption "
+		+ " where u.employeeId=:employeeId") })
 
 public class Assessment {	
 
