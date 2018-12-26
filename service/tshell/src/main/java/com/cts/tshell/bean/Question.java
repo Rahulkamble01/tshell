@@ -15,9 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "question")
 @NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
-		+ "left join fetch q.questionDifficultyLevel " 
-		+ "left join fetch q.questionAnswerType " + " left join fetch q.createdUser "
-		+ "where q.id=:questionId")
+		+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
+		+ " left join fetch q.createdUser " + "where q.id=:questionId")
 public class Question {
 
 	@Id

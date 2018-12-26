@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "`option`")
 public class Option {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +22,12 @@ public class Option {
 
 	@Column(name = "op_description")
 	private String description;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="op_qu_id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "op_qu_id")
 	private Question question;
-	
-	@Column(name="op_is_correct")
+
+	@Column(name = "op_is_correct")
 	private boolean answer;
 
 	public int getId() {
@@ -63,4 +62,5 @@ public class Option {
 		this.answer = answer;
 	}
 
+	
 }

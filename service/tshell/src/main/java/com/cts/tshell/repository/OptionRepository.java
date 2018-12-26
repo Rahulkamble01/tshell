@@ -7,5 +7,6 @@ import com.cts.tshell.bean.Option;
 
 @Repository
 public interface OptionRepository extends JpaRepository<Option, Integer> {
+	
 
 }
