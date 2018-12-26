@@ -21,9 +21,9 @@ public class TshellController {
 		ErrorResponse error = new ErrorResponse();
 		error.setTimestamp(ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT));
 		LOGGER.debug("error : {} ", error);
-		error.setReasonCode(HttpStatus.BAD_REQUEST.value());
+		error.setReasonCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		//error.setErrorMessage(ex.getMessage());
 		error.setErrorMessage("System Error");
-		return new ResponseEntity<ErrorResponse>(error, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

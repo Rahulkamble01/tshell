@@ -1,5 +1,6 @@
 package com.cts.tshell.bean;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -97,14 +98,6 @@ public class User {
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-
-	// public byte getImage() {
-	// return image;
-	// }
-	//
-	// public void setImage(byte image) {
-	// this.image = image;
-	// }
 
 	public byte[] getImage() {
 		return image;

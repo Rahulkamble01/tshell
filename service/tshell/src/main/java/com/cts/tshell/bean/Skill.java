@@ -1,5 +1,6 @@
 package com.cts.tshell.bean;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -107,6 +108,8 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
+
+	
 
 	
 }

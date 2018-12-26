@@ -15,18 +15,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "question")
-
-@NamedQueries({
-		@NamedQuery(
-				name = "Question.findTotalQuestionContributedById", 
-				query = 
-				" select count(q.id),s.name from Question q "
-				+ " join q.createdUser u " 
-				+ " join u.skills s " 
-				+ " join s.topics t join t.questions "
-				+ " where u.employeeId = :employeeId and t.id=q.id  group by s.name ")
-//		@NamedQuery(name = "Question.findQuestion", query = "select count(q.id) from Question q")
-		})
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

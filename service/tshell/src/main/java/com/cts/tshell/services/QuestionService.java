@@ -16,20 +16,14 @@ public class QuestionService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionService.class);
 	@Autowired
 	private QuestionRepository questionRepository;
-	
+
 	@Transactional
 	public List<Question> findTotalQuestionContributed(int employeeId) {
 		LOGGER.info("START");
-		 List<Question> question =questionRepository.findTotalQuestionContributedById(employeeId);
-		 LOGGER.debug("list of total no of question for each subject contributed {} ", question);
-		 LOGGER.info("END");
+		List<Question> question = questionRepository.findTotalQuestionContributedById(employeeId);
+		LOGGER.debug("list of total no of question for each subject contributed : {} ", question);
+		LOGGER.info("END");
 		return question;
-		
+
 	}
-//	@Transactional
-//	public List<Question> findQuestion() {
-//		LOGGER.info("id");
-//		return userRepository.findQuestion();
-//		
-//	}
 }
