@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TotalQuestionsService {
-  url: string = "/tShell-webservice/rest/user/get/";
+  url: string = "/tShell/question/contributed/";
 
   constructor(private http: HttpClient) { }
 
-  totalquestion(id): Observable<any> {
-    console.log(id);
-    return this.http.get<any>(this.url + 1);
+  totalquestion(employeeId): Observable<any> {
+    console.log(employeeId);
+    return this.http.get<any>(this.url + employeeId);
   }
+
 }

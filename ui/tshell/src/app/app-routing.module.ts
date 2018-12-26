@@ -6,7 +6,6 @@ import { ContributeQuestionComponent } from './contribute-question/contribute-qu
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
-;
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
@@ -26,24 +25,21 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
- 
   { path: 'search-skill', component: SearchSkillComponent },
-  
   { path: 'reviewq', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent }, 
-
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   {path:'dash', component:DashboardComponent},
- 
   {path: "recentSkills", component: RecentlyAddedSkillsComponent},
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
@@ -57,7 +53,8 @@ const routes: Routes = [
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
   { path: "skills", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
-  { path: "skillpage", component: SkillpageComponent }
+  { path: "skillpage", component: SkillpageComponent },
+  { path: "graph",component:QuestiongraphComponent}
 ];
 
 

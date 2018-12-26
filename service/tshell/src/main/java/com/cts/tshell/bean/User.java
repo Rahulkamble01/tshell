@@ -1,11 +1,9 @@
 package com.cts.tshell.bean;
 
 
+
 import java.sql.Time;
 import java.util.Date;
-
-
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,14 +19,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-
-
 @Entity
 @Table(name = "user")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
 public class User {
 
 	@Id
@@ -56,13 +49,12 @@ public class User {
 	private byte[] image;
 
 
+
 	@Column(name = "us_signup_date")
 	private Date signupDate;
 
 	@Column(name = "us_last_login_time")
 	private Time lastLoginTime;
-
-
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -148,15 +140,6 @@ public class User {
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
-
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
-				+ lastLoginTime + ", skills=" + skills + "]";
-	}
-
 
 
 }
