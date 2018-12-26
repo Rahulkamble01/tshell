@@ -14,7 +14,9 @@ import javax.persistence.Table;
 
 @Entity
 
-@NamedQuery(name="Skill.fetchTopSearchedSkills",query="select name, searchCount from Skill order by searchCount desc")
+@NamedQuery(
+		name = "Skill.fetchTopSearchedSkills", 
+		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
 @Table(name = "skill")
 public class Skill {
 
@@ -33,15 +35,15 @@ public class Skill {
 	private String active;
 
 	@Column(name = "sk_test_count")
-	private int testCount;	
-	
+	private int testCount;
+
 	@Column(name = "sk_description")
 	private String description;
-	
+
 	@Column(name = "sk_image")
 	private String image;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
 	private List<Topic> topics;
 
 	public int getId() {
@@ -108,5 +110,4 @@ public class Skill {
 		this.topics = topics;
 	}
 
-	
 }
