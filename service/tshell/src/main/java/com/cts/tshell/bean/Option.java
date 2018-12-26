@@ -23,7 +23,7 @@ public class Option {
 	@Column(name = "op_description")
 	private String description;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "op_qu_id")
 	private Question question;
 

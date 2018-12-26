@@ -29,9 +29,9 @@ public class QuestionController {
 	public void addOption(@RequestBody Option option) {
 		LOGGER.info("start");
 		LOGGER.debug("Option: {}", option);
-		LOGGER.debug("Save Successful.");
+		questionService.saveOption(option);
 		LOGGER.info("end");
-
 	}
+
 
 }
