@@ -1,3 +1,4 @@
+
 <div class="container-fluid reviewQuestionsContainer">
   <h1 class="revQuestionHeader">Review Questions</h1>
 
@@ -24,7 +25,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-ts-primary">Save changes</button>
+                  <button type="button" class="btn btn-ts-primary"  >Save changes</button>
                 </div>
               </div>
             </div>
@@ -46,6 +47,8 @@
           <i class="fas fa-plus"></i>
         </button>
 
+
+         <!---saving the option  -->
         <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
@@ -55,12 +58,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea style="height: 120px;" class="form-control"  id="exampleFormControlTextarea1" rows="3" [(ngModel)]="option"></textarea>
 
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-ts-primary">Save changes</button>
+                  <button type="button" class="btn btn-ts-primary"  (click)="addOption()" data-toggle="modal" data-target="#myModal"  >Save changes</button>
                 </div>
               </div>
             </div>
@@ -69,14 +72,21 @@
         
       </div>
 
+
+     
+
       <div class="row mt-2">
         <div class="col-1 col-sm-1 col-lg-1 text-center">
           <label>1.</label>
         </div>
-        <div class="col-8 col-sm-8 col-lg-8">
-          int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;
+        <div class="col-8 col-sm-8 col-lg-8" >
+          {{option}}
+           <!--  int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;  -->
         </div>
-        <div class="col-1 col-sm-1 col-lg-1">
+
+        
+
+       <div class="col-1 col-sm-1 col-lg-1">
           <a href="#" data-toggle="modal" data-target="#editOption1">
             <i class="fas fa-pencil-alt"></i>
           </a>
@@ -90,12 +100,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="option1"></textarea>
+                  <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="option"></textarea>
 
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-ts-primary">Save changes</button>
+                  <button type="button" class="btn btn-ts-primary" >Save changes</button>
                 </div>
               </div>
             </div>
