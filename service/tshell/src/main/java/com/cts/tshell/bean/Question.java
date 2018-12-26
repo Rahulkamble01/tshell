@@ -1,6 +1,5 @@
 package com.cts.tshell.bean;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,13 +20,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "question")
 
 @NamedQueries({
 	@NamedQuery(name = "Question.fetchAllQuestion", 
-				query = "select q from Question q " +
+				query = "select distinct q from Question q " +
 						"left join fetch q.questionDifficultyLevel t " + 
 						"left join fetch q.questionAnswerType t " + 
 						"left join fetch q.options t " + 
@@ -71,7 +71,6 @@ public class Question {
 	@JoinTable( name = "topic_question", 
 				joinColumns = { @JoinColumn(name = "tq_qu_id")},
 				inverseJoinColumns = { @JoinColumn(name = "tq_tp_id")})
-	
 	private Set<Topic> topicList; 
 
 	public int getId() {

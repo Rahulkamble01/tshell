@@ -30,6 +30,8 @@ public class AssessmentQuestionOption {
 	
 	@Column(name="ao_is_selected")
 	private boolean selected;
+	
+	
 
 	public int getId() {
 		return id;

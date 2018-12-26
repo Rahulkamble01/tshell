@@ -14,16 +14,27 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ExitAssesmentService {
-  testurl = '/tshell/test';
-  questionidurl = '/tshell/question/allquestionid/1';
+  testurl = '/tShell/test';
+  allQuestionIdURL = '/tShell/question/allquestionid/';
+  questionSetUrl = '/tShell/question/all';
+  startAssesmentUrl =  '/tShell/start/assessment';
   constructor(private http: HttpClient) { }
 
-  getQuestionId(): Observable<any> {
-return this.http.get(this.questionidurl);
+  getQuestionId(id): Observable<any> {
+return this.http.get(this.allQuestionIdURL + id);
   }
-  test(): Observable<any> {
-    return this.http.get(this.testurl);
+
+  // test(): Observable<any> {
+  //   return this.http.get(this.testurl);
+  // }
+  getQuestionSet(json): Observable<any> {
+    return this.http.post( this.questionSetUrl, json, httpOptions );
   }
+
+  startAssessment(json): Observable<any> {
+    return this.http.post( this.startAssesmentUrl, json, httpOptions );
+  }
+
   get(url: string) {
     console.log(url);
     return this.http.get(url);

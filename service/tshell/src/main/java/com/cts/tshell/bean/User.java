@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -115,6 +116,13 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", skills=" + skills + "]";
 	}	
 
+	
 }

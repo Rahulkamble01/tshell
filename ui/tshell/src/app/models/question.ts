@@ -1,7 +1,7 @@
 import { Option } from './option';
 import { QuestionDifficultyLevel } from './question-difficulty-level';
 import { QuestionAnswerType } from './question-answer-type';
-
+import { Topic } from './topic';
 export class Question {
     id: number;
     question: string;
@@ -9,6 +9,7 @@ export class Question {
     level: QuestionDifficultyLevel;
     answerType: QuestionAnswerType;
     options: Option[];
+    topicList: Topic[];
     answered: boolean;
 
     constructor(data: any) {
@@ -19,10 +20,12 @@ export class Question {
         this.level = new QuestionDifficultyLevel(data.questionDifficultyLevel);
         this.answerType = new QuestionAnswerType(data.questionAnswerType);
         this.options = [];
-      for ( let i = 0 ; i < data.length; i ++) {
-            for (const o of data[i]) {
-                this.options.push(new Option(o.options));
-            }
-        }
+        data.options.forEach(o => {
+            this.options.push(new Option(o));
+        });
+        this.topicList = [];
+        data.topicList.forEach(t => {
+            this.topicList.push(new Topic(t));
+        });
     }
 }

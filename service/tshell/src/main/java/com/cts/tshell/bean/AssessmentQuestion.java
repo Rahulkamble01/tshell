@@ -33,6 +33,9 @@ public class AssessmentQuestion {
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion")
 	private List<AssessmentQuestionOption> assessmentQuestionOption;
+	
+	@Column(name="aq_is_correct")
+	private boolean correct;
 
 	public int getId() {
 		return id;
@@ -65,4 +68,13 @@ public class AssessmentQuestion {
 	public void setAssessmentQuestionOption(List<AssessmentQuestionOption> assessmentQuestionOption) {
 		this.assessmentQuestionOption = assessmentQuestionOption;
 	}
+
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+	
 }

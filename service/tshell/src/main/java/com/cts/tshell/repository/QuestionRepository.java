@@ -11,6 +11,8 @@ import com.cts.tshell.bean.Question;
 public interface QuestionRepository extends JpaRepository<Question,Integer> {
 
 	List<Question> fetchAllQuestion(@Param("skillId")int skillId);
+	Question findQuestionById(int id);
+	
 	
 	@Query(value = "select qu_id from question  "+
 			  "left join topic_question on tq_qu_id = qu_id  "+

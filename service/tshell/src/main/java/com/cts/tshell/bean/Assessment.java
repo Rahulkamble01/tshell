@@ -2,6 +2,7 @@ package com.cts.tshell.bean;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,13 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "assessment")
@@ -37,6 +35,9 @@ public class Assessment {
 	@Column(name="as_score")
 	private float score;
 	
+	@Column(name="as_end_time")
+	private Date endTime;
+	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="as_sk_id")
 	private Skill skill;
@@ -53,6 +54,13 @@ public class Assessment {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessment")
 	private List<AssessmentQuestion> assessmentQuestions;
 
+	@Transient
+	private int skillId;
+	@Transient
+	private int userId;
+	@Transient
+	private int[] questionIds;
+	
 	public int getId() {
 		return id;
 	}
@@ -109,4 +117,38 @@ public class Assessment {
 		this.assessmentQuestions = assessmentQuestions;
 	}
 
+	
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public int getSkillId() {
+		return skillId;
+	}
+
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int[] getQuestionIds() {
+		return questionIds;
+	}
+
+	public void setQuestionIds(int[] questionIds) {
+		this.questionIds = questionIds;
+	}
+
+	
 }

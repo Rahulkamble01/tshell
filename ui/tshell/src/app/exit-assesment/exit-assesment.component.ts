@@ -17,7 +17,15 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     [{ "id": 1, "name": "Java", "searchCount": 25, "active": "yes", "testCount": 10, "description": "Java Skill ", "image": "a", "topics": [{ "id": 1, "name": "Inheritance", "questions": [{ "id": 1, "question": "Which of the following is true about inheritance in Java?", "status": "Approved", "questionDifficultyLevel": { "id": 3, "description": "Hard" }, "questionAnswerType": { "id": 2, "type": "Multiple" }, "options": [{ "id": 7, "description": "Private methods are final.", "answer": true }, { "id": 8, "description": "Protected members are accessible within a package and ", "answer": true }, { "id": 9, "description": "Protected methods are final.", "answer": false }, { "id": 10, "description": "We cannot override private methods. ", "answer": true }] }, { "id": 2, "question": "A class member declared protected becomes a member of subclass of which type?", "status": "Approved", "questionDifficultyLevel": { "id": 2, "description": "Meduim" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 11, "description": " public member", "answer": false }, { "id": 12, "description": " private member", "answer": true }, { "id": 13, "description": "protected member", "answer": false }, { "id": 14, "description": "Static Member", "answer": false }] }, { "id": 3, "question": "Which of this keyword must be used to inherit a class?", "status": "Approved", "questionDifficultyLevel": { "id": 1, "description": "Easy" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 15, "description": "super", "answer": false }, { "id": 16, "description": "this", "answer": false }, { "id": 17, "description": "extend", "answer": false }, { "id": 18, "description": "extends", "answer": true }] }] }, { "id": 2, "name": "Abstraction", "questions": [] }, { "id": 3, "name": "Exception Handling", "questions": [{ "id": 1, "question": "Which of the following is true about inheritance in Java?", "status": "Approved", "questionDifficultyLevel": { "id": 3, "description": "Hard" }, "questionAnswerType": { "id": 2, "type": "Multiple" }, "options": [{ "id": 7, "description": "Private methods are final.", "answer": true }, { "id": 8, "description": "Protected members are accessible within a package and ", "answer": true }, { "id": 9, "description": "Protected methods are final.", "answer": false }, { "id": 10, "description": "We cannot override private methods. ", "answer": true }] }, { "id": 2, "question": "A class member declared protected becomes a member of subclass of which type?", "status": "Approved", "questionDifficultyLevel": { "id": 2, "description": "Meduim" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 11, "description": " public member", "answer": false }, { "id": 12, "description": " private member", "answer": true }, { "id": 13, "description": "protected member", "answer": false }, { "id": 14, "description": "Static Member", "answer": false }] }, { "id": 3, "question": "Which of this keyword must be used to inherit a class?", "status": "Approved", "questionDifficultyLevel": { "id": 1, "description": "Easy" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 15, "description": "super", "answer": false }, { "id": 16, "description": "this", "answer": false }, { "id": 17, "description": "extend", "answer": false }, { "id": 18, "description": "extends", "answer": true }] }] }, { "id": 4, "name": "Arrays", "questions": [] }] }]
     ;
   quizes: any[];
-  quiz: Quiz = new Quiz(this.json);
+  questionId: any;
+  result: any;
+  taken: any;
+  len: any;
+  questionSet: any;
+  samplearray: any = [];
+  startAssesmentJson: any;
+  assesmentDetails: any;
+  quiz: Quiz = new Quiz(null);
   // topics: Topic = new Topic(null);
 
   topics: any = [];
@@ -60,10 +68,24 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   type = 'checkbox';
 
   // tslint:disable-next-line:max-line-length
-  constructor(private quizService: ExitAssesmentService, private router: Router, private elementRef: ElementRef, private renderer: Renderer2) { }
+  constructor(private quizService: ExitAssesmentService, private router: Router, private elementRef: ElementRef, private renderer: Renderer2, private assesmentService: ExitAssesmentService) { }
 
   ngOnInit() {
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', 'white');
+    this.startAssesmentJson = JSON.stringify({
+      date: Date.now(),
+      type: 'exit',
+      skillId: 1,
+      userId: 729703,
+    });
+    console.log(this.startAssesmentJson);
+    this.assesmentService.startAssessment(this.startAssesmentJson).subscribe(d => {
+      this.assesmentDetails = d;
+      console.log(this.assesmentDetails);
+      //  this.loadQuiz(this.questionSet);
 
+    });
+/*
     console.log('JSON DATA IS :');
     console.log(this.json);
     for (const topics of this.json) {
@@ -89,6 +111,21 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     }
     console.log('This.question DATA IS :');
     console.log(this.question);
+*/
+    this.assesmentService.getQuestionId(1).subscribe(data => {
+      this.questionId = data;
+      console.log(this.questionId);
+      this.getRandom(this.questionId, 40);
+      console.log(this.result);
+      this.assesmentService.getQuestionSet(this.result).subscribe(d => {
+        this.questionSet = d;
+        console.log(this.questionSet);
+      this.loadQuiz(this.questionSet);
+
+      });
+
+    });
+
 
 
     /*    $(document).ready(function () {
@@ -96,11 +133,11 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
         });*/
 
 
-    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', 'white');
+
     // this.quizes = this.quizService.getAll();
     // this.quizName = this.quizes[0].id;
     // this.loadQuiz(this.quizName);
-    this.loadQuiz(this.json);
+   // this.loadQuiz(this.json);
 
   }
   /****** Using service******************
@@ -119,15 +156,17 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
 
   // Without Service
   loadQuiz(json) {
-    json.forEach(res => {
+   // json.forEach(res => {
       console.log('length of json is' + json.length);
       // console.log('length of topics.question is' + this.topics.questions.length);
-      this.quiz = new Quiz(res);
-      this.pager.count = 40;
+      this.quiz = new Quiz(json);
+      this.pager.count = this.quiz.questions.length;
+      console.log('length of json is' + this.pager.count);
+      console.log(this.quiz.questions);
       this.startTime = new Date();
       this.timer = setInterval(() => { this.tick(); }, 1000);
-      this.duration = this.parseTime(this.config.duration);
-    });
+      this.duration = this.parseTime(1200);
+  //  });
     this.mode = 'quiz';
     // console.log(this.quiz);
     // console.log(this.quiz.topics);
@@ -151,19 +190,33 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     return `${mins}:${secs}`;
   }
 
-  /*   get filteredQuestions() {
- 
-    return (this.topics.questions) ?
-      this.topics.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
-  }*/
+  getRandom(arr, n) {
+    this.result = new Array(n),
+      this.len = arr.length,
+      this.taken = new Array(this.len);
+    if (n > this.len) {
+      throw new RangeError("getRandom: more elements taken than available");
+    }
+    while (n--) {
+      const x = Math.floor(Math.random() * this.len);
+      this.result[n] = arr[x in this.taken ? this.taken[x] : x];
+      this.taken[x] = --this.len in this.taken ? this.taken[this.len] : this.len;
+    }
+    return this.result;
+  }
+
+  get filteredQuestions() {
+    return (this.quiz.questions) ?
+      this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+  }
   /*
     get filteredQuestions() {
       return (this.questions) ?
         this.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
     }*/
-  /*
+  
     onSelect(question: Question, option: Option) {
-      if (question.questionTypeId === 1) {
+      if (question.answerType.id === 1 || question.answerType.id === 2) {
         question.options.forEach((x) => {
           if (x.id !== option.id) {
             console.log('option ' + option.id + ' x.id : ' + x.id);
@@ -172,30 +225,25 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
           }
         });
       }
-  
+
       if (this.config.autoMove) {
         this.goTo(this.pager.index + 1);
       }
     }
-  */
+  
   goTo(index: number) {
     if (index >= 0 && index < this.pager.count) {
       this.pager.index = index;
       this.mode = 'quiz';
     }
   }
-  /*
-  
     isAnswered(question: Question) {
-      return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+           return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
     };
-  
-  
-  
     isCorrect(question: Question) {
-      return question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
+      return question.options.every(x => x.selected === x.answer) ? 'correct' : 'wrong';
     };
-  */
+
   /* onSubmit() {
      let answers = [];
      this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));

@@ -25,7 +25,7 @@
     <h3 class=" border-bottom border-dark pb-4 text-center "> Question {{pager.index + 1}} of {{pager.count}}. </h3>
     <div class="p-1 scroll-questions" id="style-1">
       <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
-      <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of questions.question; let index = index;">
+      <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
         <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
           (click)="goTo(index)">{{index + 1}}</button>
       </span>
@@ -75,10 +75,10 @@
             </div>
 
 
-            <div *ngFor="let question of question;">
+            <div *ngFor="let question of filteredQuestions;">
               <div class="quest pt-1">
                 <span class="question-legends btn-danger">Q{{pager.index + 1}}</span>
-                <div class="quest pl-3">{{question}}</div>
+                <div class="quest pl-3">{{question.question}}</div>
               </div>
 
               <!--********************************       DISPLAYING OPTIONS  *****************************-->
@@ -87,7 +87,7 @@
               <div class="options-div pt-4">
                 <span class="answer-legends btn-success">A. </span>
                 <div class="example-radio-group ">
-                  <div class=" option-container " *ngFor="let option of questions.options">
+                  <div class=" option-container " *ngFor="let option of question.options">
                     <!-- <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="favoriteSeason"  [(ngModel)]="option.selected" (change)="onSelect(question, option);" > <label [attr.for]="option.id">{{option.name}}</label> -->
 
                     <!-- <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"   (change)="onSelect(question, option);" /><label for="{{option.id}}" >{{option.name}}</label> -->

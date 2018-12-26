@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "skill")
@@ -53,7 +53,7 @@ public class Skill {
 	private String image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-	
+	@JsonBackReference
 	private List<Topic> topics;
 
 	public int getId() {
