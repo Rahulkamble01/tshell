@@ -39,7 +39,7 @@ public class Skill {
 	@Column(name = "sk_image")
 	private byte[] image;
 	
-	@Column(name = "sk_created_on")
+	@Column(name = "sk_creation_date")
 	private Date createdOn;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")

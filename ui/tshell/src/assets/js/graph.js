@@ -1,6 +1,6 @@
-abc(d3,w,h);
+abc(d3,w,h, graphData);
 
-function abc(d3,w1,h1) {
+function abc(d3,w1,h1, graphData1) {
 
   !(function () {
     "use strict"
@@ -15,23 +15,23 @@ function abc(d3,w1,h1) {
 
     function main() {
       var range = 21
-      var data = {
-        // nodes: d3.json("/data/neo4jdata.json", function (error, graph) {})
-        nodes: d3.range(0, range).map(function (d) {
-          return {
-            label: "undefined" + d,
-            r: ~~d3.randomUniform(8, 28)()
-          }
-        }),
-        links: d3.range(0, range).map(function () {
-          return {
-            source: ~~d3.randomUniform(range)(),
-            target: ~~d3.randomUniform(range)()
-          }
-        })
-      }
-      setSize(data)
-      drawChart(data)
+      // var data = {
+      //   // nodes: d3.json("/data/neo4jdata.json", function (error, graph) {})
+      //   nodes: d3.range(0, range).map(function (d) {
+      //     return {
+      //       label: "undefined" + d,
+      //       r: ~~d3.randomUniform(8, 28)()
+      //     }
+      //   }),
+      //   links: d3.range(0, range).map(function () {
+      //     return {
+      //       source: ~~d3.randomUniform(range)(),
+      //       target: ~~d3.randomUniform(range)()
+      //     }
+      //   })
+      // }
+      setSize(graphData1)
+      drawChart(graphData1)
       // d3.json("/data/neo4jdata.json", function (error, graph) {
       //   setSize(graph)
       //   drawChart(graph)

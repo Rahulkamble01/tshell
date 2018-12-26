@@ -27,11 +27,6 @@ public class SkillController {
 	private NeoSkillToSkill neoSkillToSkill;
 	
 	@Autowired
-	public void setNeoSkillToSkill(NeoSkillToSkill neoSkillToSkill) {
-		this.neoSkillToSkill = neoSkillToSkill;
-	}
-
-	@Autowired
 	public void setTopicService(TopicService topicService) {
 		this.topicService = topicService;
 	}

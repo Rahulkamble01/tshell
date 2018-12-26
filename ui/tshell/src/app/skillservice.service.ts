@@ -15,6 +15,7 @@ export class SkillserviceService {
   updateSearchUrl = 'tShell/updateSkillSearch';
   skillToppersUrl = 'tShell/top5list/';
   updateSkillUrl = 'tShell/addSkill';
+  graphDataUrl = 'tShell/graph';
 
   constructor(private http: HttpClient) { }
 
@@ -33,5 +34,9 @@ export class SkillserviceService {
   getSkillTopper(id): Observable<any> {
     console.log(this.skillToppersUrl + id);
     return this.http.get(this.skillToppersUrl + id);
+  }
+
+  getGraphData(): Observable<any> {
+    return this.http.get(this.graphDataUrl);
   }
 }
