@@ -29,7 +29,7 @@ public class SkillService {
 	public void setSkillRepository(SkillRepository skillRepository) {
 		this.skillRepository = skillRepository;
 	}
-	
+
 	@Autowired
 	public void setNeo4jSkillRepository(Neo4jSkillRepository neo4jSkillRepository) {
 		this.neo4jSkillRepository = neo4jSkillRepository;
@@ -60,13 +60,19 @@ public class SkillService {
 	}
 
 	@Transactional
-	public void updateSkill(Skill skill) {
+	public void addOrUpdateNeoSkill(NeoSkill neoSkill) {
+		System.out.println("NeoSkill Updated " );
+		neo4jSkillRepository.save(neoSkill);
+	}
+	@Transactional
+	public void addOrUpdateSkill(Skill skill) {
 		LOGGER.debug("Updating {}'s SearchCount from {} to {}", skill.getName());
 		LOGGER.info("Skill Updated");
 		LOGGER.debug("Updated Skill", skill);
 		skillRepository.save(skill);
 	}
-	
+
+
 	@Transactional
 	public NeoSkill findByName(String name) {
 		NeoSkill result = neo4jSkillRepository.findByName(name);
@@ -81,9 +87,9 @@ public class SkillService {
 
 	@Transactional
 	public Map<String, Object> graph(int limit) {
-		System.out.println("sdfsd"+limit);
+		System.out.println("sdfsd" + limit);
 		Collection<NeoSkill> result = neo4jSkillRepository.graph(limit);
-		System.out.println("result "+result );
+		System.out.println("result " + result);
 		return toD3Format(result);
 	}
 
@@ -95,12 +101,16 @@ public class SkillService {
 		Iterator<NeoSkill> result = neoSkills.iterator();
 		while (result.hasNext()) {
 			NeoSkill neoSkill = result.next();
-			System.out.println("NeoSkill "+neoSkill);
-			nodes.add(map("name", neoSkill.getName(), "description", neoSkill.getDescription(), "image", neoSkill.getImage(), "active", neoSkill.getActive(), "createdOn", neoSkill.getCreatedOn()));
+			System.out.println("NeoSkill " + neoSkill);
+			nodes.add(map("name", neoSkill.getName(), "description", neoSkill.getDescription(), "image",
+					neoSkill.getImage(), "active", neoSkill.getActive(), "createdOn", neoSkill.getCreatedOn()));
 			int target = i;
 			i++;
 			for (SkillRequiredRelationship relationship : neoSkill.getSkillRequiredRelationships()) {
-				Map<String, Object> rSkill = map("name", relationship.getSkill2().getName(), "description", relationship.getSkill2().getDescription(), "image", relationship.getSkill2().getImage(), "active", relationship.getSkill2().getActive(), "createdOn", relationship.getSkill2().getCreatedOn());
+				Map<String, Object> rSkill = map("name", relationship.getSkill2().getName(), "description",
+						relationship.getSkill2().getDescription(), "image", relationship.getSkill2().getImage(),
+						"active", relationship.getSkill2().getActive(), "createdOn",
+						relationship.getSkill2().getCreatedOn());
 				int source = nodes.indexOf(rSkill);
 				if (source == -1) {
 					nodes.add(rSkill);
@@ -118,8 +128,9 @@ public class SkillService {
 		result.put(key2, value2);
 		return result;
 	}
-	
-	private Map<String, Object> map(String key1, Object value1, String key2, Object value2, String key3, Object value3, String key4, Object value4, String key5, Object value5) {
+
+	private Map<String, Object> map(String key1, Object value1, String key2, Object value2, String key3, Object value3,
+			String key4, Object value4, String key5, Object value5) {
 		Map<String, Object> result = new HashMap<String, Object>(2);
 		result.put(key1, value1);
 		result.put(key2, value2);
@@ -128,6 +139,5 @@ public class SkillService {
 		result.put(key5, value5);
 		return result;
 	}
-	
 
 }

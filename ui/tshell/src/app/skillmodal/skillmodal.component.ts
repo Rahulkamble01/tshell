@@ -40,7 +40,7 @@ export class SkillmodalComponent implements OnInit {
       Validators.maxLength(400),
       ]),
     image: new FormControl,
-    CreatedOn: new FormControl,
+    createdOn: new FormControl(new Date()),
     topicName: new FormControl(
       '',
       [
@@ -87,6 +87,10 @@ export class SkillmodalComponent implements OnInit {
         };
       };
       // console.log(JSON.stringify(this.addskillform.value, getCircularReplacer()));
+      if (this.addskillform.controls['createdOn'].value == null) {
+        this.addskillform.controls['createdOn'].patchValue(new Date());
+      }
+      console.log(this.addskillform.value);
       this.skillService.updateSkill(JSON.stringify(this.addskillform.value, getCircularReplacer())).subscribe();
     }
   }

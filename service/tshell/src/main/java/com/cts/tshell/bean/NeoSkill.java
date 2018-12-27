@@ -1,11 +1,12 @@
 package com.cts.tshell.bean;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @NodeEntity
 public class NeoSkill {
 
-	@Id
+	@GraphId
 	@GeneratedValue
 	private Long id;
 	private String name;
@@ -130,6 +131,15 @@ public class NeoSkill {
 		System.out.println("Indise setRelationshipSkill()");
 		this.skillRequiredRelationships = skillRequiredRelationships;
 	}
+
+	@Override
+	public String toString() {
+		return "NeoSkill [id=" + id + ", name=" + name + ", image=" + Arrays.toString(image) + ", active=" + active
+				+ ", description=" + description + ", createdOn=" + createdOn + ", searchCount=" + searchCount
+				+ ", testCount=" + testCount + ", skillRequiredRelationships=" + skillRequiredRelationships + "]";
+	}
+	
+	
 
 	
 

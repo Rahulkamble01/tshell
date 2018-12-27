@@ -52,6 +52,7 @@ export class SearchResultComponent implements OnInit {
 
     this.skillService.getAll().subscribe(data => {
       this.allSkills = data;
+      console.log(this.allSkills);
     });
 
     this.skillService.getGraphData().subscribe(data => {
@@ -72,8 +73,8 @@ export class SearchResultComponent implements OnInit {
     d3.json(this.graphData, function (error, graph) {
       if (error) { throw error; }
       const svg = d3.select('#graphID'),
-        width = +svg.attr(w),
-        height = +svg.attr(h);
+        width = +w,
+        height = +h;
       console.log(width, height);
 
       const simulation = d3.forceSimulation()
