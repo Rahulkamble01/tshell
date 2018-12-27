@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchExistingQuestionsService } from '../search-existing-questions.service';
-import { FormBuilder, FormArray,FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-existing-questions',
@@ -9,99 +10,69 @@ import { FormBuilder, FormArray,FormGroup } from '@angular/forms';
 })
 export class SearchExistingQuestionsComponent implements OnInit {
 
-  constructor(private service: SearchExistingQuestionsService, private fb: FormBuilder) { }
+  constructor(private service: SearchExistingQuestionsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    /*this.route.params.subscribe(params => {
+      console.log("Id " + params['id']);
+      this.skillId = +params['id'];
+        });*/
+        console.log(" ngOnInit")
 
-  }
- 
-  questions:string="Which of the following are legal lines of Java code?, Which data type value is returned by all transcendental math functions?Which of these literals can be contained in float data type variable? What is the range of short data type in Java?";
-  option2:string="int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;";
-  count=0;
-  questionList:any;
-  searchQuery:string;
-  questionForm = this.fb.group({
-    id:['3546'],
-    question:['Which of the following are legal lines of Java code?, Which data type value is returned by all transcendental math functions?Which of these literals can be contained in float data type variable? What is the range of short data type in Java?'],
-    options:this.fb.array([
-      this.fb.control('')
-    ]),
-    solution:[],
-    opttionList:this.fb.group({}),
-    user:this.fb.group({
-      id:['']
-    })
-  })
-
-  searchQ () {
-    console.log('This is searchQ()')
-    this.service.fetchQuestions(this.searchQuery).subscribe(
+    this.skillId = 1;
+    this.service.fetchReviewQuestion(this.skillId).subscribe(
+      
       data => {
-        this.questionList = data;
+        this.question = data[0];
+        console.log(this.question);
+        this.questionId = this.question.id;
+        this.optionList = this.question.optionList;
       }
     )
   }
-
-
-
-
-
-/* Add Option */
-
+  error:any;
+status=false;
+  skillId: number;
+  question: any;
+  optionList: any;
+  questionId: number;
+  description: string = '';
   
-  count1 = 0;
-  option: string;
-  skills:string[] = ['java', 'oops', 'html' , 'css'];
-  description: string = "description";
-  option1 = {
-    answer: true,
-    question: {
-      id: 1,
-    }
-  };
-
-
-  optionForm = this.fb.group({
-    options: this.fb.array([
-     this.fb.control('')
-   ])
- });
   addOption() {
+    console.log( "addOption()");
+    let newOption = {
+      answer: false,
+      description: this.description,
+      question: {
+        id: this.questionId
+      }
+    };
+    this.service.addOption(JSON.stringify(newOption)).subscribe(
+      data => {
+
+     
+        console.log(this.question);
+       
+       /*  if (data != null){
+          this.question = data[0];
+          this.questionId = data[0].id;
+          this.optionList = data[0].optionList;
+          this.status = true;
+          this.description = '';
+        } else {
+          console.log(data);
+        } */
+        
+     },
+      error => {
+        this.error = error
+        this.status=false;
+        this.description=""
+        }
+      
     
-    console.log('inside addOption()');
-    console.log(JSON.stringify(this.option1));
-    this.option1[this.description] = this.option;
     
-    console.log(JSON.stringify(this.option1));
-    this.service.addOption(JSON.stringify(this.option1)).subscribe(data => {
-    console.log(data);
-
-    })
+    )
   }
-  get options() {
-    return this.optionForm.get('options') as FormArray;
-    }
-
-  addOptions() {
-    if(this.count< 4){
-    this.options.push(this.fb.control(''));
-    this.count++;
-  }
-}
-  removeOption(index) {
-    console.log("Removing option");
-    const optionControl = <FormArray>this.optionForm.controls['options'];
-    
-    // remove the chosen row
-    optionControl.removeAt(index);
-    this.count--;
-    console.log(this.count);
-  }
-
-
-  
-
-
- 
 }
 
