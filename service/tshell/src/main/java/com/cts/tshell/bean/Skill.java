@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +17,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
+
+@NamedQuery(
+		name = "Skill.fetchTopSearchedSkills", 
+		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
 @Table(name = "skill")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Skill {
@@ -35,11 +40,11 @@ public class Skill {
 	private String active;
 
 	@Column(name = "sk_test_count")
-	private int testCount;	
-	
+	private int testCount;
+
 	@Column(name = "sk_description")
 	private String description;
-	
+
 	@Column(name = "sk_image")
 	private byte[] image;
 	
@@ -94,6 +99,7 @@ public class Skill {
 		this.description = description;
 	}
 
+
 	public byte[] getImage() {
 		return image;
 	}
@@ -110,7 +116,5 @@ public class Skill {
 		this.topics = topics;
 	}
 
-	
 
-	
 }
