@@ -12,6 +12,7 @@ import { Skill } from '../skill';
 import { SkillserviceService } from '../skillservice.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
 
 
 declare var abc: any;
@@ -178,14 +179,12 @@ export class SearchResultComponent implements OnInit {
 
   editSkillModel(item) {
     console.log(item);
-    const modalRef = this.modalService.open(SkillmodalComponent);
+    const modalRef = this.modalService.open(EditskillmodalComponent);
     modalRef.componentInstance.item = item;
-    modalRef.componentInstance.add = false;
   }
 
-  addSkillModel(add: boolean = true) {
+  addSkillModel() {
     const modalRef = this.modalService.open(SkillmodalComponent);
-    modalRef.componentInstance.add = add;
   }
 
   formatter = (x: { name: string }) => x.name;

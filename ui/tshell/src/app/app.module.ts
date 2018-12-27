@@ -46,6 +46,7 @@ import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-
 import { FooterComponent } from './footer/footer.component';
 import { GraphmodalComponent } from './graphmodal/graphmodal.component';
 import { ErrorComponent } from './error/error.component';
+import { EditskillmodalComponent } from './editskillmodal/editskillmodal.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ErrorComponent } from './error/error.component';
     SkillmodalComponent,
     FooterComponent,
     GraphmodalComponent,
-    ErrorComponent
+    ErrorComponent,
+    EditskillmodalComponent
   ],
 
   imports: [
@@ -102,6 +104,6 @@ import { ErrorComponent } from './error/error.component';
     HttpClientModule,
   ],
   entryComponents: [SkillmodalComponent],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, EditskillmodalComponent],
 })
 export class AppModule { }

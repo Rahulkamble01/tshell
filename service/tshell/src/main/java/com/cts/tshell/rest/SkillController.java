@@ -6,14 +6,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Skill;
@@ -30,10 +27,6 @@ public class SkillController {
 	private TopicService topicService;
 	private SkillToNeoSkill skillToNeoSkill;
 
-	@Autowired
-	public void setTopicService(TopicService topicService) {
-		this.topicService = topicService;
-	}
 
 	@Autowired
 	public void setSkillToNeoSkill(SkillToNeoSkill skillToNeoSkill) {
@@ -43,12 +36,7 @@ public class SkillController {
 	@Autowired
 	public void setSkillService(SkillService skillService) {
 		this.skillService = skillService;
-
-	@Autowired
-	public void setSkillService(SkillService skillService) {
-		this.skillService = skillService;
 	}
-	private TopicService topicService;
 
 	@Autowired
 	public void setTopicService(TopicService topicService) {
@@ -154,7 +142,7 @@ public class SkillController {
 			List<Topic> topics = skill.getTopics();
 			LOGGER.debug("Recived skill from Browser: "+skill );
 			LOGGER.debug("Recived topics from Browser: "+topics );
-			skillService.saveSkill(skill);
+			skillService.addOrUpdateSkill(skill);
 			Skill skill2 = skillService.getSkillByName(skill.getName());
 			LOGGER.debug("Recived skill from sevice: "+skill2 );
 			for(Topic topic:topics){
@@ -168,3 +156,7 @@ public class SkillController {
 		return addStatus;	
 	}
 }
+
+
+//curl -s -H "Content-Type: application/json" -X POST -d '{"id":123, "name":"adil", "description":"aasd","searchCount":5,"active":"Yes", "testCount":5, "image": null, "createdOn": null }' http://localhost:8080/tShell/updateSkill
+
