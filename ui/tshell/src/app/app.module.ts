@@ -44,6 +44,8 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { ErrorComponent } from './error/error.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +58,11 @@ PasswordNotEqualValidatorDirective,
     MostSearchedSkillsComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
+    SkillmodalComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    
+    
     RecentlyAddedSkillsComponent,
     LoginComponent,
     AdminSignupComponent,
@@ -82,7 +89,8 @@ PasswordNotEqualValidatorDirective,
      ScoreAssesmentComponent,
     SkillpageComponent,
     SkillmodalComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent
   ],
 
   imports: [

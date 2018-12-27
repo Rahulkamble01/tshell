@@ -1,15 +1,14 @@
 
-                                        <div class="card card2" > 
-                                                <div class="h3  d-flex justify-content-center "  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Questions Contributed</div>
-                                            <canvas
-                                        
-                                            baseChart
-                                            [chartType]="'horizontalBar'"
-                                            [datasets]="chartData"
-                                            [labels]="chartLabels" 
-                                            [legend]="false"
-                                            [colors]="BarColors" 
-                                            [colors]="colors"
-                                            (chartClick)="onChartClick($event)"  >
-                                        </canvas>
-                                        </div>
+<div class="row">
+        <div class="h4  d-flex justify-content-center">Top5AccessedTests</div>
+ 
+    <canvas 
+        baseChart
+        [chartType]="'horizontalBar'"
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="false"
+        (chartClick)="onChartClick($event)">
+    </canvas>
+</div>

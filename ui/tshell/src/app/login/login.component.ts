@@ -13,7 +13,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 export class LoginComponent implements OnInit {
   message: string;
   status: boolean = false;
-
+  error:any;
+  success=true;
   constructor(private router: Router, public service: AuthService,
     public loginService: LoginService) { }
 
@@ -52,8 +53,8 @@ export class LoginComponent implements OnInit {
     console.log(json);
     this.loginService.authenticateUser(json)
       .subscribe(data => {
-        console.log(data)
-        console.log(data.user.role.name)
+        console.log("incoming Data: "+data)
+        console.log("User Name: "+data.user.role.name)
         if (data.authenticated) {
           this.service.login();
           this.service.setRole(data.user.role.name);
@@ -61,8 +62,15 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dash']);
         }
         else {
-          return false;
+          this.success=false;
+          this.error=false;
+          
         }
+      },
+      error => {
+        this.error=error;
+        this.success=true;
+        console.log(this.error);
       }
       );
   }

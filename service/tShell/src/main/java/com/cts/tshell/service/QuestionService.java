@@ -1,4 +1,4 @@
-package com.cts.tshell.services;
+package com.cts.tshell.service;
 
 import java.util.List;
 

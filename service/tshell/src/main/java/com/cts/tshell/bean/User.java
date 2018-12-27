@@ -1,11 +1,7 @@
 package com.cts.tshell.bean;
 
-
 import java.sql.Time;
 import java.util.Date;
-
-
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,16 +15,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-
 @Entity
 @Table(name = "user")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
+@NamedQueries({
+	@NamedQuery(name="User.findByEmpId",
+			query=	" select u.employeeId,u.name,u.password,r.name from User u " + 
+					" join u.role r " + 
+				    " where u.employeeId = :employeeId ")
+})
+
 public class User {
 
 	@Id
@@ -55,14 +58,11 @@ public class User {
 	@Column(name = "us_image")
 	private byte[] image;
 
-
 	@Column(name = "us_signup_date")
 	private Date signupDate;
 
 	@Column(name = "us_last_login_time")
 	private Time lastLoginTime;
-
-
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -149,14 +149,11 @@ public class User {
 		this.skills = skills;
 	}
 
-
-	@Override
+	/*@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
 				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
 				+ lastLoginTime + ", skills=" + skills + "]";
-	}
-
-
+	}*/
 
 }
