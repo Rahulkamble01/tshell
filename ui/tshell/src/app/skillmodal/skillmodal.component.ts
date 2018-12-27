@@ -29,48 +29,7 @@ export class SkillmodalComponent implements OnInit {
      */
 
 
-  skills: any = [
-    {
-      id: 1,
-      name: 'SQL',
-      active: true,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
-    }, {
-      id: 2,
-      name: 'HTML',
-      active: false,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
-    }];
-
-
-
-
+  
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService) { }
 
