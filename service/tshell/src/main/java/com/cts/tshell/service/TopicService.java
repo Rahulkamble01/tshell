@@ -26,9 +26,8 @@ public class TopicService {
 	@Transactional
 	public void saveTopic(Topic topic) {
 		LOGGER.info("Starting setSkill() inside topicService");
-		System.out.println("recived topic from topicController"+topic);
+		LOGGER.debug("recived topic from topicController"+topic);
 		topicRepository.save(topic);	
 	}
 
 }
-

@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,8 @@ import com.cts.tshell.bean.NeoSkill;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.SkillRequiredRelationship;
 import com.cts.tshell.repository.Neo4jSkillRepository;
+
+import com.cts.tshell.bean.Skill;
 import com.cts.tshell.repository.SkillRepository;
 
 @Service
@@ -61,9 +66,10 @@ public class SkillService {
 
 	@Transactional
 	public void addOrUpdateNeoSkill(NeoSkill neoSkill) {
-		System.out.println("NeoSkill Updated " );
+		System.out.println("NeoSkill Updated ");
 		neo4jSkillRepository.save(neoSkill);
 	}
+
 	@Transactional
 	public void addOrUpdateSkill(Skill skill) {
 		LOGGER.debug("Updating {}'s SearchCount from {} to {}", skill.getName());
@@ -71,7 +77,6 @@ public class SkillService {
 		LOGGER.debug("Updated Skill", skill);
 		skillRepository.save(skill);
 	}
-
 
 	@Transactional
 	public NeoSkill findByName(String name) {

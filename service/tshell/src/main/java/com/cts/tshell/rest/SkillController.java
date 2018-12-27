@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Skill;
@@ -39,6 +43,16 @@ public class SkillController {
 	@Autowired
 	public void setSkillService(SkillService skillService) {
 		this.skillService = skillService;
+
+	@Autowired
+	public void setSkillService(SkillService skillService) {
+		this.skillService = skillService;
+	}
+	private TopicService topicService;
+
+	@Autowired
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
 	}
 
 	@RequestMapping(value = "/skills", method = RequestMethod.GET)
@@ -69,7 +83,7 @@ public class SkillController {
 		LOGGER.debug("Existing from updateSearch Skill with skill \n{}", skill);
 	}
 
-	@RequestMapping(value = "/addSkill", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateSkill", method = RequestMethod.POST)
 	public void UpdateSkill(@RequestBody Skill skill) {
 		LOGGER.info("starting insertneSkills");
 		List<Topic> topics = skill.getTopics();
@@ -124,4 +138,33 @@ public class SkillController {
 	// }
 	// return addStatus;
 	// }
+	
+	
+	@PostMapping("/addskill")
+	public int addOrUpdateSkill(@RequestBody Skill skill) {
+		LOGGER.info("starting insertnewSkills" );
+		String skillName = skill.getName();
+		Skill skill1=skillService.getSkillByName(skillName);
+		System.out.println("the skill we get isisisisisisisis : :"+skill1);
+		int addStatus;
+		if(skill1!=null){
+			addStatus=1;
+		}
+		else{
+			List<Topic> topics = skill.getTopics();
+			LOGGER.debug("Recived skill from Browser: "+skill );
+			LOGGER.debug("Recived topics from Browser: "+topics );
+			skillService.saveSkill(skill);
+			Skill skill2 = skillService.getSkillByName(skill.getName());
+			LOGGER.debug("Recived skill from sevice: "+skill2 );
+			for(Topic topic:topics){
+				topic.setSkill(skill2);
+				topicService.saveTopic(topic);
+			}
+			skill.setTopics(topics);
+			addStatus=2;
+			LOGGER.info("ending inserting Skill" );
+		}
+		return addStatus;	
+	}
 }

@@ -16,8 +16,28 @@
         <hr>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"><i class="fa fa-times"></i></button>
       </div>
+
+
+      <!-- <div [hidden]="success" role="alert">
+        <div [hidden]="fail" role="alert"> -->
       <div class="modal-body">
         <div class="container ">
+
+          <div *ngIf="status==2" class="alert alert-success box-msg" role="alert">
+            <h5>New Skill Added</h5>
+          </div>
+          <div *ngIf="status==1" class="alert alert-danger box-msg" role="alert">
+            <h5>Error! Skill already exists, Retry</h5>
+          </div>
+
+          <div *ngIf="error">
+           <app-error></app-error>
+          </div>
+
+          <!-- <div *ngIf="status==1" class="alert alert-danger box-msg" role="alert">
+            <h5>Error!(Retry! Or contact Admin)</h5>
+          </div> -->
+
           <div class="row">
             <div class="col-lg-4"> Name </div>
             <div class="col-lg-5"> </div>
@@ -27,12 +47,11 @@
 
           <div class="row">
             <div class="col-lg-12">
-                <input type="hidden" class="form-control" formControlName="id">
               <ng-container *ngIf="add; else else1Template">
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter a Name" #name>
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter a Name" #skillName>
               </ng-container>
               <ng-template #else1Template>
-                <input type="text" class="form-control" formControlName="name" value="{{item.name}}" #name1>
+                <input type="text" class="form-control" formControlName="name" value="{{item.name}}" #skillName1>
               </ng-template>
 
               <div *ngIf="addskillform.get('name').touched && addskillform.get('name').invalid">
@@ -76,14 +95,16 @@
 
           </div>
           <br>
-          <div class="row">
-            <div class="col-lg-4"> Upload a Picture </div>
-            <div class="col-lg-8"> </div>
-          </div>
-          <div class="row">
+          <!--   <div class="row">
+                <div class="col-lg-4"> Upload a Picture </div>
+                <div class="col-lg-8"> </div>
+              </div>
+              <div class="row">
 
-            <div class="col-lg-12"> <input type="file" fileread="image" accept=".jpg,.png"> </div>
-          </div>
+                <div class="col-lg-12">
+                  <input type="file" fileread="image" accept=".jpg,.png" formControlName="image" #image> </div>
+
+              </div> -->
           <br>
           <div class="row">
             <div class="col-lg-12"> Add Topics </div>
@@ -130,128 +151,29 @@
           </div>
         </div>
       </div>
+      <!--  </div>
+      </div> -->
       <div class="modal-footer">
-        <ng-container *ngIf="expression; else else2Template">
-          <button class="btn btn-ts-primary makecross" (click)="addSkill();">Save
-            Skill</button>
-        </ng-container>
-        <ng-template #else2Template>
-          <button class="btn btn-primary makecross" (click)="submitSkill();">Save
-            Skill</button>
-        </ng-template>
+        <!-- <div [hidden]="success" role="alert">
+          <div [hidden]="fail" role="alert"> -->
+        <button class="btn btn-ts-primary makecross" (click)="addSkill();" [disabled]="!addskillform.valid">Save
+          Skill</button>
+        <!--    </div>
+        </div> -->
+        <!--  <div [hidden]="!success"  role="alert">
+            <button class="btn btn-ts-sm btn-ts-primary" (click)="retry(); addSkillModel()">Retry</button>
+        </div>
+        <div [hidden]="!fail" role="alert">
+            <button class="btn btn-ts-sm btn-ts-primary" (click)="retry(); addSkillModel()">Retry</button>
+          </div> -->
       </div>
+
     </div>
   </form>
+
+
 </div>
 
 
 
-<!-- Modal -->
-<!-- <div class="modal-lg">
-  <form [formGroup]="addskillform">
-    <div class="modal-content">
-      <div class="modal-header">
-        <ng-container *ngIf="add; else elseTemplate">
-          <h4>
-            Add Skill
-          </h4>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <h4>
-            Edit {{item.name}}
-          </h4>
-        </ng-template>
-        <hr>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"><i class="fa fa-times"></i></button>
-      </div>
-      <div class="modal-body">
-        <div class="container ">
-          <div class="row">
-            <div class="col-lg-4"> Name </div>
-            <div class="col-lg-5"> </div>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-2"></div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <ng-container *ngIf="add; else else1Template">
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter a Name"
-                  #name>
-              </ng-container>
-              <ng-template #else1Template>
-                <input type="text" class="form-control" formControlName="name" value="{{item.name}}" #name1>
-              </ng-template>
-
-              <div *ngIf="addskillform.get('name').touched && addskillform.get('name').invalid">
-                <div *ngIf="addskillform.get('name').errors.required" class="aletry">* Skill Name is required</div>
-                <div *ngIf="addskillform.get('name').errors.minlength" class="aletry"> Skill Name must be
-                  minimum 2
-                  characters</div>
-                <div *ngIf="addskillform.get('name').errors.maxlength" class="aletry"> Skill Name must be
-                  maximun 25
-                  characters</div>
-                <div *ngIf="addskillform.get('name').errors.pattern" class="aletry"> Skill Name must not
-                  contain special charecters
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-12"> Add Topics </div>
-          </div>
-          <div class="row ">
-            <div class="col-lg-12 col-12 col-sm-12 col-md-12 buttonInside ">
-              <span class="itwillflex">
-                <input type="text" class="form-control topicinput" formControlName="topicName" #topicname placeholder="Enter sub-topic and click + to add it">
-                <button id="erase" (click)="addTopic(topicname.value)" class=" btn btn-info btn-sm fa fa-plus"></button>
-              </span>
-              <div *ngIf="addskillform.get('topicName').touched && addskillform.get('topicName').invalid">
-                <div *ngIf="addskillform.get('topicName').errors.minlength" class="aletry"> Topic Name must be
-                  of minimum 2
-                  characters</div>
-                <div *ngIf="addskillform.get('topicName').errors.maxlength" class="aletry"> Topic Name must be
-                  maximun 60
-                  characters</div>
-                <div *ngIf="addskillform.get('topicName').errors.pattern" class="aletry"> Topic Name must not
-                  contain numbers and special charecters
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <ng-container *ngIf="add; else editSkill">
-                <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
-                  <li class="badge badge-secondary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
-                      (click)="removeTopic(topic)"></i></li>
-                </ul>
-              </ng-container>
-              <ng-template #editSkill>
-                <ul *ngFor="let topic of item.topics" class="list-inline marginzero" style="display:inline-block">
-                  <li class="badge badge-primary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
-                      (click)="removeTopic(topic)"></i></li>
-                </ul>
-                <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
-                  <li class="badge badge-secondary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
-                      (click)="removeTopic(topic)"></i></li>
-                </ul>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <ng-container *ngIf="expression; else else2Template">
-          <button class="btn btn-primary makecross" (click)="submitSkill(name.value);">Save
-            Skill</button>
-        </ng-container>
-        <ng-template #else2Template>
-          <button class="btn btn-primary makecross" (click)="submitSkill();">Save
-            Skill</button>
-        </ng-template>
-
-      </div>
-    </div>
-  </form>
-</div> -->
+<!-- activeModal.dismiss('Cross click') -->

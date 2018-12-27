@@ -188,16 +188,6 @@ export class SearchResultComponent implements OnInit {
     modalRef.componentInstance.add = add;
   }
 
-  // formatter = (result: string) => result.toUpperCase();
-  // search = (text$: Observable<string>) =>
-  //   text$.pipe(
-  //     debounceTime(100),
-  //     distinctUntilChanged(),
-  //     map(term => term === '' ? []
-  //       : this.skillNameArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
-  //     ),
-
-  //   )
   formatter = (x: { name: string }) => x.name;
   search = (text$: Observable<string>) => text$.pipe(
     debounceTime(100),

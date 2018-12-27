@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Skill } from '../skill';
 import { Topic } from '../topic';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { SkillserviceService } from '../skillservice.service';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Skill, Topics } from '../skill';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-skillmodal',
@@ -15,48 +14,98 @@ import { Skill, Topics } from '../skill';
 })
 export class SkillmodalComponent implements OnInit {
   add: boolean;
+  item: any;
+  json: any;
+  error: any;
+  status: number = 0;
   expression: any;
-  @Input() item: any;
-  skills: any = [];
+  @Input() name: any;
+
   topics: Array<Topic> = [];
+  allskills: any;
+  sameSkillName: boolean = false;
+  /*   success = false;
+    fail= false;
+     */
 
-  addskillform = new FormGroup({
-    id: new FormControl(0),
-    name: new FormControl(
-      '',
-      [Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(25),
-      Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
 
-      ]),
-    searchCount: new FormControl(0),
-    active: new FormControl(false),
-    testCount: new FormControl(0),
-    description: new FormControl(
-      '',
-      [Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(400),
-      ]),
-    image: new FormControl,
-    createdOn: new FormControl(new Date()),
-    topicName: new FormControl(
-      '',
-      [
-        Validators.minLength(2),
-        Validators.maxLength(60),
-        Validators.pattern(/^[a-zA-Z ._-]+$/),
-      ]),
-    topics: this.fb.array([])
+  skills: any = [
+    {
+      id: 1,
+      name: 'SQL',
+      active: true,
+      top3: [
+        {
+          score: 90,
+          user: { id: 1, name: 'Arisankar M' }
+        },
+        {
+          score: 80,
+          user: { id: 2, name: 'Joseph Vijay' }
+        },
+        {
+          score: 70,
+          user: { id: 3, name: 'Vijay Kumar' }
+        }
+      ]
+    }, {
+      id: 2,
+      name: 'HTML',
+      active: false,
+      top3: [
+        {
+          score: 90,
+          user: { id: 1, name: 'Arisankar M' }
+        },
+        {
+          score: 80,
+          user: { id: 2, name: 'Joseph Vijay' }
+        },
+        {
+          score: 70,
+          user: { id: 3, name: 'Vijay Kumar' }
+        }
+      ]
+    }];
 
-  });
 
-  constructor(public activeModal: NgbActiveModal, private skillService: SkillserviceService, private fb: FormBuilder) { }
+
+
+
+  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService) { }
+
+  addskillform = new FormGroup
+    ({
+      name: new FormControl(
+        '',
+        [Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(25),
+        Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
+
+        ]),
+      description: new FormControl(
+        '',
+        [Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(400),
+        ]),
+
+      topicName: new FormControl(
+        '',
+        [
+          Validators.minLength(2),
+          Validators.maxLength(60),
+          Validators.pattern(/^[a-zA-Z ._-]+$/),
+        ]),
+      image: new FormControl(''),
+    });
+
+
   addTopic(topicname) {
-    // const topic = new Topic(topicname);
-    const topic = new FormGroup({ id: new FormControl(null), name: new FormControl(topicname) });
-    this.topics.push(topic.value);
+    const topic = new Topic(topicname);
+    // alert(JSON.stringify(topic.name));
+    this.topics.push(topic);
     this.clearInput();
   }
   removeTopic(topic) {
@@ -64,44 +113,89 @@ export class SkillmodalComponent implements OnInit {
     this.topics.splice(index, 1);
   }
 
-  get topicName(): any { return this.addskillform.get('topicName'); }
-  clearInput() { this.topicName.reset(); }
-
-  submitSkill() {
-    if (!this.add) {
-      const control = <FormArray>this.addskillform.controls['topics'];
-      this.topics.forEach(element => {
-        control.push(new FormControl(element));
-      });
-      //to avoid circular JSON Structure
-      const getCircularReplacer = () => {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
-          }
-          return value;
-        };
-      };
-      // console.log(JSON.stringify(this.addskillform.value, getCircularReplacer()));
-      if (this.addskillform.controls['createdOn'].value == null) {
-        this.addskillform.controls['createdOn'].patchValue(new Date());
-      }
-      console.log(this.addskillform.value);
-      this.skillService.updateSkill(JSON.stringify(this.addskillform.value, getCircularReplacer())).subscribe();
-    }
+  get topicName(): any {
+    return this.addskillform.get('topicName');
   }
+
+  clearInput() {
+    this.topicName.reset();
+  }
+
+  clearAllInput() {
+    this.topics = [];
+  }
+
+
+  addSkill() {
+
+    console.log(this.status);
+
+    /* for (let i = 0; i < this.allskills.length; i++) {
+      let userSkillname = this.addskillform.controls['name'].value;
+      let dataSkillname = this.allskills[i].name;
+      if (userSkillname.toUpperCase() == dataSkillname.toUpperCase()) {
+        this.sameSkillName = true;
+      }
+    } */
+
+    /*  if (this.sameSkillName != true) { */
+    const skill = new Skill(this.addskillform.controls['name'].value, "Active", this.addskillform.controls['description'].value, this.topics, new Date());
+    /*  console.log(this.sameSkillName); */
+    console.log(skill);
+    this.SkillService.addSkill(skill).subscribe(
+      data => {
+        console.log(data);
+        this.status = data;
+
+        console.log(this.status);
+        /*******calling the service to fetch new list of skills**********/
+        this.SkillService.getAll().subscribe(
+          data => {
+            this.allskills = data;
+            console.log(this.allskills);
+          }
+          ,
+          error => {
+          this.error = error;
+            this.status = 0;
+          }
+        );
+        /************************************************************* */
+        if (this.status == 2) {
+          this.addskillform.reset();
+          this.clearAllInput();
+        }
+
+      },
+      error => {
+      this.error = error;
+        this.status = 0;
+      }
+    )
+      ;
+    /*  }
+     else {
+ 
+       this.status = 3;
+ 
+       console.log(this.status);
+       console.log("Skill already exists");
+       this.sameSkillName = false;
+ 
+     } */
+
+  }
+
+
+
   ngOnInit() {
-    if (!this.add) {
-      this.addskillform.patchValue(this.item);
-      const control = <FormArray>this.addskillform.controls['topics'];
-      this.item.topics.forEach(element => {
-        control.push(new FormControl(element));
-      });
-    }
+
+    this.SkillService.getAll().subscribe(
+      data => {
+        this.allskills = data;
+        console.log(this.allskills);
+      }
+    );
   }
 
 }

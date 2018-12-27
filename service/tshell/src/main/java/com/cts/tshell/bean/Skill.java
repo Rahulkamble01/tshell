@@ -97,6 +97,7 @@ public class Skill {
 		this.description = description;
 	}
 
+	
 	public byte[] getImage() {
 		return image;
 	}
@@ -112,6 +113,8 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
+	
+	
 
 	public Date getCreatedOn() {
 		return createdOn;

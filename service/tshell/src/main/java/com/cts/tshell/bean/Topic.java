@@ -30,7 +30,7 @@ public class Topic {
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="tp_sk_id")	
+	@JoinColumn(name="tp_sk_id")
 	@JsonIgnore
 	private Skill skill;
 	
@@ -80,5 +80,6 @@ public class Topic {
 	
 	
 
+	
 	
 }

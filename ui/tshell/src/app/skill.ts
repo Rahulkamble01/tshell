@@ -1,3 +1,5 @@
+import { Topic } from './topic';
+
 export class Skill {
     id: number;
     name: string;
@@ -5,17 +7,16 @@ export class Skill {
     active: string;
     testCount: number;
     description: string;
-    image: any;
-    createdOn: Date = new Date();
-    topics: Topics[];
-}
-export class Topics {
-    id: number;
-    name: string;
-    skillId: Skill["id"];
+    date_of_creation: Date;
+    topics: Topic[];
 
-    constructor(name) {
+    constructor(name, active, description, topics, date_of_creation) {
+
         this.name = name;
-    }
+        this.active = active;
+        this.description = description;
+        this.topics = topics;
+        this.date_of_creation = date_of_creation;
 
+    }
 }
