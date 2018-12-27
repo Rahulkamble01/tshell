@@ -1,10 +1,7 @@
 .card{
     box-shadow: 2px 2px 18px 6px rgba(0, 0, 0, 0.20);
 }
-.card3{
-    margin:10px; 
-    height:140px;
-}
+
 .icon{
     padding-top:20px;
     color: #05b0ff; 
@@ -22,6 +19,24 @@
     color: #888888;
     font-size:14px;
 }
-.card2{
-    padding:10px;
+
+.row{
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

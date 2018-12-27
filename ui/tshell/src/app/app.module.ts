@@ -13,7 +13,6 @@ import { SearchExistingQuestionsComponent } from './search-existing-questions/se
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { ContributeQuestionService } from './contribute-question.service';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component'
-import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
@@ -45,6 +44,7 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,6 @@ PasswordNotEqualValidatorDirective,
     AddskillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
-    TotalquestionComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
     SkillmodalComponent,
@@ -89,7 +88,8 @@ PasswordNotEqualValidatorDirective,
      ScoreAssesmentComponent,
     SkillpageComponent,
     SkillmodalComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent
   ],
 
   imports: [

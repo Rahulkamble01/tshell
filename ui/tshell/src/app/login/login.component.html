@@ -1,12 +1,14 @@
+
 <div class="container-fluid">
-       <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
-        <div data-dismiss="alert">Invalid Name or Password!!!</div>
-    </div> 
+  <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
+    <div data-dismiss="alert">Invalid Name or Password!!!</div>
+  </div>
 
 
   <div class="row">
     <div class="col-lg-8">
-      <br><br><h1 class="log">Test your skills with tShell...</h1>
+      <br><br>
+      <h1 class="log">Test your skills with tShell...</h1>
     </div>
     <div class="col-lg-4 col-sm-12">
 
@@ -17,8 +19,11 @@
             <div class="card-title" id="card1">Login</div>
 
           </div>
-          <div class="card-block" id="card2">
+          <div class="card-block" id="card2" >
             <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
+            <div *ngIf="error">
+              <app-error></app-error>
+            </div>
             <form [formGroup]="form">
               <div class="form-group">
                 <div class="col-lg-12">
@@ -42,8 +47,7 @@
               </div>
               <div class="form-group">
 
-                <div class="col-lg-12"><button id="btn-login" class="btn btn-ts-primary" id="card7"
-                (click)="check(employeeId.value,password.value)"> Login</button>
+                <div class="col-lg-12"><button id="btn-login" class="btn btn-ts-primary" id="card7" (click)="check(employeeId.value, password.value)"> Login</button>
 
                 </div>
                 <div style="float: right; font-size: 100%;" class="btn forgotPassword" data-toggle="modal" data-target="#forgotModal">Forgot password?
@@ -116,4 +120,9 @@
 
 
   </div>
+
 </div>
+
+
+
+

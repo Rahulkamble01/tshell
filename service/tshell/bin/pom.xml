@@ -1,14 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.cts</groupId>
-	<artifactId>tshell</artifactId>
-	<version>1</version>
-	<packaging>war</packaging>
-
-	<name>tshell</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.cts</groupId>
+  <artifactId>tShell</artifactId>
+  <version>1</version>
+  <packaging>war</packaging>
+  <name>tShell</name>
 	<description>tShell Application</description>
 
 	<parent>
@@ -75,4 +71,8 @@
 		</plugins>
 	</build>
 
+<<<<<<< HEAD
 </project>
+=======
+</project>
+>>>>>>> 4314dc790b6d640cf6a773dc67d0a43aa78a673c

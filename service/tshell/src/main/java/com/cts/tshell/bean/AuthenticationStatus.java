@@ -3,6 +3,15 @@ package com.cts.tshell.bean;
 public class AuthenticationStatus {
 
 	private boolean authenticated;
+	private User user; 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public AuthenticationStatus() {
 		super();
