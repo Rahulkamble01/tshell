@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.tshell.bean.Skill;
 import com.cts.tshell.service.SkillService;
 
 @RestController
@@ -25,9 +26,9 @@ public class SkillController {
 	}
 
 	@GetMapping("/recentSkillList")
-	public List<String> getRecentSkills() {
+	public List<Skill> getRecentSkills() {
 		LOGGER.info("start");
-		List<String> skills = skillService.getRecent5Skills();
+		List<Skill> skills = skillService.getRecent5Skills();
 		LOGGER.debug("SkillController -> {}", skills);
 		return skills;
 	}

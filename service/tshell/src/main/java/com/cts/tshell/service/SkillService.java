@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cts.tshell.bean.Skill;
 import com.cts.tshell.repository.SkillRepository;
 
 @Service
@@ -24,9 +25,9 @@ public class SkillService {
 	}
 
 	@Transactional
-	public List<String> getRecent5Skills() {
+	public List<Skill> getRecent5Skills() {
 		LOGGER.info("start");
-		List<String> recent5Skills = skillRepository.fetchRecentSkills();
+		List<Skill> recent5Skills = skillRepository.fetchRecentSkills();
 		LOGGER.debug("recent5Skills -> " + recent5Skills);
 		if (recent5Skills.size() >= 5) {
 			LOGGER.debug("size of json data ->" + recent5Skills);

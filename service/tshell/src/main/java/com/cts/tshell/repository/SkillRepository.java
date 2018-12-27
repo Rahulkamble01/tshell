@@ -11,5 +11,5 @@ import com.cts.tshell.bean.Skill;
 @Repository
 public interface SkillRepository extends JpaRepository<Skill, Integer>{
 
-	List<String> fetchRecentSkills();
+	List<Skill> fetchRecentSkills();
 }

@@ -1,7 +1,11 @@
-.card{
-    box-shadow: 2px 2px 18px 6px rgba(0, 0, 0, 0.20);
+
+.viewskills{ 
+    margin:20px;  
 }
-.card3{
-    margin:10px; 
-    height:140px;
+.badge{
+    font-weight: 400;
+    line-height: 1.2;   
+    padding: 10px
 }
+
+

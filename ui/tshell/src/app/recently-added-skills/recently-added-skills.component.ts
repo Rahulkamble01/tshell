@@ -24,8 +24,9 @@ export class RecentlyAddedSkillsComponent implements OnInit {
     );
   }
   
- /*  recentlyAddedSkills(){  
-   
-  } */
+
+  /* click(){
+  this.router.navigate(['skills']);
+} */
 
 }
