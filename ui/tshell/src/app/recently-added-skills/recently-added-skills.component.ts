@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SkillService } from '../skill.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recently-added-skills',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentlyAddedSkillsComponent implements OnInit {
 
-  constructor() { }
+  recentSkillList:any[];
+
+  constructor(private skillService: SkillService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.skillService.getrecentSkill().subscribe(
+      data => {
+
+        this.recentSkillList = data;
+        console.log(data)
+      }
+      
+    );
   }
+  
+
+  /* click(){
+  this.router.navigate(['skills']);
+} */
 
 }
