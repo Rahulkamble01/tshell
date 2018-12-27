@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchExistingQuestionsService } from '../search-existing-questions.service';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-existing-questions',
@@ -9,68 +10,42 @@ import { FormBuilder } from '@angular/forms';
 })
 export class SearchExistingQuestionsComponent implements OnInit {
 
-  constructor(private service: SearchExistingQuestionsService, private fb: FormBuilder) { }
+  constructor(private service: SearchExistingQuestionsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    /*this.route.params.subscribe(params => {
+      console.log("Id " + params['id']);
+      this.skillId = +params['id'];
+        });*/
 
-  }
-
-  /* questions:string="Which of the following are legal lines of Java code?, Which data type value is returned by all transcendental math functions?Which of these literals can be contained in float data type variable? What is the range of short data type in Java?";
-  option1:string="int w = (int)888.8; byte x = (byte)100L;long y = (byte)100;byte z = (byte)100L;";
-  count=0;
-  questionList:any;
-  searchQuery:string;
-  questionForm = this.fb.group({
-    id:['3546'],
-    question:['Which of the following are legal lines of Java code?, Which data type value is returned by all transcendental math functions?Which of these literals can be contained in float data type variable? What is the range of short data type in Java?'],
-    options:this.fb.array([
-      this.fb.control('')
-    ]),
-    solution:[],
-    opttionList:this.fb.group({}),
-    user:this.fb.group({
-      id:['']
-    })
-  })
-
-  searchQ () {
-    console.log('This is searchQ()')
-    this.service.fetchQuestions(this.searchQuery).subscribe(
+    this.skillId = 1;
+    this.service.fetchReviewQuestion(this.skillId).subscribe(
       data => {
-        this.questionList = data;
+        this.question = data[0];
+        this.questionId = this.question.id;
+        this.optionList = this.question.optionList;
       }
     )
   }
- */
-  option: string;
-  description: string = "description";
 
-
-
-  option1 = {
-    answer: true,
-    question: {
-      id: 2,
-    }
-  };
+  skillId: number;
+  question: any;
+  optionList: any;
+  questionId: number;
+  description: string = '';
 
 
   addOption() {
-    
-    console.log('inside addOption()');
-    console.log(JSON.stringify(this.option1));
-    this.option1[this.description] = this.option;
-    
-    console.log(JSON.stringify(this.option1));
-    this.service.addOption(JSON.stringify(this.option1)).subscribe(data => {
-    console.log(data);
-
-    }
-  )
-
+    let newOption = {
+      answer: false,
+      description: this.description,
+      question: {
+        id: this.questionId
+      }
+    };
+    this.service.addOption(JSON.stringify(newOption)).subscribe(
+      data => {
+      })
   }
-
-
-
 }
 

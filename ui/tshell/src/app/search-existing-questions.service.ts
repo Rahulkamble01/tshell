@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-const httpOptions={
+const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':'application/json',
+    'Content-Type': 'application/json',
   })
 }
 
@@ -16,24 +16,15 @@ export class SearchExistingQuestionsService {
 
   constructor(private http: HttpClient) { }
 
-  fetchQuestions(searchQuery): Observable<any> {
-    // tslint:disable-next-line:prefer-const
-    let urlSearchQuestions: string = '/questions/findExistingQuestions/' + searchQuery;
-    console.log(urlSearchQuestions);
-    return this.http.get<any>(urlSearchQuestions);
-}
+  fetchReviewQuestion(skillId): Observable<any> {
+    let questionUrl: string = '/tShell/question/review/' + skillId;
+    return this.http.get<any>(questionUrl);
+  }
 
-
-     urlOption :string = "/tShell/question/option/add ";
-
-      addOption(option1):Observable<any>{
-       console.log("inside add option");
-     console.log(option1);
-     return this.http.post<any>(this.urlOption, option1, httpOptions);
-}
-
- 
-
+  addOption(newOption): Observable<any> {
+    let urlOption: string = "/tShell/question/option/add ";
+    return this.http.post<any>(urlOption, newOption, httpOptions);
+  }
 }
 
 
