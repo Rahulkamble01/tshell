@@ -30,6 +30,10 @@
             <h5>Error! Skill already exists, Retry</h5>
           </div>
 
+          <div *ngIf="error">
+           <app-error></app-error>
+          </div>
+
           <!-- <div *ngIf="status==1" class="alert alert-danger box-msg" role="alert">
             <h5>Error!(Retry! Or contact Admin)</h5>
           </div> -->

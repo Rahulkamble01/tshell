@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class SkillserviceService {
   getAllSkillUrl = 'tShell/skills';
-  addSkillurl= 'tShell/addskill';
+  addSkillurl = 'tShell/addskill';
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class SkillserviceService {
 
 
   addSkill(skilly): Observable<any> {
-    return this.http.post(this.addSkillurl, skilly, httpOptions); 
-   }
+    return this.http.post(this.addSkillurl, skilly, httpOptions);
+  }
 
 }

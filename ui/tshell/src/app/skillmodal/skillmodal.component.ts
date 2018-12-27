@@ -16,6 +16,7 @@ export class SkillmodalComponent implements OnInit {
   add: boolean;
   item: any;
   json: any;
+  error:any;
   status: number = 0;
   expression: any;
   @Input() name: any;
@@ -121,7 +122,7 @@ export class SkillmodalComponent implements OnInit {
   }
 
   clearAllInput() {
-    this.topics=[];
+    this.topics = [];
   }
 
 
@@ -137,41 +138,49 @@ export class SkillmodalComponent implements OnInit {
       }
     } */
 
-   /*  if (this.sameSkillName != true) { */
-      const skill = new Skill(this.addskillform.controls['name'].value, "Active", this.addskillform.controls['description'].value, this.topics, new Date());
-     /*  console.log(this.sameSkillName); */
-      console.log(skill);
-      this.SkillService.addSkill(skill).subscribe(
-        data => {
-          console.log(data);
-          this.status = data;
+    /*  if (this.sameSkillName != true) { */
+    const skill = new Skill(this.addskillform.controls['name'].value, "Active", this.addskillform.controls['description'].value, this.topics, new Date());
+    /*  console.log(this.sameSkillName); */
+    console.log(skill);
+    this.SkillService.addSkill(skill).subscribe(
+      data => {
+        console.log(data);
+        this.status = data;
 
-          console.log(this.status);
-          /*******calling the service to fetch new list of skills**********/
-          this.SkillService.getAll().subscribe(
-            data => {
-              this.allskills = data;
-              console.log(this.allskills);
-            }
-          );
-          /************************************************************* */
-          if(this.status==2){
-            this.addskillform.reset();
-            this.clearAllInput(); 
+        console.log(this.status);
+        /*******calling the service to fetch new list of skills**********/
+        this.SkillService.getAll().subscribe(
+          data => {
+            this.allskills = data;
+            console.log(this.allskills);
           }
-          
+          ,
+          error => {this.error = error
+            this.status=0;
+    }
+        );
+        /************************************************************* */
+        if (this.status == 2) {
+          this.addskillform.reset();
+          this.clearAllInput();
         }
-      );
-   /*  }
-    else {
 
-      this.status = 3;
-
-      console.log(this.status);
-      console.log("Skill already exists");
-      this.sameSkillName = false;
-
-    } */
+      },
+      error => {this.error = error
+              this.status=0;
+      }
+    )
+    ;
+    /*  }
+     else {
+ 
+       this.status = 3;
+ 
+       console.log(this.status);
+       console.log("Skill already exists");
+       this.sameSkillName = false;
+ 
+     } */
 
   }
 
