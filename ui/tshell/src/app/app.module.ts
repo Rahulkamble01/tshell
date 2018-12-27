@@ -58,6 +58,11 @@ PasswordNotEqualValidatorDirective,
     MostSearchedSkillsComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
+    SkillmodalComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    
+    
     RecentlyAddedSkillsComponent,
     LoginComponent,
     AdminSignupComponent,

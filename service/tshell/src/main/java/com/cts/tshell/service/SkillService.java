@@ -1,13 +1,16 @@
 package com.cts.tshell.service;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import javax.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.tshell.bean.Skill;
@@ -35,5 +38,22 @@ public class SkillService {
 		LOGGER.info("start ");
 		Page<Skill> topSearchedSkills = skillRepository.findBySkillTop4( PageRequest.of(0, 4));
 		return topSearchedSkills.getContent();
+	}
+	@Autowired
+	public void setSkillRepository(SkillRepository skillRepository) {
+		this.skillRepository = skillRepository;
+	}
+
+	@Transactional
+	public List<Skill> getRecent5Skills() {
+		LOGGER.info("start");
+		List<Skill> recent5Skills = skillRepository.fetchRecentSkills();
+		LOGGER.debug("recent5Skills -> " + recent5Skills);
+		if (recent5Skills.size() >= 5) {
+			LOGGER.debug("size of json data ->" + recent5Skills);
+			return recent5Skills.subList(0, 5);
+		}
+		return recent5Skills;
+
 	}
 }

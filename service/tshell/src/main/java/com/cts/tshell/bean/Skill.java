@@ -1,5 +1,6 @@
 package com.cts.tshell.bean;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,10 +19,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
-
+@NamedQueries ({
+@NamedQuery(name="Skill.fetchRecentSkills",	
+query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
 @NamedQuery(
 		name = "Skill.fetchTopSearchedSkills", 
 		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
+})
+
 @Table(name = "skill")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Skill {
@@ -48,6 +54,39 @@ public class Skill {
 	@Column(name = "sk_image")
 	private byte[] image;
 	
+	@Column(name= "sk_creation_date")
+	private Date creationDate;
+	
+	
+	public Skill(int id, String name, int searchCount, String active, int testCount, String description, byte[] image,
+			Date creationDate, List<Topic> topics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.searchCount = searchCount;
+		this.active = active;
+		this.testCount = testCount;
+		this.description = description;
+		this.image = image;
+		this.creationDate = creationDate;
+		this.topics = topics;
+	}
+
+	@Override
+	public String toString() {
+		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
+				+ ", testCount=" + testCount + ", description=" + description + ", image=" + image + ", creationDate="
+				+ creationDate + ", topics=" + topics + "]";
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
 
