@@ -43,7 +43,7 @@ public class SkillController {
 	
 	
 	@PostMapping("/addskill")
-	public int insertnewSkill(@RequestBody Skill skill) {
+	public int addOrUpdateSkill(@RequestBody Skill skill) {
 		
 		LOGGER.info("starting insertnewSkills" );
 		

@@ -124,8 +124,7 @@ public class Skill {
 /*	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
-				+ ", testCount=" + testCount + ", description=" + description + ", image=" + Arrays.toString(image)
-				+ ", topics=" + topics + "]";
+				+ ", testCount=" + testCount + ", description=" + description +", topics=" + topics + "]";
 	}
 */
 	
