@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TotalquestionsService } from '../totalquestions.service';
+import { TotalQuestionsService } from '../totalquestions.service';
+
 
 @Component({
   selector: 'app-questiongraph',
@@ -28,7 +29,7 @@ export class QuestiongraphComponent implements OnInit {
     console.log(event);
   }
 
-  constructor(private totalquestion: TotalquestionsService) { }
+  constructor(private totalquestion: TotalQuestionsService) { }
 
   ngOnInit() {
     this.totalquestion.totalquestion(1).subscribe(
