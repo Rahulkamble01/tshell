@@ -11,10 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "question")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,15 +31,15 @@ public class Question {
 	private String status;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "qu_qd_id")
+	@JoinColumn(name = "qu_qd_id")	
 	private QuestionDifficultyLevel questionDifficultyLevel;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "qu_qt_id")
+	@JoinColumn(name = "qu_qt_id")	
 	private QuestionAnswerType questionAnswerType;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "qu_created_by_us_id")
+	@JoinColumn(name = "qu_created_by_us_id")	
 	private User createdUser;
 
 	

@@ -14,16 +14,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
-
+@NamedQueries({ @NamedQuery(name = "User.fetchByEmployeeId", query = " select distinct u from User u left join fetch u.skills"
+		+ " where u.employeeId=:employeeId ") })
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "us_id")
+	@Column(name = "us_id")	
 	private int id;
 
 	@Column(name = "us_name")
@@ -36,7 +41,8 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
+	@JoinColumn(name = "us_ur_id")
+	@JsonView(Views.Internal.class)
 	private Role role;
 
 	@Column(name = "us_emp_id")

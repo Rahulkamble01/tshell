@@ -48,10 +48,11 @@ export class LoginComponent implements OnInit {
       console.log(password);
       this.service.login();
       this.router.navigate(['/authenticate']);
-    } else if (employeeId == '123456' && password == '123456') {
+    } else if (employeeId == '729714' && password == '123') {
       console.log(employeeId);
       console.log(password);
       this.service.learnerLogin();
+      this.service.employeeLoggedIn=employeeId;
       /*   this.router.navigate(['/assessmenthistory']); */
       this.router.navigate(['/dash']);
       /*   this.router.navigate(['/learner-homepage']); */
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
       this.service.logout();
       this.router.navigate(['/login']);
     }
+    
   }
   sendMail() {
     console.log('This is check!');

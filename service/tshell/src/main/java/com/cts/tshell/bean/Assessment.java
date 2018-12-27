@@ -2,6 +2,7 @@ package com.cts.tshell.bean;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +17,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "assessment")
-@NamedQueries({ @NamedQuery(name = "Assessment.findUserHistory", query = "select distinct a from Assessment a " 
-		+ " left join a.skill " + " left join a.user u " 
-		+ " left join u.role " + " left join a.assessmentQuestions q " 
-		+ " left join q.assessmentQuestionOption o "+ " left join o.assessmentOption "
-		+ " where u.employeeId=:employeeId") })
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@NamedQueries({ 
+				
+				@NamedQuery(name="Assessment.findUserHistory",query="select distinct a from Assessment a "
+		+ "left join fetch a.skill left join fetch a.user u left join fetch a.assessmentQuestions"		
+		+ " where u.employeeId=:id") ,
+			
+})
+
 
 public class Assessment {	
 

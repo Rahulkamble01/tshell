@@ -7,7 +7,7 @@ export class AuthService {
 
   isAdminLoggedIn = false;
   isLearnerLoggedIn = false;
-
+  employeeLoggedIn :any=0;
   constructor() { }
 
   login() {

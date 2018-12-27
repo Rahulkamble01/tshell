@@ -10,26 +10,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Assessment;
+import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.AssessmentService;
+import com.cts.tshell.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class AssessmentController {
 	public AssessmentService assessmentService;
-
+	
+	@Autowired
+	public UserService userService;
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentController.class);
 	
 	@Autowired
 	public void setAssessmentService(AssessmentService assessmentService) {
 		this.assessmentService = assessmentService;
-	}
+	}	
 	
-	@GetMapping("/getUser/{employeeId}")
-	public List<Assessment> getUserId(@PathVariable("employeeId") int employeeId) {
+	@GetMapping("/getAssessment/{userId}")
+	public String getAssessmentsOfUserById(@PathVariable("userId") int userId) throws JsonProcessingException{
 		LOGGER.info("start");
-		LOGGER.debug("employeeId: {} " , employeeId);
+		LOGGER.debug("userId: {} " , userId);
 		LOGGER.info("end");
-		return assessmentService.getUserId(employeeId);
+		List<Assessment> assessments=assessmentService.getAssessmentsOfUserById(userId);
+		ObjectMapper mapper = new ObjectMapper();
+		String result=mapper.writerWithView(Views.Public.class).writeValueAsString(assessments);
+		return result;
 	}
-	
-	
 }

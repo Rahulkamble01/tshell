@@ -65,5 +65,11 @@ public class AssessmentQuestionOption {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-
+/*
+	@Override
+	public String toString() {
+		return "AssessmentQuestionOption [id=" + id + ", assessmentQuestion=" + assessmentQuestion
+				+ ", assessmentOption=" + assessmentOption + ", selected=" + selected + "]";
+	}
+*/
 }
