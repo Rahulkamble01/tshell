@@ -51,6 +51,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
   
   count1 = 0;
   option: string;
+  skills:string[] = ['java', 'oops', 'html' , 'css'];
   description: string = "description";
   option1 = {
     answer: true,
@@ -82,7 +83,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
     }
 
   addOptions() {
-    if(this.count<=4){
+    if(this.count< 4){
     this.options.push(this.fb.control(''));
     this.count++;
   }
