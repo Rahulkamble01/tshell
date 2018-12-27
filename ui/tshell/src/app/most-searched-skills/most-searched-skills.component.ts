@@ -49,6 +49,7 @@ export class MostSearchedSkillsComponent implements OnInit {
        
       },
       error => {
+        console.log("inside error");
         this.error=error;
         
         console.log(error);

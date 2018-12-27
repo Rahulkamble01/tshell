@@ -12,6 +12,7 @@ export class SearchTop5SkillsService {
 
   getSkills():Observable<any>{
     console.log("inside top 4 searched skill service");
+    console.log( this.http.get<any>(this.url));
     return this.http.get<any>(this.url);
 
   }
