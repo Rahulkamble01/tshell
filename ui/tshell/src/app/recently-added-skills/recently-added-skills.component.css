@@ -5,7 +5,9 @@
 .badge{
     font-weight: 400;
     line-height: 1.2;   
-    padding: 10px
+    padding: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 8px;
 }
 
 
