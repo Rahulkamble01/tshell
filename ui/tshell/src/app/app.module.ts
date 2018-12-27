@@ -60,7 +60,7 @@ PasswordNotEqualValidatorDirective,
     SkillmodalComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
-    TotalquestionComponent,
+    
     
     RecentlyAddedSkillsComponent,
     LoginComponent,
