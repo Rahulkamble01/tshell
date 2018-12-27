@@ -8,9 +8,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cts.tshell.bean.Assessment;
 import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
+import com.cts.tshell.repository.AssessmentQuestionRepository;
 import com.cts.tshell.repository.QuestionRepository;
 import com.cts.tshell.repository.SkillRepository;
 import com.cts.tshell.repository.TopicRepository;
@@ -27,11 +29,13 @@ public class QuestionService {
 	@Autowired 
 	private QuestionRepository questionRepository;
 	
+	
+	
 	public List<Skill> fetchAllQuestion(int skillId){
 		return skillRepository.fetchAllSkillQuestion(skillId);
 	}
-	public List<Question> getAllQuestion(int questionId){
-		 List<Question> questionList = questionRepository.fetchAllQuestion(questionId);
+	public List<Question> getQuestionById(int questionId){
+		 List<Question> questionList = questionRepository.fetchQuestionById(questionId);
 		 //System.out.println(questionList.size());
 		 for (Question question : questionList ) {
 			 for (Topic topic : question.getTopicList()){
@@ -49,11 +53,9 @@ public class QuestionService {
 	
 	
 	public  Set<Integer>  fetchQuestionsID(int skillId){
-		 int POOL_SIZE = 20;
-		 int VAL_COUNT = 5;
-
+		 
 		 long[]  mapping = questionRepository.getQuestionId(skillId);
-		 long[] results;
+		 
 		 int max = mapping.length;
 		 int numbersNeeded = 40;
 		 if (max < numbersNeeded)
@@ -78,6 +80,5 @@ public class QuestionService {
 		return questionRepository.findAll();
 	}
 	
-	
-	
+		
 }

@@ -150,5 +150,10 @@ public class Assessment {
 		this.questionIds = questionIds;
 	}
 
+	@Override
+	public String toString() {
+		return "Assessment [id=" + id + "]";
+	}
+
 	
 }

@@ -25,10 +25,14 @@
     <h3 class=" border-bottom border-dark pb-4 text-center "> Question {{pager.index + 1}} of {{pager.count}}. </h3>
     <div class="p-1 scroll-questions" id="style-1">
       <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
-      <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
-        <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
+      <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of questionIds; let index = index;">
+        <button type="button" class="{{ isAnswered(question,index)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
           (click)="goTo(index)">{{index + 1}}</button>
       </span>
+      <!-- <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
+        <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
+          (click)="goTo(index)">{{index + 1}}</button>
+      </span> -->
     </div>
     <div class="legends pt-2">
       <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered

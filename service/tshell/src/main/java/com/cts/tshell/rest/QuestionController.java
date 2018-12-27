@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,25 +32,20 @@ public class QuestionController {
 		return questionService.fetchAllQuestion(id);
 	}
 
-	//QRepositoery
-	/*@GetMapping("/all/{id}")
-	public List<Question> fetchAllQuestion(@PathVariable int id) {
+	// QRepositoery
+	/*
+	 * @GetMapping("/all/{id}") public List<Question>
+	 * fetchAllQuestion(@PathVariable int id) {
+	 * LOGGER.info("START : getAllQuestion()  of QuestionController");
+	 * LOGGER.debug("SkillId {}", id); return
+	 * questionService.getAllQuestion(id); }
+	 */
+
+	@GetMapping("/questionId/{questionId}")
+	public List<Question> fetchAllQuestion(@PathVariable int questionId) {
 		LOGGER.info("START : getAllQuestion()  of QuestionController");
-		LOGGER.debug("SkillId {}", id);
-		return questionService.getAllQuestion(id);
-	}*/
-	
-	@PostMapping("/all")
-	public List<Question> fetchAllQuestion(@RequestBody int[] questionIDs) {
-		LOGGER.info("START : getAllQuestion()  of QuestionController");
-		LOGGER.debug("Randomised Question Ids {}", questionIDs);
-		List<Question> questions = new ArrayList<Question>();
-		for(int questionId : questionIDs ){
-			List<Question> question = questionService.getAllQuestion(questionId);
-			questions.addAll(question);
-		}
-		
-		return questions;
+		LOGGER.debug("Question Id {}", questionId);
+		return questionService.getQuestionById(questionId);
 	}
 
 	@GetMapping("/allquestionid/{skillId}")
@@ -60,6 +54,9 @@ public class QuestionController {
 		LOGGER.debug("SkillId :  {}", skillId);
 		return questionService.fetchQuestionsID(skillId);
 	}
-
-	
+/*
+	@GetMapping("/save")
+	public void sav(){
+		questionService.
+	}*/
 }

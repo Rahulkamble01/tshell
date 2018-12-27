@@ -16,8 +16,9 @@ const httpOptions = {
 export class ExitAssesmentService {
   testurl = '/tShell/test';
   allQuestionIdURL = '/tShell/question/allquestionid/';
-  questionSetUrl = '/tShell/question/all';
-  startAssesmentUrl =  '/tShell/start/assessment';
+  questionUrl = '/tShell/question/questionId/';
+  startAssesmentUrl =  '/tShell/assessment/start';
+  saveResponseUrl = '/tShell/assessment/saveresponse';
   constructor(private http: HttpClient) { }
 
   getQuestionId(id): Observable<any> {
@@ -27,14 +28,17 @@ return this.http.get(this.allQuestionIdURL + id);
   // test(): Observable<any> {
   //   return this.http.get(this.testurl);
   // }
-  getQuestionSet(json): Observable<any> {
-    return this.http.post( this.questionSetUrl, json, httpOptions );
+  getQuestion(json): Observable<any> {
+    return this.http.get( this.questionUrl + json);
   }
 
   startAssessment(json): Observable<any> {
     return this.http.post( this.startAssesmentUrl, json, httpOptions );
   }
 
+  saveAssessmentResponse(json): Observable<any> {
+    return this.http.post( this.saveResponseUrl, json, httpOptions );
+  }
   get(url: string) {
     console.log(url);
     return this.http.get(url);

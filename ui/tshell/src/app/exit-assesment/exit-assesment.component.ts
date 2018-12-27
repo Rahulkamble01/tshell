@@ -17,20 +17,25 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     [{ "id": 1, "name": "Java", "searchCount": 25, "active": "yes", "testCount": 10, "description": "Java Skill ", "image": "a", "topics": [{ "id": 1, "name": "Inheritance", "questions": [{ "id": 1, "question": "Which of the following is true about inheritance in Java?", "status": "Approved", "questionDifficultyLevel": { "id": 3, "description": "Hard" }, "questionAnswerType": { "id": 2, "type": "Multiple" }, "options": [{ "id": 7, "description": "Private methods are final.", "answer": true }, { "id": 8, "description": "Protected members are accessible within a package and ", "answer": true }, { "id": 9, "description": "Protected methods are final.", "answer": false }, { "id": 10, "description": "We cannot override private methods. ", "answer": true }] }, { "id": 2, "question": "A class member declared protected becomes a member of subclass of which type?", "status": "Approved", "questionDifficultyLevel": { "id": 2, "description": "Meduim" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 11, "description": " public member", "answer": false }, { "id": 12, "description": " private member", "answer": true }, { "id": 13, "description": "protected member", "answer": false }, { "id": 14, "description": "Static Member", "answer": false }] }, { "id": 3, "question": "Which of this keyword must be used to inherit a class?", "status": "Approved", "questionDifficultyLevel": { "id": 1, "description": "Easy" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 15, "description": "super", "answer": false }, { "id": 16, "description": "this", "answer": false }, { "id": 17, "description": "extend", "answer": false }, { "id": 18, "description": "extends", "answer": true }] }] }, { "id": 2, "name": "Abstraction", "questions": [] }, { "id": 3, "name": "Exception Handling", "questions": [{ "id": 1, "question": "Which of the following is true about inheritance in Java?", "status": "Approved", "questionDifficultyLevel": { "id": 3, "description": "Hard" }, "questionAnswerType": { "id": 2, "type": "Multiple" }, "options": [{ "id": 7, "description": "Private methods are final.", "answer": true }, { "id": 8, "description": "Protected members are accessible within a package and ", "answer": true }, { "id": 9, "description": "Protected methods are final.", "answer": false }, { "id": 10, "description": "We cannot override private methods. ", "answer": true }] }, { "id": 2, "question": "A class member declared protected becomes a member of subclass of which type?", "status": "Approved", "questionDifficultyLevel": { "id": 2, "description": "Meduim" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 11, "description": " public member", "answer": false }, { "id": 12, "description": " private member", "answer": true }, { "id": 13, "description": "protected member", "answer": false }, { "id": 14, "description": "Static Member", "answer": false }] }, { "id": 3, "question": "Which of this keyword must be used to inherit a class?", "status": "Approved", "questionDifficultyLevel": { "id": 1, "description": "Easy" }, "questionAnswerType": { "id": 1, "type": "Single" }, "options": [{ "id": 15, "description": "super", "answer": false }, { "id": 16, "description": "this", "answer": false }, { "id": 17, "description": "extend", "answer": false }, { "id": 18, "description": "extends", "answer": true }] }] }, { "id": 4, "name": "Arrays", "questions": [] }] }]
     ;
   quizes: any[];
-  questionId: any;
+  qId: any;
+  questionIds: any;
+  questionId: number;
   result: any;
   taken: any;
   len: any;
-  questionSet: any;
+  QuesJson: any;
+  question: Question;
   samplearray: any = [];
   startAssesmentJson: any;
   assesmentDetails: any;
-  quiz: Quiz = new Quiz(null);
+  temp: any = [];
+  assesmentOptionssss: any = [];
+  quiz: Quiz = new Quiz(null, null);
   // topics: Topic = new Topic(null);
 
   topics: any = [];
   questions: any = [];
-  question: any = [];
+
   options: any = [];
 
   mode = 'quiz';
@@ -49,7 +54,8 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     'showPager': true,
     'theme': 'none'
   };
-
+  AnsweredStatus: any;
+  AnsweredStatusArray: any = [];
   pager = {
     index: 0,
     size: 1,
@@ -85,92 +91,39 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
       //  this.loadQuiz(this.questionSet);
 
     });
-/*
-    console.log('JSON DATA IS :');
-    console.log(this.json);
-    for (const topics of this.json) {
-      this.topics.push(topics.topics);
-    }
 
-    console.log(this.topics);
-    for (let i = 0; i < this.topics.length; i++) {
-      console.log('inside topics.length : ' + i);
-      this.topics[i].forEach(x => {
-        this.questions.push(x.questions);
-      });
-    }
-
-    console.log('This.questions DATA IS :');
-    console.log(this.questions);
-    for (let i = 0; i < this.questions.length; i++) {
-      console.log('inside topics.length : ' + i);
-      for (const q of this.questions[i]) {
-        //  console.log('queistion is ' + q.question);
-        this.question.push(q.question);
-      }
-    }
-    console.log('This.question DATA IS :');
-    console.log(this.question);
-*/
     this.assesmentService.getQuestionId(1).subscribe(data => {
-      this.questionId = data;
+      this.questionIds = data;
+      console.log(this.questionIds);
+      this.questionId = this.questionIds[this.pager.index];
       console.log(this.questionId);
-      this.getRandom(this.questionId, 40);
-      console.log(this.result);
-      this.assesmentService.getQuestionSet(this.result).subscribe(d => {
-        this.questionSet = d;
-        console.log(this.questionSet);
-      this.loadQuiz(this.questionSet);
-
+      this.assesmentService.getQuestion(this.questionId).subscribe(d => {
+        this.question = d;
+        this.loadQuiz();
+        this.loadQuestions(this.question, this.pager.index);
+        console.log(this.question);
       });
 
     });
 
-
-
-    /*    $(document).ready(function () {
-          countdown(2);
-        });*/
-
-
-
-    // this.quizes = this.quizService.getAll();
-    // this.quizName = this.quizes[0].id;
-    // this.loadQuiz(this.quizName);
-   // this.loadQuiz(this.json);
+    // tslint:disable-next-line:max-line-length
+    // this.quizes = this.quizService.getAll();    // this.quizName = this.quizes[0].id;    // this.loadQuiz(this.quizName);  // this.loadQuiz(this.json);
 
   }
-  /****** Using service******************
-    loadQuiz(quizName: string) {
-      this.quizService.get(quizName).subscribe(res => {
-        this.quiz = new Quiz(res);
-        this.pager.count = this.quiz.questions.length;
-        this.startTime = new Date();
-        this.timer = setInterval(() => { this.tick(); }, 1000);
-        this.duration = this.parseTime(this.config.duration);
-      });
-      this.mode = 'quiz';
-    }
-  */
 
 
+  loadQuestions(json, index: number) {
+    this.quiz = new Quiz(json, index);
+  }
   // Without Service
-  loadQuiz(json) {
-   // json.forEach(res => {
-      console.log('length of json is' + json.length);
-      // console.log('length of topics.question is' + this.topics.questions.length);
-      this.quiz = new Quiz(json);
-      this.pager.count = this.quiz.questions.length;
-      console.log('length of json is' + this.pager.count);
-      console.log(this.quiz.questions);
-      this.startTime = new Date();
-      this.timer = setInterval(() => { this.tick(); }, 1000);
-      this.duration = this.parseTime(1200);
-  //  });
+  loadQuiz() {
+    this.pager.count = 40;
+    console.log('length of json is' + this.pager.count);
+    console.log(this.quiz.questions);
+    this.startTime = new Date();
+    this.timer = setInterval(() => { this.tick(); }, 1000);
+    this.duration = this.parseTime(1200);
     this.mode = 'quiz';
-    // console.log(this.quiz);
-    // console.log(this.quiz.topics);
-    // console.log(this.quiz.topics);
   }
 
   tick() {
@@ -190,59 +143,92 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     return `${mins}:${secs}`;
   }
 
-  getRandom(arr, n) {
-    this.result = new Array(n),
-      this.len = arr.length,
-      this.taken = new Array(this.len);
-    if (n > this.len) {
-      throw new RangeError("getRandom: more elements taken than available");
-    }
-    while (n--) {
-      const x = Math.floor(Math.random() * this.len);
-      this.result[n] = arr[x in this.taken ? this.taken[x] : x];
-      this.taken[x] = --this.len in this.taken ? this.taken[this.len] : this.len;
-    }
-    return this.result;
-  }
+
 
   get filteredQuestions() {
-    return (this.quiz.questions) ?
-      this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+    return this.quiz.questions;
+    // this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
   }
-  /*
-    get filteredQuestions() {
-      return (this.questions) ?
-        this.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
-    }*/
-  
-    onSelect(question: Question, option: Option) {
-      if (question.answerType.id === 1 || question.answerType.id === 2) {
-        question.options.forEach((x) => {
-          if (x.id !== option.id) {
-            console.log('option ' + option.id + ' x.id : ' + x.id);
-            x.selected = false;
-            console.log('inside on Select selected : ' + x.selected);
-          }
-        });
-      }
 
-      if (this.config.autoMove) {
-        this.goTo(this.pager.index + 1);
-      }
+  onSelect(question: Question, option: Option) {
+    console.log(question);
+    console.log(option);
+    if (question.answerType.id === 1 || question.answerType.id === 2) {
+      question.options.forEach((x) => {
+        if (x.id !== option.id) {
+          console.log('option ' + option.id + ' x.id : ' + x.id);
+          x.selected = false;
+          console.log('inside on Select selected : ' + x.selected);
+        }
+      });
     }
-  
+
+    if (this.config.autoMove) {
+      this.goTo(this.pager.index + 1);
+    }
+    this.temp = question;
+    this.qId = question.id;
+    // this.isAnswered(question);
+    // this.isAnsweredStatus();
+  }
+  isAnswered(questId) {
+    if (questId == this.qId) {
+      // return this.temp.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+    }
+  };
   goTo(index: number) {
     if (index >= 0 && index < this.pager.count) {
       this.pager.index = index;
+      this.questionId = this.questionIds[this.pager.index];
+      console.log(this.questionId);
+      this.assesmentService.getQuestion(this.questionId).subscribe(d => {
+        this.question = d;
+        this.loadQuestions(this.question, this.pager.index);
+        console.log(this.question);
+        this.saveResponse();
+      });
       this.mode = 'quiz';
+      console.log(this.quiz.questions);
     }
   }
-    isAnswered(question: Question) {
-           return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
-    };
-    isCorrect(question: Question) {
-      return question.options.every(x => x.selected === x.answer) ? 'correct' : 'wrong';
-    };
+
+  saveResponse() {
+    this.temp.options.forEach(o => {
+      this.assesmentOptionssss.push({
+        id: o.id,
+        description: o.description,
+        answer: o.answer
+      }
+      );
+    });
+    this.QuesJson = JSON.stringify({
+      assessment: this.assesmentDetails,
+      question:  this.temp ,
+      correct: 'false',
+      assessmentOption: this.assesmentOptionssss,
+      });
+      console.log(this.temp);
+      console.log(this.QuesJson);
+    this.assesmentService.saveAssessmentResponse(this.QuesJson).subscribe();
+  }
+  /*
+  isAnswered(question) {
+    this.AnsweredStatus = question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+    this.qId = question.id;
+
+  };*/
+  /*
+    isAnsweredStatus(questId, index) {
+  
+      if (questId == this.qId && index == this.pager.index) {
+        this.AnsweredStatusArray.splice(index, 0, this.temp.options.find(x => x.selected) ? 'Answered' : 'Not Answered');
+  
+      }
+      return this.AnsweredStatusArray[index];
+    }*/
+  isCorrect(question: Question) {
+    return question.options.every(x => x.selected === x.answer) ? 'correct' : 'wrong';
+  };
 
   /* onSubmit() {
      let answers = [];
@@ -256,7 +242,6 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
    }
  */
   ngOnDestroy() {
-    // this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'red';
     this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', '#989D9E');
   }
 

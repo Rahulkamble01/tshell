@@ -26,14 +26,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "question")
 
 @NamedQueries({
-	@NamedQuery(name = "Question.fetchAllQuestion", 
+	@NamedQuery(name = "Question.fetchQuestionById", 
 				query = "select distinct q from Question q " +
 						"left join fetch q.questionDifficultyLevel t " + 
 						"left join fetch q.questionAnswerType t " + 
 						"left join fetch q.options t " + 
 						"left join fetch q.topicList t " + 
 						"where q.status ='Approved' " + 
-						"and q.id = :skillId "+ 
+						"and q.id = :questionId "+ 
 						" "),
 	}) 
 

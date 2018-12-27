@@ -24,7 +24,7 @@ public class AssessmentQuestionOption {
 	@JoinColumn(name="ao_aq_id")
 	private AssessmentQuestion assessmentQuestion;
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.MERGE)
 	@JoinColumn(name="ao_op_id")
 	private Option assessmentOption;
 	

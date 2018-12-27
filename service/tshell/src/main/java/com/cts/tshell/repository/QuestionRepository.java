@@ -10,7 +10,7 @@ import com.cts.tshell.bean.Question;
 
 public interface QuestionRepository extends JpaRepository<Question,Integer> {
 
-	List<Question> fetchAllQuestion(@Param("skillId")int skillId);
+	List<Question> fetchQuestionById(@Param("questionId")int questionId);
 	Question findQuestionById(int id);
 	
 	
