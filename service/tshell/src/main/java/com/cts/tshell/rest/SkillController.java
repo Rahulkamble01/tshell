@@ -155,15 +155,4 @@ public class SkillController {
 		LOGGER.debug("SkillController -> {}", skills);
 		return skills;
 	}
-
-
-
-
-
-
-
-}
-
-class TopicObject {
-
 }

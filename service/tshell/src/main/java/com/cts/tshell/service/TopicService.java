@@ -38,10 +38,4 @@ public class TopicService {
 
 	}
 
-
-	public Topic getTopicByName(int skillId) {
-		return topicRepository.findSkillTopic(skillId);
-		
-	}
-
 }

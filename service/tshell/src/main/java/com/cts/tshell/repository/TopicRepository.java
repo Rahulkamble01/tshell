@@ -10,6 +10,4 @@ import com.cts.tshell.bean.Topic;
 public interface TopicRepository extends JpaRepository<Topic,Integer>{
 		
 	Topic getTopicByName(String TopicName);
-	
-	Topic findSkillTopic(@Param("skillId") int skillId);
 }
