@@ -7,16 +7,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
-@Table(name="user_role")
+@Table(name = "user_role")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Role {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ur_id")
+	@Column(name = "ur_id")
+	@JsonView(Views.Internal.class)
 	private int id;
-	
-	@Column(name="ur_role")
+
+	@Column(name = "ur_role")
 	private String name;
 
 	public int getId() {
@@ -34,5 +40,10 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + "]";
+	}
+
 }

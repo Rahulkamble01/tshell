@@ -80,23 +80,19 @@ export class SkillmodalComponent implements OnInit {
         '',
         [Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(50),
-        Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
-
+        Validators.maxLength(45)
         ]),
       description: new FormControl(
         '',
         [Validators.required,
-        Validators.minLength(10),
         Validators.maxLength(400),
         ]),
 
       topicName: new FormControl(
         '',
         [
-          Validators.minLength(2),
-          Validators.maxLength(100),
-          Validators.pattern(/^[a-zA-Z ._-]+$/),
+          Validators.minLength(1),
+          Validators.maxLength(45)
         ]),
       image: new FormControl(''),
     });

@@ -16,10 +16,10 @@
       <div class="modal-body">
         <div class="container ">
 
-          <div *ngIf="status==2" class="alert alert-success box-msg" role="alert">
+          <div *ngIf="status==2"  class="alert alert-success" role="alert">
             <h5>New Skill Added</h5>
           </div>
-          <div *ngIf="status==1" class="alert alert-danger box-msg" role="alert">
+          <div *ngIf="status==1"  class="alert alert-danger" role="alert">
             <h5>Error! Skill already exists, Retry</h5>
           </div>
 
@@ -45,11 +45,8 @@
                 <div *ngIf="addskillform.get('name').errors.required" class="aletry">* Skill Name is required</div>
 
                 <div *ngIf="addskillform.get('name').errors.maxlength" class="aletry"> Skill Name must be
-                  maximun 50
+                  maximun 45
                   characters</div>
-                <div *ngIf="addskillform.get('name').errors.pattern" class="aletry"> Skill Name must not
-                  contain special charecters
-                </div>
               </div>
             </div>
           </div>
@@ -66,9 +63,6 @@
                   Name is required</div>
                 <div *ngIf="addskillform.get('description').errors.maxlength" class="aletry"> skill Description
                   must be maximun 400
-                  characters</div>
-                <div *ngIf="addskillform.get('description').errors.minlength" class="aletry"> skill Description
-                  must be of 10
                   characters</div>
               </div>
             </div>
@@ -97,14 +91,12 @@
               </span>
               <div *ngIf="addskillform.get('topicName').touched && addskillform.get('topicName').invalid">
                 <div *ngIf="addskillform.get('topicName').errors.minlength" class="aletry"> Topic Name must be
-                  of minimum 2
+                  of minimum 1
                   characters</div>
                 <div *ngIf="addskillform.get('topicName').errors.maxlength" class="aletry"> Topic Name must be
-                  maximun 100
+                  maximun 45
                   characters</div>
-                <div *ngIf="addskillform.get('topicName').errors.pattern" class="aletry"> Topic Name must not
-                  contain numbers and special charecters
-                </div>
+               
               </div>
             </div>
           </div>

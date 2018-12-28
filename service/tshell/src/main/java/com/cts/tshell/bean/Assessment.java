@@ -17,6 +17,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "assessment")
 @NamedQueries({
@@ -25,6 +28,7 @@ import javax.persistence.Table;
 			+ "a.user u left join fetch u.role left join fetch a.assessmentQuestions "
 			+ "where s.id=:skillId order by a.score desc")
 })
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Assessment {	
 
 	@Id
