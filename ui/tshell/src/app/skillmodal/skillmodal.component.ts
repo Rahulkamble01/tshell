@@ -17,6 +17,7 @@ export class SkillmodalComponent implements OnInit {
   item: any;
   json: any;
   error: any;
+  sametopic = false;
   status: number = 0;
   expression: any;
   @Input() name: any;
@@ -27,48 +28,6 @@ export class SkillmodalComponent implements OnInit {
   /*   success = false;
     fail= false;
      */
-
-
-  skills: any = [
-    {
-      id: 1,
-      name: 'SQL',
-      active: true,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
-    }, {
-      id: 2,
-      name: 'HTML',
-      active: false,
-      top3: [
-        {
-          score: 90,
-          user: { id: 1, name: 'Arisankar M' }
-        },
-        {
-          score: 80,
-          user: { id: 2, name: 'Joseph Vijay' }
-        },
-        {
-          score: 70,
-          user: { id: 3, name: 'Vijay Kumar' }
-        }
-      ]
-    }];
-
-
 
 
 
@@ -101,12 +60,29 @@ export class SkillmodalComponent implements OnInit {
   addTopic(topicname) {
     const topic = new Topic(topicname);
     // alert(JSON.stringify(topic.name));
-    this.topics.push(topic);
-    this.clearInput();
+    let counter = 0;
+    for (let i = 0; i < this.topics.length; i++) {
+      if (topicname == this.topics[i].name) {
+        counter = 1;
+      }
+    }
+    if (counter == 0) {
+      this.topics.push(topic);
+      this.sametopic = false;
+      this.clearInput();
+    } else {
+      this.sametopic = true;
+    }
+
+
+
   }
+
+
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
     this.topics.splice(index, 1);
+    this.sametopic = false;
   }
 
   get topicName(): any {
@@ -124,7 +100,6 @@ export class SkillmodalComponent implements OnInit {
 
   addSkill() {
 
-    console.log(this.status);
 
     /* for (let i = 0; i < this.allskills.length; i++) {
       let userSkillname = this.addskillform.controls['name'].value;
@@ -142,43 +117,20 @@ export class SkillmodalComponent implements OnInit {
       data => {
         console.log(data);
         this.status = data;
-
         console.log(this.status);
-        /*******calling the service to fetch new list of skills**********/
-        this.SkillService.getAll().subscribe(
-          data => {
-            this.allskills = data;
-            console.log(this.allskills);
-          }
-          ,
-          error => {
-          this.error = error;
-            this.status = 0;
-          }
-        );
-        /************************************************************* */
         if (this.status == 2) {
+          this.error = false;
           this.addskillform.reset();
+          this.sametopic = false;
           this.clearAllInput();
         }
 
       },
       error => {
-      this.error = error;
+        this.error = error;
         this.status = 0;
       }
-    )
-      ;
-    /*  }
-     else {
- 
-       this.status = 3;
- 
-       console.log(this.status);
-       console.log("Skill already exists");
-       this.sameSkillName = false;
- 
-     } */
+    );
 
   }
 
@@ -186,12 +138,6 @@ export class SkillmodalComponent implements OnInit {
 
   ngOnInit() {
 
-    this.SkillService.getAll().subscribe(
-      data => {
-        this.allskills = data;
-        console.log(this.allskills);
-      }
-    );
   }
 
 }
