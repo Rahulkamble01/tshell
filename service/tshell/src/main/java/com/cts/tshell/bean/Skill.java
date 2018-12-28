@@ -1,6 +1,6 @@
 package com.cts.tshell.bean;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 
 @Entity
 @NamedQueries ({
@@ -70,13 +69,6 @@ public class Skill {
 		this.image = image;
 		this.creationDate = creationDate;
 		this.topics = topics;
-	}
-
-	@Override
-	public String toString() {
-		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
-				+ ", testCount=" + testCount + ", description=" + description + ", image=" + image + ", creationDate="
-				+ creationDate + ", topics=" + topics + "]";
 	}
 
 	public Date getCreationDate() {
@@ -155,5 +147,13 @@ public class Skill {
 		this.topics = topics;
 	}
 
+	
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 
 }
