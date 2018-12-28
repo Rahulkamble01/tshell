@@ -19,7 +19,7 @@ public class SkillController extends TshellController {
 	@Autowired
 	private SkillService skillService;
 
-	@GetMapping("/skill/top4searchedskills")
+	@GetMapping("/top4searchedskills")
 	public List<Skill> getTop4SearchedSkills() {
 		LOGGER.info("start ");
 		List<Skill> top4SearchedSkills = skillService.getTop4Skills();

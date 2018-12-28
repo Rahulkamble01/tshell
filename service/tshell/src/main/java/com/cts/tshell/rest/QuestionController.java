@@ -17,7 +17,7 @@ import com.cts.tshell.service.QuestionService;
 @ControllerAdvice
 @RestController
 @RequestMapping("/question")
-public class QuestionController extends TshellController {
+public class QuestionController extends TshellController{
 	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionController.class);
 
 	@Autowired
