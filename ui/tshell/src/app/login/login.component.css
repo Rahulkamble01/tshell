@@ -16,7 +16,7 @@
 #card3 {
   padding-top: 10px;
   font-size: 85%;
-  padding-left: 13px;
+  padding-left: 15px;
 }
 
 #card4 {
@@ -68,16 +68,12 @@
 }
 
 @media screen and (max-width: 600px){
-  
+  #loginbox {
+    margin-top: 80px;
+  } 
   .log {
    font-size:xx-large;
   }
-}
-
-@media screen and (max-width: 600px){
-  #loginbox {
-    margin-top: 80px;
-  }  
 }
 
 
