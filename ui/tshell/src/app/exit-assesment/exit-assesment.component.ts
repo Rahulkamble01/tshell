@@ -28,6 +28,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   samplearray: any = [];
   startAssesmentJson: any;
   assesmentDetails: any;
+  questionSet: any = [];
   temp: any = [];
   assesmentOptionssss: any = [];
   quiz: Quiz = new Quiz(null, null);
@@ -113,6 +114,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
 
 
   loadQuestions(json, index: number) {
+    this.questionSet.splice(index, 0, json);
     this.quiz = new Quiz(json, index);
   }
   // Without Service
@@ -147,7 +149,8 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
 
   get filteredQuestions() {
     return this.quiz.questions;
-    // this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+    // console.log(this.questionSet.slice(this.pager.index, this.pager.index + this.pager.size));
+    // return this.questionSet ? this.questionSet.slice(this.pager.index, this.pager.index + this.pager.size) : [];
   }
 
   onSelect(question: Question, option: Option) {
@@ -203,13 +206,14 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     });
     this.QuesJson = JSON.stringify({
       assessment: this.assesmentDetails,
-      question:  this.temp ,
+      question: this.temp,
       correct: 'false',
-      assessmentOption: this.assesmentOptionssss,
-      });
-      console.log(this.temp);
-      console.log(this.QuesJson);
+      assessmentQuestionOption: this.assesmentOptionssss,
+    });
+    console.log(this.temp);
+    console.log(this.QuesJson);
     this.assesmentService.saveAssessmentResponse(this.QuesJson).subscribe();
+    this.assesmentOptionssss = [];
   }
   /*
   isAnswered(question) {

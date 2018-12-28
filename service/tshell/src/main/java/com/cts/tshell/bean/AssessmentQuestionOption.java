@@ -20,7 +20,7 @@ public class AssessmentQuestionOption {
 	@Column(name="ao_id")
 	private int id;
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.MERGE)
 	@JoinColumn(name="ao_aq_id")
 	private AssessmentQuestion assessmentQuestion;
 	

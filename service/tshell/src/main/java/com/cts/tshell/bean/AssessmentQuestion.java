@@ -31,7 +31,7 @@ public class AssessmentQuestion {
 	@JoinColumn(name="aq_qu_id")
 	private Question question;
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion",cascade=CascadeType.MERGE)
 	private List<AssessmentQuestionOption> assessmentQuestionOption;
 	
 	@Column(name="aq_is_correct")
