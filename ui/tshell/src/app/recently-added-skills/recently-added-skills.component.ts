@@ -9,16 +9,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RecentlyAddedSkillsComponent implements OnInit {
 
-  recentSkillList:any[];
-
+  recentSkillList:any[]=[];
+  recentSkillListLength : any;
+  error:any;
   constructor(private skillService: SkillService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.skillService.getrecentSkill().subscribe(
       data => {
-
         this.recentSkillList = data;
+        this.recentSkillListLength = this.recentSkillList.length;
+
         console.log(data)
+      },
+      error => {
+        this.error=error;
+        console.log(this.error);
       }
       
     );
@@ -26,6 +32,7 @@ export class RecentlyAddedSkillsComponent implements OnInit {
   
 
   /* click(){
+
   this.router.navigate(['skills']);
 } */
 

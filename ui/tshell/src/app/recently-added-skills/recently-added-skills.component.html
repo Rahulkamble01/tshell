@@ -4,14 +4,19 @@
 </div>
 <div class="row " style="margin:0px;padding:10px;margin-bottom:0px;">
   <div>
-    <div *ngIf="recentSkillList==''">
+    <div *ngIf="recentSkillListLength==0">
       <div>There are no skills added in last 30 days</div>
     </div>
-    <div *ngIf="!recentSkillList==''">
+    <div *ngIf="recentSkillListLength>0">
       <h2 *ngFor="let recentSkill of recentSkillList" style="display:inline-block">
         <a href="/skills/:id" class="badge badge-primary viewskills">{{recentSkill[1]}}</a>
       </h2>
     </div>
+    <div *ngIf="error">
+        <div class="error-padding-top">
+            <app-error></app-error>
+        </div>
+    </div> 
 
   </div>
 </div>
