@@ -51,7 +51,7 @@ export class SkillmodalComponent implements OnInit {
         '',
         [
           Validators.minLength(1),
-          Validators.maxLength(45)
+          Validators.maxLength(70)
         ]),
       image: new FormControl(''),
     });
@@ -61,8 +61,12 @@ export class SkillmodalComponent implements OnInit {
     const topic = new Topic(topicname);
     // alert(JSON.stringify(topic.name));
     let counter = 0;
+   
+    if (topicname =='') {
+      counter = 1;
+    }
     for (let i = 0; i < this.topics.length; i++) {
-      if (topicname == this.topics[i].name) {
+      if (topicname == this.topics[i].name || topicname =='') {
         counter = 1;
       }
     }
@@ -117,13 +121,16 @@ export class SkillmodalComponent implements OnInit {
       data => {
         console.log(data);
         this.status = data;
+        this.error = false;
         console.log(this.status);
         if (this.status == 2) {
-          this.error = false;
+
           this.addskillform.reset();
           this.sametopic = false;
           this.clearAllInput();
         }
+       
+
 
       },
       error => {

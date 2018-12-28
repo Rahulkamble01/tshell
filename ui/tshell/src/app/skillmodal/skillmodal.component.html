@@ -20,9 +20,8 @@
             New Skill Added
           </div>
           <div *ngIf="status==1"  class="alert alert-danger" role="alert">
-            Error! Skill already exists, Retry
+            Skill already exists
           </div>
-
           <div *ngIf="error">
            <app-error></app-error>
           </div>
@@ -94,11 +93,11 @@
                   of minimum 1
                   characters</div>
                 <div *ngIf="addskillform.get('topicName').errors.maxlength" class="aletry"> Topic Name must be
-                  maximun 45 characters
+                  maximun 70 characters
                 </div>
               </div>
               <div *ngIf="sametopic"  class="aletry" role="alert">
-                   Duplicate topic name!
+                  Empty or Duplicate topic name!
                </div>
             </div>
           </div>
