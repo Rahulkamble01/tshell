@@ -89,43 +89,6 @@ public class SkillController {
 		LOGGER.info("{}", skillToNeoSkill);
 		skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
 	}
-
-	// @RequestMapping(value = "/addSkill", method = RequestMethod.POST)
-	// public int addOrUpdateSkill(@RequestBody Skill skill) {
-	// LOGGER.info("starting addOrUpdateSkills");
-	// System.out.println(skill);
-	// String skillName = skill.getName();
-	// System.out.println(skillName);
-	// List<Topic> topics = skill.getTopics();
-	//// Skill skill1 = null;
-	//// try{
-	//// skill1 = skillService.getSkillByName(skillName);
-	//// System.out.println("the skill we get isisisisisisisis : :" + skill1);
-	//// }catch(NullPointerException e){
-	//// LOGGER.debug(""+e);
-	//// }
-	// int addStatus;
-	// if (skillService.getSkillByName(skillName) != null) {
-	// addStatus = 1;
-	// LOGGER.debug("addStatus {}", addStatus);
-	// } else {
-	// LOGGER.debug("{Inside }");
-	// LOGGER.debug("Recived skill from Browser: " + skill);
-	// LOGGER.debug("Recived topics from Browser: " + topics);
-	//// skillService.addOrUpdateSkill(skill, skillToNeoSkill.convert(skill));
-	//
-	// Skill skill2 = skillService.getSkillByName(skill.getName());
-	// LOGGER.debug("Recived skill from sevice: " + skill2);
-	// for (Topic topic : topics) {
-	// topic.setSkill(skill2);
-	// topicService.saveTopic(topic);
-	// }
-	// skill.setTopics(topics);
-	// addStatus = 2;
-	// LOGGER.info("ending inserting Skill");
-	// }
-	// return addStatus;
-	// }
 	
 	
 	@PostMapping("/addskill")
@@ -156,7 +119,3 @@ public class SkillController {
 		return addStatus;	
 	}
 }
-
-
-//curl -s -H "Content-Type: application/json" -X POST -d '{"id":123, "name":"adil", "description":"aasd","searchCount":5,"active":"Yes", "testCount":5, "image": null, "createdOn": null }' http://localhost:8080/tShell/updateSkill
-
