@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.cts.tshell.bean.ErrorResponse;
 
 public class TshellController {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(TshellController.class);
 
 	@ExceptionHandler(Exception.class)
@@ -24,7 +25,5 @@ public class TshellController {
 		//error.setErrorMessage(ex.getMessage());
 		error.setErrorMessage("System Error");
 		return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-	
 	}
-
 }
