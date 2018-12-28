@@ -178,7 +178,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     if (questId == this.qId) {
       // return this.temp.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
     }
-  };
+  }
   goTo(index: number) {
     if (index >= 0 && index < this.pager.count) {
       this.pager.index = index;
@@ -214,6 +214,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     console.log(this.QuesJson);
     this.assesmentService.saveAssessmentResponse(this.QuesJson).subscribe();
     this.assesmentOptionssss = [];
+    this.temp = [];
   }
   /*
   isAnswered(question) {
@@ -223,26 +224,26 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   };*/
   /*
     isAnsweredStatus(questId, index) {
-  
+
       if (questId == this.qId && index == this.pager.index) {
         this.AnsweredStatusArray.splice(index, 0, this.temp.options.find(x => x.selected) ? 'Answered' : 'Not Answered');
-  
+
       }
       return this.AnsweredStatusArray[index];
     }*/
   isCorrect(question: Question) {
     return question.options.every(x => x.selected === x.answer) ? 'correct' : 'wrong';
-  };
+  }
 
   /* onSubmit() {
      let answers = [];
      this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
- 
+
      // Post your data to the server here. answers contains the questionId and the users' answer.
      console.log(this.quiz.questions);
      this.mode = 'result';
      this.router.navigate(['/assesmentscore']);
- 
+
    }
  */
   ngOnDestroy() {
