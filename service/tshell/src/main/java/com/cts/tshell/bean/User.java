@@ -19,16 +19,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
 
 @NamedQueries({
 	@NamedQuery(name="User.findByEmpId",
-			query=	" select u.employeeId,u.name,u.password,r.name from User u " + 
-					" join u.role r " + 
+			query=	" select u from User u " + 
+					" left join fetch u.role r " + 
 				    " where u.employeeId = :employeeId ")
 })
 
@@ -53,6 +52,7 @@ public class User {
 	private Role role;
 
 	@Column(name = "us_emp_id")
+	@JsonView(Views.Public.class)
 	private int employeeId;
 
 	@Column(name = "us_image")
@@ -67,6 +67,7 @@ public class User {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
+	@JsonView(Views.Internal.class)
 	private List<Skill> skills;
 
 	public int getId() {
@@ -149,11 +150,11 @@ public class User {
 		this.skills = skills;
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
 				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
 				+ lastLoginTime + ", skills=" + skills + "]";
-	}*/
+	}
 
 }

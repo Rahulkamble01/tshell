@@ -15,12 +15,15 @@ export class LoginComponent implements OnInit {
   status: boolean = false;
   error:any;
   success=true;
+  employeeIdPattern = "^(0|[1-9][0-9]*)$";
+
   constructor(private router: Router, public service: AuthService,
     public loginService: LoginService) { }
 
   form = new FormGroup({
     employeeId: new FormControl(
-      '', [Validators.required
+      '', [Validators.required,
+        Validators.pattern(this.employeeIdPattern)
       ]),
 
     password: new FormControl(
@@ -53,15 +56,14 @@ export class LoginComponent implements OnInit {
     console.log(json);
     this.loginService.authenticateUser(json)
       .subscribe(data => {
-        console.log("incoming Data: "+data)
-        console.log("User Name: "+data.user.role.name)
+        console.log("incoming Data: "+data.authenticated)
         if (data.authenticated) {
           this.service.login();
           this.service.setRole(data.user.role.name);
           this.service.setEmployeeId(data.user.employeeId);
           this.router.navigate(['/dash']);
         }
-        else {
+        else{
           this.success=false;
           this.error=false;
           

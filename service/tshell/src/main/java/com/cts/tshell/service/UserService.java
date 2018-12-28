@@ -1,7 +1,5 @@
 package com.cts.tshell.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -25,7 +23,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public List<User>  getUser(int employeeId) {
+	public User getUser(int employeeId) {
 		LOGGER.info("Start");
 		LOGGER.debug("EmployeeId: {}", employeeId);
 		LOGGER.info("End");

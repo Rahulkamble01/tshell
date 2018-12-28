@@ -14,7 +14,7 @@ import com.cts.tshell.service.SkillService;
 
 @RestController
 @RequestMapping("/skill")
-public class SkillController  {
+public class SkillController extends TshellController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
 	@Autowired
 	private SkillService skillService;
