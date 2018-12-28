@@ -29,5 +29,19 @@ public class TopicService {
 		LOGGER.debug("recived topic from topicController"+topic);
 		topicRepository.save(topic);	
 	}
+	
+	@Transactional
+	public void deleteTopic(Topic topic) {
+		LOGGER.info("Starting setSkill() inside topicService");
+		LOGGER.debug("recived topic from topicController");
+		topicRepository.delete(topic);
+
+	}
+
+
+	public Topic getTopicByName(int skillId) {
+		return topicRepository.findSkillTopic(skillId);
+		
+	}
 
 }

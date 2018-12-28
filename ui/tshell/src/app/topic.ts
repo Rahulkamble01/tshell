@@ -1,10 +1,9 @@
 
 export class Topic {
-    id:number;
+    id: number;
     name: string;
-
-
-    constructor(name) {
+    constructor(id, name) {
+        this.id = id;
         this.name = name;
     }
 }

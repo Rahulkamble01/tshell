@@ -43,11 +43,16 @@ public class SkillService {
 	}
 
 	@Transactional
+	public Skill getSkillById(int skillId) {
+		LOGGER.info("Starting getSkillbyId() inside SkillService");
+		return skillRepository.findById(skillId);
+	}
+	
+	@Transactional
 	public Skill getSkillByName(String skillname) {
 		LOGGER.info("Starting getSkillbyName() inside SkillService");
 		LOGGER.debug("recived skillname from controller: " + skillname);
-		Skill result = skillRepository.findByName(skillname);
-		return result;
+		return skillRepository.findByName(skillname);
 	}
 
 	@Transactional

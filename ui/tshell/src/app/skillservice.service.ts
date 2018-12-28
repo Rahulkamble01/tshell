@@ -17,6 +17,7 @@ export class SkillserviceService {
   updateSkillUrl = 'tShell/updateSkill';
   graphDataUrl = 'tShell/graph';
   addSkillurl = 'tShell/addskill';
+  deleteTopicUrl = "tShell/deleteTopic";
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,14 @@ export class SkillserviceService {
 
   getGraphData(): Observable<any> {
     return this.http.get(this.graphDataUrl);
+  }
+
+  deleteTopic(topicName, skillId): Observable<any> {
+    console.log(topicName, skillId);
+
+    const json = `${topicName} ${skillId}`;
+    console.log(json);
+    return this.http.post(this.deleteTopicUrl, json , httpOptions);
   }
 
 

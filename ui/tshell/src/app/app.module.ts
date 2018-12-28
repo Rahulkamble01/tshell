@@ -47,6 +47,8 @@ import { FooterComponent } from './footer/footer.component';
 import { GraphmodalComponent } from './graphmodal/graphmodal.component';
 import { ErrorComponent } from './error/error.component';
 import { EditskillmodalComponent } from './editskillmodal/editskillmodal.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,8 @@ import { EditskillmodalComponent } from './editskillmodal/editskillmodal.compone
     FooterComponent,
     GraphmodalComponent,
     ErrorComponent,
-    EditskillmodalComponent
+    EditskillmodalComponent,
+    ConfirmationDialogComponent
   ],
 
   imports: [
@@ -102,8 +105,9 @@ import { EditskillmodalComponent } from './editskillmodal/editskillmodal.compone
     ContributeQuestionService,
     AuthService,
     HttpClientModule,
+    ConfirmationDialogService
   ],
-  entryComponents: [SkillmodalComponent],
-  bootstrap: [AppComponent, EditskillmodalComponent],
+  entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

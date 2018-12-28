@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { SkillserviceService } from '../skillservice.service';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 @Component({
   selector: 'app-editskillmodal',
@@ -48,16 +49,41 @@ export class EditskillmodalComponent implements OnInit {
 
   });
 
-  constructor(public activeModal: NgbActiveModal, private skillService: SkillserviceService, private fb: FormBuilder) { }
-  addTopic(topicname) {
-    // const topic = new Topic(topicname);
-    const topic = new FormGroup({ id: new FormControl(null), name: new FormControl(topicname) });
-    this.topics.push(topic.value);
+  // tslint:disable-next-line:max-line-length
+  constructor(public activeModal: NgbActiveModal, private skillService: SkillserviceService, private fb: FormBuilder, private confirmationDialogService: ConfirmationDialogService) { }
+  addTopic(id, topicname) {
+    const topic1 = new Topic(id, topicname);
+    // let topic1 = null;
+    console.log(id + " " + topicname);
+    // if (id != null) {
+    //   topic1 = new FormGroup({ id: new FormControl(null), name: new FormControl(topicname) });
+    // } else {
+    //   topic1 = new FormGroup({ id: new FormControl(id), name: new FormControl(topicname) });
+    // }
+    this.topics.push(topic1);
     this.clearInput();
   }
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
-    this.topics.splice(index, 1);
+    console.log(index + " " + this.topics[index].name);
+
+    this.confirmationDialogService.confirm(`Deletion of ${this.topics[index].name}`, 'Do you really want to Delete ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          console.log('User confirmed:', confirmed);
+          this.skillService.deleteTopic(this.topics[index].name, this.item.id).subscribe();
+          this.topics.splice(index, 1);
+        } else {
+          console.log('User confirmed:', confirmed);
+          return;
+        }
+
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+    // this.skillService;
+
+    // this.topics.splice(index, 1);
   }
 
   get topicName(): any { return this.addskillform.get('topicName'); }
@@ -91,13 +117,11 @@ export class EditskillmodalComponent implements OnInit {
     }
   }
   ngOnInit() {
-    if (!this.add) {
-      this.addskillform.patchValue(this.item);
-      const control = <FormArray>this.addskillform.controls['topics'];
-      this.item.topics.forEach(element => {
-        control.push(new FormControl(element));
-      });
-    }
+    this.addskillform.patchValue(this.item);
+    const control = <FormArray>this.addskillform.controls['topics'];
+    this.item.topics.forEach(element => {
+      this.addTopic(element.id, element.name);
+    });
   }
 
 }

@@ -80,7 +80,7 @@
             <div class="col-lg-12 col-12 col-sm-12 col-md-12 buttonInside ">
               <span class="itwillflex">
                 <input type="text" class="form-control topicinput" formControlName="topicName" #topicname placeholder="Enter sub-topic and click + to add it">
-                <button id="erase" (click)="addTopic(topicname.value)" class=" btn btn-ts-primary btn-ts-sm fa fa-plus"
+                <button id="erase" (click)="addTopic(null, topicname.value)" class=" btn btn-ts-primary btn-ts-sm fa fa-plus"
                   [disabled]="!topicName.valid"></button>
               </span>
               <div *ngIf="addskillform.get('topicName').touched && addskillform.get('topicName').invalid">
@@ -98,10 +98,6 @@
           </div>
           <div class="row">
             <div class="col-lg-12">
-                <ul *ngFor="let topic of item.topics" class="list-inline marginzero" style="display:inline-block">
-                  <li class="badge badge-primary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
-                      (click)="removeTopic(topic)"></i></li>
-                </ul>
                 <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
                   <li class="badge badge-secondary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
                       (click)="removeTopic(topic)"></i></li>

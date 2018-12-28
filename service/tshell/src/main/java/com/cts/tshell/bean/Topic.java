@@ -13,12 +13,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "topic")
+@NamedQueries({
+	@NamedQuery(name="Topic.findSkillTopic",query="from Topic t "
+			+ "join t.skill s "
+			+ "where s.id=:skillId")
+})
 public class Topic {
 
 	@Id
@@ -33,6 +42,7 @@ public class Topic {
 	@JoinColumn(name="tp_sk_id")
 	@JsonIgnore
 	private Skill skill;
+	
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(name="topic_question",
@@ -72,6 +82,7 @@ public class Topic {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
+	
 
 	@Override
 	public String toString() {
