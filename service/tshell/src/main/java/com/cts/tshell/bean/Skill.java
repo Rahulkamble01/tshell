@@ -16,8 +16,8 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries ({
-@NamedQuery(name="Skill.fetchRecentSkills",	
-query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
+/*@NamedQuery(name="Skill.fetchRecentSkills",	
+query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),*/
 })
 @Table(name = "skill")
 public class Skill {
