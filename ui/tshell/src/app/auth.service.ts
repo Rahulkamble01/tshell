@@ -8,6 +8,7 @@ export class AuthService {
   isAdminLoggedIn = false;
   isLearnerLoggedIn = false;
   employeeLoggedIn :any=0;
+  employeeRole:any;
   constructor() { }
 
   login() {

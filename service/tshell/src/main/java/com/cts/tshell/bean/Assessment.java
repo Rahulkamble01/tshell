@@ -17,18 +17,18 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "assessment")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-@NamedQueries({ 
-				
-				@NamedQuery(name="Assessment.findUserHistory",query="select distinct a from Assessment a "
-		+ "left join fetch a.skill left join fetch a.user u left join fetch a.assessmentQuestions"		
+@NamedQueries({@NamedQuery(name="Assessment.findUserHistory",query="select distinct a from Assessment a "
+		+ "left join fetch a.skill "
+		+ "left join fetch a.user "
+		+ "u left join fetch u.role "		
 		+ " where u.employeeId=:id") ,
-			
 })
 
 
@@ -43,6 +43,7 @@ public class Assessment {
 	private String type;
 	
 	@Column(name="as_start_time")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd ")
 	private Date date;
 	
 	@Column(name="as_score")

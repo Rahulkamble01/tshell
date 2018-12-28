@@ -30,7 +30,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ChartsModule } from 'ng2-charts';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
-import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
+
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
@@ -45,6 +45,7 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ PasswordNotEqualValidatorDirective,
     AdminHomepageComponent,
     ChangepasswordComponent,
     UserprofileComponent,
-    ViewlearnerComponent,
+    ViewprofileComponent,
     SearchExistingQuestionsComponent,
     ContributeQuestionComponent,
     PreviewQuestionsComponent,

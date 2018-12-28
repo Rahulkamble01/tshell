@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
       console.log(password);
       this.service.learnerLogin();
       this.service.employeeLoggedIn=employeeId;
+      this.service.employeeRole='admin';
       /*   this.router.navigate(['/assessmenthistory']); */
       this.router.navigate(['/dash']);
       /*   this.router.navigate(['/learner-homepage']); */

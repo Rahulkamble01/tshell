@@ -17,7 +17,6 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
-import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
@@ -26,6 +25,7 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 
 const routes: Routes = [
@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: "changepassword", component: ChangepasswordComponent },
   { path: "userprofile", component: UserprofileComponent },
   { path: "assessmenthistory", component: AssessmenthistoryComponent },
-  { path: "viewprofile", component: ViewlearnerComponent },
+  { path: "viewprofile", component: ViewprofileComponent },
   { path: "questions", component: CountOfQuestionsToReviewComponent },
   { path: 'assesment', component: ExitAssesmentComponent },
   { path: 'instruction', component: InstructionComponent },

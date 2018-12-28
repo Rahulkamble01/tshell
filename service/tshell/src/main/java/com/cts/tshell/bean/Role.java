@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="user_role")
 public class Role {
@@ -14,6 +16,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ur_id")
+	@JsonView(Views.Internal.class)
 	private int id;
 	
 	@Column(name="ur_role")

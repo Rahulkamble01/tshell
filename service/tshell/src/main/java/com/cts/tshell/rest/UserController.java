@@ -33,7 +33,7 @@ public class UserController {
 		LOGGER.info("end");
 		User user=userService.getUserId(employeeId);
 		ObjectMapper mapper = new ObjectMapper();
-		String result=mapper.writerWithView(Views.Public.class).writeValueAsString(user);
+		String result=mapper.writerWithView(Views.Internal.class).writeValueAsString(user);
 		return result;
 	}
 	

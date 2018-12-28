@@ -3,7 +3,7 @@ package com.cts.tshell.bean;
 public class AuthenticationStatus {
 
 	private boolean authenticated;
-
+	private String message;
 	public AuthenticationStatus() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -12,6 +12,15 @@ public class AuthenticationStatus {
 	public AuthenticationStatus(boolean authenticated) {
 		super();
 		this.authenticated = authenticated;
+	}
+
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public boolean isAuthenticated() {

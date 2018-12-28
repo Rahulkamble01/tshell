@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ViewlearnerService } from './viewlearner.service';
+import { ViewprofileService } from './viewprofile.service';
 
-describe('ViewlearnerService', () => {
+describe('ViewprofileService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ViewlearnerService = TestBed.get(ViewlearnerService);
+    const service: ViewprofileService = TestBed.get(ViewprofileService);
     expect(service).toBeTruthy();
   });
 });
