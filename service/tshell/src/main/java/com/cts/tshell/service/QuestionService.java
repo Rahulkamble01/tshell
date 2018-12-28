@@ -37,6 +37,7 @@ public class QuestionService {
 	@Transactional
 	public Question saveOption(Option option) {
 		LOGGER.info("start");
+
 		int questionId = option.getQuestion().getId();
 		Question question = questionRepository.fetchAllQuestionDetails(questionId);
 		option.setQuestion(question);
@@ -45,7 +46,7 @@ public class QuestionService {
 		question = questionRepository.fetchQuestionDetails(questionId);
 		LOGGER.debug("Question: {}", question);
 		LOGGER.info("end");
-        return question;
+		return question;
 	}
 
 	@Transactional
@@ -65,26 +66,44 @@ public class QuestionService {
 		LOGGER.info("START");
 		LOGGER.debug("Skill Id {} ", skillId);
 		/*
+		 * 
 		 * Passing the skillId along with Pageable object with page and size
 		 * parameters to QustionRepository
+		 * 
+		 * Passing the skillId along with Pageable object with page and size
+		 * parameters to QustionRepository
+		 * 
 		 */
 		Page<Question> questionPage = questionRepository.findReviewQuestion(skillId, PageRequest.of(0, 1));
 		LOGGER.debug("Question Page : {}", questionPage);
 		/*
+		 * 
 		 * getContent() method gives the contents of the page object returned
 		 * from Question Repository.
+		 * 
+		 * getContent() method gives the contents of the page object returned
+		 * from Question Repository.
+		 * 
 		 */
 		List<Question> questionList = questionPage.getContent();
 		LOGGER.debug("Question List : {}", questionList);
 		/*
 		 * The below code is for changing the status of the obtained questions.
 		 */
+
 		/*
 		 * for (Question eachQuestion : questionList) {
 		 * eachQuestion.setStatus("In Review");
 		 * LOGGER.debug("Question (Modified Status) : {}", eachQuestion);
 		 * questionRepository.save(eachQuestion); }
 		 */
+
+		for (Question eachQuestion : questionList) {
+			eachQuestion.setStatus("In Review");
+			LOGGER.debug("Question (Modified Status) : {}", eachQuestion);
+			questionRepository.save(eachQuestion);
+		}
+
 		return questionList;
 	}
 

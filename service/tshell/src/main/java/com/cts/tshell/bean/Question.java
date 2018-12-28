@@ -25,7 +25,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "question")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
 @NamedQueries({
+
+
 @NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
 		+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
 		+ " left join fetch q.createdUser " + "where q.id=:questionId"),
@@ -166,15 +169,5 @@ public class Question {
 		this.topicList = topicList;
 	}
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", question=" + question + ", status=" + status + ", createdDate=" + createdDate
-				+ ", reviewedDate=" + reviewedDate + ", questionDifficultyLevel=" + questionDifficultyLevel
-				+ ", questionAnswerType=" + questionAnswerType + ", createdUser=" + createdUser + ", reviewedUser="
-				+ reviewedUser + ", optionList=" + optionList + ", topicList=" + topicList + "]";
-	}
-	
-	
-	
 
 }

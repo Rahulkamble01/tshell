@@ -14,8 +14,11 @@ import com.cts.tshell.bean.Question;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	Question fetchAllQuestionDetails(@Param("questionId") int questionId);
+
 	
 	Question fetchQuestionDetails(@Param("questionId") int questionId);
+
+
 	/*
 	 * Mentioning the query using @Query annotation and passing the Pageable object
 	 * to get the limited row from database
