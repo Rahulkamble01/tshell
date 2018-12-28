@@ -2,14 +2,13 @@ package com.cts.tshell.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
@@ -66,11 +65,11 @@ public class QuestionService {
 		/*
 		 * The below code is for changing the status of the obtained questions.
 		 */
-		for (Question eachQuestion : questionList) {
+		/*for (Question eachQuestion : questionList) {
 			eachQuestion.setStatus("In Review");
 			LOGGER.debug("Question (Modified Status) : {}", eachQuestion);
 			questionRepository.save(eachQuestion);
-		}
+		}*/
 		return questionList;
 	}
 
@@ -87,6 +86,23 @@ public class QuestionService {
 		Option option = optionRepository.fetchOptionDetailsById(id);
 		LOGGER.debug(" Inside service......Option By Id details are{}", option);
 		return option;
+	}
+	
+	@Transactional
+	public void updateStatus(int questionId, String status) {
+		LOGGER.info("START");
+		LOGGER.debug("Question Id {}", questionId);
+		LOGGER.debug("Question Status {}", status);
+		Question question = questionRepository.findById(questionId);
+		LOGGER.debug("Question with initial status {}", question);
+		if (status.equals("approve")) {
+			question.setStatus("Approved");
+		} else if (status.equals("reject")) {
+			question.setStatus("Rejected");
+		}
+		questionRepository.save(question);
+		LOGGER.debug("Question with final status {} ", question);
+		LOGGER.info("end");
 	}
 
 }

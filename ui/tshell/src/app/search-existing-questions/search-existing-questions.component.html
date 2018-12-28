@@ -1,16 +1,19 @@
 <div class="container-fluid reviewQuestionsContainer">
   <h1 class="revQuestionHeader">Review Questions</h1>
 
-
   <div class="row baseRow">
-    <div class="col-12 col-sm-12 col-lg-6 mt-2 lhsCol">
+    <div *ngIf="this.message != 'undefined'" class="col-12 col-sm-12 col-lg-6 mt-2 lhsMessageCol text-center">
+     Nope<br> No Questions Left for Review
+    </div>
+    <div *ngIf="this.message == 'undefined'" class="col-12 col-sm-12 col-lg-6 mt-2 lhsCol">
       <div class="row">
         <div class="col-12 col-sm-12 col-lg-12 mt-2">
           <label># Id</label> : {{question.id}}&nbsp;
           <a href="#" data-toggle="modal" data-target="#editQuestion">
-            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-pencil-alt" data-toggle="tooltip" data-placement="top" title="edit question"></i>
           </a>
-          <div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -35,22 +38,21 @@
         </div>
       </div>
 
-      <!--------  Need to be worked on -------------------------- 
-        
-        <div class="row mt-2" style="padding-right:16px;padding-left:16px;">
-        <span class="badge badge-primary skillBadge mr-2">JAVA</span>
-        <span class="badge badge-secondary topicBadge mr-1">Inheritance</span>
-      </div> -->
+      <div class="row mt-2" style="padding-right:16px;padding-left:16px;">
+        <span class="badge badge-primary skillBadge mr-2">{{skillName}}</span>
+        <span *ngFor="let topic of question.topicList; let index = i" class="badge badge-secondary topicBadge mr-1">{{topic.name}}</span>
+      </div>
 
       <div class="row mt-4" style="padding-right:16px;padding-left:16px;">
         <label>Options (Max 5)</label>&nbsp;
         <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" data-toggle="modal" data-target="#addOption">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus " data-toggle="tooltip" data-placement="top" title="add option"></i>
         </button>
 
 
-        <!---saving the option  -->
-        <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!----------Adding new option-----------Adding new option---------------Adding new option---------------Adding new option---------------------Adding new option-----------------------Adding new option-------------->
+        <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -59,8 +61,8 @@
                 </button>
               </div>
               <div class="modal-body">
-                <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add new Option ..."
-                  [(ngModel)]="description"></textarea>
+                <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                  placeholder="Add new Option ..." [(ngModel)]="description"></textarea>
 
               </div>
               <div class="modal-footer">
@@ -74,7 +76,7 @@
 
       </div>
 
-
+      <!------------------Option List ----------------------------------------------------------------------------------------------------------------->
       <div class="row mt-2" *ngFor="let option of optionList ; let i = index">
         <div class="col-1 col-sm-1 col-lg-1 text-center">
           <label>{{i+1}}.</label>
@@ -84,10 +86,11 @@
         </div>
         <div class="col-1 col-sm-1 col-lg-1">
           <a href="#" data-toggle="modal" data-target="#{{option.id}}">
-            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-pencil-alt" data-toggle="tooltip" data-placement="top" title="edit option"></i>
           </a>
 
-          <div class="modal fade" id="{{option.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="{{option.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -96,7 +99,8 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="option.description"></textarea>
+                  <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    [(ngModel)]="option.description"></textarea>
 
                 </div>
                 <div class="modal-footer">
@@ -107,11 +111,47 @@
             </div>
           </div>
         </div>
+        <!--****************delete option*****************-->
         <div class="col-1 col-sm-1 col-lg-1">
-          <a href="#">
-            <i class="far fa-trash-alt"></i>
-          </a>
+          <a href="#" (click)="getselectedoption(option.id);" data-id="option.id" data-toggle="modal"  data-target="#confirmmodal" 
+          style="cursor: pointer;" >
+          <i class="far fa-trash-alt" ></i>
+        </a>
         </div>
+        <!--delete confirmation modal-->
+        <div   class="modal " id="confirmmodal"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"  >
+          <div class="modal-dialog " role="document">
+            <div class="modal-content">
+             
+              <div class="modal-body">
+              Are you sure you want to delete the option?
+              </div>
+              
+              <div class="modal-footer">
+                <button  type="button" class="btn btn-ts-cancel" data-dismiss="modal" >No</button>
+                
+                <button type="button" class="btn btn-ts-cancel" (click)="deleteoption(deleteOptionId);" data-toggle="modal"  data-target="#myModal1" data-dismiss="modal" >Yes</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngIf="deleteOptionStatus==true" class="modal " id="myModal1"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+             
+              <div class="modal-body">
+                Option deleted
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div *ngIf="option.answer == true " class="col-1 col-sm-1 col-lg-1">
           <input type="checkbox" checked>
         </div>
@@ -123,21 +163,28 @@
       <div class="row mt-2">
         <div class="col-12 col-sm-12 col-lg-12">
           <span class="lhsNoteSpan">
-            <i class="fas fa-info-circle"></i>&nbsp;&nbsp;correct answers are checked</span>
+            <i class="fas fa-info-circle"></i>&nbsp;&nbsp;Correct answers are checked.</span>
         </div>
       </div>
 
       <div class="row mt-3">
         <div class="col-12 col-sm-12 col-lg-12 ">
           <span class="lhsApproveRejectBtnSpan">
-            <button type="button" class="btn btn-ts-primary btn-sm lhsApproveBtn">Approve</button>&nbsp;
-            <button type="button" class="btn btn-ts-danger btn-sm lhsRejectBtn">Reject</button>
+            <button type="button" class="btn btn-ts-primary btn-sm lhsApproveBtn" (click)="approveQuestion(question.id)">Approve</button>&nbsp;
+            <button type="button" class="btn btn-ts-danger btn-sm lhsRejectBtn" (click)="rejectQuestion(question.id)">Reject</button>
           </span>
 
         </div>
       </div>
 
-      <div class="row mt-3 mb-5">
+      <div class="row mt-1 mb-1">
+        <div class="col-12 col-sm-12 col-lg-12">
+          <span class="lhsNoteSpanII">Please approve or reject to move to next question.</span>
+        </div>
+      </div>
+
+      <!------------  These are navigation buttons which are temprorily not used ------------------------------------------------------\>
+        <div class="row mt-3 mb-5">
         <div class="col-6 col-sm-6 col-lg-6 preQuestionCol">
           <button type="button" class="btn btn-ts-primary preQuestionBtn">
             <i class="fas fa-angle-double-left"></i>
@@ -148,16 +195,18 @@
             <i class="fas fa-angle-double-right"></i>
           </button>
         </div>
-      </div>
+      </div> --------------------------------------------------------------------------------------------------------------------->
 
     </div>
+
+
     <div class="col-12 col-sm-12 col-lg-6 mt-2 rhsCol">
 
       <div class="row">
         <div class="col-12 col-sm-12 col-lg-12">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="search for existing questions" aria-label="Recipient's username" aria-describedby="basic-addon2"
-              [(ngModel)]="searchQuery">
+            <input type="text" class="form-control" placeholder="search for existing questions" aria-label="Recipient's username"
+              aria-describedby="basic-addon2" [(ngModel)]="searchQuery">
             <div class="input-group-append">
               <span class="input-group-text searchSpan" id="basic-addon2" (click)="searchQ();">
                 <i class="fas fa-search"></i>
@@ -180,11 +229,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet1" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet1"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -194,7 +244,8 @@
               <div class="col-1 col-sm-1 col-lg-1 text-center">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11 font-weight-bold">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11 font-weight-bold">int w = (int)888.8; Which data type value is
+                returned by all transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1 text-center">
@@ -233,11 +284,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet2" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet2"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -247,7 +299,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -287,11 +340,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet3" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet3"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -302,7 +356,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -342,11 +397,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet4" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet4"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -357,7 +413,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -397,11 +454,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet5" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet5"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -412,7 +470,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11 font-weight-bold">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11 font-weight-bold">int w = (int)888.8; Which data type value is
+                returned by all transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -452,11 +511,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet6" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet6"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -467,7 +527,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -507,11 +568,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet7" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet7"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -522,7 +584,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -562,11 +625,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet8" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet8"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -577,7 +641,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -617,11 +682,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet9" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet9"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -632,7 +698,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -672,11 +739,12 @@
             </span>
           </div>
           <div class="col-12 col-sm-12 col-lg-12 questionDef">
-            Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
+            Which data type value is returned by all transcendental math functions? Which of these literals can be
+            contained in float
             data type variable?
             <span class="rhsOptionsBtnSpan">
-              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet10" aria-expanded="false"
-                aria-controls="collapseExample">
+              <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet10"
+                aria-expanded="false" aria-controls="collapseExample">
                 Options
               </button>
             </span>
@@ -687,7 +755,8 @@
               <div class="col-1 col-sm-1 col-lg-1">
                 <label>1.</label>
               </div>
-              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
+              <div class="col-11 col-sm-11 col-lg-11">int w = (int)888.8; Which data type value is returned by all
+                transcendental math functions?</div>
             </div>
             <div class="row">
               <div class="col-1 col-sm-1 col-lg-1">
@@ -715,195 +784,7 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- <div class="row row1">
-    <div class="col-lg-1 col-1 col-sm-1 cmn0pt9">
-      
-      <i class="fas fa-angle-left"></i>
-    </div>
-    <div class="col-lg-5 col-5 col-sm-5 cmn1">
-      <label>Question Id:</label> &nbsp;
-      <input class="questionIdInput" type="text" value="345" readonly/>
-    </div>
-    <div class="col-lg-5 col-5 col-sm-5 cmn2">
-      <label>Status:</label>&nbsp;
-      <button type="button" class="btn btn-primary">PENDING</button>
-    </div>
-    <div class="col-lg-1 col-1 col-sm-1 cmn2pt1">
-      
-      <i class="fas fa-angle-right"></i>
-    </div>
-    <div class="col-lg-1 col-1 col-sm-1 cmn2pt2">
-      
-    </div>
-    <div class="col-lg-5 col-sm-5 col-5 cmn2pt3">
-      <label>Skill</label> &nbsp;
-      <input class="skillInput" type="text" value="Java" readonly/>
-    </div>
-    <div class="col-lg-5 col-sm-5 col-5 cmn2pt4">
-      <label>Topic</label> &nbsp;
-      <input class="topicInput" type="text" value="Operators" readonly/>
-    </div>
-    <div class="col-lg-1 col-1 col-sm-1 cmn2pt5">
-      
-    </div>
-    <div class="col-lg-1 col-1 col-sm-1 cmn2pt9">
-      
-    </div>
-    <div class="col-lg-10 col-10 col-sm-10 cmn3">
-      On applying Left shift operator,
-       , on integer bits are lost one they are shifted past which position bit? </div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn3pt1">
-          
-        </div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn3pt9">
-          
-        </div>
-        <div class="col-lg-10 col-10 col-sm-10 cmn4">a) 46</div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn4pt1">
-         
-        </div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn4pt9">
-          
-        </div>
-        <div class="col-lg-10 col-10 col-sm-10 cmn5">b) 32</div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn5pt1">
-          
-        </div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn5pt9">
-          
-        </div>
-        <div class="col-lg-10 col-10 col-sm-10 cmn6">c) 33</div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn6pt1">
-          
-        </div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn6pt9">
-          
-        </div>
-        <div class="col-lg-10 col-10 col-sm-10 cmn7">d) 31</div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn7pt1">
-          
-        </div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn7pt9">
-          
-        </div>
-        <div class="col-lg-10 col-10 col-sm-10 cmn8">additional data</div>
-        <div class="col-lg-1 col-1 col-sm-1 cmn8pt1">
-          
-        </div>
-    </div>
-
-    <div class="row row2">
-      <div class="col-12 col-sm-12 col-lg-12 col-xl-12 cmn9">
-        <div class="input-group mt-2 mb-2">
-          <input type="text" class="form-control" placeholder="search for existing questions" aria-label="Recipient's username" aria-describedby="basic-addon2"
-            [(ngModel)]="searchQuery">
-          <div class="input-group-append">
-            <span class="input-group-text searchSpan" id="basic-addon2" (click)="searchQ();">
-              <i class="fas fa-search"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row row2pt9">
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-      <div class="row row3">
-        <div class="col-12 col-sm-12 col-lg-1 existingQuestionId">
-          Q Id:12334
-        </div>
-        <div class="col-12 col-sm-12 col-lg-11 existingQuestion">
-          Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-          data type variable? What is the range of short data type in Java? What is the range of short data type in Java?
-          What is the range of short data type in Java?
-        </div>
-      </div>
-    </div> -->
 </div>

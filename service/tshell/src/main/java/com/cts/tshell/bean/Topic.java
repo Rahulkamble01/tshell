@@ -15,12 +15,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "topic")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Topic {
 
 	@Id
@@ -33,6 +32,7 @@ public class Topic {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="tp_sk_id")
+	@JsonView(Views.Internal.class)
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -40,6 +40,7 @@ public class Topic {
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
+	@JsonView(Views.Internal.class)
 	private List<Question> questions;
 
 	public int getId() {

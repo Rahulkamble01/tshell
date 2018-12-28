@@ -22,9 +22,19 @@ export class SearchExistingQuestionsService {
   }
 
   addOption(newOption): Observable<any> {
-    let urlOption: string = "/tShell/question/option/add ";
+    let urlOption: string = "/tShell/question/option/add";
     return this.http.post<any>(urlOption, newOption, httpOptions);
   }
+
+  updateQuestionStatus(questionId, status, skillId): Observable<any> {
+    let updateQuestionUrl:string = '/tShell/question/updatestatus/'+questionId+'/'+status+'/'+skillId;
+    return this.http.get<any>(updateQuestionUrl);
+  }
+
+  deleteoption(id:number):Observable<any>{
+    let url:string='/tShell/question/option/delete/'+id;
+     return this.http.get<any>(url);
+   }
 }
 
 

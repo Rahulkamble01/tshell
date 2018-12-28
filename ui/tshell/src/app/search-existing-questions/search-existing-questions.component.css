@@ -30,8 +30,18 @@ a{
 .lhsApproveRejectBtnSpan{
     float: right;
 }
+.lhsMessageCol{
+    font-family:cursive;
+    font-size:30px;
+    color:rgb(255, 94, 0);
+}
 .lhsNoteSpan{
     float: right;
+    color:gray;
+}
+.lhsNoteSpanII{
+    font-size:14px;
+    float:right;
     color:gray;
 }
 .lhsOptionLabelCol{
@@ -112,4 +122,10 @@ a{
 .searchSpan:hover{
     cursor: pointer;
     color:rgb(119, 119, 119);
+}
+.skillBadge{
+    text-transform: uppercase;
+}
+.topicBadge{
+    text-transform: capitalize;
 }

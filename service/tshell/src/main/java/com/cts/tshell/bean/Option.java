@@ -13,12 +13,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "`option`")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @NamedQueries({
 	@NamedQuery(name = "Option.fetchOptionDetailsById", query = "select o from Option o join o.question where o.id=:optionId")
 
@@ -35,6 +34,7 @@ public class Option {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "op_qu_id")
+	@JsonView(Views.Internal.class)
 	private Question question;
 
 	@Column(name = "op_is_correct")
