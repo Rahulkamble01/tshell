@@ -17,9 +17,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  
-                  <textarea style="height: 250px;" class="form-control" rows="3" [(ngModel)]="question.question"></textarea>
-
+                   <textarea style="height: 250px;" class="form-control" rows="3" [(ngModel)]="question.question"></textarea>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
@@ -34,19 +32,25 @@
         </div>
       </div>
 
-      <!--------  Need to be worked on -------------------------- 
+      <!--------  Need to be worked on -------------------------- *************************
         
         <div class="row mt-2" style="padding-right:16px;padding-left:16px;">
         <span class="badge badge-primary skillBadge mr-2">JAVA</span>
         <span class="badge badge-secondary topicBadge mr-1">Inheritance</span>
       </div> -->
 
-      <div class="row mt-4" style="padding-right:16px;padding-left:16px;">
+        <div class="row mt-4" style="padding-right:16px;padding-left:16px;">
         <label>Options (Max 5)</label>&nbsp;
-        
+        <div *ngIf="countOption<5" class="option">
         <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" data-toggle="modal" data-target="#addOption">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus"   data-toggle="tooltip" data-placement="top" title="Add option" ></i>
         </button>
+        </div>
+        <div *ngIf="countOption>=5" class="option">
+            <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" disabled  data-toggle="modal" data-target="#addOption">
+              <i class="fas fa-plus"   data-toggle="tooltip" data-placement="top" title="Maximum options reached" ></i>
+            </button>
+            </div>
      
         <!-- <div *ngFor="let skill of skills">
           {{skill}}
@@ -75,40 +79,48 @@
         </div> -->
 
 
-        <!---saving the option  -->
-        <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+ <!--- *****************************************    Saving the Option Start ******************************* ***********                   -->
+       <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  <div *ngIf="status" class="alert alert-success">
-                      <h5>Option added sucessfully</h5>
-                    </div>
-                    <div *ngIf="error" class="alert alert-danger">
-                        <h5>System error</h5>
-                      </div>
-                <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add new Option ..."
-                  [(ngModel)]="description"></textarea>
+              <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Add New Option
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal"  (click)="modalClose();" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                 <div class="modal-body">
+                  <form [formGroup]="form">
+                    <div class="form-group">
+                        <div *ngIf="status" class="alert alert-success">
+                            <h5>Option added sucessfully</h5>
+                          </div>
+                          <div *ngIf="error" class="alert alert-danger">
+                              <h5>System error</h5>
+                            </div>
 
+                            <div *ngIf="!status">
+                      <textarea type="text" style="height: 120px;" name="description" formControlName="description"
+                      [(ngModel)]="description" class="form-control"  placeholder="Add New Option..."  ></textarea>
+                      <div *ngIf="form.get('description').touched && form.get('description').invalid">
+                        <div *ngIf="form.get('description').errors.required" class="danger" style="color:red">Option is
+                          required</div>
+                         </div>
+                    </div>
+                  </div>
+                    </form>
+                     <div class="modal-footer">
+                <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose();">Close</button>
+                <button type="button" class="btn btn-ts-primary" (click)="addOption()" *ngIf="!status" [disabled]="form.invalid"   >Save changes</button>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-ts-primary" (click)="addOption()"
-                >Save changes</button>
               </div>
-            </div>
-          </div>
+             </div>
+        </div>
+        </div>
         </div>
 
-
-      </div>
-
-
-      <div class="row mt-2" *ngFor="let option of optionList ; let i = index">
+        <div class="row mt-2" *ngFor="let option of optionList ; let i = index">
         <div class="col-1 col-sm-1 col-lg-1 text-center">
           <label>{{i+1}}.</label>
         </div>
@@ -119,8 +131,7 @@
           <a href="#" data-toggle="modal" data-target="#{{option.id}}">
             <i class="fas fa-pencil-alt"></i>
           </a>
-
-          <div class="modal fade" id="{{option.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         <div class="modal fade" id="{{option.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -133,7 +144,7 @@
 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose();">Close</button>
                   <button type="button" class="btn btn-ts-primary">Save changes</button>
                 </div>
               </div>
@@ -152,6 +163,8 @@
           <input type="checkbox">
         </div>
       </div>
+
+<!---*****************************  ************************************* Saving Option End  **************************************************** *********************************      -->
 
       <div class="row mt-2">
         <div class="col-12 col-sm-12 col-lg-12">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchExistingQuestionsService } from '../search-existing-questions.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchExistingQuestionsComponent implements OnInit {
 
-  constructor(private service: SearchExistingQuestionsService, private route: ActivatedRoute) { }
+  constructor(private service: SearchExistingQuestionsService, private route: ActivatedRoute , private fb : FormBuilder) { }
+
+  
 
   ngOnInit() {
     /*this.route.params.subscribe(params => {
@@ -18,6 +20,8 @@ export class SearchExistingQuestionsComponent implements OnInit {
       this.skillId = +params['id'];
         });*/
         console.log(" ngOnInit")
+
+        
 
     this.skillId = 1;
     this.service.fetchReviewQuestion(this.skillId).subscribe(
@@ -27,11 +31,22 @@ export class SearchExistingQuestionsComponent implements OnInit {
         console.log(this.question);
         this.questionId = this.question.id;
         this.optionList = this.question.optionList;
+        console.log( this.optionList.length);
+
+      this.countOption=this.optionList.length
+      console.log( "count option"+this.countOption);
       }
     )
   }
+
+  form = new FormGroup({
+    description: new FormControl(
+      '',
+      [Validators.required])
+    })
+countOption:number;
   error:any;
-status=false;
+  status=false;
   skillId: number;
   question: any;
   optionList: any;
@@ -49,30 +64,60 @@ status=false;
     };
     this.service.addOption(JSON.stringify(newOption)).subscribe(
       data => {
+        /* this.status = true;
+        this.description = ''; 
+         console.log(data);
+        this.question = data;        
+        this.questionId = this.question.id;
+        this.optionList = this.question.optionList;
+        console.log( this.optionList.length);
 
-     
-        console.log(this.question);
-       
-       /*  if (data != null){
-          this.question = data[0];
-          this.questionId = data[0].id;
-          this.optionList = data[0].optionList;
+      this.countOption=this.optionList.length
+      console.log( "count option"+this.countOption);   */
+      this.service.fetchReviewQuestion(this.skillId).subscribe(
+      
+        data => {
+
           this.status = true;
-          this.description = '';
-        } else {
-          console.log(data);
-        } */
-        
-     },
+         this.description = ''
+          this.question = data[0];
+          this.questionId = this.question.id;
+          this.optionList = this.question.optionList;
+        this.countOption=this.optionList.length
+        //console.log( "count option"+this.countOption);
+        }
+      )
+           
+       },
       error => {
         this.error = error
         this.status=false;
-        this.description=""
-        }
       
-    
-    
-    )
-  }
+        }
+        )
+      this.form.reset();
+      }
+
+
+
+
+
+
+
+
+      
+
+
+      modalClose(){
+        this.status=false;
+        this.error=false;
+        this.form.reset();            
+       }
+
+
+
+
+
+
 }
 
