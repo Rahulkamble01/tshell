@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,7 @@ public class SkillController {
 	public void setTopicService(TopicService topicService) {
 		this.topicService = topicService;
 	}
+
 
 	@RequestMapping(value = "/skills", method = RequestMethod.GET)
 	public List<Skill> getAllSkills() {
@@ -135,6 +137,31 @@ public class SkillController {
 		}
 		return addStatus;
 	}
+
+
+
+	@GetMapping("/top4searchedskills")
+	public List<Skill> getTop4SearchedSkills() {
+		LOGGER.info("start ");
+		List<Skill> top4SearchedSkills = skillService.getTop4Skills();
+		LOGGER.debug("Top 4 Searched Skills ->", top4SearchedSkills);
+		return top4SearchedSkills;
+	}
+
+	@GetMapping("/recentSkillList")
+	public List<Skill> getRecentSkills() {
+		LOGGER.info("start");
+		List<Skill> skills = skillService.getRecent5Skills();
+		LOGGER.debug("SkillController -> {}", skills);
+		return skills;
+	}
+
+
+
+
+
+
+
 }
 
 class TopicObject {

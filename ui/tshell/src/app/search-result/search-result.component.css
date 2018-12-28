@@ -269,7 +269,7 @@ body {
 }
 
 .card-header{    
-    background-color: #007bff;
+    
     color: white;
 }
 
@@ -287,5 +287,8 @@ body {
   padding: 3px 4px !important;
 }
 
+.fontBlack{
+  color:Black;
+}
 
 

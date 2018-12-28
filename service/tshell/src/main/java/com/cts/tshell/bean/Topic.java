@@ -13,21 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Transient;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
-@NamedQueries({
-	@NamedQuery(name="Topic.findSkillTopic",query="from Topic t "
-			+ "join t.skill s "
-			+ "where s.id=:skillId")
-})
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Topic {
 
 	@Id
@@ -37,7 +31,7 @@ public class Topic {
 
 	@Column(name = "tp_name")
 	private String name;
-	
+
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="tp_sk_id")
 	@JsonIgnore
@@ -49,6 +43,7 @@ public class Topic {
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
+	
 	private List<Question> questions;
 
 	public int getId() {

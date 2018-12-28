@@ -13,7 +13,6 @@ import { SearchExistingQuestionsComponent } from './search-existing-questions/se
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { ContributeQuestionService } from './contribute-question.service';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component'
-import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
@@ -50,6 +49,7 @@ import { EditskillmodalComponent } from './editskillmodal/editskillmodal.compone
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,9 +57,13 @@ import { ConfirmationDialogService } from './confirmation-dialog.service';
     PasswordNotEqualValidatorDirective,
     DashboardComponent,
     MostSearchedSkillsComponent,
-    TotalquestionComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
+    SkillmodalComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    
+    
     RecentlyAddedSkillsComponent,
     LoginComponent,
     AdminSignupComponent,

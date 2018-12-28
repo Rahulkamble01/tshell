@@ -9,13 +9,27 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@NamedQueries ({
+@NamedQuery(name="Skill.fetchRecentSkills",	
+query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
+@NamedQuery(
+		name = "Skill.fetchTopSearchedSkills", 
+		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
+})
+
 @Table(name = "skill")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Skill {
 
 	@Id
@@ -33,11 +47,11 @@ public class Skill {
 	private String active;
 
 	@Column(name = "sk_test_count")
-	private int testCount;	
-	
+	private int testCount;
+
 	@Column(name = "sk_description")
 	private String description;
-	
+
 	@Column(name = "sk_image")
 	private byte[] image;
 	
@@ -45,6 +59,29 @@ public class Skill {
 	@Temporal(TemporalType.DATE)
 	private Date createdOn;
 	
+	
+	public Skill(int id, String name, int searchCount, String active, int testCount, String description, byte[] image,
+			Date createdOn, List<Topic> topics) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.searchCount = searchCount;
+		this.active = active;
+		this.testCount = testCount;
+		this.description = description;
+		this.image = image;
+		this.createdOn = createdOn;
+		this.topics = topics;
+	}
+
+	public Date getCreationDate() {
+		return createdOn;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.createdOn = creationDate;
+	}
+
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
 
@@ -126,4 +163,12 @@ public class Skill {
 	
 
 	
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+
 }
