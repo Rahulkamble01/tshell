@@ -1,45 +1,67 @@
 <div class="container-fluid">
-  <!--  <div class="alert alert-success" style="text-align: center;">
-      <div data-dismiss="alert">Succcessfully Registered! Go to Login Page</div>
-  </div> -->
+
   <div class="row">
-    <div class="col-lg-8 col-12"> <br><br><h1 class="log">Test your skills with tShell...</h1></div>
+    <div class="col-lg-7 col-12">
+      <br>
+      <br>
+      <h1 class="log">Test your skills with tShell...</h1>
+    </div>
     <div class="col-lg-4 col-12">
 
       <div id="signupbox">
-        <div class="card card-inverse card-info">
+        <div class="card card-inverse card-info mb-3 md-3">
           <div class="card-header">
+
             <div class="card-title" id="card4">Signup</div>
             <!-- <div id="card5"><a [routerLink]="['/login']" >Login</a>
       </div> -->
           </div>
           <div class="card-block">
+            <div *ngIf="status.signupStatus " class="alert alert-success message">
+              <div data-dismiss="alert">Succcessfully Registered! Go to Login Page</div>
+            </div>
+
+            <div *ngIf="status.emailExist == false && status.userIdExist==true " class="alert alert-danger message">
+              <div data-dismiss="alert">Email already exists </div>
+            </div>
+            <div *ngIf="status.userIdExist == false" class="alert alert-danger message">
+              <div data-dismiss="alert">Employee ID already exists </div>
+            </div>
+
+            <div style="display: none;" id="login-alert" class="alert alert-danger"></div>
+            <div *ngIf="error" class="message mb-0" >
+              <app-error></app-error>
+            </div>
+
             <form [formGroup]="form">
+
               <div class="form-group">
+
                 <br>
                 <div class="form-group">
                   <div class="col-lg-12">
+                    <input type="text" class="form-control" formControlName="employeeId" placeholder="Employee ID *" #empId />
 
+                    <div *ngIf="form.get('employeeId').touched && form.get('employeeId').invalid">
+                      <div *ngIf="form.get('employeeId').errors.required" class="danger validation">Employee ID is required</div>
+                      <div *ngIf="form.get('employeeId').errors.pattern" class="danger validation">Please enter digits only</div>
+                      <div *ngIf="form.get('employeeId').errors.minlength" class="danger validation">Employee ID must contain minimum 6 digits</div>
+                      <div *ngIf="form.get('employeeId').errors.maxlength" class="danger validation">Employee ID must contain maximum 10 digits</div>
 
-                    <input type="text" class="form-control" formControlName="empId" placeholder="Employee ID *" #empId/>
-
-                    <div *ngIf="form.get('empId').touched && form.get('empId').invalid">
-                      <div *ngIf="form.get('empId').errors.required" class="danger" style="color:red">Employee ID is required</div>
-                      <div *ngIf="form.get('empId').errors.minlength" class="danger" style="color:red">Employee ID must contain minimum 6 digits</div>
-                      <div *ngIf="form.get('empId').errors.maxlength" class="danger" style="color:red">Employee ID must contain maximum 10 digits</div>
                     </div>
+
                   </div>
                 </div>
 
-               
+
 
                 <div class="form-group">
                   <div class="col-lg-12">
 
-                    <input type="text" class="form-control" formControlName="username" placeholder="Name *" #name/>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Name *" #name/>
                     <div *ngIf="form.get('name').touched && form.get('name').invalid">
-                      <div *ngIf="form.get('name').errors.required" class="danger" style="color:red">Name is required</div>
-
+                      <div *ngIf="form.get('name').errors.required" class="danger validation">Name is required</div>
+                      <div *ngIf="form.get('name').errors.maxlength" class="danger validation">Name must contain maximum 45 characters</div>
                     </div>
                   </div>
                 </div>
@@ -50,8 +72,8 @@
                     <input type="text" class="form-control" formControlName="email" placeholder="Email *" #email/>
 
                     <div *ngIf="form.get('email').touched && form.get('email').invalid">
-                      <div *ngIf="form.get('email').errors.required" class="danger" style="color:red">Email is required</div>
-                      <div *ngIf="form.get('email').errors.pattern" class="danger" style="color:red">Email pattern not valid</div>
+                      <div *ngIf="form.get('email').errors.required" class="danger validation">Email is required</div>
+                      <div *ngIf="form.get('email').errors.pattern" class="danger validation">Email pattern is not valid. Example: "tShell@cognizant.com"</div>
                     </div>
                   </div>
                 </div>
@@ -62,9 +84,9 @@
                     <input type="password" class="form-control" formControlName="password" placeholder="Password *" #password/>
 
                     <div *ngIf="form.get('password').touched && form.get('password').invalid">
-                      <div *ngIf="form.get('password').errors.required" class="danger" style="color:red">Password is required</div>
-                      <div *ngIf="form.get('password').errors.minlength" class="danger" style="color:red">Password must contain minimum 6 characters</div>
-                      <div *ngIf="form.get('password').errors.maxlength" class="danger" style="color:red">Password must contain maximum 30 characters</div>
+                      <div *ngIf="form.get('password').errors.required" class="danger validation">Password is required</div>
+                      <div *ngIf="form.get('password').errors.minlength" class="danger validation">Password must contain minimum 6 characters</div>
+                      <div *ngIf="form.get('password').errors.maxlength" class="danger validation">Password must contain maximum 30 characters</div>
                     </div>
                   </div>
 
@@ -74,14 +96,13 @@
                   <div class="col-lg-12">
 
                     <input type="password" class="form-control" appConfirmEqualValidator="password" formControlName="confirmPassword" placeholder="Confirm Password *"
-
                       #confirmPassword/>
                     <div *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
-                      <div *ngIf="form.get('confirmPassword').errors.required" class="danger" style="color:red">Password is required</div>
+                      <div *ngIf="form.get('confirmPassword').errors.required" class="danger validation">Password is required</div>
 
-                      <div *ngIf="form.get('confirmPassword').errors.cannotContainSpace" class="danger" style="color:red">Password should not have any space
+                      <div *ngIf="form.get('confirmPassword').errors.cannotContainSpace" class="danger validation">Password should not have any space
                       </div>
-                      <div class="help-block" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').errors?.notEqual" style="color: red">
+                      <div class="help-block validation" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').errors?.notEqual" >
                         New password and confirm password does not match
                       </div>
                     </div>
@@ -92,12 +113,11 @@
                   <div id="card6"></div>
 
                   <div class="col-lg-12">
-                    <button id="btn-login" href="#" class="btn btn-ts-primary" (click)="signup(empId.value,name.value,email.value,password.value,confirmPassword.value)"
-                      style="width:100%" value="submit">Signup</button>
+                    <button id="btn-login" href="#" class="btn btn-ts-primary" [disabled]="!form.valid" (click)="signup()" style="width:100%"
+                      value="submit">Signup</button>
+                     <div id= "card3"> Have an account?<a [routerLink]="['/login']"  style="color:#007bff"> Login </a></div>
                   </div>
-               
-
-                  <br>
+                
                 </div>
               </div>
             </form>
@@ -105,7 +125,7 @@
         </div>
       </div>
     </div>
-    
+    <div class="col-lg-1 col-12"></div>
+
   </div>
 </div>
-

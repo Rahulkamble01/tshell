@@ -3,7 +3,9 @@ package com.cts.tshell.bean;
 public class AuthenticationStatus {
 
 	private boolean authenticated;
-
+	private boolean checkEmail;
+	private boolean checkUserId;
+	
 	public AuthenticationStatus() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -22,9 +24,38 @@ public class AuthenticationStatus {
 		this.authenticated = authenticated;
 	}
 
+	
+
+	public boolean isCheckEmail() {
+		return checkEmail;
+	}
+
+	public void setCheckEmail(boolean checkEmail) {
+		this.checkEmail = checkEmail;
+	}
+
+	public boolean isCheckUserId() {
+		return checkUserId;
+	}
+
+	public void setCheckUserId(boolean checkUserId) {
+		this.checkUserId = checkUserId;
+	}
+
 	@Override
 	public String toString() {
-		return "AuthenticationStatus [authenticated=" + authenticated + "]";
+		return "AuthenticationStatus [authenticated=" + authenticated + ", checkEmail=" + checkEmail + ", checkUserId="
+				+ checkUserId + "]";
 	}
+	
+	
+
+
+
+	
+
+
+
+	
 
 }
