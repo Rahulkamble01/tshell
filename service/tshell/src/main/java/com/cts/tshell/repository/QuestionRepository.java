@@ -14,7 +14,8 @@ import com.cts.tshell.bean.Question;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	Question fetchAllQuestionDetails(@Param("questionId") int questionId);
-	public Question findById(int questionId);
+	//public Question findById(int questionId);
+	Question fetchQuestionDetails(@Param("questionId") int questionId);
 	/*
 	 * Mentioning the query using @Query annotation and passing the Pageable object
 	 * to get the limited row from database for the below method findReviewQuestion()
@@ -29,4 +30,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 		   "order by q.createdDate asc ")
 	public Page<Question> findReviewQuestion(@Param("skillId") int skillId, Pageable pageable);
 
+	public Question findById(int id);
 }

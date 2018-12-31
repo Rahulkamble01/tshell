@@ -56,6 +56,9 @@ a{
     padding:0;
    width:100%
 } */
+.modal-title{
+    padding-left: 125px;
+}
 .nxtQuestionCol{
     text-align: right;
 }
@@ -129,3 +132,5 @@ a{
 .topicBadge{
     text-transform: capitalize;
 }
+
+

@@ -1,9 +1,8 @@
 <div class="container-fluid reviewQuestionsContainer">
   <h1 class="revQuestionHeader">Review Questions</h1>
-
   <div class="row baseRow">
     <div *ngIf="this.message != 'undefined'" class="col-12 col-sm-12 col-lg-6 mt-2 lhsMessageCol text-center">
-     Nope<br> No Questions Left for Review
+      Nope<br> No Questions Left for Review
     </div>
     <div *ngIf="this.message == 'undefined'" class="col-12 col-sm-12 col-lg-6 mt-2 lhsCol">
       <div class="row">
@@ -23,7 +22,6 @@
                 </div>
                 <div class="modal-body">
                   <textarea style="height: 250px;" class="form-control" rows="3" [(ngModel)]="question.question"></textarea>
-
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
@@ -45,36 +43,74 @@
 
       <div class="row mt-4" style="padding-right:16px;padding-left:16px;">
         <label>Options (Max 5)</label>&nbsp;
-        <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" data-toggle="modal" data-target="#addOption">
-          <i class="fas fa-plus " data-toggle="tooltip" data-placement="top" title="add option"></i>
-        </button>
-
+        <div *ngIf="countOption<5" class="option">
+          <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" data-toggle="modal" data-target="#addOption">
+            <i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Add option"></i>
+          </button>
+        </div>
+        <div *ngIf="countOption>=5" class="option">
+          <button class="btn btn-ts-primary  btn-sm ml-auto addOptionBtn" disabled data-toggle="modal" data-target="#addOption">
+            <i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Maximum options reached"></i>
+          </button>
+        </div><br>
 
         <!----------Adding new option-----------Adding new option---------------Adding new option---------------Adding new option---------------------Adding new option-----------------------Adding new option-------------->
+        <!--- *****************************************    Saving the Option Start ******************************* ***********                   -->
         <div class="modal fade" id="addOption" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel"> Add New Option
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="modalClose();" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <textarea style="height: 120px;" class="form-control" id="exampleFormControlTextarea1" rows="3"
-                  placeholder="Add new Option ..." [(ngModel)]="description"></textarea>
+                <form [formGroup]="form">
+                  <div class="form-group">
+                    <div *ngIf="status" class="alert alert-success">
+                      <h5>Option added sucessfully</h5>
+                    </div>
+                    <div *ngIf="error" class="alert alert-danger">
+                      <h5>System error Please retry</h5>
+                    </div>
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-ts-primary" (click)="addOption()">Save changes</button>
+                    <div *ngIf="!status">
+                      <textarea type="text" style="height: 120px;" formControlName="description" class="form-control"
+                        placeholder="Add New Option..."></textarea>
+                      <div *ngIf="form.get('description').touched && form.get('description').invalid">
+                        <div *ngIf="form.get('description').errors.required" class="danger" style="color:red">Please
+                          fill the option to save</div>
+                          <div *ngIf="form.get('description').errors.maxlength"  class="danger" style="color:red">
+                              Max 200 characters allowed.
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose();">Close</button>
+                  <button type="button" class="btn btn-ts-primary" (click)="addOption()" *ngIf="!status" [disabled]="form.invalid">Save
+                    changes</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
+      <!-- <div class="col-1 col-sm-1 col-lg-1">
+                <a href="#">
+                  <i class="far fa-trash-alt"></i>
+                </a>
+              </div>
+              <div class="col-1 col-sm-1 col-lg-1">
+                <input type="checkbox" checked>
+              </div>
+            </div>
+        </div> -->
+
 
       <!------------------Option List ----------------------------------------------------------------------------------------------------------------->
       <div class="row mt-2" *ngFor="let option of optionList ; let i = index">
@@ -88,7 +124,6 @@
           <a href="#" data-toggle="modal" data-target="#{{option.id}}">
             <i class="fas fa-pencil-alt" data-toggle="tooltip" data-placement="top" title="edit option"></i>
           </a>
-
           <div class="modal fade" id="{{option.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -104,7 +139,7 @@
 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose();">Close</button>
                   <button type="button" class="btn btn-ts-primary">Save changes</button>
                 </div>
               </div>
@@ -113,44 +148,80 @@
         </div>
         <!--****************delete option*****************-->
         <div class="col-1 col-sm-1 col-lg-1">
-          <a href="#" (click)="getselectedoption(option.id);" data-id="option.id" data-toggle="modal"  data-target="#confirmmodal" 
-          style="cursor: pointer;" >
-          <i class="far fa-trash-alt" ></i>
-        </a>
+          <a href="#" (click)="getselectedoption(option.id);" data-id="option.id" data-toggle="modal" data-target="#optionDeleteConfirmationModel">
+            <i class="far fa-trash-alt"></i>
+          </a>
         </div>
         <!--delete confirmation modal-->
-        <div   class="modal " id="confirmmodal"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"  >
-          <div class="modal-dialog " role="document">
+        <div class="modal fade" id="optionDeleteConfirmationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-             
-              <div class="modal-body">
-              Are you sure you want to delete the option?
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this option</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              
+              <form [formGroup]="form">
+                <div  class="form-group">
+                    <div *ngIf="deleteOptionStatus == 'true'" class="alert alert-success">
+                        <h5>Option deleted sucessfully</h5>
+                      </div>
+                      <div *ngIf="deleteOptionStatus == 'false'" class="alert alert-danger">
+                        <h5>Couldnt Delete, System error Please retry</h5>
+                      </div>
+                  <div *ngIf="deleteOptionStatus == 'undefined'" class="modal-body">
+                    <textarea type="text" style="height: 120px;" formControlName="description" class="form-control" readonly></textarea>
+                  </div>
+                </div>
+              </form>
               <div class="modal-footer">
-                <button  type="button" class="btn btn-ts-cancel" data-dismiss="modal" >No</button>
-                
-                <button type="button" class="btn btn-ts-cancel" (click)="deleteoption(deleteOptionId);" data-toggle="modal"  data-target="#myModal1" data-dismiss="modal" >Yes</button>
-                
+                <button *ngIf="deleteOptionStatus =='undefined'" type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose();" >No</button>
+                <button *ngIf="deleteOptionStatus =='undefined'" type="button" class="btn btn-ts-primary" (click)="deleteOption()">Yes</button>
+                <button *ngIf="deleteOptionStatus =='false'" type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose();" >Close</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div  *ngIf="deleteOptionStatus==true" class="modal " id="myModal1"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <!-- <div class="modal " id="optionDeletionConfirmModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      Are you sure you want to delete the option?
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                <div class="modal-body">
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-ts-cancel" (click)="deleteoption(deleteOptionId);" data-toggle="modal"
+                    data-target="#myModal1" data-dismiss="modal">Yes</button>
+
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+        <!-- <div *ngIf="deleteOptionStatus==true" class="modal " id="myModal1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-             
+
               <div class="modal-body">
                 Option deleted
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-               
+
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div *ngIf="option.answer == true " class="col-1 col-sm-1 col-lg-1">
           <input type="checkbox" checked>
@@ -159,6 +230,8 @@
           <input type="checkbox">
         </div>
       </div>
+
+      <!---*****************************  ************************************* Saving Option End  **************************************************** *********************************      -->
 
       <div class="row mt-2">
         <div class="col-12 col-sm-12 col-lg-12">

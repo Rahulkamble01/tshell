@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,10 +24,17 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "question")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-@NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
-		+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
-		+ " left join fetch q.createdUser " + "where q.id=:questionId")
+// @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
+// property="@id")
+@NamedQueries({
+		@NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
+				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
+				+ " left join fetch q.createdUser " + "where q.id=:questionId"),
+
+		@NamedQuery(name = "Question.fetchQuestionDetails", query = "select distinct q from Question q "
+				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
+				+ " left join fetch q.createdUser " + "left join fetch q.optionList " + "where q.id=:questionId") })
+
 public class Question {
 
 	@Id
@@ -48,12 +56,12 @@ public class Question {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qd_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private QuestionDifficultyLevel questionDifficultyLevel;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	// @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionAnswerType questionAnswerType;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

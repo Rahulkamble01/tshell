@@ -13,6 +13,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -70,6 +71,12 @@ public class Option {
 
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
+	}
+
+	@Override
+	public String toString() {
+		return "Option [id=" + id + ", description=" + description  + ", answer=" + answer
+				+ "]";
 	}
 
 	

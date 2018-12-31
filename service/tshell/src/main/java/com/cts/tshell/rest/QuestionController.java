@@ -33,11 +33,23 @@ public class QuestionController {
 	}
 
 	@PostMapping("/option/add")
-	public void addOption(@RequestBody Option option) {
+	public String addOption(@RequestBody Option option) throws JsonProcessingException {
 		LOGGER.info("start");
 		LOGGER.debug("Option: {}", option);
-		questionService.saveOption(option);
+		Question question = questionService.saveOption(option);
+		ObjectMapper mapper = new ObjectMapper();
+		String questionString = mapper.writerWithView(Views.Public.class).writeValueAsString(question);
+		LOGGER.debug("Question: {}", question);
 		LOGGER.info("end");
+        return questionString;
+	}
+
+	@PostMapping("/save")
+	public void saveOptionDescription(@RequestBody Option option) {
+		LOGGER.info("Starting Controller");
+		questionService.saveOptionDescription(option);
+		LOGGER.info("Ending Controller");
+
 	}
 
 	@GetMapping("/review/{skillId}")
@@ -54,11 +66,14 @@ public class QuestionController {
 	}
 
 	@GetMapping("/option/delete/{id}")
-	public void deleteOptionById(@PathVariable int id) {
+	public boolean deleteOptionById(@PathVariable int id) {
 		LOGGER.info("start of deleteOptionById controller");
-		Option option = questionService.getOptionById(id);
-		questionService.deleteOption(option);
+		boolean optionDeleteStatus = false;
+		LOGGER.debug("optionDeleteStatus {}",optionDeleteStatus);
+		optionDeleteStatus = questionService.deleteOption(id);
+		LOGGER.debug("optionDeleteStatus {}",optionDeleteStatus);
 		LOGGER.info("end of deleteOptionById controller");
+		return optionDeleteStatus;
 
 	}
 	

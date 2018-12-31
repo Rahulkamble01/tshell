@@ -17,8 +17,10 @@ export class SearchExistingQuestionsService {
   constructor(private http: HttpClient) { }
 
   fetchReviewQuestion(skillId): Observable<any> {
-    let questionUrl: string = '/tShell/question/review/' + skillId;
+    console.log("inside fetch review service")
+    let questionUrl: string = '/tShell/question/revie/' + skillId;
     return this.http.get<any>(questionUrl);
+    
   }
 
   addOption(newOption): Observable<any> {
@@ -31,7 +33,7 @@ export class SearchExistingQuestionsService {
     return this.http.get<any>(updateQuestionUrl);
   }
 
-  deleteoption(id:number):Observable<any>{
+  deleteOption(id:number):Observable<any>{
     let url:string='/tShell/question/option/delete/'+id;
      return this.http.get<any>(url);
    }
