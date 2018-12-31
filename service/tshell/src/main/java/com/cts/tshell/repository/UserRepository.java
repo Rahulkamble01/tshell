@@ -9,4 +9,11 @@ import com.cts.tshell.bean.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByEmpId(@Param("employeeId") int employeeId);
+
+
+	
+	User getUserByEmail(String email);
+	
+	User getUserByEmployeeId(int userId);
+
 }

@@ -18,6 +18,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -38,12 +45,17 @@ public class User {
 	@Column(name = "us_id")
 	private int id;
 
+	@NotNull(message = "User Name cannot be empty")
 	@Column(name = "us_name")
 	private String name;
 
+	@NotNull(message = "Email cannot be empty")
+	@Pattern(regexp = ".+@.+\\..+", message = "Email address is invalid")
 	@Column(name = "us_email")
 	private String email;
 
+	@NotNull(message = "Password cannot be empty")
+	@Size(min = 6, max = 100, message = "Password must be 6 to 30 characters")
 	@Column(name = "us_password")
 	private String password;
 
@@ -51,6 +63,8 @@ public class User {
 	@JoinColumn(name = "us_ur_id")
 	private Role role;
 
+	@Min(value = 1, message = "Employee ID must be at least 6 digits")
+	@Max(value = 10000000000L, message = "Employee ID cannot exceed 10 digits")
 	@Column(name = "us_emp_id")
 	@JsonView(Views.Public.class)
 	private int employeeId;
@@ -141,6 +155,8 @@ public class User {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	
 
 	public List<Skill> getSkills() {
 		return skills;

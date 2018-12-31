@@ -11,9 +11,16 @@ const httpOptions ={
     providedIn: 'root'
 })
 export class SignupService{
-    url: string = "/tshell/signup"
+    url: string = "/tShell/signup/"
+    //url1 = "/tShell/checkUserExist"
     constructor(private http: HttpClient){}
+    
     signup(json): Observable<any>{
         return this.http.post<any>(this.url, json, httpOptions);
     }
+
+   
+    /* checkUserExist(json): Observable<any>{
+        return this.http.post<any>(this.url1, json, httpOptions);
+    } */
 }
