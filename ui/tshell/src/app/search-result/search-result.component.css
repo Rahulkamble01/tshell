@@ -1,0 +1,264 @@
+
+.search-heading {
+  float: left;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  margin-bottom: 40px;
+  font-size: 14px;
+  position: relartive;
+  z-index: 3;
+  margin-top: 30px
+}
+
+.search-heading span {
+  font-family: 'Libre Baskerville', serif;
+  display: block;
+  font-size: 14px;
+  text-transform: none;
+  font-weight: 700
+}
+
+.search-heading a {
+  color: #fff;
+  font-weight: bold;
+}
+
+body {
+  background: #24C6DC;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #514A9D, #24C6DC);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #514A9D, #24C6DC);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.head {
+  float: left;
+  width: 100%;
+}
+
+.search-box {
+  width: 100%;
+  /* margin: 0 auto 40px; */
+  /* box-shadow: 10px 13px 0 rgba(0, 0, 0, 0.2); */
+}
+
+.listing-block {
+  background: #fff;
+  height: 500px;
+  padding-top: 20px;
+  overflow-y: scroll;
+}
+
+#graphID{
+  overflow-y: scroll;
+  overflow-x: scroll;
+  background-color: azure;
+  min-height:  501px; 
+}
+
+.slimScrollDiv {
+  width: 49% !important;
+}
+
+.media {
+  background: #fff;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.media img {
+  width: 200px;
+  margin: 0;
+  height: 136px;
+}
+
+.media-body {
+  border: 1px solid #bcbcbc;
+  border-left: 0;
+  height: 136px;
+}
+
+.media .price {
+  float: left;
+  width: 100%;
+  font-size: 30px;
+  font-weight: 600;
+  color: #4765AB;
+}
+
+.media .price small {
+  display: block;
+  font-size: 17px;
+  color: #232323;
+}
+
+.media .stats {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.media .stats span {
+  float: left;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.media .stats span i {
+  margin-right: 7px;
+  color: #4765AB;
+}
+
+.media .address {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  margin-top: 5px;
+  color: #888;
+}
+
+.media .fav-box {
+  position: absolute;
+  right: 10px;
+  font-size: 20px;
+  top: 4px;
+  color: #E74C3C;
+}
+
+.map-box {
+  background-image: url('../../assets/images/graph.png');
+  background-size: 448px 500px;
+  background-repeat: no-repeat;
+
+}
+
+/* ???????????????????Saikat???????????????????? */
+
+.addSkillContainer {
+  background-color: white;
+  border: 1px solid rgb(190, 202, 209);
+  border-radius: 25px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 17px 17px 19px grey;
+  display: flex;
+}
+
+.searchbox {
+  padding-right: 0px;
+}
+
+.searchbutton {
+  padding-left: 0px;
+}
+
+.entry:not(:first-of-type) {
+  margin-top: 10px;
+}
+
+.fa {
+  font-size: 12px;
+}
+
+.fa-addskilll {
+  font-size: 16px;
+}
+
+
+.newlist {
+  list-style: none;
+}
+
+
+
+.itwillflex {
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+
+#erase {
+  position: absolute;
+  right: 20px;
+  top: 7px;
+  border: none;
+  height: 25px;
+  width: 40px;
+  outline: none;
+  text-align: center;
+  font-weight: bold;
+  padding: 7px;
+
+}
+
+#erase:hover {
+  cursor: pointer;
+}
+
+#erase1 {
+  position: absolute;
+  right: 30px;
+  top: 26px;
+  border: none;
+  height: 25px;
+  width: 40px;
+  outline: none;
+  text-align: center;
+  font-weight: bold;
+  padding: 0px;
+
+}
+
+#erase1:hover {
+  cursor: pointer;
+}
+
+.buttonInside {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.makepointer {
+  cursor: pointer;
+}
+
+.makecross {
+  cursor: not-allowed;
+}
+
+.litopic {
+
+  cursor: default;
+  position: relative;
+  display: inline-block;
+  margin: 4px 4px 0 0;
+  padding: 7px;
+  font-size: 14px;
+}
+
+.marginzero {
+  margin-bottom: 2px;
+}
+
+.aletry {
+  color: red;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+/* ???????????????????????????????????? */
+
+.male1 {
+  display: inline-block;
+  border: 1px solid #000;
+  margin: 0px;
+}
+/*  */
+.skilledit{
+  font-size: 26px;
+  color: black;
+  cursor: pointer;
+
+}
