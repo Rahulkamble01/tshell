@@ -65,6 +65,7 @@ public class Question {
 	private User createdUser;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Set<Option> options;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

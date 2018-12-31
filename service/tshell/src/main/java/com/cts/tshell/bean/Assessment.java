@@ -2,6 +2,7 @@ package com.cts.tshell.bean;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,13 +13,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "assessment")
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@NamedQueries({
+	@NamedQuery(name = "Assessment.fetchAssesmentDetailById", 
+				query = "select distinct a from Assessment a " +
+						"left join fetch a.assessmentQuestions q " + 
+						"left join fetch q.assessmentQuestionOption " + 
+						"where a.id=:assessmentId " +  
+						" "),
+	}) 
 public class Assessment {	
 
 	@Id
@@ -40,10 +55,12 @@ public class Assessment {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="as_sk_id")
+	@JsonView(Views.Internal.class)
 	private Skill skill;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="as_us_id")
+	@JsonView(Views.Internal.class)
 	private User user;
 	
 //	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -52,7 +69,7 @@ public class Assessment {
 //				inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
 //	)
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessment")
-	private List<AssessmentQuestion> assessmentQuestions;
+	private Set<AssessmentQuestion> assessmentQuestions;
 
 	@Transient
 	private int skillId;
@@ -109,11 +126,11 @@ public class Assessment {
 		this.user = user;
 	}
 
-	public List<AssessmentQuestion> getAssessmentQuestions() {
+	public Set<AssessmentQuestion> getAssessmentQuestions() {
 		return assessmentQuestions;
 	}
 
-	public void setAssessmentQuestions(List<AssessmentQuestion> assessmentQuestions) {
+	public void setAssessmentQuestions(Set<AssessmentQuestion> assessmentQuestions) {
 		this.assessmentQuestions = assessmentQuestions;
 	}
 

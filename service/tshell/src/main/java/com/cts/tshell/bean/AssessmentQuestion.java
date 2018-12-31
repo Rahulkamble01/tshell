@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="assessment_question")
 
@@ -32,6 +34,7 @@ public class AssessmentQuestion {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.MERGE)
 	@JoinColumn(name="aq_qu_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Question question;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion",cascade=CascadeType.MERGE)

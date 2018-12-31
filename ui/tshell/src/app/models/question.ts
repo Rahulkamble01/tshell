@@ -21,7 +21,7 @@ export class Question {
         this.answerType = new QuestionAnswerType(data.questionAnswerType);
         this.options = [];
         data.options.forEach(o => {
-            this.options.push(new Option(o));
+            this.options.push(new Option(o, this.answerType.type));
         });
         this.topicList = [];
         data.topicList.forEach(t => {

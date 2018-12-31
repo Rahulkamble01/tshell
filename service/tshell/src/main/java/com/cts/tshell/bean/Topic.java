@@ -15,11 +15,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
 /*
 @NamedNativeQueries({
        @NamedNativeQuery(
@@ -52,6 +56,7 @@ public class Topic {
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)	 
+	@JsonView(Views.Internal.class)
 	private List<Question> questions;
 
 	public int getId() {

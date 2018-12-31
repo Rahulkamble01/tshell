@@ -42,7 +42,7 @@ export class ScoreAssesmentComponent implements OnInit {
   totalOutOf: number = 0;
   overallpecent: number = 0;
   overallClass: any;
-  constructor(private router: Router,private elementRef: ElementRef, private renderer: Renderer2) { }
+  constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', '#989D9E');

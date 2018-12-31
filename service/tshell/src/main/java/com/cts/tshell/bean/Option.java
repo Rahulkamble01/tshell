@@ -35,7 +35,7 @@ public class Option {
 	private boolean answer;
 	
 	@Transient
-	private boolean selected;
+	private boolean response;
 
 	public int getId() {
 		return id;
@@ -69,13 +69,15 @@ public class Option {
 		this.answer = answer;
 	}
 
-	public boolean isSelected() {
-		return selected;
+	public boolean isResponse() {
+		return response;
 	}
 
-	public void setSelected(boolean selected) {
-		this.selected = selected;
+	public void setResponse(boolean response) {
+		this.response = response;
 	}
+
+	
 
 	
 }

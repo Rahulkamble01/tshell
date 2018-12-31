@@ -49,7 +49,6 @@ public class AssessmentService {
 		LOGGER.info("START : startAssesment() Service  of AssessmentService");
 		LOGGER.debug("Assesment Object : ", assessment);
 		Skill skill = skillRepository.findSkillById(assessment.getSkillId());
-		LOGGER.debug("Skill : ", skill);
 		User user = userRepository.findUserByEmployeeId(assessment.getUserId());
 		LOGGER.debug("User : ", user);
 		assessment.setSkill(skill);
@@ -67,19 +66,14 @@ public class AssessmentService {
 
 		LOGGER.info("START : saveAssessmentResponse() Service  of AssessmentService");
 		int assessmentId = assessmentQuestion.getAssessment().getId();
-
 		int questionId = assessmentQuestion.getQuestion().getId();
-		System.out.println("Assessment ID : " + assessmentId + " " + " Question Id : " + questionId);
+		LOGGER.debug("Assessment ID ", assessmentId + " Question Id : ", questionId);
 		int[] assmentQuestionId = assessmentQuestionRepository.fetchAssesmentQuestionId(assessmentId, questionId);
-		System.out.println("Asssssnfhflnsdkl : " + assmentQuestionId.length);
 
 		if (assmentQuestionId.length == 0) {
 			AssessmentQuestion a = new AssessmentQuestion();
-			LOGGER.debug("AssessmentQuestion Object : ", assessmentQuestion);
 			a.setQuestion(assessmentQuestion.getQuestion());
-			LOGGER.debug("Setting setQuestion Object : ", assessmentQuestion);
 			a.setAssessmentQuestionOption(assessmentQuestion.getAssessmentQuestionOption());
-			System.out.println(assessmentQuestion.getAssessment());
 			Assessment as = assessmentRepository.findAssessmentById(assessmentQuestion.getAssessment().getId());
 			a.setAssessment(as);
 			a.setCorrect(assessmentQuestion.isCorrect());
@@ -87,12 +81,11 @@ public class AssessmentService {
 
 			System.out.println("Starting AssessmentQuestionOption ");
 
-			// opt.setAssessmentQuestion(a);
 			for (Option option : a.getQuestion().getOptions()) {
 				AssessmentQuestionOption opt = new AssessmentQuestionOption();
 				opt.setAssessmentQuestion(a);
 				opt.setAssessmentOption(option);
-				opt.setSelected(option.isSelected());
+				opt.setSelected(option.isResponse());
 				System.out.println("Starting save ");
 				assessmentQuestionOptionRepository.save(opt);
 			}
@@ -101,53 +94,46 @@ public class AssessmentService {
 			System.out.println("Inside else loop");
 			int assessmentQuestionId = assmentQuestionId[0];
 			AssessmentQuestion a = assessmentQuestionRepository.findAssessmentQuestionById(assessmentQuestionId);
-			a.setQuestion(assessmentQuestion.getQuestion());	
-			// a.setAssessmentQuestionOption(assessmentQuestion.getAssessmentQuestionOption());
-			// Assessment as = assessmentRepository.findAssessmentById(assessmentQuestion.getAssessment().getId());
-		//	a.setAssessment(as);
-			// assessmentQuestionRepository.save(a);
-			int i =1 ;
+			a.setQuestion(assessmentQuestion.getQuestion());
+
 			for (Option option : a.getQuestion().getOptions()) {
-				System.out.println("Inside loop : "+i);
-				int assessmentQuestionOptionId = assessmentQuestionOptionRepository.fetchAssesmentQuestionOptionId(a.getId(), option.getId());
-				System.out.println("AssessmentQOption Id : " +assessmentQuestionOptionId);
-				// AssessmentQuestionOption opt = new AssessmentQuestionOption();
-				//opt.setId(assessmentQuestionOptionId);
-				//opt.setAssessmentQuestion(a);
-				//opt.setAssessmentOption(option);
-				//opt.setSelected(option.isSelected());
+				int assessmentQuestionOptionId = assessmentQuestionOptionRepository
+						.fetchAssesmentQuestionOptionId(a.getId(), option.getId());
+				System.out.println("AssessmentQOption Id : " + assessmentQuestionOptionId);
 				int optionId = option.getId();
-				boolean selected = option.isSelected();
+				boolean selected = option.isResponse();
 				System.out.println("Starting save ");
-			//	assessmentQuestionOptionRepository.save(opt);
-				assessmentQuestionOptionRepository.saveAssesmentQuestionOption(assessmentQuestionId, optionId, selected, assessmentQuestionOptionId);
-				i++;
+				assessmentQuestionOptionRepository.saveAssesmentQuestionOption(assessmentQuestionId, optionId, selected,
+						assessmentQuestionOptionId);
 			}
-
-			
-
 		}
-
-		// for (AssessmentQuestionOption aqoption :
-		// assessmentQuestion.getAssessmentQuestionOption()) {
-		//// AssessmentQuestionOption opt = new AssessmentQuestionOption();
-		//// opt.setAssessmentQuestion(aqoption.getAssessmentQuestion());
-		//// opt.setAssessmentOption(aqoption.getAssessmentOption());
-		//// opt.setSelected(aqoption.isSelected());
-		// assessmentQuestionOptionRepository.save(opt);
-		// }
-
 	}
 
-	@Transactional
-	public void saveResponse(AssessmentQuestionOption assessmentQuestionOption) {
+	public void submitAssesment(Assessment assessment) {
+		Assessment as = assessmentRepository.findAssessmentById(assessment.getId());
+		as.setEndTime(assessment.getEndTime());
+		assessmentRepository.save(as);
+	}
 
-		AssessmentQuestionOption aqoption = new AssessmentQuestionOption();
-		// AssessmentQuestion a = new AssessmentQuestion();
-		aqoption.setAssessmentQuestion(assessmentQuestionOption.getAssessmentQuestion());
-		aqoption.setAssessmentOption(assessmentQuestionOption.getAssessmentOption());
-		aqoption.setSelected(assessmentQuestionOption.isSelected());
-		assessmentQuestionOptionRepository.save(aqoption);
+	// To view the Assesment object json data for GETMapping
+	/*
+	 * public Assessment evaluateScore(int assessmentId) { Assessment assessment
+	 * = assessmentRepository.fetchAssesmentDetailById(assessmentId); return
+	 * assessment; }
+	 */
+
+	public void evaluateScore(int assessmentId) {
+		Assessment assessment = assessmentRepository.fetchAssesmentDetailById(assessmentId);
+		int score = 0;
+		for (AssessmentQuestion assessmentQuestion : assessment.getAssessmentQuestions()) {
+			for (AssessmentQuestionOption assessmentQuestionOption : assessmentQuestion.getAssessmentQuestionOption().) {
+				if (assessmentQuestionOption.getAssessmentOption().isAnswer() == assessmentQuestionOption
+						.isSelected()) {
+					score++;
+				}
+			}
+		}
+
 	}
 
 }
