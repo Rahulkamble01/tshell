@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.tshell.bean.AuthenticationStatus;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.bean.Util;
+import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 
 @ControllerAdvice
 @RestController
@@ -29,18 +34,22 @@ public class LoginController extends TshellController {
 	private UserService userservice;
 
 	@GetMapping("/rest/{employeeId}")
-	public User getUser(@PathVariable("employeeId") int employeeId) {
+	public String getUser(@PathVariable("employeeId") int employeeId) throws JsonProcessingException {
 		LOGGER.info("Start");
+		User user = userservice.getUser(employeeId);
 		LOGGER.debug("EmployeeId : {}", employeeId);
+		ObjectMapper mapper = new ObjectMapper();
+		String result=mapper.writerWithView(Views.Public.class).writeValueAsString(user);	
 		LOGGER.info("End");
-		return userservice.getUser(employeeId);
-
+		return result;
 	}
 
 	@PostMapping("/authenticate")
 	public ResponseEntity<AuthenticationStatus> authenticate(@RequestBody User user) throws NoSuchAlgorithmException {
 		LOGGER.info("Start");
 		LOGGER.debug("From request (user) : {}", user);
+		int employeeId = user.getEmployeeId();
+		LOGGER.debug("Value of employeeId: {} ", employeeId);
 		String password = user.getPassword();
 		LOGGER.debug("Value of password: {} ", password);
 
@@ -48,16 +57,18 @@ public class LoginController extends TshellController {
 		LOGGER.debug("User entered encrypted password: {} ", encryptedPassword);
 
 		String actualPassword = "";
+		int actualEmployeeId=0;
 		AuthenticationStatus status = new AuthenticationStatus();
 		status.setAuthenticated(false);
-		User actualUser = userservice.getUser(user.getEmployeeId());
+		User actualUser = userservice.getUser(employeeId);
 		LOGGER.debug("From request (actualUser) : {}", actualUser);
-		LOGGER.debug("Actual password: {} ", actualUser.getPassword());
 		if (actualUser != null) {
 			actualPassword = actualUser.getPassword();
+			actualEmployeeId = actualUser.getEmployeeId();
 			status.setUser(actualUser);
-		}
-		status.setAuthenticated(encryptedPassword.equals(actualPassword));
+			status.setAuthenticated(employeeId==actualEmployeeId);
+			status.setAuthenticated(encryptedPassword.equals(actualPassword));
+		}		
 		LOGGER.debug("Value of actualPassword: {} ", actualPassword);
 		LOGGER.debug("Value of status: {} ", status);
 		LOGGER.info("End");
