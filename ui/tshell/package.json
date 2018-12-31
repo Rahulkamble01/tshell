@@ -21,6 +21,7 @@
     "@angular/router": "~7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
+    "@types/d3": "^5.5.0",
     "@types/jquery": "^3.3.27",
     "angular-cli": "^1.0.0-beta.28.3",
     "angular-popper": "^2.0.0",

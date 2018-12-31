@@ -1,6 +1,7 @@
 package com.cts.tshell.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
@@ -20,5 +21,8 @@ public interface Neo4jSkillRepository extends Neo4jRepository<NeoSkill, Long>  {
 //    @Query("MATCH (n:NeoSkill) return n LIMIT {limit}")
 //	@Query("MATCH (n:NeoSkill)-[r]-(m) RETURN n,r,m LIMIT {limit}")
 	Collection<NeoSkill> graph(@Param("limit") int limit);
+    
+    @Query("MATCH (a:NeoSkill {name: '{skillName}'})-[r:REQUIRED_KNOWLEDGE_OF]->(b:NeoSkill) RETURN b")
+	List<NeoSkill> skillGraph(@Param("skillName")String skillName);
 
 }

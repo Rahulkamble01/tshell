@@ -118,6 +118,13 @@ public class SkillService {
 		System.out.println("result " + result);
 		return toD3Format(result);
 	}
+	@Transactional
+	public List<NeoSkill> graph(String skillName) {
+		System.out.println(skillName);
+		List<NeoSkill> result = neo4jSkillRepository.skillGraph(skillName);
+		System.out.println("result " + result);
+		return result;
+	}
 
 	@Transactional
 	private Map<String, Object> toD3Format(Collection<NeoSkill> neoSkills) {

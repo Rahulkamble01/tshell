@@ -1,6 +1,6 @@
-abc(d3,w,h, graphData);
+abc(d3,w,h);
 
-function abc(d3,w1,h1, graphData1) {
+function abc(d3,w1,h1) {
 
   !(function () {
     "use strict"

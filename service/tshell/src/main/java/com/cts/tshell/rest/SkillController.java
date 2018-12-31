@@ -1,5 +1,6 @@
 package com.cts.tshell.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.tshell.bean.NeoSkill;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.converter.SkillToNeoSkill;
@@ -62,6 +65,13 @@ public class SkillController {
 		// System.out.println(skillService.graph(limit));
 		return skillService.graph(limit);
 	}
+	
+	@RequestMapping(value = "/graph/{skillName}", method = RequestMethod.GET)
+	public List<NeoSkill> graph(@PathVariable String skillName) {
+		System.out.println("Indsude+++++++++++ {}"+ skillName);
+		// System.out.println(skillService.graph(limit));
+		return skillService.graph(skillName);
+	}
 
 	@RequestMapping(value = "/updateSkillSearch", method = RequestMethod.POST)
 	public void updateSkillSearch(@RequestBody Skill skill) {
@@ -107,8 +117,9 @@ public class SkillController {
 		}
 		skill.setTopics(topics);
 		LOGGER.info("ending inserting Skill");
-		LOGGER.info("{}", skillToNeoSkill);
+		
 		skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
+		System.out.println("{}"+ skillToNeoSkill);
 	}
 
 	@PostMapping("/addskill")

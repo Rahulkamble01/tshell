@@ -53,7 +53,6 @@ body {
 #graphID{
   overflow-y: scroll;
   overflow-x: scroll;
-  background-color: azure;
   min-height:  501px; 
 }
 
@@ -268,10 +267,6 @@ body {
     padding:10px; 
 }
 
-.card-header{    
-    
-    color: white;
-}
 
 .card-body,.card-header{
     border: 1px solid rgba(0,0,0,.125);
