@@ -8,7 +8,7 @@ import com.cts.tshell.bean.AuthenticationStatus;
 @RestController
 public class TestController {
 	
-	@GetMapping("/list")
+	@GetMapping("/rest/list")
 	public AuthenticationStatus get(){
 		AuthenticationStatus status = new AuthenticationStatus();
 		status.setAuthenticated(false);

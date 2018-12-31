@@ -14,15 +14,17 @@ import com.cts.tshell.service.SkillService;
 
 @RestController
 @RequestMapping("/skill")
-public class SkillController {
-
-	private final static Logger LOGGER = LoggerFactory.getLogger(SkillService.class);
-
+public class SkillController extends TshellController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
+	@Autowired
 	private SkillService skillService;
 
-	@Autowired
-	public void setSkillService(SkillService skillService) {
-		this.skillService = skillService;
+	@GetMapping("/top4searchedskills")
+	public List<Skill> getTop4SearchedSkills() {
+		LOGGER.info("start ");
+		List<Skill> top4SearchedSkills = skillService.getTop4Skills();
+		LOGGER.debug("Top 4 Searched Skills ->", top4SearchedSkills);
+		return top4SearchedSkills;
 	}
 
 	@GetMapping("/recentSkillList")

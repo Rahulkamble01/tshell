@@ -46,6 +46,7 @@ import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-
 import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

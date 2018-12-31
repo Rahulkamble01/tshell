@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class SkillService {
 
-  url: string ="/tshell/skill/recentSkillList/"
+  url: string ="/tShell/skill/recentSkillList/"
 
   constructor(private http: HttpClient) { }
 

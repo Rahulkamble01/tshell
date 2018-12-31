@@ -1,6 +1,6 @@
 package com.cts.tshell.bean;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,12 +17,15 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 @Entity
 @NamedQueries ({
 @NamedQuery(name="Skill.fetchRecentSkills",	
 query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
+@NamedQuery(
+		name = "Skill.fetchTopSearchedSkills", 
+		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
 })
+
 @Table(name = "skill")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Skill {
@@ -42,11 +45,11 @@ public class Skill {
 	private String active;
 
 	@Column(name = "sk_test_count")
-	private int testCount;	
-	
+	private int testCount;
+
 	@Column(name = "sk_description")
 	private String description;
-	
+
 	@Column(name = "sk_image")
 	private byte[] image;
 	
@@ -66,13 +69,6 @@ public class Skill {
 		this.image = image;
 		this.creationDate = creationDate;
 		this.topics = topics;
-	}
-
-	@Override
-	public String toString() {
-		return "Skill [id=" + id + ", name=" + name + ", searchCount=" + searchCount + ", active=" + active
-				+ ", testCount=" + testCount + ", description=" + description + ", image=" + image + ", creationDate="
-				+ creationDate + ", topics=" + topics + "]";
 	}
 
 	public Date getCreationDate() {
@@ -134,6 +130,7 @@ public class Skill {
 		this.description = description;
 	}
 
+
 	public byte[] getImage() {
 		return image;
 	}
@@ -151,6 +148,12 @@ public class Skill {
 	}
 
 	
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	
+	
+
 }

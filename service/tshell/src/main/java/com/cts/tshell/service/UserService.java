@@ -27,7 +27,7 @@ public class UserService {
 		LOGGER.info("Start");
 		LOGGER.debug("EmployeeId: {}", employeeId);
 		LOGGER.info("End");
-		return userRepository.findByEmployeeId(employeeId);
+		return userRepository.findByEmpId(employeeId);
 	}
 
 }
