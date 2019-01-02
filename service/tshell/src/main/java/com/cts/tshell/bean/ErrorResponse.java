@@ -5,7 +5,10 @@ public class ErrorResponse {
 	private static final long serialVersionUID = 5776681206288518465L;
 	
 	private String timestamp;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> top-5-accessed-tests-service
 	private String errorMessage;
 	private int reasonCode;
 	

@@ -36,7 +36,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
-import { TestComponent } from './top5AccessedTest/test.component';
+
  import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
  import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
@@ -44,7 +44,11 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+<<<<<<< HEAD
 import { ErrorComponent } from './error/error.component';
+=======
+import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
+>>>>>>> top-5-accessed-tests-service
 
 @NgModule({
   declarations: [
@@ -82,14 +86,18 @@ PasswordNotEqualValidatorDirective,
     SearchResultComponent,
     AddskillComponent,
     QuestiongraphComponent,
-    TestComponent,
+    TopAccessedTestsComponent,
      ExitAssesmentComponent,
      InstructionComponent,
      ScoreAssesmentComponent,
     SkillpageComponent,
     SkillmodalComponent,
     FooterComponent,
+<<<<<<< HEAD
     ErrorComponent
+=======
+    TopAccessedTestsComponent
+>>>>>>> top-5-accessed-tests-service
   ],
 
   imports: [

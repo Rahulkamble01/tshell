@@ -14,6 +14,7 @@ import com.cts.tshell.service.SkillService;
 
 @RestController
 @RequestMapping("/skill")
+<<<<<<< HEAD
 public class SkillController extends TshellController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
 	@Autowired
@@ -37,3 +38,25 @@ public class SkillController extends TshellController {
 }
 
 
+=======
+public class SkillController {
+	private final static Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
+
+	@Autowired
+	private SkillService skillService;
+
+	@Autowired
+	public void setSkillService(SkillService skillService) {
+		this.skillService = skillService;
+	}
+
+	@GetMapping("/gettop5tests")
+	public List<Skill> getTopAccessedtests() {
+		LOGGER.info("start");
+		List<Skill> topAccessedtests = skillService.getTopAccessedtests();
+		LOGGER.debug("top5 accessed tests ->", topAccessedtests);
+		return topAccessedtests;
+
+	}
+}
+>>>>>>> top-5-accessed-tests-service
