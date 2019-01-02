@@ -15,6 +15,7 @@ export class ViewprofileComponent implements OnInit {
   assessmentsData: any[] = [];
   assessmentsForQn:any[]=[];
   emailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,4}$";
+  status=false;
   constructor(private viewprofileService: ViewprofileService, private service: AuthService) { }
   form = new FormGroup({
     name: new FormControl(
@@ -94,7 +95,7 @@ export class ViewprofileComponent implements OnInit {
     console.log("employeeId = "+employeeId);
      this.viewprofileService.getUserDetails(employeeId).subscribe(
       data => {
-
+        this.status = false;        
         this.user = data;
         console.log(this.user);
       })
@@ -109,9 +110,9 @@ export class ViewprofileComponent implements OnInit {
     var reader = new FileReader();
     reader.onload = (event: any) => {
       this.imageUrl = event.target.result;
-    }
-    reader.readAsDataURL(this.fileToUpload);
 
+    }
+    let by=reader.readAsDataURL(this.fileToUpload);
 
 
   }

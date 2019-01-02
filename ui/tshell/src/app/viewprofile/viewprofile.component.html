@@ -22,9 +22,8 @@
               <div class="avatar-upload">
                 <form #imageForm=ngForm>
                   <div class="avatar-edit">
-                    <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
-
-                    <label for="imageUpload"></label>
+                   <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
+                     <label for="imageUpload"></label> 
                   </div>
                   <div class="avatar-preview">
                     <img [src]="imageUrl" id="imagePreview" style="border-radius:50%;height:100%;width:100%;background-image: url(https://www.loopconnect.net/images/main/avatar.png);" />
