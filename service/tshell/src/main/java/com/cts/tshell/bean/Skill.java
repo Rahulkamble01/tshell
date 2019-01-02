@@ -1,7 +1,6 @@
 package com.cts.tshell.bean;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +35,7 @@ public class Skill {
 	private String description;
 	
 	@Column(name = "sk_image")
-	private byte image;
+	private byte image[];
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
 	private List<Topic> topics;
@@ -89,11 +88,11 @@ public class Skill {
 		this.description = description;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {		
 		this.image = image;
 	}
 
@@ -104,6 +103,5 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-
 	
 }

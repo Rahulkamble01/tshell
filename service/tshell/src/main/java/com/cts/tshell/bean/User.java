@@ -1,8 +1,6 @@
 package com.cts.tshell.bean;
 
-
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,39 +13,47 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
-
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "us_id")
+	@JsonView(Views.Public.class)
 	private int id;
 
 	@Column(name = "us_name")
+	@JsonView(Views.Public.class)
 	private String name;
 
 	@Column(name = "us_email")
+	@JsonView(Views.Public.class)
 	private String email;
 
 	@Column(name = "us_password")
+	@JsonView(Views.Public.class)
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_ur_id")	
+	@JsonView(Views.Internal.class)
 	private Role role;
 
 	@Column(name = "us_emp_id")
+	@JsonView(Views.Public.class)
 	private int employeeId;
 	
 	@Column(name = "us_image")
-	private byte image;
+	@JsonView(Views.Public.class)
+	private byte[] image;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
+	@JsonView(Views.Public.class)
 	private List<Skill> skills;
 
 	public int getId() {
@@ -98,11 +104,11 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

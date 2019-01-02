@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "question")
 public class Question {
@@ -87,7 +85,5 @@ public class Question {
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
 	}	
-	
-	
 
 }

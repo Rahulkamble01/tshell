@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="assessment_question")
 public class AssessmentQuestion {	
@@ -24,7 +26,7 @@ public class AssessmentQuestion {
 	private int id;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="aq_as_id")
+	@JoinColumn(name="aq_as_id")	
 	private Assessment assessment;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
