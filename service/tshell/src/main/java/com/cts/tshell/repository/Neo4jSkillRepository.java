@@ -7,9 +7,11 @@ import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 import com.cts.tshell.bean.NeoSkill;
 
+@Repository
 @RepositoryRestResource(collectionResourceRel = "neoSkill", path = "neoSkill")
 public interface Neo4jSkillRepository extends Neo4jRepository<NeoSkill, Long>  {
 
@@ -24,5 +26,6 @@ public interface Neo4jSkillRepository extends Neo4jRepository<NeoSkill, Long>  {
     
     @Query("MATCH (a:NeoSkill {name: '{skillName}'})-[r:REQUIRED_KNOWLEDGE_OF]->(b:NeoSkill) RETURN b")
 	List<NeoSkill> skillGraph(@Param("skillName")String skillName);
+
 
 }

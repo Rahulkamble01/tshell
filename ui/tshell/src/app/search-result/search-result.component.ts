@@ -97,6 +97,7 @@ export class SearchResultComponent implements OnInit {
     this.skillService.updateSearch($event.item).subscribe();
     this.skillService.getSkillTopper($event.item.id).subscribe(data => {
       this.toppers = data;
+      console.log(data);
     });
     // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
     //   this.graphData = data;

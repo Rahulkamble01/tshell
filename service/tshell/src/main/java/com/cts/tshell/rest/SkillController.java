@@ -55,19 +55,14 @@ public class SkillController {
 
 	@RequestMapping(value = "/graph", method = RequestMethod.GET)
 	public Map<String, Object> graph(@RequestParam(value = "limit", required = false) Integer limit) {
-		System.out.println("Indsude+++++++++" + limit);
 		if (limit == null) {
 			limit = 100;
 		}
-		System.out.println("Indsude+++++++++++" + limit);
-		// System.out.println(skillService.graph(limit));
 		return skillService.graph(limit);
 	}
 
 	@RequestMapping(value = "/graph/{skillName}", method = RequestMethod.GET)
 	public List<NeoSkill> graph(@PathVariable String skillName) {
-		System.out.println("Indsude+++++++++++ {}" + skillName);
-		// System.out.println(skillService.graph(limit));
 		return skillService.graph(skillName);
 	}
 
@@ -104,7 +99,6 @@ public class SkillController {
 	public int UpdateSkill(@RequestBody Skill skill) {
 		LOGGER.info("starting insertneSkills");
 		LOGGER.debug("Recived skill from Browser: " + skill);
-		System.out.println("skillname" + skill.getName());
 		int addStatus = 0;
 		Skill checkSkill = skillService.getSkillByName(skill.getName());
 		if (checkSkill == null) {
@@ -134,7 +128,6 @@ public class SkillController {
 		LOGGER.info("starting insertnewSkills");
 		String skillName = skill.getName();
 		Skill skill1 = skillService.getSkillByName(skillName);
-		System.out.println("the skill we get isisisisisisisis : :" + skill1);
 		int addStatus;
 		if (skill1 != null) {
 			addStatus = 1;
@@ -144,6 +137,7 @@ public class SkillController {
 			LOGGER.debug("Recived topics from Browser: " + topics);
 			skillService.addOrUpdateSkill(skill);
 			Skill skill2 = skillService.getSkillByName(skill.getName());
+			skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
 			LOGGER.debug("Recived skill from sevice: " + skill2);
 			for (Topic topic : topics) {
 				topic.setSkill(skill2);

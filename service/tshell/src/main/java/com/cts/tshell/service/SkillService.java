@@ -88,8 +88,8 @@ public class SkillService {
 
 	@Transactional
 	public void addOrUpdateNeoSkill(NeoSkill neoSkill) {
-		System.out.println("NeoSkill Updated ");
 		neo4jSkillRepository.save(neoSkill);
+		System.out.println("NeoSkill Updated\n ");
 	}
 
 	@Transactional
