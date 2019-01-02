@@ -18,7 +18,7 @@ public interface QuestionRepository extends JpaRepository<Question,Integer> {
 			  "left join topic_question on tq_qu_id = qu_id  "+
 			  "left join topic on tp_id = tq_tp_id "+
 			  " "+
-			  "where qu_status = 'Approved' "+ "and tp_sk_id = :skillId "+
+			  "where qu_status = 'Approved' "+ "and tq_tp_id = :topicId and tp_sk_id = :skillId "+
 			  " ", nativeQuery = true)
-	long[] getQuestionId(@Param("skillId")int skillId);
+	long[] getQuestionId(@Param("topicId")int topicId, @Param("skillId")int skillId);
 }

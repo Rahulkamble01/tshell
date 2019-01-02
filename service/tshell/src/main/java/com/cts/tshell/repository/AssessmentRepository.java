@@ -8,5 +8,6 @@ import com.cts.tshell.bean.Assessment;
 public interface AssessmentRepository extends JpaRepository<Assessment,Integer>  {
 
 	Assessment findAssessmentById(int id);
+	
 	Assessment fetchAssesmentDetailById(@Param("assessmentId")int assessmentId);
 }

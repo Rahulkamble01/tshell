@@ -1,6 +1,5 @@
 package com.cts.tshell.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,12 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Skill;
+import com.cts.tshell.bean.Topic;
 import com.cts.tshell.service.QuestionService;
 
 @RestController
@@ -54,9 +53,14 @@ public class QuestionController {
 		LOGGER.debug("SkillId :  {}", skillId);
 		return questionService.fetchQuestionsID(skillId);
 	}
-/*
-	@GetMapping("/save")
+
+	/*@GetMapping("/topic")
 	public void sav(){
-		questionService.
+		
+		System.out.println(questionService.getTopicListandWeightage());
+		for(Topic topic : questionService.getTopicListandWeightage()){
+			int weightage = topic.getWeightage();
+			System.out.println(weightage);
+		}
 	}*/
 }

@@ -122,18 +122,38 @@ public class AssessmentService {
 	 * assessment; }
 	 */
 
-	public void evaluateScore(int assessmentId) {
+	public Assessment evaluateScore(int assessmentId) {
+		LOGGER.info("START : evaluateScore() Service  of AssessmentService");
 		Assessment assessment = assessmentRepository.fetchAssesmentDetailById(assessmentId);
 		int score = 0;
+
 		for (AssessmentQuestion assessmentQuestion : assessment.getAssessmentQuestions()) {
-			for (AssessmentQuestionOption assessmentQuestionOption : assessmentQuestion.getAssessmentQuestionOption().) {
+			LOGGER.info("Taking Assessment Question");
+			int counter = 0;
+			boolean answerStatus = false;
+			int optionsSize = assessmentQuestion.getAssessmentQuestionOption().size();
+			LOGGER.debug("The total no of options are : ", optionsSize);
+			System.out.println(optionsSize);
+			for (AssessmentQuestionOption assessmentQuestionOption : assessmentQuestion.getAssessmentQuestionOption()) {
+				LOGGER.info("Taking AssessmentQuestionOption");
 				if (assessmentQuestionOption.getAssessmentOption().isAnswer() == assessmentQuestionOption
 						.isSelected()) {
+					counter++;
+				}
+				if (counter == optionsSize) {
 					score++;
+					answerStatus = true;
 				}
 			}
+			assessmentQuestion.setCorrect(answerStatus);
+			LOGGER.info("Saving Answer Status for the Question");
+			// assessmentQuestionRepository.save(assessmentQuestion);
 		}
-
+		assessment.setScore(score);
+		LOGGER.info("Saving Assessment Score");
+		assessmentRepository.save(assessment);
+		LOGGER.info("Score saved Successfully");
+		return assessment;
 	}
 
 }

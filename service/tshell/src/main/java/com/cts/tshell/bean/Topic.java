@@ -58,6 +58,9 @@ public class Topic {
 	)	 
 	@JsonView(Views.Internal.class)
 	private List<Question> questions;
+	
+	@Column(name = "tp_weightage")
+	private int weightage;
 
 	public int getId() {
 		return id;
@@ -90,6 +93,16 @@ public class Topic {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
+
+	public int getWeightage() {
+		return weightage;
+	}
+
+//	public void setWeightage(int weightage) {
+//		this.weightage = weightage;
+//	}
+
+	 
 
 	
 }

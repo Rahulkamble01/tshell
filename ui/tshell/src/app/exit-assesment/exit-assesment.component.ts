@@ -41,7 +41,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     'allowBack': true,
     'allowReview': true,
     'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 10,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'duration': 1200,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
     'richText': false,
@@ -87,21 +87,23 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
       console.log(this.assesmentDetails);
       //  this.loadQuiz(this.questionSet);
 
-    });
+      this.assesmentService.getQuestionId(1).subscribe(data => {
+        this.questionIds = data;
+        console.log(this.questionIds);
+        this.questionId = this.questionIds[this.pager.index];
+        console.log(this.questionId);
+        this.assesmentService.getQuestion(this.questionId).subscribe(d => {
+          this.question = d;
+          this.loadQuiz();
+          this.loadQuestions(this.question, this.pager.index);
+          console.log(this.question);
+        });
 
-    this.assesmentService.getQuestionId(1).subscribe(data => {
-      this.questionIds = data;
-      console.log(this.questionIds);
-      this.questionId = this.questionIds[this.pager.index];
-      console.log(this.questionId);
-      this.assesmentService.getQuestion(this.questionId).subscribe(d => {
-        this.question = d;
-        this.loadQuiz();
-        this.loadQuestions(this.question, this.pager.index);
-        console.log(this.question);
       });
 
     });
+
+
 
     // tslint:disable-next-line:max-line-length
     // this.quizes = this.quizService.getAll();    // this.quizName = this.quizes[0].id;    // this.loadQuiz(this.quizName);  // this.loadQuiz(this.json);
@@ -120,7 +122,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     console.log(this.quiz.questions);
     this.startTime = new Date();
     this.timer = setInterval(() => { this.tick(); }, 1000);
-    this.duration = this.parseTime(10);
+    this.duration = this.parseTime(1200);
     this.mode = 'quiz';
   }
 
