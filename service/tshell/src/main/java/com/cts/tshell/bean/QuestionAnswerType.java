@@ -8,16 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="question_difficulty")
-public class QuestionDifficultyLevel {
-
+@Table(name="question_answer_type")
+public class QuestionAnswerType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="qd_id")
+	@Column(name="qt_id")
 	private int id;
 	
-	@Column(name="qd_difficulty")
-	private String description;
+	@Column(name="qt_type")
+	private String type;
 
 	public int getId() {
 		return id;
@@ -27,13 +26,11 @@ public class QuestionDifficultyLevel {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getType() {
+		return type;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	
+	public void setType(String type) {
+		this.type = type;
+	}	
 }

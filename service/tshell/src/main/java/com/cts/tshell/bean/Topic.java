@@ -75,5 +75,4 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	
 }

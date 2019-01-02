@@ -45,11 +45,6 @@ public class Assessment {
 	@JoinColumn(name="as_us_id")
 	private User user;
 	
-//	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-//	@JoinTable(name="assessment_question",
-//				joinColumns= {@JoinColumn(name="aq_as_id")},
-//				inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
-//	)
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessment")
 	private List<AssessmentQuestion> assessmentQuestions;
 
@@ -110,3 +105,4 @@ public class Assessment {
 	}
 
 }
+
