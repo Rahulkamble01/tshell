@@ -88,7 +88,7 @@ export class SearchResultComponent implements OnInit {
     debounceTime(100),
     distinctUntilChanged(),
     map(term => term === '' ? []
-      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 10)
+      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100)
     )
   )
   itemSelected($event) {
@@ -98,9 +98,9 @@ export class SearchResultComponent implements OnInit {
     this.skillService.getSkillTopper($event.item.id).subscribe(data => {
       this.toppers = data;
     });
-    this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
-      this.graphData = data;
-    });
+    // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
+    //   this.graphData = data;
+    // });
   }
 
 }

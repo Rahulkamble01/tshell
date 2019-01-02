@@ -15,10 +15,10 @@ export class SkillserviceService {
   updateSearchUrl = 'tShell/updateSkillSearch';
   skillToppersUrl = 'tShell/top5list/';
   updateSkillUrl = 'tShell/updateSkill';
-  graphDataUrl = 'tShell/graph';
+  // graphDataUrl = 'tShell/graph';
   addSkillurl = 'tShell/addskill';
   deleteTopicUrl = "tShell/deleteTopic";
-  graphDataOfSkillUrl = 'tShell/graph/';
+  // graphDataOfSkillUrl = 'tShell/graph/';
 
   constructor(private http: HttpClient) { }
 
@@ -39,13 +39,13 @@ export class SkillserviceService {
     return this.http.get(this.skillToppersUrl + id);
   }
 
-  getGraphDataOfSkill(skillName): Observable<any> {
-    return this.http.get(this.graphDataUrl + skillName);
-  }
+  // getGraphDataOfSkill(skillName): Observable<any> {
+  //   return this.http.get(this.graphDataUrl + skillName);
+  // }
 
-  getGraphData(): Observable<any> {
-    return this.http.get(this.graphDataUrl);
-  }
+  // getGraphData(): Observable<any> {
+  //   return this.http.get(this.graphDataUrl);
+  // }
 
   deleteTopic(topicName, skillId): Observable<any> {
     console.log(topicName, skillId);
