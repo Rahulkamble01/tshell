@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.AuthenticationStatus;
 import com.cts.tshell.bean.User;
-import com.cts.tshell.bean.Util;
 import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.UserService;
+import com.cts.tshell.util.Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

@@ -1,4 +1,4 @@
-package com.cts.tshell.bean;
+package com.cts.tshell.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
