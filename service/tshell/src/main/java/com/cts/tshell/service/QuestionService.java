@@ -26,4 +26,13 @@ public class QuestionService {
 		return question;
 
 	}
+	
+	@Transactional
+	public List<Question> getTotalCountQuestions(){
+		LOGGER.info("start");
+		List<Question> totalQuestions = questionRepository.totalQuestions();
+		LOGGER.debug("totalQuestions -> {}", totalQuestions );
+		return totalQuestions;
+}
+
 }

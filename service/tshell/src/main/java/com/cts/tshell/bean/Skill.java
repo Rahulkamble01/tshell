@@ -27,12 +27,12 @@ query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-3
 })
 
 @Table(name = "skill")
-<<<<<<< HEAD
+
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-=======
 
 
->>>>>>> top-5-accessed-tests-service
+
+
 public class Skill {
 
 	@Id
@@ -134,11 +134,6 @@ public class Skill {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-<<<<<<< HEAD
-
-=======
->>>>>>> top-5-accessed-tests-service
 	public byte[] getImage() {
 		return image;
 	}

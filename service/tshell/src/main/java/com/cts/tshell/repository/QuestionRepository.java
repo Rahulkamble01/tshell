@@ -16,4 +16,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 			" join s.topics t join t.questions " + 
 			" where u.employeeId = :employeeId and t.id=q.id  group by s.name")
 	List<Question> findTotalQuestionContributedById(@Param("employeeId") int employeeId);
+	
+	@Query("select count(q.id) from Question q")
+	List<Question> totalQuestions();
+
 }
