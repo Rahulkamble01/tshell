@@ -16,6 +16,11 @@ export class ContributeQuestionComponent implements OnInit {
   }
   userFile: any = File;
   uploadForm: any = FormGroup;
+  csvData: any;
+  fileName: any;
+  fileExtension: any;
+  fileExtensionError: boolean = false;
+  fileExtensionMessage: any;
   isChecked: boolean = false;
   count = 0;
   temp = 0;
@@ -81,8 +86,13 @@ export class ContributeQuestionComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    const file = event.target.files[0];
+    var file = event.target.files[0];
     this.userFile = file;
+    console.log(this.userFile.name);
+    this.fileName = file.name;
+    var allowedExtensions = ["CSV", "csv"];
+    this.fileExtension = this.fileName.split('.').pop();
+    console.log('File extension is ' + this.fileExtension);
   }
   upload() {
     console.log('File Upload method is called!');
@@ -90,7 +100,8 @@ export class ContributeQuestionComponent implements OnInit {
     formData.append('file', this.userFile);
     this.contributeQuestionService.uploadQuestions(formData).subscribe(
       data => {
-        console.log(data);
+        this.csvData = data;
+        console.log(this.csvData);
       }
     )
     this.router.navigate(['preview']);
