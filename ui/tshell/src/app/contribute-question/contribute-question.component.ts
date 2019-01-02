@@ -93,9 +93,22 @@ export class ContributeQuestionComponent implements OnInit {
     var allowedExtensions = ["CSV", "csv"];
     this.fileExtension = this.fileName.split('.').pop();
     console.log('File extension is ' + this.fileExtension);
+    if (this.isInArray(allowedExtensions, this.fileExtension)) {
+      this.fileExtensionError = false;
+      this.fileExtensionMessage = ""
+    } else {
+      this.fileExtensionMessage = "Only CSV file is allowed!"
+      this.fileExtensionError = true;
+    }
+  }
+  isInArray(array, word) {
+    return array.indexOf(word.toLowerCase()) > -1;
   }
   upload() {
     console.log('File Upload method is called!');
+    console.log('File extension error is ' + this.fileExtensionError);
+    console.log(this.fileExtensionMessage);
+
     let formData = new FormData;
     formData.append('file', this.userFile);
     this.contributeQuestionService.uploadQuestions(formData).subscribe(
