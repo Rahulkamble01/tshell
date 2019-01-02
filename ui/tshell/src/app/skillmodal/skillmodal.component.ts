@@ -18,18 +18,14 @@ export class SkillmodalComponent implements OnInit {
   json: any;
   error: any;
   sametopic = false;
+  emptyper = false;
+  bigper = false;
   status: number = 0;
   expression: any;
   @Input() name: any;
-
   topics: Array<Topic> = [];
   allskills: any;
   sameSkillName: boolean = false;
-  /*   success = false;
-    fail= false;
-     */
-
-
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService) { }
 
@@ -53,28 +49,52 @@ export class SkillmodalComponent implements OnInit {
           Validators.minLength(1),
           Validators.maxLength(70)
         ]),
+      topicPercentage: new FormControl(
+        '',
+        [
+          Validators.minLength(1),
+          Validators.maxLength(2),
+        ]),
       image: new FormControl(''),
     });
 
 
-  addTopic(id, topicname) {
-    const topic = new Topic(id, topicname);
+  addTopic(topicname, topicpercntage) {
+    const topic = new Topic(null, topicname, topicpercntage);
     // alert(JSON.stringify(topic.name));
     let counter = 0;
+    let percounter = 0;
+    let morethahun = 0;
 
-    if (topicname == '') {
+    if (topicname === '') {
       counter = 1;
     }
+
+    if (topicpercntage === '') {
+      percounter = 1;
+      this.emptyper = true;
+      this.bigper = false;
+    }
+
+    if (topicpercntage > 100) {
+      this.bigper = true;
+      this.emptyper = false;
+      morethahun = 1;
+    }
+
+
     for (let i = 0; i < this.topics.length; i++) {
-      if (topicname == this.topics[i].name || topicname == '') {
+      if (topicname.toUpperCase() === this.topics[i].name.toUpperCase() || topicname === '') {
         counter = 1;
       }
     }
-    if (counter == 0) {
+    if (counter === 0 && percounter === 0 && morethahun === 0) {
       this.topics.push(topic);
       this.sametopic = false;
+      this.emptyper = false;
+      this.bigper = false;
       this.clearInput();
-    } else {
+    } else if (counter !== 0) {
       this.sametopic = true;
     }
 
@@ -93,8 +113,13 @@ export class SkillmodalComponent implements OnInit {
     return this.addskillform.get('topicName');
   }
 
+  get topicPercentage(): any {
+    return this.addskillform.get('topicPercentage');
+  }
+
   clearInput() {
     this.topicName.reset();
+    this.topicPercentage.reset();
   }
 
   clearAllInput() {
@@ -103,19 +128,8 @@ export class SkillmodalComponent implements OnInit {
 
 
   addSkill() {
-
-
-    /* for (let i = 0; i < this.allskills.length; i++) {
-      let userSkillname = this.addskillform.controls['name'].value;
-      let dataSkillname = this.allskills[i].name;
-      if (userSkillname.toUpperCase() == dataSkillname.toUpperCase()) {
-        this.sameSkillName = true;
-      }
-    } */
-
-    /*  if (this.sameSkillName != true) { */
-    const skill = new Skill(this.addskillform.controls['name'].value, "Active", this.addskillform.controls['description'].value, this.topics, new Date());
-    /*  console.log(this.sameSkillName); */
+    // tslint:disable-next-line:max-line-length
+    const skill = new Skill(this.addskillform.controls['name'].value, "active", this.addskillform.controls['description'].value, this.topics, new Date());
     console.log(skill);
     this.SkillService.addSkill(skill).subscribe(
       data => {
@@ -123,15 +137,12 @@ export class SkillmodalComponent implements OnInit {
         this.status = data;
         this.error = false;
         console.log(this.status);
-        if (this.status == 2) {
+        if (this.status === 2) {
 
           this.addskillform.reset();
           this.sametopic = false;
           this.clearAllInput();
         }
-
-
-
       },
       error => {
         this.error = error;

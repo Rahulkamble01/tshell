@@ -1,6 +1,5 @@
 package com.cts.tshell.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +45,6 @@ public class SkillController {
 		this.topicService = topicService;
 	}
 
-
 	@RequestMapping(value = "/skills", method = RequestMethod.GET)
 	public List<Skill> getAllSkills() {
 		LOGGER.debug("Fetching All Skills from database");
@@ -65,10 +63,10 @@ public class SkillController {
 		// System.out.println(skillService.graph(limit));
 		return skillService.graph(limit);
 	}
-	
+
 	@RequestMapping(value = "/graph/{skillName}", method = RequestMethod.GET)
 	public List<NeoSkill> graph(@PathVariable String skillName) {
-		System.out.println("Indsude+++++++++++ {}"+ skillName);
+		System.out.println("Indsude+++++++++++ {}" + skillName);
 		// System.out.println(skillService.graph(limit));
 		return skillService.graph(skillName);
 	}
@@ -94,7 +92,7 @@ public class SkillController {
 
 		for (Topic topics : skill.getTopics()) {
 			if (topics.getName().equals(splited[0])) {
-				LOGGER.debug("Deleting {}" , topics);
+				LOGGER.debug("Deleting {}", topics);
 				topicService.deleteTopic(topics);
 				LOGGER.debug("{} Deleted", topics);
 			}
@@ -103,23 +101,32 @@ public class SkillController {
 	}
 
 	@RequestMapping(value = "/updateSkill", method = RequestMethod.POST)
-	public void UpdateSkill(@RequestBody Skill skill) {
+	public int UpdateSkill(@RequestBody Skill skill) {
 		LOGGER.info("starting insertneSkills");
-		List<Topic> topics = skill.getTopics();
 		LOGGER.debug("Recived skill from Browser: " + skill);
-		LOGGER.debug("Recived topics from Browser: " + topics);
-		skillService.addOrUpdateSkill(skill);
-		Skill skill2 = skillService.getSkillByName(skill.getName());
-		LOGGER.debug("Recived skill from sevice: " + skill2);
-		for (Topic topic : topics) {
-			topic.setSkill(skill2);
-			topicService.saveTopic(topic);
+		System.out.println("skillname" + skill.getName());
+		int addStatus = 0;
+		Skill checkSkill = skillService.getSkillByName(skill.getName());
+		if (checkSkill == null) {
+			List<Topic> topics = skill.getTopics();
+			LOGGER.debug("Recived topics from Browser: " + topics);
+			skillService.addOrUpdateSkill(skill);
+			Skill skill2 = skillService.getSkillByName(skill.getName());
+			LOGGER.debug("Recived skill from sevice: " + skill2);
+			for (Topic topic : topics) {
+				topic.setSkill(skill2);
+				topicService.saveTopic(topic);
+			}
+			skill.setTopics(topics);
+			LOGGER.info("ending Update Skill");
+
+			// skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
+			// System.out.println("{}"+ skillToNeoSkill);
+			addStatus = 2;
+		} else {
+			addStatus = 1;
 		}
-		skill.setTopics(topics);
-		LOGGER.info("ending inserting Skill");
-		
-		skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
-		System.out.println("{}"+ skillToNeoSkill);
+		return addStatus;
 	}
 
 	@PostMapping("/addskill")
@@ -148,8 +155,6 @@ public class SkillController {
 		}
 		return addStatus;
 	}
-
-
 
 	@GetMapping("/top4searchedskills")
 	public List<Skill> getTop4SearchedSkills() {

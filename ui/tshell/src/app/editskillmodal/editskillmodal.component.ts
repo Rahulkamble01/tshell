@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
@@ -11,11 +11,17 @@ import { ConfirmationDialogService } from '../confirmation-dialog.service';
   styleUrls: ['./editskillmodal.component.css']
 })
 export class EditskillmodalComponent implements OnInit {
-  add: boolean;
+  status: number;
+  error: any;
   expression: any;
   @Input() item: any;
   skills: any = [];
   topics: Array<Topic> = [];
+  sametopic = false;
+  public imagePath;
+  imgURL: any;
+  public message: string;
+  base64textString: string = '';
 
   addskillform = new FormGroup({
     id: new FormControl(0),
@@ -50,18 +56,27 @@ export class EditskillmodalComponent implements OnInit {
   });
 
   // tslint:disable-next-line:max-line-length
-  constructor(public activeModal: NgbActiveModal, private skillService: SkillserviceService, private fb: FormBuilder, private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(private cd: ChangeDetectorRef, public activeModal: NgbActiveModal, private skillService: SkillserviceService, private fb: FormBuilder, private confirmationDialogService: ConfirmationDialogService) { }
   addTopic(id, topicname) {
-    const topic1 = new Topic(id, topicname);
-    // let topic1 = null;
+    const topic1 = new Topic(id, topicname, 0);
     console.log(id + " " + topicname);
-    // if (id != null) {
-    //   topic1 = new FormGroup({ id: new FormControl(null), name: new FormControl(topicname) });
-    // } else {
-    //   topic1 = new FormGroup({ id: new FormControl(id), name: new FormControl(topicname) });
-    // }
-    this.topics.push(topic1);
-    this.clearInput();
+    let counter = 0;
+    if (topicname === '') {
+      counter = 1;
+    }
+    this.topics.forEach(element => {
+      if (topicname === element.name || topicname === '') {
+        counter = 1;
+      }
+    });
+
+    if (counter === 0) {
+      this.topics.push(topic1);
+      this.sametopic = false;
+      this.clearInput();
+    } else {
+      this.sametopic = true;
+    }
   }
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
@@ -77,45 +92,90 @@ export class EditskillmodalComponent implements OnInit {
           console.log('User confirmed:', confirmed);
           return;
         }
-
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-
-    // this.skillService;
-
-    // this.topics.splice(index, 1);
   }
 
   get topicName(): any { return this.addskillform.get('topicName'); }
   clearInput() { this.topicName.reset(); }
+  clearAllInput() {
+    this.topics = [];
+  }
 
   submitSkill() {
-    if (!this.add) {
-      const control = <FormArray>this.addskillform.controls['topics'];
-      this.topics.forEach(element => {
-        control.push(new FormControl(element));
-      });
-      //to avoid circular JSON Structure
-      const getCircularReplacer = () => {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
+    const control = <FormArray>this.addskillform.controls['topics'];
+    this.topics.forEach(element => {
+      control.push(new FormControl(element));
+    });
+    //to avoid circular JSON Structure
+    const getCircularReplacer = () => {
+      const seen = new WeakSet();
+      return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) {
+            return;
           }
-          return value;
-        };
+          seen.add(value);
+        }
+        return value;
       };
-      // console.log(JSON.stringify(this.addskillform.value, getCircularReplacer()));
-      if (this.addskillform.controls['createdOn'].value == null) {
-        this.addskillform.controls['createdOn'].patchValue(new Date());
-      }
-      console.log(this.addskillform.value);
-      this.skillService.updateSkill(JSON.stringify(this.addskillform.value, getCircularReplacer())).subscribe();
+    };
+    if (this.addskillform.controls['createdOn'].value == null) {
+      this.addskillform.controls['createdOn'].patchValue(new Date());
     }
+
+    this.topics.forEach(element => {
+      console.log(element);
+    });
+    this.skillService.updateSkill(JSON.stringify(this.addskillform.value, getCircularReplacer())).subscribe(
+      data => {
+        this.status = data;
+        this.error = false;
+        console.log(this.status);
+        if (this.status === 2) {
+          this.addskillform.reset();
+          this.clearAllInput();
+        }
+      }, error => {
+        this.error = error;
+        this.status = 0;
+      });
   }
+
+  preview(files) {
+    if (files.length === 0) {
+      return;
+    }
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      // this.addskillform.controls['image'].patchValue(
+      //   reader.result
+      // );
+      this.cd.markForCheck();
+      this.imgURL = reader.result;
+      console.log(this.imgURL);
+    };
+  }
+
+  // ByteTobase64(base64) {
+  //   return function (buffer) {
+  //     let binary = '';
+  //     let bytes = new Uint8Array(buffer);
+  //     let len = bytes.byteLength;
+  //     for (var i = 0; i < len; i++) {
+  //       binary += String.fromCharCode(bytes[i]);
+  //     }
+  //     return window.btoa(binary);
+  //   };
+  // }
+
   ngOnInit() {
     this.addskillform.patchValue(this.item);
     const control = <FormArray>this.addskillform.controls['topics'];

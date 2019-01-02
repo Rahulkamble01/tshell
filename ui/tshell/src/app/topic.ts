@@ -2,8 +2,10 @@
 export class Topic {
     id: number;
     name: string;
-    constructor(id, name) {
+    percentage: number;
+    constructor(id, name, percentage) {
         this.id = id;
         this.name = name;
+        this.percentage = percentage;
     }
 }
