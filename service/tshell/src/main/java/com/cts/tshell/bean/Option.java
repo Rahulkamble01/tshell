@@ -61,5 +61,4 @@ public class Option {
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
 	}
-
 }
