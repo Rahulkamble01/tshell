@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header invalid-alert" data-toggle="collapse" data-target="#content1">
       1.
-      <span>Question can't be empty!</span>
+      <span *ngFor="let question of csvData.length">{{csvData[question].question}}</span>
       <span class="error"><i class="fas fa-question-circle" title="Invalid question format"></i></span>
     </div>
 

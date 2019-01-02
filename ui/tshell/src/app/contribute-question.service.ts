@@ -6,8 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContributeQuestionService {
+  csvData : any;
   uploadUrl: string = '/tShell/question/upload';
-  addQuestionUrl: string= "/tShell/";
+  addQuestionUrl: string = "/tShell/";
 
   constructor(private http: HttpClient) {
     this.http = http;
@@ -17,5 +18,12 @@ export class ContributeQuestionService {
   }
   addQuestion(json: any): Observable<any> {
     return this.http.post<any>(this.addQuestionUrl, json);
+  }
+  getCsvData() {
+    return this.csvData;
+  }
+
+  setCsvData(csvData:any) {
+   this.csvData = csvData;
   }
 }

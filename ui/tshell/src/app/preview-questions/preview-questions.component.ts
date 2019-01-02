@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContributeQuestionService } from '../contribute-question.service';
 
 @Component({
   selector: 'app-preview-questions',
@@ -7,16 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./preview-questions.component.css']
 })
 export class PreviewQuestionsComponent implements OnInit {
+  csvData = [];
+  constructor(private router: Router, private contributeQuestionService: ContributeQuestionService) { }
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
+  ngOnInit() { 
+    this.csvData =  this.contributeQuestionService.getCsvData() ;
+     
+    console.log(this.csvData);
   }
-  review(){
+  review() {
     alert('Questions are submitted successfully for Review!');
     this.router.navigate(['/contributeQuestion']);
   }
-  retry(){
+  retry() {
     alert('No Questions are posted!');
     this.router.navigate(['/contributeQuestion']);
   }
