@@ -1,5 +1,8 @@
 package com.cts.tshell.service;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,10 +32,15 @@ public class SkillService {
 		LOGGER.info("start");
 		List<Skill> recent5Skills = skillRepository.fetchRecentSkills();
 		LOGGER.debug("recent5Skills -> " + recent5Skills);
-		if (recent5Skills.size() >= 5) {
+	/*	if (recent5Skills.size() >= 5) {
 			LOGGER.debug("size of json data ->" + recent5Skills);
 			return recent5Skills.subList(0, 5);
-		}
+		}*/
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.add( Calendar.DAY_OF_YEAR, -30);
+		Date tenDaysAgo = cal.getTime();
+		LOGGER.debug("required",tenDaysAgo);
+		
 		return recent5Skills;
 
 	}
