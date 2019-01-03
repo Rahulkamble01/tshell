@@ -1,7 +1,6 @@
 label{
-       
-       font-weight: bolder;
-        font-size: larger;
+      font-size: large;
+      font-weight: 500;
 }
 #optionButton{
      zoom:1.5;
@@ -11,16 +10,30 @@ label{
     cursor: pointer;
     color: red;
 }
+.addOptionButton{
+    background-color: #3498db;
+    zoom:0.5;
+}
 .fa-pencil-alt{
     color: #3498db;
-}
+    height: 25px;
+    width:25px;
+}   
 .container{
     margin-bottom:40px; 
 }
-
-
-.checkmark{
+/* .checkmark{
     height: 25px;
     width:25px;
   
+} */
+.lhsNoteSpan{
+    float: right;
+    color:gray;
+}
+.card{
+    margin-top: 10px;
+}
+.p{
+    font-weight: bold;
 }

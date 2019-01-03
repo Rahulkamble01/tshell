@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ContributeQuestionService } from '../contribute-question.service';
+import { CountOfPendingServiceService } from '../count-of-pending-service.service';
 
 @Component({
   selector: 'app-add-question',
@@ -9,12 +10,22 @@ import { ContributeQuestionService } from '../contribute-question.service';
 })
 export class AddQuestionComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private contributeQuestionService: ContributeQuestionService) { }
+  constructor(private fb: FormBuilder, private contributeQuestionService: ContributeQuestionService,private countPendingService:CountOfPendingServiceService) { }
 
   ngOnInit() {
+
+    
+    this.contributeQuestionService.getTopics(this.skillId).subscribe(
+
+      data => {
+        this.topics = data;
+      },
+
+    );  
   }
 
-
+  skillId:1;
+  topics:any[];
   isChecked: boolean = false;
   count = 1;
   temp = 0;
@@ -40,15 +51,6 @@ export class AddQuestionComponent implements OnInit {
   modalOption: any = '';
   modalQuestion: any = '';
 
-  // check(event) {
-  //   if (event.target.checked) {
-  //     this.isChecked = true;
-  //   }
-  //   else {
-  //     this.isChecked = false;
-  //   }
-  //   console.log(this.isChecked);
-  // }
 
   addOption() {
   
@@ -59,7 +61,10 @@ export class AddQuestionComponent implements OnInit {
   }
 
   removeOption(index: number) {
-    console.log('Index : ' + index)
+    console.log('Index : ' + index);
+    for(let i=index;i<this.optionsList.length;i++){
+      this.optionsList[i].id=this.optionsList[i].id-1;
+    }
     this.optionsList.splice(index - 1, 1);
     this.count--;
     console.log(this.count)
@@ -74,6 +79,8 @@ export class AddQuestionComponent implements OnInit {
     console.log(this.optionsList);
 
   }
+
+  
 
 
 }
