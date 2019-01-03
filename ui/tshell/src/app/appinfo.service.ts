@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment} from '../app/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppinfoService {
 
-  url:string="/tShell/skill/skillcount/"
-  url2:string="/tShell/user/usercount/"
-  url3:string="/tShell/question/questioncount/"
-  url4:string="/tShell/assessment/assessmentcount/"
+  url:string=environment.serviceUrlPrefix + "/skill/skillcount/"
+  url2:string=environment.serviceUrlPrefix + "/user/usercount/"
+  url3:string=environment.serviceUrlPrefix + "/question/questioncount/"
+  url4:string=environment.serviceUrlPrefix + "/assessment/assessmentcount/"
   constructor(private http: HttpClient) { }
 
   getSkillCount(): Observable<any> {
