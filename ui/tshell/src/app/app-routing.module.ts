@@ -25,12 +25,9 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
-<<<<<<< HEAD
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
-=======
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
 
->>>>>>> top-5-accessed-tests-service
 
 
 const routes: Routes = [
@@ -59,11 +56,8 @@ const routes: Routes = [
   { path: "skills/:id", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent },
-<<<<<<< HEAD
-  { path: "graph",component:QuestiongraphComponent}
-=======
+  { path: "graph",component:QuestiongraphComponent},
   { path: "top5Tests", component: TopAccessedTestsComponent }
->>>>>>> top-5-accessed-tests-service
 ];
 
 
