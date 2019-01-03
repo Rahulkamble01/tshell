@@ -9,4 +9,3 @@ import com.cts.tshell.bean.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByEmployeeId(int employeeId);
 }
-
