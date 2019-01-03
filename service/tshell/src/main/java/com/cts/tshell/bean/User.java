@@ -40,7 +40,6 @@ public class User {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_ur_id")	
-	@JsonIgnore
 	private Role role;
 
 	@Column(name = "us_emp_id")

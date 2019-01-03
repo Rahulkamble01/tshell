@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "`option`")
@@ -28,7 +29,7 @@ public class Option {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="op_qu_id")
-	@JsonIgnore
+	@JsonView(Views.Internal.class)
 	private Question question;
 	
 	@Column(name="op_is_correct")

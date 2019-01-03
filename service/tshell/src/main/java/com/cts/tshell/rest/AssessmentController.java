@@ -1,5 +1,7 @@
 package com.cts.tshell.rest;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Assessment;
 import com.cts.tshell.bean.AssessmentQuestion;
+import com.cts.tshell.bean.TopicWiseScore;
 import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.AssessmentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,7 +44,6 @@ public class AssessmentController {
 		LOGGER.info("START : saveAssesmentResponse() of AssessmentController");
 		LOGGER.debug("AssessmentQuestionOption Object : ", assessmentQuestion);
 		assessmentService.saveAssessmentResponse(assessmentQuestion);
-
 	}
 
 	@PostMapping("/submit")
@@ -62,5 +64,12 @@ public class AssessmentController {
 		String result = mapper.writerWithView(Views.Public.class).writeValueAsString(assessment);
 		return result;
 
+	}
+	
+	@GetMapping("/topicscore/{assessmentId}")
+	public List<TopicWiseScore> getTopicwiseScore(@PathVariable int assessmentId){
+		 List<TopicWiseScore> assessment = assessmentService.getTopicWiseScore(assessmentId);
+		 assessment.toArray();
+		 return assessment;
 	}
 }

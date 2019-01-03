@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from './environment';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -14,12 +15,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ExitAssesmentService {
-  testurl = '/tShell/test';
-  allQuestionIdURL = '/tShell/question/allquestionid/';
-  questionUrl = '/tShell/question/questionId/';
-  startAssesmentUrl = '/tShell/assessment/start';
-  saveResponseUrl = '/tShell/assessment/saveresponse';
-  submitAssessmentURL = 'tShell/assessment/submit';
+  testurl = environment.serviceUrlPrefix + '/test';
+  allQuestionIdURL = environment.serviceUrlPrefix + '/question/allquestionid/';
+  questionUrl = environment.serviceUrlPrefix + '/question/questionId/';
+  startAssesmentUrl = environment.serviceUrlPrefix + '/assessment/start';
+  saveResponseUrl = environment.serviceUrlPrefix + '/assessment/saveresponse';
+  submitAssessmentURL = environment.serviceUrlPrefix + '/assessment/submit';
   constructor(private http: HttpClient) { }
 
   getQuestionId(id): Observable<any> {

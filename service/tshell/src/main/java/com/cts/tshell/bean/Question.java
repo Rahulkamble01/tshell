@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "question")
@@ -61,7 +62,7 @@ public class Question {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
-	@JsonIgnore
+	@JsonView(Views.Internal.class)
 	private User createdUser;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")

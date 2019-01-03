@@ -1,5 +1,9 @@
 package com.cts.tshell.service;
 
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import com.cts.tshell.bean.AssessmentQuestion;
 import com.cts.tshell.bean.AssessmentQuestionOption;
 import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Skill;
+import com.cts.tshell.bean.TopicWiseScore;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.repository.AssessmentQuestionOptionRepository;
 import com.cts.tshell.repository.AssessmentQuestionRepository;
@@ -48,8 +53,9 @@ public class AssessmentService {
 	public String startAssessment(Assessment assessment) {
 		LOGGER.info("START : startAssesment() Service  of AssessmentService");
 		LOGGER.debug("Assesment Object : ", assessment);
-		Skill skill = skillRepository.findSkillById(assessment.getSkillId());
-		User user = userRepository.findUserByEmployeeId(assessment.getUserId());
+		System.out.println(assessment.getSkill().getId());
+		Skill skill = skillRepository.findSkillById(assessment.getSkill().getId());
+		User user = userRepository.findUserByEmployeeId(assessment.getUser().getEmployeeId());
 		LOGGER.debug("User : ", user);
 		assessment.setSkill(skill);
 		assessment.setUser(user);
@@ -85,6 +91,7 @@ public class AssessmentService {
 				AssessmentQuestionOption opt = new AssessmentQuestionOption();
 				opt.setAssessmentQuestion(a);
 				opt.setAssessmentOption(option);
+				System.out.println(option.isResponse());
 				opt.setSelected(option.isResponse());
 				System.out.println("Starting save ");
 				assessmentQuestionOptionRepository.save(opt);
@@ -122,15 +129,17 @@ public class AssessmentService {
 	 * assessment; }
 	 */
 
+	@Transactional
 	public Assessment evaluateScore(int assessmentId) {
 		LOGGER.info("START : evaluateScore() Service  of AssessmentService");
 		Assessment assessment = assessmentRepository.fetchAssesmentDetailById(assessmentId);
 		int score = 0;
-
-		for (AssessmentQuestion assessmentQuestion : assessment.getAssessmentQuestions()) {
+		Set<AssessmentQuestion> assessmentQuestions = new LinkedHashSet<>(assessment.getAssessmentQuestions());
+		for (AssessmentQuestion assessmentQuestion : assessmentQuestions) {
 			LOGGER.info("Taking Assessment Question");
 			int counter = 0;
 			boolean answerStatus = false;
+			System.out.println(assessmentQuestion.getQuestion().getTopicList().iterator().next().getName());
 			int optionsSize = assessmentQuestion.getAssessmentQuestionOption().size();
 			LOGGER.debug("The total no of options are : ", optionsSize);
 			System.out.println(optionsSize);
@@ -147,8 +156,9 @@ public class AssessmentService {
 			}
 			assessmentQuestion.setCorrect(answerStatus);
 			LOGGER.info("Saving Answer Status for the Question");
-			// assessmentQuestionRepository.save(assessmentQuestion);
+			assessmentQuestionRepository.save(assessmentQuestion);
 		}
+
 		assessment.setScore(score);
 		LOGGER.info("Saving Assessment Score");
 		assessmentRepository.save(assessment);
@@ -156,4 +166,7 @@ public class AssessmentService {
 		return assessment;
 	}
 
+	public List<TopicWiseScore> getTopicWiseScore(int assessmentId){
+		return assessmentRepository.getTopicWiseQuestionCount(assessmentId);
+	}
 }

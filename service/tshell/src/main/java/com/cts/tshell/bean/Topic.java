@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,20 +23,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 
-/*
-@NamedNativeQueries({
-       @NamedNativeQuery(
-            name    =   "getAllQuestionById",
-            query   =   "select qu_id from question " +
-                        "left join topic_question on tq_qu_id=qu_id  " +
-                        "left join topic on tp_id = tq_tp_id " +
-                        " "+
-                         "where tp_sk_id=:id "
-                        
-           )
-})*/
+
 public class Topic {
 
 	@Id
@@ -45,22 +35,23 @@ public class Topic {
 
 	@Column(name = "tp_name")
 	private String name;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="tp_sk_id")
-	@JsonIgnore
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "tp_sk_id")
+	@JsonView(Views.Internal.class)
 	private Skill skill;
-	
-	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinTable(name="topic_question",
-				joinColumns= {@JoinColumn(name="tq_tp_id")},
-				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
-	)	 
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "topic_question", joinColumns = { @JoinColumn(name = "tq_tp_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "tq_qu_id") })
 	@JsonView(Views.Internal.class)
 	private List<Question> questions;
-	
+
 	@Column(name = "tp_weightage")
 	private int weightage;
+
+	@Transient
+	private float topicScore;
 
 	public int getId() {
 		return id;
@@ -98,11 +89,16 @@ public class Topic {
 		return weightage;
 	}
 
-//	public void setWeightage(int weightage) {
-//		this.weightage = weightage;
-//	}
+	public float getTopicScore() {
+		return topicScore;
+	}
 
-	 
+	public void setTopicScore(float topicScore) {
+		this.topicScore = topicScore;
+	}
 
-	
+	public void setWeightage(int weightage) {
+		this.weightage = weightage;
+	}
+
 }

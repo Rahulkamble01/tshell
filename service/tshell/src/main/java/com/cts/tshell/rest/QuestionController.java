@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
+import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.QuestionService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/question")
@@ -24,33 +27,24 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 
-	@GetMapping("/list/{id}")
-	public List<Skill> getAllQuestion(@PathVariable int id) {
-		LOGGER.info("START : getAllQuestion()  of QuestionController");
-		LOGGER.debug("SkillId {}", id);
-		return questionService.fetchAllQuestion(id);
-	}
-
-	// QRepositoery
-	/*
-	 * @GetMapping("/all/{id}") public List<Question>
-	 * fetchAllQuestion(@PathVariable int id) {
-	 * LOGGER.info("START : getAllQuestion()  of QuestionController");
-	 * LOGGER.debug("SkillId {}", id); return
-	 * questionService.getAllQuestion(id); }
-	 */
+	
 
 	@GetMapping("/questionId/{questionId}")
-	public List<Question> fetchAllQuestion(@PathVariable int questionId) {
+	public String fetchAllQuestion(@PathVariable int questionId) throws JsonProcessingException {
 		LOGGER.info("START : getAllQuestion()  of QuestionController");
 		LOGGER.debug("Question Id {}", questionId);
-		return questionService.getQuestionById(questionId);
+		
+		List<Question> questions =  questionService.getQuestionById(questionId);
+		ObjectMapper mapper = new ObjectMapper();
+		String result = mapper.writerWithView(Views.Public.class).writeValueAsString(questions);
+		return result;
 	}
 
 	@GetMapping("/allquestionid/{skillId}")
 	public Set<Integer> fetchAllQuestionId(@PathVariable int skillId) {
 		LOGGER.info("START :Getting all Question Ids from fetchAllQuestionId()  of QuestionController");
 		LOGGER.debug("SkillId :  {}", skillId);
+		
 		return questionService.fetchQuestionsID(skillId);
 	}
 

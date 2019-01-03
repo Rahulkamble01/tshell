@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.cts.tshell.bean.Topic;
-import com.cts.tshell.bean.TopicWeightage;
 
 public interface TopicRepository extends JpaRepository<Topic,Integer> {
 

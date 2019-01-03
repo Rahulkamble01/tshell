@@ -28,18 +28,16 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository questionRepository;
 
-	public List<Skill> fetchAllQuestion(int skillId) {
-		return skillRepository.fetchAllSkillQuestion(skillId);
-	}
+	
 
 	public List<Question> getQuestionById(int questionId) {
 		List<Question> questionList = questionRepository.fetchQuestionById(questionId);
 		// System.out.println(questionList.size());
-		for (Question question : questionList) {
+		/*for (Question question : questionList) {
 			for (Topic topic : question.getTopicList()) {
 				topic.setQuestions(null);
 			}
-		}
+		}*/
 		return questionList;
 	}
 

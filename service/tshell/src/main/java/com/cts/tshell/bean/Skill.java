@@ -8,24 +8,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "skill")
-@NamedQueries({
-	@NamedQuery(name = "Skill.fetchAllSkillQuestion", 
-				query = "select distinct s from Skill s " + 
-						"left join fetch s.topics t " + 
-						" "+ 
-						" " +   
-						"where s.id=:id "
-	),
-	}) 
 
 public class Skill {
 
@@ -53,7 +40,6 @@ public class Skill {
 	private String image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-	@JsonBackReference
 	private List<Topic> topics;
 
 	public int getId() {

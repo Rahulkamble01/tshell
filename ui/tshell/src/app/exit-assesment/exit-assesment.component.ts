@@ -78,8 +78,12 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     this.startAssesmentJson = JSON.stringify({
       date: Date.now(),
       type: 'exit',
-      skillId: 1,
-      userId: 729703,
+      skill: {
+        id: 1
+      },
+      user: {
+        employeeId: 729703
+      }
     });
     console.log(this.startAssesmentJson);
     this.assesmentService.startAssessment(this.startAssesmentJson).subscribe(d => {
@@ -158,11 +162,11 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     if (question.answerType.id === 1) {
       question.options.forEach((x) => {
         if (x.id == option.id) {
-          x.selected = true;
-          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', selected : ' + x.selected);
+          x.response = true;
+          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
         } else {
-          x.selected = false;
-          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', selected : ' + x.selected);
+          x.response = false;
+          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
         }
       });
     }
@@ -172,18 +176,18 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
         if (x.id == option.id) {
           if (x.counter % 2 == 0) {
             // When user checks counter = even number and marked as Checked
-            x.selected = true;
+            x.response = true;
             x.counter++;
           } else {
             // When user unchecks counter = odd number and marked as Checked
-            x.selected = false;
+            x.response = false;
             x.counter++;
           }
-          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', selected : ' + x.selected);
+          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
         }
         //  else {
-        //   x.selected = false;
-        //   console.log('Option : ' + option.id + ', x.id : ' + x.id + ', selected : ' + x.selected);
+        //   x.response = false;
+        //   console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
         // }
       });
     }
@@ -198,7 +202,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   }
   isAnswered(questId) {
     if (questId == this.qId) {
-      // return this.temp.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+      // return this.temp.options.find(x => x.response) ? 'Answered' : 'Not Answered';
     }
   }
 
@@ -245,13 +249,13 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   }
   /*
   isAnswered(question) {
-    this.AnsweredStatus = question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+    this.AnsweredStatus = question.options.find(x => x.response) ? 'Answered' : 'Not Answered';
     this.qId = question.id;
 
   };*/
 
   isCorrect(question: Question) {
-    return question.options.every(x => x.selected === x.answer) ? 'correct' : 'wrong';
+    return question.options.every(x => x.response === x.answer) ? 'correct' : 'wrong';
   }
 
   onSubmit() {

@@ -9,6 +9,6 @@ import com.cts.tshell.bean.Skill;
 
 public interface SkillRepository extends JpaRepository<Skill,Integer> {
 
-	 List<Skill> fetchAllSkillQuestion(@Param("id")int id);
+	
 	 Skill findSkillById(int id);
 }

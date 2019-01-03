@@ -2,7 +2,7 @@ export class Option {
     id: number;
     description: string;
     answer: boolean;
-    selected: boolean = false;
+    response: boolean = false;
     answerType: string;
     counter: number = 0;
 
