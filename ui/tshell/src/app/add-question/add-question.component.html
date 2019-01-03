@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-lg-12">
+      <h3>Adding question for "Java" </h3>
+      <div>
+        <label>Topics:</label>
+        <select [(ngModel)]="topic" class="form-control" name="topic" id="topic">
+          <option>Spring</option>
+          <option>Hibernate</option>
+          <option>OOPS</option>
+          <option>Exception Handling</option>
+          <option>JDBC</option>
+        </select>
+      </div>
+
+
+      <!--Question-->
+      <div style="padding: 10px 10px;background-color: darkgray;margin:5px;border-radius: 2px;">
+        <label>Question:</label>
+        <a href="#" data-toggle="modal" data-target="#editQuestion">
+          <i class="fas fa-pencil-alt" title="Edit question"></i>
+          <label>click here to edit Question.</label>
+        </a>
+
+        <div style="margin-left:5px; background-color: #fbfbfb">
+          {{question}}
+        </div>
+      </div>
+
+      <div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <textarea style="height: 250px;" class="form-control" rows="3" [(ngModel)]="question"></textarea>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-ts-primary" (click)="saveQuestion()" data-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Options-->
+      <div class="addOption" style="padding: 10px 10px;background-color: darkgray;margin:5px;border-radius: 2px;">
+        <label>Add Options:</label>
+        <button (click)="addOption()" class="btn btn-ts-primary" [disabled]="count==5" style="margin-top:3px;padding-bottom: 0px;padding-top: 0px;padding-left: 4px;padding-right: 4px; zoom:0.8">
+          <i class="fas fa-plus"> </i>
+        </button>
+      </div>
+
+
+      <div class="row ">
+        <div *ngFor="let option of optionsList">
+          <span class="col-lg-12">
+
+            <label> {{option.id}}.</label>
+            <a href="#" data-toggle="modal" [attr.data-target]="'#mo'+option.id">
+              <i class="fas fa-pencil-alt" title="Edit Option"></i>
+            </a>
+            <div style="margin-left:5px;background-color: #fbfbfb">{{option.opt}}
+            </div>
+
+          </span>
+          <span class="col-lg-2">
+            <label>
+              Correct :{{option.ans}}
+            </label>
+          </span>
+          <span class="col-lg-2">
+            <span>
+              Delete :
+              <i class="far fa-trash-alt" (click)="removeOption(option.id)" id="optionButton" title="Remove option"></i>
+            </span>
+          </span>
+
+          <div class="modal fade" [id]="'mo'+option.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label>Option:{{option.id}}</label>
+                  <textarea style="height: 250px;" [name]="'opt'+option.id" class="form-control" [(ngModel)]="option.opt" rows="3" required></textarea>
+                  <label>Is Correct ? Check if yes.</label>
+                  <input type="checkbox" [name]="'ans'+option.id" class="checkmark " [(ngModel)]="option.ans" checked>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-ts-primary" (click)="saveOption()" data-dismiss="modal">Ok</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <span *ngIf="count==5">
+      <span style="color:red">*</span>Max 5 Options allowed</span>
+  </div>
+  <div>
+    <button type="submit" style="margin-top: 3px;" (click)="submit()" class="btn btn-ts-primary addButton" style="float: right">Add Question</button>
+  </div>
+</div>

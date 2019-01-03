@@ -64,6 +64,17 @@ export class ContributeQuestionComponent implements OnInit {
 
   onSubmit() {
     console.log(this.questionForm.value);
+    let json=JSON.stringify({
+      user:this.questionForm.value.user,
+      skill:this.questionForm.value.skill,
+      topic:this.questionForm.value.topic,
+      question:this.questionForm.value.question,
+      options:{
+         name:this.questionForm.value.options[this.count],
+         answer:this.questionForm.value.solution[this.count]
+      }
+    })
+    console.log(json);
     this.contributeQuestionService.addQuestion(this.questionForm.value)
       .subscribe(data => {
         console.log("Response: " + data)
@@ -84,15 +95,5 @@ export class ContributeQuestionComponent implements OnInit {
     const file = event.target.files[0];
     this.userFile = file;
   }
-  upload() {
-    console.log('File Upload method is called!');
-    let formData = new FormData;
-    formData.append('file', this.userFile);
-    this.contributeQuestionService.uploadQuestions(formData).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-    this.router.navigate(['preview']);
-  }
+ 
 }
