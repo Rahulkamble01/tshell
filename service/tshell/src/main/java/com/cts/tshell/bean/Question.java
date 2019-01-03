@@ -88,5 +88,4 @@ public class Question {
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
 	}
-
 }

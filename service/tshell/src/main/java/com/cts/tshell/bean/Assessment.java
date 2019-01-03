@@ -68,6 +68,7 @@ public class Assessment {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User user;
 
+
 	// @ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	// @JoinTable(name="assessment_question",
 	// joinColumns= {@JoinColumn(name="aq_as_id")},

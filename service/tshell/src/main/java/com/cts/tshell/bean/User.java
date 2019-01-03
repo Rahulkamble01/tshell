@@ -154,5 +154,4 @@ public class User {
 				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
 				+ lastLoginTime + ", skills=" + skills + "]";
 	}
-
 }

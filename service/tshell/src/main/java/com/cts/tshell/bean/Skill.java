@@ -156,5 +156,4 @@ public class Skill {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 }
