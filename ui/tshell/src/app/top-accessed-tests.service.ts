@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../app/environment';
+
 const httpOptions={
   headers: new HttpHeaders({
     'Content-Type':'application/json',
@@ -12,7 +13,7 @@ const httpOptions={
   providedIn: 'root'
 })
 export class TopAccessedTestsService {
-  url:string="/tshell-rest/gettop5tests/"
+  url:string = environment.serviceUrlPrefix + "/skill/gettop5tests/"
   constructor(private http:HttpClient) { } 
   
   getTestDetails():Observable<any> {

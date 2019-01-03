@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-  "/tShell/*": {
-    "target": "http://localhost:9090",
-=======
-  "/tshell-rest/*": {
+  "/tshell-service/*": {
     "target": "http://localhost:8080",
->>>>>>> top-5-accessed-tests-service
     "secure": false,
     "loglevel": "debug",
     "changeOrigin": true
