@@ -20,16 +20,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@NamedQueries ({
-@NamedQuery(name="Skill.fetchRecentSkills",	
-query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
-@NamedQuery(
-		name = "Skill.fetchTopSearchedSkills", 
-		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
-})
+@NamedQueries({
+		@NamedQuery(name = "Skill.fetchRecentSkills", query = "select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
+		@NamedQuery(name = "Skill.fetchTopSearchedSkills", query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc") })
 
 @Table(name = "skill")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Skill {
 
 	@Id
@@ -54,12 +50,14 @@ public class Skill {
 
 	@Column(name = "sk_image")
 	private byte[] image;
-	
+
 	@Column(name = "sk_creation_date")
 	@Temporal(TemporalType.DATE)
 	private Date createdOn;
 	
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
+	private List<Topic> topics;
+
 	public Skill(int id, String name, int searchCount, String active, int testCount, String description, byte[] image,
 			Date createdOn, List<Topic> topics) {
 		super();
@@ -81,10 +79,6 @@ public class Skill {
 	public void setCreationDate(Date creationDate) {
 		this.createdOn = creationDate;
 	}
-
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-	private List<Topic> topics;
-
 
 	public int getId() {
 		return id;
@@ -134,7 +128,6 @@ public class Skill {
 		this.description = description;
 	}
 
-	
 	public byte[] getImage() {
 		return image;
 	}
@@ -150,8 +143,6 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-	
-	
 
 	public Date getCreatedOn() {
 		return createdOn;
@@ -160,15 +151,10 @@ public class Skill {
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
-	
 
-	
 	public Skill() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
-	
 
 }

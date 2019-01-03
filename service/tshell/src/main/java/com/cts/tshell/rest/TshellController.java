@@ -20,7 +20,7 @@ public class TshellController {
 		LOGGER.info("start");
 		ErrorResponse error = new ErrorResponse();
 		error.setTimestamp(ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT));
-		LOGGER.debug("error : {} ", error);
+		LOGGER.error(ex.getMessage(), ex);
 		error.setReasonCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		//error.setErrorMessage(ex.getMessage());
 		error.setErrorMessage("System Error");

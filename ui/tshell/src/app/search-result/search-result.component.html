@@ -13,9 +13,24 @@
           <ng-template #rt let-r="result" let-t="term">
             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
           </ng-template>
+          <!-- <ng-template #noResults>
+              <ngb-highlight result="No Result Found!"></ngb-highlight>
+            </ng-template> -->
           <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
-            placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" />
+            placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" 
+            typeahead-no-results="noResults" />
+            <span ng-if="noResults">No Results found</span>
         </div>
+        <!-- <div class="itwillflex">
+            <ng-template #rt let-r="result" let-t="term">
+              <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+            </ng-template>
+            <ng-template #noResults>
+                <ngb-highlight [result]="No Result Found!"></ngb-highlight>
+              </ng-template>
+            <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
+              placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" [typeahead-no-results]="noResults"/>
+          </div> -->
       </div>
       <ng-container *ngIf="skills.length != 0; else searchNotFoundTemplate">
         <p class="row search-heading text-center mb-0 mt-1 pl-3">Found Result for &nbsp; <span> "{{name}}"</span></p>

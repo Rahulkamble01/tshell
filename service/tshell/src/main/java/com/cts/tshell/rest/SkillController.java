@@ -101,7 +101,7 @@ public class SkillController {
 		LOGGER.debug("Recived skill from Browser: " + skill);
 		int addStatus = 0;
 		Skill checkSkill = skillService.getSkillByName(skill.getName());
-		
+
 		List<Topic> topics = skill.getTopics();
 		LOGGER.debug("Recived topics from Browser: " + topics);
 		Skill skill2 = skillService.getSkillByName(skill.getName());
@@ -110,7 +110,7 @@ public class SkillController {
 			topic.setSkill(skill2);
 			topicService.saveTopic(topic);
 		}
-		
+
 		if (checkSkill == null) {
 			skillService.addOrUpdateSkill(skill);
 			skill.setTopics(topics);
@@ -137,6 +137,10 @@ public class SkillController {
 			List<Topic> topics = skill.getTopics();
 			LOGGER.debug("Recived skill from Browser: " + skill);
 			LOGGER.debug("Recived topics from Browser: " + topics);
+			skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill));
+
+			// skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
+			System.out.println("{}" + skillToNeoSkill);
 			skillService.addOrUpdateSkill(skill);
 			Skill skill2 = skillService.getSkillByName(skill.getName());
 			skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));

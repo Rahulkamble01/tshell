@@ -82,7 +82,7 @@ export class EditskillmodalComponent implements OnInit {
     const index = this.topics.indexOf(topic);
     console.log(index + " " + this.topics[index].name);
 
-    this.confirmationDialogService.confirm(`Deletion of ${this.topics[index].name}`, 'Do you really want to Delete ?')
+    this.confirmationDialogService.confirm(`Deletion of "${this.topics[index].name}"`, 'Do you really want to Delete ?')
       .then((confirmed) => {
         if (confirmed) {
           console.log('User confirmed:', confirmed);

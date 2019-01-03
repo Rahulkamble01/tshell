@@ -75,12 +75,12 @@ export class SearchResultComponent implements OnInit {
 
   editSkillModel(item) {
     console.log(item);
-    const modalRef = this.modalService.open(EditskillmodalComponent);
+    const modalRef = this.modalService.open(EditskillmodalComponent, { centered: true });
     modalRef.componentInstance.item = item;
   }
 
   addSkillModel() {
-    const modalRef = this.modalService.open(SkillmodalComponent);
+    const modalRef = this.modalService.open(SkillmodalComponent, { centered: true });
   }
 
   formatter = (x: { name: string }) => x.name;
@@ -88,21 +88,26 @@ export class SearchResultComponent implements OnInit {
     debounceTime(100),
     distinctUntilChanged(),
     map(term => term === '' ? []
-      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100)
-    )
+      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
+    ),
+    // map(term => term === '' ? [])
   )
-  itemSelected($event) {
-    this.skills = $event.item;
-    this.name = $event.item.name;
-    this.skillService.updateSearch($event.item).subscribe();
-    this.skillService.getSkillTopper($event.item.id).subscribe(data => {
-      this.toppers = data;
-      console.log(data);
-    });
-    // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
-    //   this.graphData = data;
-    // });
-  }
+
+
+
+
+itemSelected($event) {
+  this.skills = $event.item;
+  this.name = $event.item.name;
+  this.skillService.updateSearch($event.item).subscribe();
+  this.skillService.getSkillTopper($event.item.id).subscribe(data => {
+    this.toppers = data;
+    console.log(data);
+  });
+  // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
+  //   this.graphData = data;
+  // });
+}
 
 }
 

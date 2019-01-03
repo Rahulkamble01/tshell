@@ -23,19 +23,17 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
-
 @NamedQueries({
 	@NamedQuery(name="User.findByEmpId",
 			query=	" select u from User u " + 
 					" left join fetch u.role r " + 
 				    " where u.employeeId = :employeeId ")
 })
-
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "us_id")
+	@Column(name = "us_id")	
 	private int id;
 
 	@Column(name = "us_name")
@@ -53,23 +51,21 @@ public class User {
 	private Role role;
 
 	
-	@Column(name = "us_emp_id")
-	@JsonView(Views.Public.class)
+	@Column(name = "us_emp_id")	
 	private int employeeId;
 
-	@Column(name = "us_image")
+	@Column(name = "us_image")	
 	private byte[] image;
 
-	@Column(name = "us_signup_date")
+	@Column(name = "us_signup_date")	
 	private Date signupDate;
 
-	@Column(name = "us_last_login_time")
+	@Column(name = "us_last_login_time")	
 	private Time lastLoginTime;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
-	@JsonView(Views.Internal.class)
 	private List<Skill> skills;
 
 	public int getId() {
