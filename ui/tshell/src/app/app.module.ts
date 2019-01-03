@@ -44,11 +44,11 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
-<<<<<<< HEAD
+
 import { ErrorComponent } from './error/error.component';
-=======
+
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
->>>>>>> top-5-accessed-tests-service
+
 
 @NgModule({
   declarations: [
@@ -93,11 +93,11 @@ PasswordNotEqualValidatorDirective,
     SkillpageComponent,
     SkillmodalComponent,
     FooterComponent,
-<<<<<<< HEAD
-    ErrorComponent
-=======
+
+    ErrorComponent,
+
     TopAccessedTestsComponent
->>>>>>> top-5-accessed-tests-service
+
   ],
 
   imports: [
