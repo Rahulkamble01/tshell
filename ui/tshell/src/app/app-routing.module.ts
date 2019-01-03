@@ -32,14 +32,14 @@ const routes: Routes = [
   { path: 'search-skill', component: SearchSkillComponent },
   { path: 'reviewq', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
-  { path: 'preview', component: PreviewQuestionsComponent }, 
+  { path: 'preview', component: PreviewQuestionsComponent },
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
-  {path:'dash', component:DashboardComponent},
-  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
+  { path: 'dash', component: DashboardComponent },
+  { path: "recentSkills", component: RecentlyAddedSkillsComponent },
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
   { path: "changepassword", component: ChangepasswordComponent },
@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: "skillpage", component: SkillpageComponent },
   { path: "skills/:id", component: SearchResultComponent },
   { path: "skillpage", component: SkillpageComponent },
-  { path: "graph",component:QuestiongraphComponent}
+  { path: "graph", component: QuestiongraphComponent }
 ];
 
 

@@ -23,6 +23,7 @@ export class SkillmodalComponent implements OnInit {
   status: number = 0;
   expression: any;
   @Input() name: any;
+
   topics: Array<Topic> = [];
   allskills: any;
   sameSkillName: boolean = false;
@@ -61,7 +62,6 @@ export class SkillmodalComponent implements OnInit {
 
   addTopic(topicname, topicpercntage) {
     const topic = new Topic(null, topicname, topicpercntage);
-    // alert(JSON.stringify(topic.name));
     let counter = 0;
     let percounter = 0;
     let morethahun = 0;
@@ -82,7 +82,6 @@ export class SkillmodalComponent implements OnInit {
       morethahun = 1;
     }
 
-
     for (let i = 0; i < this.topics.length; i++) {
       if (topicname.toUpperCase() === this.topics[i].name.toUpperCase() || topicname === '') {
         counter = 1;
@@ -94,14 +93,18 @@ export class SkillmodalComponent implements OnInit {
       this.emptyper = false;
       this.bigper = false;
       this.clearInput();
-    } else if (counter !== 0) {
+    }
+
+    if (counter !== 0) {
       this.sametopic = true;
     }
 
-
-
+    if (counter === 0 && percounter !== 0) {
+      this.sametopic = false;
+    } else if (counter !== 0 && percounter === 0) {
+      this.emptyper = false;
+    }
   }
-
 
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
@@ -126,10 +129,10 @@ export class SkillmodalComponent implements OnInit {
     this.topics = [];
   }
 
-
   addSkill() {
     // tslint:disable-next-line:max-line-length
     const skill = new Skill(this.addskillform.controls['name'].value, "active", this.addskillform.controls['description'].value, this.topics, new Date());
+
     console.log(skill);
     this.SkillService.addSkill(skill).subscribe(
       data => {
@@ -138,9 +141,10 @@ export class SkillmodalComponent implements OnInit {
         this.error = false;
         console.log(this.status);
         if (this.status === 2) {
-
           this.addskillform.reset();
           this.sametopic = false;
+          this.emptyper = false;
+          this.bigper = false;
           this.clearAllInput();
         }
       },
@@ -149,14 +153,8 @@ export class SkillmodalComponent implements OnInit {
         this.status = 0;
       }
     );
-
   }
-
-
-
   ngOnInit() {
-
   }
-
 }
 

@@ -31,6 +31,8 @@ export class SearchResultComponent implements OnInit {
   toppers: any[] = [];
   graphData: any[] = [];
   topics: Array<Topic>;
+  userRole: any;
+  userLoggedInn: any;
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService) {
@@ -52,9 +54,14 @@ export class SearchResultComponent implements OnInit {
       // abc(this.w, this.h);
     });
 
-    // this.skillService.getGraphData().subscribe(data => {
-    //   this.graphData = data;
-    // });
+    this.userRole = this.authService.getRole();
+    if (this.userRole !== undefined || this.userRole !== 'Learner') {
+      this.userRole = 0;
+    }
+    if (this.userRole !== 'Learner' || this.userRole !== 'Admin' || this.userRole !== 'SME') {
+      this.userLoggedInn = true;
+    }
+
   }
 
   toggllingSkill(skill) {
@@ -96,18 +103,18 @@ export class SearchResultComponent implements OnInit {
 
 
 
-itemSelected($event) {
-  this.skills = $event.item;
-  this.name = $event.item.name;
-  this.skillService.updateSearch($event.item).subscribe();
-  this.skillService.getSkillTopper($event.item.id).subscribe(data => {
-    this.toppers = data;
-    console.log(data);
-  });
-  // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
-  //   this.graphData = data;
-  // });
-}
+  itemSelected($event) {
+    this.skills = $event.item;
+    this.name = $event.item.name;
+    this.skillService.updateSearch($event.item).subscribe();
+    this.skillService.getSkillTopper($event.item.id).subscribe(data => {
+      this.toppers = data;
+      console.log(data);
+    });
+    // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
+    //   this.graphData = data;
+    // });
+  }
 
 }
 
