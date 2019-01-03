@@ -101,16 +101,18 @@ public class SkillController {
 		LOGGER.debug("Recived skill from Browser: " + skill);
 		int addStatus = 0;
 		Skill checkSkill = skillService.getSkillByName(skill.getName());
+		
+		List<Topic> topics = skill.getTopics();
+		LOGGER.debug("Recived topics from Browser: " + topics);
+		Skill skill2 = skillService.getSkillByName(skill.getName());
+		LOGGER.debug("Recived skill from sevice: " + skill2);
+		for (Topic topic : topics) {
+			topic.setSkill(skill2);
+			topicService.saveTopic(topic);
+		}
+		
 		if (checkSkill == null) {
-			List<Topic> topics = skill.getTopics();
-			LOGGER.debug("Recived topics from Browser: " + topics);
 			skillService.addOrUpdateSkill(skill);
-			Skill skill2 = skillService.getSkillByName(skill.getName());
-			LOGGER.debug("Recived skill from sevice: " + skill2);
-			for (Topic topic : topics) {
-				topic.setSkill(skill2);
-				topicService.saveTopic(topic);
-			}
 			skill.setTopics(topics);
 			LOGGER.info("ending Update Skill");
 
