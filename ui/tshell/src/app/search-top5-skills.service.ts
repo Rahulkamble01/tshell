@@ -7,21 +7,13 @@ import { environment } from '../app/environment';
   providedIn: 'root'
 })
 export class SearchTop5SkillsService {
-<<<<<<< HEAD
   url = environment.serviceUrlPrefix + '/skill/top4searchedskills';
-=======
-  url='/tShell/top4searchedskills';
->>>>>>> Skills
   constructor(private http: HttpClient) { }
 
-  getSkills():Observable<any>{
+  getSkills(): Observable<any> {
     console.log("inside top 4 searched skill service");
-    console.log( this.http.get<any>(this.url));
+    console.log(this.http.get<any>(this.url));
     return this.http.get<any>(this.url);
 
   }
-  
-    }
-
-
-  
+}

@@ -1,24 +1,19 @@
 package com.cts.tshell.rest;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.tshell.bean.NeoSkill;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
-import com.cts.tshell.converter.SkillToNeoSkill;
 import com.cts.tshell.service.SkillService;
 import com.cts.tshell.service.TopicService;
 
@@ -28,12 +23,6 @@ public class SkillController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
 	private SkillService skillService;
 	private TopicService topicService;
-	private SkillToNeoSkill skillToNeoSkill;
-
-	@Autowired
-	public void setSkillToNeoSkill(SkillToNeoSkill skillToNeoSkill) {
-		this.skillToNeoSkill = skillToNeoSkill;
-	}
 
 	@Autowired
 	public void setSkillService(SkillService skillService) {
@@ -53,18 +42,6 @@ public class SkillController {
 		return skillService.getSkills();
 	}
 
-	@RequestMapping(value = "/graph", method = RequestMethod.GET)
-	public Map<String, Object> graph(@RequestParam(value = "limit", required = false) Integer limit) {
-		if (limit == null) {
-			limit = 100;
-		}
-		return skillService.graph(limit);
-	}
-
-	@RequestMapping(value = "/graph/{skillName}", method = RequestMethod.GET)
-	public List<NeoSkill> graph(@PathVariable String skillName) {
-		return skillService.graph(skillName);
-	}
 
 	@RequestMapping(value = "/updateSkillSearch", method = RequestMethod.POST)
 	public void updateSkillSearch(@RequestBody Skill skill) {
@@ -137,13 +114,8 @@ public class SkillController {
 			List<Topic> topics = skill.getTopics();
 			LOGGER.debug("Recived skill from Browser: " + skill);
 			LOGGER.debug("Recived topics from Browser: " + topics);
-			skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill));
-
-			// skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
-			System.out.println("{}" + skillToNeoSkill);
 			skillService.addOrUpdateSkill(skill);
 			Skill skill2 = skillService.getSkillByName(skill.getName());
-			skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
 			LOGGER.debug("Recived skill from sevice: " + skill2);
 			for (Topic topic : topics) {
 				topic.setSkill(skill2);

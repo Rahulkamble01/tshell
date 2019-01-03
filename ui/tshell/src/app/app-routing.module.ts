@@ -5,7 +5,6 @@ import { SearchExistingQuestionsComponent } from './search-existing-questions/se
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
@@ -25,9 +24,6 @@ import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.componen
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
-import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
-
-
 
 const routes: Routes = [
 
@@ -55,13 +51,7 @@ const routes: Routes = [
   { path: "skills", component: SearchResultComponent },
   { path: "skillpage", component: SkillpageComponent },
   { path: "skills/:id", component: SearchResultComponent },
-  { path: "skillpage", component: SkillpageComponent },
-<<<<<<< HEAD
-  { path: "graph",component:QuestiongraphComponent},
-  { path: "top5Tests", component: TopAccessedTestsComponent }
-=======
   { path: "graph", component: QuestiongraphComponent }
->>>>>>> Skills
 ];
 
 
