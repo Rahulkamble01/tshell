@@ -52,9 +52,6 @@ public class QuestionController {
 		return user;
 		
 	}
-//	LOGGER.info("starting save traveller" );
-//	travellerRepository.save(traveller);
-//	LOGGER.debug("traveller details are" + traveller);
-//	LOGGER.info("end" );
+
 	
 }
