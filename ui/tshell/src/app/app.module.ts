@@ -90,9 +90,8 @@ PasswordNotEqualValidatorDirective,
     SkillpageComponent,
     SkillmodalComponent,
     FooterComponent,
-    ErrorComponent
-    
-  
+    ErrorComponent,
+    TopAccessedTestsComponent
   ],
 
   imports: [

@@ -16,12 +16,12 @@ public interface SkillRepository extends JpaRepository<Skill, Integer>{
 	@Query("select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
 	Page<Skill> findBySkillTop4(Pageable pageable);
 	List<Skill> fetchRecentSkills();
-
+	
 	@Query("select s.name, s.testCount from Skill s  where s.testCount>0 order by testCount desc")
 	Page<Skill> findBySkillTop5(Pageable pageable);
-	
 
-
+	@Query( "select count(s.id) from Skill s ")
+	long totalSkillCount();
 
 }
 

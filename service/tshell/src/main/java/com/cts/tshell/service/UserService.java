@@ -1,5 +1,7 @@
 package com.cts.tshell.service;
 
+
+
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -28,6 +30,14 @@ public class UserService {
 		LOGGER.debug("EmployeeId: {}", employeeId);
 		LOGGER.info("End");
 		return userRepository.findByEmpId(employeeId);
+	}
+	@Transactional
+	public long getUserCount(){
+		LOGGER.info("start");
+		long userCount = userRepository.totalUserCount();
+		LOGGER.debug("totalUserCount -> ",  userCount );
+		
+		return userCount; 
 	}
 
 }

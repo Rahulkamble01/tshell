@@ -18,14 +18,20 @@ public class TshellController {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleError(Exception ex){
 		LOGGER.info("start");
+
+
 		LOGGER.error(ex.getMessage(), ex);
+
 		ErrorResponse error = new ErrorResponse();
 		error.setTimestamp(ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT));
 		LOGGER.debug("error : {} ", error);
 		error.setReasonCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+
 		//error.setErrorMessage(ex.getMessage());
 		error.setErrorMessage("System Error");
+
 		error.setErrorMessage(ex.getMessage());
+
 		return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

@@ -34,6 +34,7 @@ public class SkillController extends TshellController {
 		LOGGER.debug("SkillController -> {}", skills);
 		return skills;
 	}
+	
 	@GetMapping("/gettop5tests")
 	public List<Skill> getTopAccessedtests() {
 		LOGGER.info("start");
@@ -41,6 +42,19 @@ public class SkillController extends TshellController {
 		LOGGER.debug("top5 accessed tests ->", topAccessedtests);
 		return topAccessedtests;
 
+	}
 	
+
+	@GetMapping("/skillcount")
+	public long getSkillCount() {
+		LOGGER.info("start");
+		long skillCount = skillService.getSkillCount();
+		LOGGER.debug("Total Skill Count -> {}", skillCount);
+		return skillCount;
+	}
 }
-}
+
+
+
+
+
