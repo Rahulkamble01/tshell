@@ -46,12 +46,12 @@ public class SkillController extends TshellController {
 	}
 	
 
-@GetMapping("/skillcount")
-	public List<Skill> getTotalNumberofSkill() {
+	@GetMapping("/skillcount")
+	public long getSkillCount() {
 		LOGGER.info("start");
-		List<Skill> totalSkills = skillService.getTotalCountSkill();
-		LOGGER.debug("SkillController -> {}", totalSkills);
-		return totalSkills;
+		long skillCount = skillService.getSkillCount();
+		LOGGER.debug("Total Skill Count -> {}", skillCount);
+		return skillCount;
 	}
 }
 

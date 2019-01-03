@@ -28,11 +28,11 @@ public class QuestionService {
 	}
 	
 	@Transactional
-	public List<Question> getTotalCountQuestions(){
+	public long getQuestionCount(){
 		LOGGER.info("start");
-		List<Question> totalQuestions = questionRepository.totalQuestions();
-		LOGGER.debug("totalQuestions -> {}", totalQuestions );
-		return totalQuestions;
+		long questionCount = questionRepository.totalQuestionsCount();
+		LOGGER.debug("QuestionCount -> {}", questionCount );
+		return questionCount;
 }
 
 }

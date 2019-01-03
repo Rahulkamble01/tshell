@@ -1,6 +1,6 @@
 package com.cts.tshell.repository;
 
-import java.util.List;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User getUserByEmployeeId(int userId);
 	
 	@Query("select count(u.id) from User u ")
-	List<User> totalUser();
+	long totalUserCount();
 
 }

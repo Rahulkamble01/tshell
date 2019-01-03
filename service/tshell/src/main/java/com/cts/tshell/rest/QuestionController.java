@@ -35,11 +35,11 @@ public class QuestionController extends TshellController{
 	}
 	
 	@GetMapping("/questioncount")
-	public List<Question> getTotalNumberofQuestions() {
+	public long getQuestionCount() {
 		LOGGER.info("start");
-		List<Question> totalQuestions = questionService.getTotalCountQuestions();
-		LOGGER.debug("totalQuestions  -> {}", totalQuestions );
-		return totalQuestions ;
+		long questionCount = questionService.getQuestionCount();
+		LOGGER.debug("QuestionCount  -> {}", questionCount );
+		return questionCount ;
 	}
 
 

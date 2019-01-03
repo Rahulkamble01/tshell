@@ -1,6 +1,6 @@
 package com.cts.tshell.service;
 
-import java.util.List;
+
 
 import javax.transaction.Transactional;
 
@@ -32,12 +32,12 @@ public class UserService {
 		return userRepository.findByEmpId(employeeId);
 	}
 	@Transactional
-	public List<User> getTotalUserCount(){
+	public long getUserCount(){
 		LOGGER.info("start");
-		List<User> totalUserCount = userRepository.totalUser();
-		LOGGER.debug("totalUserCount -> ",  totalUserCount );
+		long userCount = userRepository.totalUserCount();
+		LOGGER.debug("totalUserCount -> ",  userCount );
 		
-		return totalUserCount; 
+		return userCount; 
 	}
 
 }

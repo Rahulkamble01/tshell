@@ -21,7 +21,7 @@ public interface SkillRepository extends JpaRepository<Skill, Integer>{
 	Page<Skill> findBySkillTop5(Pageable pageable);
 
 	@Query( "select count(s.id) from Skill s ")
-	List<Skill> totalSkill();
+	long totalSkillCount();
 
 }
 

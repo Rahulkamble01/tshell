@@ -11,11 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import org.springframework.data.domain.Sort;
-import javax.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import org.springframework.stereotype.Service;
 
@@ -58,12 +54,12 @@ public class SkillService {
 	}
 	
 	@Transactional
-	public List<Skill> getTotalCountSkill(){
+	public long getSkillCount(){
 		LOGGER.info("start");
-		List<Skill> totalSkillCount = skillRepository.totalSkill();
-		LOGGER.debug("recent5Skills -> " + totalSkillCount);
+		long skillCount = skillRepository.totalSkillCount();
+		LOGGER.debug("Skill Count -> " , skillCount);
 		
-		return totalSkillCount;
+		return skillCount;
 	}
 
 }

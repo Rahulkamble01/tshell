@@ -1,6 +1,6 @@
 package com.cts.tshell.rest;
 
-import java.util.List;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.tshell.bean.Assessment;
+
 import com.cts.tshell.service.AssessmentService;
 
 @RestController
@@ -21,11 +21,11 @@ public class AssessmentController {
 	private AssessmentService assessmentService;
 	
 	@GetMapping("/assessmentcount")
-	public List<Assessment> getTotalNumberofAssessments() {
+	public long getTotalNumberofAssessments() {
 		LOGGER.info("start");
-		List<Assessment> totalAssessments = assessmentService.getTotalCountAssessment();
-		LOGGER.debug("totalAssessments -> {}", totalAssessments);
-		return totalAssessments;
+		long assessmentCount = assessmentService.getAssessmentCount();
+		LOGGER.debug("totalAssessments -> {}", assessmentCount);
+		return assessmentCount;
 	}
 	
 }

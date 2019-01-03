@@ -18,6 +18,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	List<Question> findTotalQuestionContributedById(@Param("employeeId") int employeeId);
 	
 	@Query("select count(q.id) from Question q")
-	List<Question> totalQuestions();
+	long totalQuestionsCount();
 
 }
