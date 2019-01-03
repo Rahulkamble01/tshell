@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContributeQuestionService {
-  csvData : any;
+  csvData = [];
   uploadUrl: string = '/tShell/question/upload';
   addQuestionUrl: string = "/tShell/";
 
