@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from './enviroment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,14 +12,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SkillserviceService {
-  getAllSkillUrl = 'tShell/skills';
-  updateSearchUrl = 'tShell/updateSkillSearch';
-  skillToppersUrl = 'tShell/top5list/';
-  updateSkillUrl = 'tShell/updateSkill';
-  // graphDataUrl = 'tShell/graph';
-  addSkillurl = 'tShell/addskill';
-  deleteTopicUrl = "tShell/deleteTopic";
-  // graphDataOfSkillUrl = 'tShell/graph/';
+  getAllSkillUrl = environment.serviceUrlPrefix + '/skills';
+  updateSearchUrl = environment.serviceUrlPrefix + '/updateSkillSearch';
+  skillToppersUrl = environment.serviceUrlPrefix + '/top5list/';
+  updateSkillUrl = environment.serviceUrlPrefix + '/updateSkill';
+  // graphDataUrl = environment.serviceUrlPrefix + '/graph';
+  addSkillurl = environment.serviceUrlPrefix + '/addskill';
+  deleteTopicUrl = environment.serviceUrlPrefix + '/deleteTopic';
+  // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/graph/';
 
   constructor(private http: HttpClient) { }
 
