@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 
@@ -35,7 +37,7 @@ public class User {
 	@Column(name = "us_password")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "us_ur_id")	
 	private Role role;
 
@@ -43,11 +45,12 @@ public class User {
 	private int employeeId;
 	
 	@Column(name = "us_image")
-	private byte image;
+	private byte[] image;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
+	@JsonIgnore
 	private List<Skill> skills;
 
 	public int getId() {
@@ -98,11 +101,11 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

@@ -1,6 +1,6 @@
 package com.cts.tshell.bean;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +8,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "skill")
+//@NamedQueries({
+//	@NamedQuery(name = "Skill.fetchQuestionById", query = "select s,t.id,t.name from Skill s "
+//			+" left join fetch s.topics t " + " left join fetch t.questions q "+" left join fetch q.option o "
+//			+" where s.id=:userId ")
+//	
+//})
 public class Skill {
 
 	@Id
@@ -36,10 +44,10 @@ public class Skill {
 	private String description;
 	
 	@Column(name = "sk_image")
-	private byte image;
+	private byte[] image;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-	private List<Topic> topics;
+	private Set<Topic> topics;
 
 	public int getId() {
 		return id;
@@ -89,19 +97,19 @@ public class Skill {
 		this.description = description;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
-	public List<Topic> getTopics() {
+	public Set<Topic> getTopics() {
 		return topics;
 	}
 
-	public void setTopics(List<Topic> topics) {
+	public void setTopics(Set<Topic> topics) {
 		this.topics = topics;
 	}
 

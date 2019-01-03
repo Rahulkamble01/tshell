@@ -7,5 +7,11 @@ import com.cts.tshell.bean.Question;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
+	
+	Question fetchLatestQn();
 
 }
+
+	
+
+

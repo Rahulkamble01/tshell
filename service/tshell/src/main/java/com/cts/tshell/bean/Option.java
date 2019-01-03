@@ -12,9 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "option")
+@Table(name = "`option`")
 public class Option {
-	
+public Option() {
+		}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "op_id")
@@ -23,7 +25,7 @@ public class Option {
 	@Column(name = "op_description")
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="op_qu_id")
 	private Question question;
 	
@@ -61,5 +63,12 @@ public class Option {
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
 	}
+
+	@Override
+	public String toString() {
+		return "Option [id=" + id + ", description=" + description + ", answer=" + answer
+				+ "]";
+	}
+	
 
 }
