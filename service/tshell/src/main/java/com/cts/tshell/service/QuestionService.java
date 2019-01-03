@@ -50,9 +50,8 @@ public class QuestionService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		LOGGER.info("readFile() execution is completed!");
 		return uploadedQuestions;
-
 	}
 
 }

@@ -16,7 +16,6 @@ export class ContributeQuestionComponent implements OnInit {
   }
   userFile: any = File;
   uploadForm: any = FormGroup;
-  csvData: any;
   fileName: any;
   fileExtension: any;
   fileExtensionError: boolean = false;
@@ -104,19 +103,19 @@ export class ContributeQuestionComponent implements OnInit {
   isInArray(array, word) {
     return array.indexOf(word.toLowerCase()) > -1;
   }
-  upload() {
+
+  async upload() {
     console.log('File Upload method is called!');
     console.log('File extension error is ' + this.fileExtensionError);
     console.log(this.fileExtensionMessage);
-
     let formData = new FormData;
     formData.append('file', this.userFile);
     this.contributeQuestionService.uploadQuestions(formData).subscribe(
-      data => {
-        this.csvData = data;
-        console.log(this.csvData);
-      }
-    )
+      async data => {
+        this.contributeQuestionService.csvData = await data;
+        await this.contributeQuestionService.setCsvData(data);
+      })
+    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
     this.router.navigate(['preview']);
   }
 }

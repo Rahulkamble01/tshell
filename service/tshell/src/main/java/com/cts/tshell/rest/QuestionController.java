@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,10 +30,25 @@ public class QuestionController {
 
 	@PostMapping("/upload")
 	public List<Question> uploadFile(@RequestParam("file") MultipartFile file) {
-		LOGGER.info("Backend is called!");
+		LOGGER.info("uploadFile() is called");
+		LOGGER.debug("Content type is {}", file.getContentType());
 		List<Question> questionsList = new ArrayList<Question>();
 		questionsList = questionService.readFile(file);
-		LOGGER.info("Backend call is completed!");
+		LOGGER.info("uploadFile() execution is completed!");
 		return questionsList;
+	}
+
+	@PostMapping("/submitforreview")
+	public void submitForReview(@RequestBody Question[] questionsList) {
+		LOGGER.info("submitForReview() is called");
+		for (Question question : questionsList) {
+			System.out.println(question);
+		}
+		LOGGER.info("submitForReview() execution is completed!");
+	}
+
+	@PostMapping("/approveandsubmit")
+	public void submitAsApproved(@RequestBody List<Question> questionsList) {
+
 	}
 }

@@ -10,6 +10,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ContributeQuestionService {
+  csvData: any;
   uploadUrl: string = '/tShell/question/upload';
   addQuestionUrl: string = '/tShell/question/';
   submitQuestionsUrl: string = '/tShell/question/submitforreview';
@@ -18,7 +19,7 @@ export class ContributeQuestionService {
     this.http = http;
   }
   uploadQuestions(formData: any): Observable<any> {
-    return this.http.post(this.uploadUrl, formData);
+    return this.http.post<any>(this.uploadUrl, formData);
   }
   addQuestion(json: any): Observable<any> {
     return this.http.post<any>(this.addQuestionUrl, json);
@@ -26,6 +27,12 @@ export class ContributeQuestionService {
   submitForReview(questionsList): Observable<any> {
     console.log('submitForReview() is called!');
     console.log(this.submitQuestionsUrl);
-    return this.http.post(this.submitQuestionsUrl, questionsList);
+    return this.http.post<any>(this.submitQuestionsUrl, questionsList, httpOptions);
+  }
+  getCsvData() {
+    return this.csvData;
+  }
+  setCsvData(csvData: any) {
+    this.csvData = csvData;
   }
 }
