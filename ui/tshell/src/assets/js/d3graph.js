@@ -1,7 +1,9 @@
-function d31() {
+abc(width, height );
+
+function abc(width, height) {
     alert('jsagh');
-  var width = 800,
-    height = 800;
+  // var width = 800,
+  //   height = 800;
 
   var force = d3.layout.force()
     .charge(-200).linkDistance(30).size([width, height]);
@@ -11,9 +13,10 @@ function d31() {
     .attr("pointer-events", "all");
 
   // d3.json("/graph", function (error, graph) {
-  d3.json(noe4jdata, function (error, graph) {
+  d3.json('http://localhost:4200/tShell/graph', function (error, graph) {
     if (error) return;
 
+    console.log(graph);
     force.nodes(graph.nodes).links(graph.links).start();
 
     var link = svg.selectAll(".link")
@@ -60,4 +63,4 @@ function d31() {
   });
 };
 
-d31();
+

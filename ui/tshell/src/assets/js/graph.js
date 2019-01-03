@@ -14,25 +14,24 @@ function abc(d3,w1,h1) {
     main()
 
     function main() {
-      console.log("indise main")
       var range = 21
-      var data = {
-        // nodes: d3.json("/data/neo4jdata.json", function (error, graph) {})
-        nodes: d3.range(0, range).map(function (d) {
-          return {
-            label: "undefined" + d,
-            r: ~~d3.randomUniform(8, 28)()
-          }
-        }),
-        links: d3.range(0, range).map(function () {
-          return {
-            source: ~~d3.randomUniform(range)(),
-            target: ~~d3.randomUniform(range)()
-          }
-        })
-      }
-      setSize(data)
-      drawChart(data)
+      // var data = {
+      //   // nodes: d3.json("/data/neo4jdata.json", function (error, graph) {})
+      //   nodes: d3.range(0, range).map(function (d) {
+      //     return {
+      //       label: "undefined" + d,
+      //       r: ~~d3.randomUniform(8, 28)()
+      //     }
+      //   }),
+      //   links: d3.range(0, range).map(function () {
+      //     return {
+      //       source: ~~d3.randomUniform(range)(),
+      //       target: ~~d3.randomUniform(range)()
+      //     }
+      //   })
+      // }
+      setSize(graphData1)
+      drawChart(graphData1)
       // d3.json("/data/neo4jdata.json", function (error, graph) {
       //   setSize(graph)
       //   drawChart(graph)
@@ -43,7 +42,6 @@ function abc(d3,w1,h1) {
     function setSize(data) {
       width = w1;
       height = h1;
-      console.log(width, height);
       margin = {
         top: 0,
         left: 0,

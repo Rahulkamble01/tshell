@@ -1,6 +1,6 @@
 package com.cts.tshell.bean;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,25 +13,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@NamedQueries ({
-@NamedQuery(name="Skill.fetchRecentSkills",	
-query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
-@NamedQuery(
-		name = "Skill.fetchTopSearchedSkills", 
-		query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
-})
+@NamedQueries({
+		@NamedQuery(name = "Skill.fetchRecentSkills", query = "select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
+		@NamedQuery(name = "Skill.fetchTopSearchedSkills", query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc") })
 
 @Table(name = "skill")
-
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-
-
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Skill {
 
 	@Id
@@ -56,13 +50,16 @@ public class Skill {
 
 	@Column(name = "sk_image")
 	private byte[] image;
+
+	@Column(name = "sk_creation_date")
+	@Temporal(TemporalType.DATE)
+	private Date createdOn;
 	
-	@Column(name= "sk_creation_date")
-	private Date creationDate;
-	
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
+	private List<Topic> topics;
+
 	public Skill(int id, String name, int searchCount, String active, int testCount, String description, byte[] image,
-			Date creationDate, List<Topic> topics) {
+			Date createdOn, List<Topic> topics) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,20 +68,17 @@ public class Skill {
 		this.testCount = testCount;
 		this.description = description;
 		this.image = image;
-		this.creationDate = creationDate;
+		this.createdOn = createdOn;
 		this.topics = topics;
 	}
 
 	public Date getCreationDate() {
-		return creationDate;
+		return createdOn;
 	}
 
 	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+		this.createdOn = creationDate;
 	}
-
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-	private List<Topic> topics;
 
 	public int getId() {
 		return id;
@@ -133,6 +127,7 @@ public class Skill {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public byte[] getImage() {
 		return image;
 	}
@@ -149,7 +144,14 @@ public class Skill {
 		this.topics = topics;
 	}
 
-	
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
 	public Skill() {
 		super();
 		// TODO Auto-generated constructor stub

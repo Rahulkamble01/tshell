@@ -7,7 +7,11 @@ import { environment } from '../app/environment';
   providedIn: 'root'
 })
 export class SearchTop5SkillsService {
+<<<<<<< HEAD
   url = environment.serviceUrlPrefix + '/skill/top4searchedskills';
+=======
+  url='/tShell/top4searchedskills';
+>>>>>>> Skills
   constructor(private http: HttpClient) { }
 
   getSkills():Observable<any>{

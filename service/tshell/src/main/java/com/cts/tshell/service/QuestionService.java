@@ -26,13 +26,13 @@ public class QuestionService {
 		return question;
 
 	}
-	
+
 	@Transactional
-	public long getQuestionCount(){
+	public long getQuestionCount() {
 		LOGGER.info("start");
 		long questionCount = questionRepository.totalQuestionsCount();
-		LOGGER.debug("QuestionCount -> {}", questionCount );
+		LOGGER.debug("QuestionCount -> {}", questionCount);
 		return questionCount;
-}
+	}
 
 }

@@ -20,7 +20,6 @@ import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
@@ -35,14 +34,14 @@ const routes: Routes = [
   { path: 'search-skill', component: SearchSkillComponent },
   { path: 'reviewq', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
-  { path: 'preview', component: PreviewQuestionsComponent }, 
+  { path: 'preview', component: PreviewQuestionsComponent },
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
-  {path:'dash', component:DashboardComponent},
-  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
+  { path: 'dash', component: DashboardComponent },
+  { path: "recentSkills", component: RecentlyAddedSkillsComponent },
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
   { path: "changepassword", component: ChangepasswordComponent },
@@ -53,11 +52,16 @@ const routes: Routes = [
   { path: 'assesment', component: ExitAssesmentComponent },
   { path: 'instruction', component: InstructionComponent },
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
-  { path: "skills/:id", component: SearchResultComponent },
-  { path: "addskill", component: AddskillComponent },
+  { path: "skills", component: SearchResultComponent },
   { path: "skillpage", component: SkillpageComponent },
+  { path: "skills/:id", component: SearchResultComponent },
+  { path: "skillpage", component: SkillpageComponent },
+<<<<<<< HEAD
   { path: "graph",component:QuestiongraphComponent},
   { path: "top5Tests", component: TopAccessedTestsComponent }
+=======
+  { path: "graph", component: QuestiongraphComponent }
+>>>>>>> Skills
 ];
 
 

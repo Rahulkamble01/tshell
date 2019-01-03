@@ -7,7 +7,12 @@ import { environment } from '../app/environment';
   providedIn: 'root'
 })
 export class SkillService {
+<<<<<<< HEAD
   url: string = environment.serviceUrlPrefix + "/skill/recentSkillList/"
+=======
+
+  url: string ="/tshell/recentSkillList/"
+>>>>>>> Skills
 
   constructor(private http: HttpClient) { }
 

@@ -22,7 +22,7 @@ import { AuthService } from './auth.service';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
@@ -33,27 +33,38 @@ import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
+<<<<<<< HEAD
 
  import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
  import { InstructionComponent } from './instruction/instruction.component';
+=======
+import { TestComponent } from './top5AccessedTest/test.component';
+import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
+import { InstructionComponent } from './instruction/instruction.component';
+>>>>>>> Skills
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { GraphmodalComponent } from './graphmodal/graphmodal.component';
 import { ErrorComponent } from './error/error.component';
+<<<<<<< HEAD
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
+=======
+import { EditskillmodalComponent } from './editskillmodal/editskillmodal.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './confirmation-dialog.service';
+
+>>>>>>> Skills
 
 @NgModule({
   declarations: [
     AppComponent,
-PasswordMachingValidatorDirective,
-PasswordNotEqualValidatorDirective,
-
-    AddskillComponent,
+    PasswordMachingValidatorDirective,
+    PasswordNotEqualValidatorDirective,
     DashboardComponent,
     MostSearchedSkillsComponent,
     AssessmenthistoryComponent,
@@ -81,8 +92,8 @@ PasswordNotEqualValidatorDirective,
     CountOfQuestionsToReviewComponent,
     HomeComponent,
     SearchResultComponent,
-    AddskillComponent,
     QuestiongraphComponent,
+<<<<<<< HEAD
     TopAccessedTestsComponent,
      ExitAssesmentComponent,
      InstructionComponent,
@@ -92,6 +103,19 @@ PasswordNotEqualValidatorDirective,
     FooterComponent,
     ErrorComponent,
     TopAccessedTestsComponent
+=======
+    TestComponent,
+    ExitAssesmentComponent,
+    InstructionComponent,
+    ScoreAssesmentComponent,
+    SkillpageComponent,
+    SkillmodalComponent,
+    FooterComponent,
+    GraphmodalComponent,
+    ErrorComponent,
+    EditskillmodalComponent,
+    ConfirmationDialogComponent
+>>>>>>> Skills
   ],
 
   imports: [
@@ -107,8 +131,9 @@ PasswordNotEqualValidatorDirective,
     ContributeQuestionService,
     AuthService,
     HttpClientModule,
+    ConfirmationDialogService
   ],
-  entryComponents: [SkillmodalComponent],
+  entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

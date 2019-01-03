@@ -13,13 +13,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
+@NamedQueries({
+	@NamedQuery(name="Topic.fetchTopicsofSkill",query="select distinct t from Topic t "
+			+ "left join fetch t.skill s where s.id=:skillId")
+})
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Topic {
 
@@ -30,17 +38,23 @@ public class Topic {
 
 	@Column(name = "tp_name")
 	private String name;
+	
+	@Column(name = "tp_percentage")
+	private float percentage;
 
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="tp_sk_id")
+	@JsonIgnore
+	@JsonView(Views.Internal.class)
 	private Skill skill;
+	
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(name="topic_question",
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
-	
+	@JsonView(Views.Internal.class)	
 	private List<Question> questions;
 
 	public int getId() {
@@ -73,6 +87,18 @@ public class Topic {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}	
+
+	public float getPercentage() {
+		return percentage;
 	}
 
+	public void setPercentage(float percentage) {
+		this.percentage = percentage;
+	}
+
+	@Override
+	public String toString() {
+		return "Topic [id=" + id + ", name=" + name + "]";
+	}
 }
