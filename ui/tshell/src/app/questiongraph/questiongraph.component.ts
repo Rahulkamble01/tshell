@@ -14,6 +14,7 @@ export class QuestiongraphComponent implements OnInit {
   ];
   chartLabels = [];
   error:any;
+  EmployeeId=this.service.getEmployeeId();
 
   constructor(private totalquestion: TotalQuestionsService,private service : AuthService) { }
   

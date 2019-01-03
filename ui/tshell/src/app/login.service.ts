@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class LoginService {
 
-  url: string = "/tShell/authenticate";
+  url: string = "/tshell-service/authenticate";
 
   constructor(private http: HttpClient) { }
 

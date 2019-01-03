@@ -92,6 +92,7 @@ PasswordNotEqualValidatorDirective,
     FooterComponent,
     ErrorComponent
     
+  
   ],
 
   imports: [
