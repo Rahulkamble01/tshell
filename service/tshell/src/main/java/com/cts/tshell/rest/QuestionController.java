@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.tshell.Search;
 import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Views;
@@ -20,7 +21,7 @@ import com.cts.tshell.service.QuestionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@ControllerAdvice
+//@ControllerAdvice
 @RestController
 @RequestMapping("/question/")
 public class QuestionController {
@@ -37,21 +38,17 @@ public class QuestionController {
 		LOGGER.info("start");
 		LOGGER.debug("Option: {}", option);
 		Question question = questionService.saveOption(option);
+		LOGGER.info("Getting New Question");
+		//Question question = questionService.getQuestion(option.getQuestion().getId());
+		LOGGER.debug("Question: {}", question);
 		ObjectMapper mapper = new ObjectMapper();
 		String questionString = mapper.writerWithView(Views.Public.class).writeValueAsString(question);
-		LOGGER.debug("Question: {}", question);
+		LOGGER.debug("Question String : {}", questionString);
 		LOGGER.info("end");
         return questionString;
 	}
 
-	@PostMapping("/save")
-	public void saveOptionDescription(@RequestBody Option option) {
-		LOGGER.info("Starting Controller");
-		questionService.saveOptionDescription(option);
-		LOGGER.info("Ending Controller");
-
-	}
-
+	
 	@GetMapping("/review/{skillId}")
 	public String getSingleReviewQuestion(@PathVariable int skillId) throws JsonProcessingException {
 		LOGGER.info("START");
@@ -67,14 +64,13 @@ public class QuestionController {
 
 	@GetMapping("/option/delete/{id}")
 	public boolean deleteOptionById(@PathVariable int id) {
-		LOGGER.info("start of deleteOptionById controller");
+		LOGGER.info("START");
 		boolean optionDeleteStatus = false;
-		LOGGER.debug("optionDeleteStatus {}",optionDeleteStatus);
+		LOGGER.debug("Option Delete Status(initial): {}",optionDeleteStatus);
 		optionDeleteStatus = questionService.deleteOption(id);
-		LOGGER.debug("optionDeleteStatus {}",optionDeleteStatus);
-		LOGGER.info("end of deleteOptionById controller");
+		LOGGER.debug("Option Delete Status(final): {}",optionDeleteStatus);
+		LOGGER.info("END");
 		return optionDeleteStatus;
-
 	}
 	
 	@GetMapping("/updatestatus/{questionId}/{status}/{skillId}")
@@ -91,5 +87,49 @@ public class QuestionController {
 		LOGGER.debug("Questions as String : {}", questionList);
 		LOGGER.info("END");
 		return questions;
+	}
+	
+	@PostMapping("/searchedquestionslist")
+	public String getAllQuestions(@RequestBody Search search) throws JsonProcessingException  {
+		LOGGER.info("Start Fetching Questions Based On Keyword .");
+		String searchedQuestion = search.getKeyword();
+		List<Question> allQuestions = questionService.fetchQuestionBasedOnKeyword(searchedQuestion);
+		ObjectMapper mapper = new ObjectMapper();
+		String questions = mapper.writerWithView(Views.Public.class).writeValueAsString(allQuestions);
+		LOGGER.info("End Fetching Questions Based On Keyword .");
+		return questions;
+		
+	}
+	
+	@PostMapping("/save")
+	public boolean saveOptionDescription(@RequestBody Option option) {
+		LOGGER.info("Starting Controller");
+		LOGGER.info("Ending Controller");
+		boolean isOptionEdited = questionService.saveOptionDescription(option);
+		LOGGER.debug("isOptionEdited: {}",isOptionEdited);
+		LOGGER.info("END");
+		return isOptionEdited;
+	}
+	
+	@PostMapping("/update")
+	public String editQuestion(@RequestBody Question question) throws JsonProcessingException {
+		LOGGER.info("START");
+		LOGGER.debug("Question {}", question);
+		Question updatedQuestion = questionService.updateQuestion(question);
+		LOGGER.debug("Updated Question {}", updatedQuestion);
+		ObjectMapper mapper = new ObjectMapper();
+		String uQuestion = mapper.writerWithView(Views.Public.class).writeValueAsString(updatedQuestion);
+		LOGGER.debug("Updated Question as String {}", uQuestion);
+		LOGGER.info("END");
+		return uQuestion;
+	}
+	
+	@GetMapping("/option/updatestatus/{optionId}")
+	public boolean updateOptionStatus(@PathVariable int optionId) {
+		LOGGER.info("START");
+		LOGGER.debug("Option Id {}", optionId);
+		boolean modified = questionService.modifyOptionStatus(optionId);
+		LOGGER.debug("Is Option status modified {}", modified);
+		return modified;
 	}
 }

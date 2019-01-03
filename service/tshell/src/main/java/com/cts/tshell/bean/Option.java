@@ -36,6 +36,7 @@ public class Option {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "op_qu_id")
 	@JsonView(Views.Internal.class)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Question question;
 
 	@Column(name = "op_is_correct")

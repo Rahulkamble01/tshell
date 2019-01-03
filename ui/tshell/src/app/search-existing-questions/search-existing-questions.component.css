@@ -13,6 +13,9 @@ a{
 .baseRow{
     padding-top: 20px;
 }
+.deleteModalTextArea{
+    background-color:white;
+}
 .rejectBtnCmn{
     text-align: center;
 }
@@ -32,7 +35,7 @@ a{
 }
 .lhsMessageCol{
     font-family:cursive;
-    font-size:30px;
+    font-size:38px;
     color:rgb(255, 94, 0);
 }
 .lhsNoteSpan{
@@ -56,9 +59,6 @@ a{
     padding:0;
    width:100%
 } */
-.modal-title{
-    padding-left: 125px;
-}
 .nxtQuestionCol{
     text-align: right;
 }
@@ -132,5 +132,10 @@ a{
 .topicBadge{
     text-transform: capitalize;
 }
+
+
+.whitebackground{
+    background-color: white;
+  }
 
 

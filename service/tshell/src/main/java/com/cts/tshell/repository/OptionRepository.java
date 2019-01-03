@@ -9,4 +9,5 @@ import com.cts.tshell.bean.Option;
 public interface OptionRepository extends JpaRepository<Option, Integer> {
 
 	Option fetchOptionDetailsById(@Param("optionId") int optionId);
+	public Option findById(int optionId);
 }

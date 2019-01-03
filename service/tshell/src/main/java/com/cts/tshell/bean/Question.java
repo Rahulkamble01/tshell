@@ -70,6 +70,7 @@ public class Question {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_reviewed_by_us_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User reviewedUser;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
@@ -167,5 +168,15 @@ public class Question {
 	public void setTopicList(List<Topic> topicList) {
 		this.topicList = topicList;
 	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", question=" + question + ", status=" + status + ", createdDate=" + createdDate
+				+ ", reviewedDate=" + reviewedDate + ", questionDifficultyLevel=" + questionDifficultyLevel
+				+ ", questionAnswerType=" + questionAnswerType + ", createdUser=" + createdUser + ", reviewedUser="
+				+ reviewedUser + ", optionList=" + optionList + ", topicList=" + topicList + "]";
+	}
+	
+	
 
 }

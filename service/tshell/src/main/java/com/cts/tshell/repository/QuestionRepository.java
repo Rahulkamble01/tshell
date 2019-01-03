@@ -1,7 +1,8 @@
 package com.cts.tshell.repository;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,6 @@ import com.cts.tshell.bean.Question;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	Question fetchAllQuestionDetails(@Param("questionId") int questionId);
-	//public Question findById(int questionId);
 	Question fetchQuestionDetails(@Param("questionId") int questionId);
 	/*
 	 * Mentioning the query using @Query annotation and passing the Pageable object
@@ -30,5 +30,9 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 		   "order by q.createdDate asc ")
 	public Page<Question> findReviewQuestion(@Param("skillId") int skillId, Pageable pageable);
 
-	public Question findById(int id);
+	public Question findById(int questionId);
+	
+	@Query(value = "SELECT * FROM question WHERE MATCH (qu_question) AGAINST (? IN NATURAL LANGUAGE MODE) ",
+			nativeQuery = true)
+	public List<Question> fetchQuestionBasedOnKeyword (String searchedQuestion );
 }
