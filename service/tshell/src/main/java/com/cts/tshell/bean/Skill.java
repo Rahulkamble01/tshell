@@ -156,4 +156,10 @@ public class Skill {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		return "Skill [id=" + id + ", name=" + name + "]";
+	}
+	
 }

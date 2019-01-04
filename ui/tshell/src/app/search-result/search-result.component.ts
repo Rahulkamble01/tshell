@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
 import { ForceLink } from 'd3';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 
 declare var abc: any;
@@ -33,9 +34,10 @@ export class SearchResultComponent implements OnInit {
   topics: Array<Topic>;
   userRole: any;
   userLoggedInn: any;
-
+  imageUrl: string = null;
+  fileToUpload: File = null;
   // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService) {
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) {
 
   }
   ngOnInit() {
@@ -65,19 +67,46 @@ export class SearchResultComponent implements OnInit {
   }
 
   toggllingSkill(skill) {
+    let str: string;
     if (skill.active) {
-      if (confirm("do you want to deactivate " + skill.name + " ?")) {
-        return skill.active = false;
-      } else {
-        return;
-      }
+      str = 'Deacitvate';
     } else {
-      if (confirm("do you want to activate " + skill.name + " ?")) {
-        return skill.active = true;
-      } else {
-        return;
-      }
+      str = 'Activate';
     }
+
+    this.confirmationDialogService.confirm(`${str} of "${skill.name}"`, `Do you really want to ${str} Skill ?`)
+      .then((confirmed) => {
+        if (confirmed) {
+          console.log('User confirmed:', confirmed);
+          if (str === 'Activate') {
+            return skill.active = 'active';
+          } else {
+            return skill.active = 'deactive';
+          }
+        } else {
+          console.log('User confirmed:', confirmed);
+          return;
+        }
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+
+
+
+
+    // if (skill.active) {
+    //   if (confirm("do you want to deactivate " + skill.name + " ?")) {
+    //     return skill.active = false;
+    //   } else {
+    //     return;
+    //   }
+    // } else {
+    //   if (confirm("do you want to activate " + skill.name + " ?")) {
+    //     return skill.active = true;
+    //   } else {
+    //     return;
+    //   }
+    // }
   }
 
   editSkillModel(item) {
@@ -116,12 +145,21 @@ export class SearchResultComponent implements OnInit {
     // });
   }
 
+  handleFileInput(file: FileList) {
+    this.fileToUpload = file.item(0);
+
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    };
+    reader.readAsDataURL(this.fileToUpload);
+
+
+
+  }
+
 }
 
-export interface Graph123 {
-  links: any[];
-  nodes: any[];
-}
 
 
 // const tooltip = d3.select("#graphID")

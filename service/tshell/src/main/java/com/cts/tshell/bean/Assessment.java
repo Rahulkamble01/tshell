@@ -25,21 +25,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "assessment")
 @NamedQueries({
-		// @NamedQuery(name="Assessment.findTop5BySkill",query="from Assessment
-		// a "
-		// + "left join fetch a.assessmentQuestions aq "
-		// + "left join fetch a.skill s "
-		// + "left join fetch a.user u "
-		// + "where s.id=:skillId"),
-
 		@NamedQuery(name = "Assessment.findTop5BySkill", query = "select distinct a from Assessment a "
 				+ "join a.skill s " + "join a.user u " + "where s.id=:skillId order by a.score desc")
-
-		// @NamedQuery(name="Assessment.findTop5BySkill",query="select a from
-		// Assessment a "
-		// + "left join fetch a.skill s left join fetch "
-		// + "a.user u left join fetch a.assessmentQuestions "
-		// + "where s.id=:skillId order by a.score desc")
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Assessment {

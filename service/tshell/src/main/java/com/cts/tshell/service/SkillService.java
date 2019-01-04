@@ -1,22 +1,30 @@
 package com.cts.tshell.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cts.tshell.bean.ReferenceSkill;
 import com.cts.tshell.bean.Skill;
+import com.cts.tshell.repository.ReferenceSkillRepository;
 import com.cts.tshell.repository.SkillRepository;
 
 @Service
 public class SkillService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillService.class);
+	@Autowired
 	private SkillRepository skillRepository;
+	
+	@Autowired
+	private ReferenceSkillRepository refernceSkillRepository;
 
 /*
 	public List<Skill> getTop4Skills() {
@@ -29,7 +37,6 @@ public class SkillService {
 		 
 		return topSearchedSkills;*/
 
-
 	@Transactional
 	public List<Skill> getTop4Skills() {
 		LOGGER.info("start ");
@@ -37,10 +44,10 @@ public class SkillService {
 		return topSearchedSkills.getContent();
 	}		
 
-	@org.springframework.transaction.annotation.Transactional
+	@Transactional
 	public List<Skill> getSkills() {
 		LOGGER.info("Starting getSkill() inside SkillRepository");
-		return (List<Skill>) skillRepository.findAll();
+		return skillRepository.findAll();
 	}
 
 	@Transactional
@@ -103,6 +110,16 @@ public class SkillService {
 		return skillCount;
 	}
 
+	public List<ReferenceSkill> getRefernceSkill(int skillId) {
+		LOGGER.info("Fetching Reference Skill Through skillService()");
+		List<ReferenceSkill> result = refernceSkillRepository.findBySkillId(skillId);
+		
+		List<Skill> referenceSkills = new ArrayList<Skill>();
+		for (ReferenceSkill referenceSkill : result) {
+			
+		}
+		return null;
+	}
 }
 
 

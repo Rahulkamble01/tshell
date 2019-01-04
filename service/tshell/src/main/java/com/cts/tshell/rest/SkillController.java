@@ -5,13 +5,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.tshell.bean.ReferenceSkill;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.service.SkillService;
@@ -102,7 +102,7 @@ public class SkillController {
 		return addStatus;
 	}
 
-	@PostMapping("/addskill")
+	@RequestMapping(value = "/addskill", method = RequestMethod.POST)
 	public int addOrUpdateSkill(@RequestBody Skill skill) {
 		LOGGER.info("starting insertnewSkills");
 		String skillName = skill.getName();
@@ -128,7 +128,7 @@ public class SkillController {
 		return addStatus;
 	}
 
-	@GetMapping("/top4searchedskills")
+	@RequestMapping(value = "/top4searchedskills", method = RequestMethod.GET)
 	public List<Skill> getTop4SearchedSkills() {
 		LOGGER.info("start ");
 		List<Skill> top4SearchedSkills = skillService.getTop4Skills();
@@ -136,7 +136,7 @@ public class SkillController {
 		return top4SearchedSkills;
 	}
 
-	@GetMapping("/recentSkillList")
+	@RequestMapping(value = "/recentSkillList", method = RequestMethod.GET)
 	public List<Skill> getRecentSkills() {
 		LOGGER.info("start");
 		List<Skill> skills = skillService.getRecent5Skills();
@@ -144,7 +144,7 @@ public class SkillController {
 		return skills;
 	}
 	
-	@GetMapping("/gettop5tests")
+	@RequestMapping(value = "/gettop5tests", method = RequestMethod.GET)
 	public List<Skill> getTopAccessedtests() {
 		LOGGER.info("start");
 		List<Skill> topAccessedtests = skillService.getTopAccessedtests();
@@ -153,13 +153,23 @@ public class SkillController {
 
 	}
 	
-
-	@GetMapping("/skillcount")
+	@RequestMapping(value = "/skillcount", method = RequestMethod.GET)
 	public long getSkillCount() {
 		LOGGER.info("start");
 		long skillCount = skillService.getSkillCount();
 		LOGGER.debug("Total Skill Count -> {}", skillCount);
 		return skillCount;
+	}
+	
+	@RequestMapping(value = "/referenceskill/{skillId}", method = RequestMethod.GET)
+	public List<ReferenceSkill> getReferenceSkill(@PathVariable("skillId") int skillId){
+		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
+		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", skillId);
+		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);
+		
+		
+		
+		return result;
 	}
 }
 
