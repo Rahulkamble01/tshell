@@ -373,4 +373,9 @@ footer p {
   padding-bottom: 20px;
 }
 
+.validation{
+  color:red;
+  font-size: 12px;
+}
+
 

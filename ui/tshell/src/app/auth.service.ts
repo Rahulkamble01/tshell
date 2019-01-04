@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
+  employeeId : any =123456;
+
   isAdminLoggedIn = false;
   isLearnerLoggedIn = false;
 
@@ -28,6 +30,14 @@ export class AuthService {
   learnerLogout() {
     console.log("Inside learner auth service logout()")
     this.isLearnerLoggedIn = false;
+  }
+
+  getEmployeeId() {
+    return this.employeeId;
+  }
+
+  setEmployeeId(employeeId:any) {
+    this.employeeId = employeeId;
   }
 
 

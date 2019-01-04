@@ -3,7 +3,7 @@ import { Directive, Input } from '@angular/core';
 
 
 @Directive({
-    selector: '[appPasswordNotEqualValidator]',
+    selector: '[appConfirmNotEqualValidator]',
     providers: [{
         provide: NG_VALIDATORS,
         useExisting: PasswordNotEqualValidatorDirective,
@@ -11,9 +11,9 @@ import { Directive, Input } from '@angular/core';
     }]
 })
 export class PasswordNotEqualValidatorDirective implements Validator {
-    @Input() appPasswordNotEqualValidator: string;
+    @Input() appConfirmNotEqualValidator: string;
     validate(control: AbstractControl): { [key: string]: any } | null {
-        const controlToCompare = control.parent.get(this.appPasswordNotEqualValidator);
+        const controlToCompare = control.parent.get(this.appConfirmNotEqualValidator);
         if (controlToCompare && controlToCompare.value !== control.value) {
             return { 'notEqual': true };
         }

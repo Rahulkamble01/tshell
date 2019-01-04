@@ -4,25 +4,32 @@
 .dropdown-item {
     color: rgba(255,255,255,.5);
 }
+
 .dropdown-item:hover {
     color: white;
-    text-decoration: white;
+    /* text-decoration: white; */
     background-color: inherit;
 }
 
 body, html {
     line-height: 1 ; 
 }
+
+
+
 /*  changepassword css */
 
 h3{
     text-align: center;
 }
 
-#success{  
-    padding-top: 20px;
+
+.success{  
+    padding-top: 5px;
     color: green;
+    font-size:25px;
 } 
+
 .modal-body{
     border-radius: 0.5rem;
 }
@@ -36,4 +43,23 @@ h3{
 }
 #exampleModal{
     margin-top: 20vh;
+}
+.customeMessage{
+    color:red;
+}
+
+#change{
+    color:rgba(255,255,255,.5);
+    cursor: pointer
+}
+
+#change:hover {
+    color: white;
+    /* text-decoration: white; */
+    background-color: inherit;
+}
+
+#status{
+    margin-bottom : 10px;
+    font-size: 15px;
 }
