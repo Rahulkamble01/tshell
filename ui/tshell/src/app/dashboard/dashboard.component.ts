@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   userCount:number;
   questionCount:number;
   error:any;
-   testnumber:number = 100000000; 
+   /* testnumber:number = 1000;  */
   constructor(private route: ActivatedRoute, private router: Router,
                private appinfoService: AppinfoService) { }
 
