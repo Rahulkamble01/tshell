@@ -13,6 +13,7 @@ import { CountOfPendingQuestionsService } from '../count-of-pending-questions.se
 
 export class ContributeQuestionComponent implements OnInit {
   skillId:number;
+  skillName:any;
   max=500;
   topicList: any[];
   isChecked: boolean = false;
@@ -36,6 +37,7 @@ export class ContributeQuestionComponent implements OnInit {
 
   ngOnInit() {
     this.skillId=this.skillIdFromService.skillId;
+    this.skillName=this.skillIdFromService.skillName;
     this.contributeQuestionService.getTopics(this.skillId).subscribe(
       data => {
         this.topicList = data;

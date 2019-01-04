@@ -13,7 +13,7 @@ import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.bean.User;
-import com.cts.tshell.repository.OptionsRepository;
+import com.cts.tshell.repository.OptionRepository;
 import com.cts.tshell.repository.QuestionRepository;
 import com.cts.tshell.repository.TopicRepository;
 import com.cts.tshell.repository.UserRepository;
@@ -25,12 +25,12 @@ public class QuestionService {
 
 	private QuestionRepository questionRepository;
 	private TopicRepository topicRepository;
-	private OptionsRepository optionsRepository;
+	private OptionRepository optionRepository;
 	private UserRepository userRepository;
 
 	@Autowired
-	public void setOptionsRepository(OptionsRepository optionsRepository) {
-		this.optionsRepository = optionsRepository;
+	public void setoptionRepository(OptionRepository optionRepository) {
+		this.optionRepository = optionRepository;
 	}
 	@Autowired
 	public void setQuestionRepository(QuestionRepository questionRepository) {
@@ -68,7 +68,7 @@ public class QuestionService {
 			
 			option.setId(0);
 			option.setQuestion(latestQn);
-			optionsRepository.save(option);
+			optionRepository.save(option);
 		}
 
 	}

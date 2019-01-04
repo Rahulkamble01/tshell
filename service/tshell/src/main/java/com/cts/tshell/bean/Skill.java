@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "skill")
 @NamedQueries({
 		@NamedQuery(name = "Skill.findPendingQuestionsCount", query = "select count(*), s.name, s.id from Skill s "
-				+ "join s.topics t " + "join t.questions q " + "where q.status='P' group by s.name "),
+				+ "join s.topics t " + "join t.questions q " + "where q.status='Pending' group by s.name "),
 
 		@NamedQuery(name = "Skill.findSkillNames", query = "select s.name,s.id from Skill s "
 				+ "where s.name LIKE CONCAT('%',:searchSkillName,'%') "),
