@@ -20,7 +20,7 @@
       <span class="answer">Answer:</span>
       <span *ngFor="let option of csvData[i].optionList, let k=index">
         <span class="correctOption" *ngIf="option.answer==true && csvData[i].error==''">
-          Option {{k+1 }}
+          Option {{k+1}}
         </span>
       </span>
       <span class="badge badge-danger" style="float:right">{{csvData[i].error}}</span>
