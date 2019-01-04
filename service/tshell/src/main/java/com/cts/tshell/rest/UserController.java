@@ -1,5 +1,7 @@
 package com.cts.tshell.rest;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.tshell.bean.Role;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.UserService;
@@ -46,6 +49,12 @@ public class UserController {
 		userService.save(user);
 	}
 	
+	@GetMapping("/getRoles")
+		public List<Role> getRoles(){
+		return userService.getRoles();
+		}
+	
+	
 	@PostMapping("/update")
 	public void save(@RequestBody User user){
 		LOGGER.info("start");
@@ -53,5 +62,7 @@ public class UserController {
 		LOGGER.info("end");
 		userService.update(user);
 	}
+	
+	
 
 }

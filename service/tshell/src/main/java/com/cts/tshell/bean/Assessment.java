@@ -43,7 +43,7 @@ public class Assessment {
 	private String type;
 	
 	@Column(name="as_start_time")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd ")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy ")
 	private Date date;
 	
 	@Column(name="as_score")
