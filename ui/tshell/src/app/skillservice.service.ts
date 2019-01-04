@@ -20,6 +20,7 @@ export class SkillserviceService {
   addSkillurl = environment.serviceUrlPrefix + '/skill/addskill';
   deleteTopicUrl = environment.serviceUrlPrefix + '/skill/deleteTopic';
   // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/skill/graph/';
+  keySearchUrl = environment.serviceUrlPrefix + "/skill/getSkillsOnSearch/";
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +39,11 @@ export class SkillserviceService {
   getSkillTopper(id): Observable<any> {
     console.log(this.skillToppersUrl + id);
     return this.http.get(this.skillToppersUrl + id);
+  }
+
+  skillsOnSearch(key): Observable<any> {
+    console.log(this.keySearchUrl + key);
+    return this.http.get(this.keySearchUrl);
   }
 
   // getGraphDataOfSkill(skillName): Observable<any> {

@@ -19,7 +19,6 @@ export class ConfirmationDialogService {
       // { size: dialogSize },
       { centered: true }
     );
-    modalRef.componentInstance.confirmDialoge = true;
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
     modalRef.componentInstance.btnOkText = btnOkText;
@@ -37,10 +36,11 @@ export class ConfirmationDialogService {
       // { size: dialogSize },
       { centered: true }
     );
-    modalRef.componentInstance.confirmDialoge = false;
+    modalRef.componentInstance.confirmDialoge = 2;
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
     modalRef.componentInstance.btnOkText = btnOkText;
+    modalRef.componentInstance.btnCancelText = "Cancel";
     return modalRef.result;
   }
 

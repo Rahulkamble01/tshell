@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild, Input, PlatformRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import * as $ from 'jquery';
-import * as d3 from 'd3';
 import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
 import { AuthService } from '../auth.service';
@@ -13,7 +11,6 @@ import { SkillserviceService } from '../skillservice.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
-import { ForceLink } from 'd3';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 
@@ -22,7 +19,8 @@ declare var abc: any;
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  styleUrls: ['./search-result.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SearchResultComponent implements OnInit {
   name: any;
@@ -44,16 +42,6 @@ export class SearchResultComponent implements OnInit {
     this.skillService.getAll().subscribe(data => {
       this.allSkills = data;
       console.log(this.allSkills);
-      // const data1 = $("#graphID").ready(function () {
-      //   return new Promise((res, rec) => {
-      //     this.w = document.getElementById("graphID").offsetWidth;
-      //     this.h = document.getElementById("graphID").offsetHeight;
-      //   });
-      // });
-      // this.w = data1[0].offsetWidth;
-      // this.h = data1[0].offsetHeight;
-      // console.log(this.w, this.h);
-      // abc(this.w, this.h);
     });
 
     this.userRole = this.authService.getRole();
@@ -89,24 +77,6 @@ export class SearchResultComponent implements OnInit {
         }
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-
-
-
-
-
-    // if (skill.active) {
-    //   if (confirm("do you want to deactivate " + skill.name + " ?")) {
-    //     return skill.active = false;
-    //   } else {
-    //     return;
-    //   }
-    // } else {
-    //   if (confirm("do you want to activate " + skill.name + " ?")) {
-    //     return skill.active = true;
-    //   } else {
-    //     return;
-    //   }
-    // }
   }
 
   editSkillModel(item) {

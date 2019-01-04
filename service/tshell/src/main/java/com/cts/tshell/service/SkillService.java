@@ -123,6 +123,11 @@ public class SkillService {
 //		}
 		return result;
 	}
+
+	public List<Skill> getSkillByKeys(String pressedKeys) {
+		LOGGER.info("----------Start in get count service for dropdown skill name--------");
+		return skillRepository.findSkillNames(pressedKeys);
+	}
 }
 
 

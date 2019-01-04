@@ -50,6 +50,7 @@ import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tes
 import { EditskillmodalComponent } from './editskillmodal/editskillmodal.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog.service';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -103,7 +104,7 @@ import { ConfirmationDialogService } from './confirmation-dialog.service';
         HttpClientModule,
         ChartsModule,
         NgbModule,
-        HttpClientModule
+        CommonModule
     ],
     providers: [
         ContributeQuestionService,

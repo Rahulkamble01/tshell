@@ -12,10 +12,14 @@ export class ConfirmationDialogComponent implements OnInit {
   @Input() message: string;
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
-  @Input() confirmDialoge: boolean;
+  @Input() confirmDialoge;
   constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
+    console.log(this.title, this.confirmDialoge);
+    if (this.confirmDialoge === 2) {
+      this.btnCancelText = 'null';
+    }
   }
 
   public decline() {
