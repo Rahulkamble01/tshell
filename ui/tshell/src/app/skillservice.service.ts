@@ -12,14 +12,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SkillserviceService {
-  getAllSkillUrl = environment.serviceUrlPrefix + '/skills';
-  updateSearchUrl = environment.serviceUrlPrefix + '/updateSkillSearch';
-  skillToppersUrl = environment.serviceUrlPrefix + '/top5list/';
-  updateSkillUrl = environment.serviceUrlPrefix + '/updateSkill';
-  // graphDataUrl = environment.serviceUrlPrefix + '/graph';
-  addSkillurl = environment.serviceUrlPrefix + '/addskill';
-  deleteTopicUrl = environment.serviceUrlPrefix + '/deleteTopic';
-  // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/graph/';
+  getAllSkillUrl = environment.serviceUrlPrefix + '/skill/skills';
+  updateSearchUrl = environment.serviceUrlPrefix + '/skill/updateSkillSearch';
+  skillToppersUrl = environment.serviceUrlPrefix + '/assessment/top5list/';
+  updateSkillUrl = environment.serviceUrlPrefix + '/skill/updateSkill';
+  // graphDataUrl = environment.serviceUrlPrefix + '/skill/graph';
+  addSkillurl = environment.serviceUrlPrefix + '/skill/addskill';
+  deleteTopicUrl = environment.serviceUrlPrefix + '/skill/deleteTopic';
+  // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/skill/graph/';
 
   constructor(private http: HttpClient) { }
 

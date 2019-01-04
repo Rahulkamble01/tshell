@@ -4,17 +4,10 @@
 </div>
 <div class="row " style="margin:0px;padding:10px;margin-bottom:0px;">
   <div>
-<<<<<<< HEAD
     <div *ngIf="recentSkillListLength==0">
       <div>There are no skills added in last 30 days</div>
     </div>
     <div *ngIf="recentSkillListLength>0">
-=======
-    <div *ngIf="recentSkillList.length == 0">
-      <div>There are no skills added in last 30 days</div>
-    </div>
-    <div *ngIf="recentSkillList.length > 0">
->>>>>>> Skills
       <h2 *ngFor="let recentSkill of recentSkillList" style="display:inline-block">
         <a href="/skills/:id" class="badge badge-primary viewskills">{{recentSkill[1]}}</a>
       </h2>

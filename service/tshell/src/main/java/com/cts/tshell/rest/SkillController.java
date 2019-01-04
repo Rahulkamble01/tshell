@@ -18,7 +18,7 @@ import com.cts.tshell.service.SkillService;
 import com.cts.tshell.service.TopicService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/skill")
 public class SkillController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
 	private SkillService skillService;

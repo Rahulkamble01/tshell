@@ -43,7 +43,7 @@ export class EditskillmodalComponent implements OnInit {
       Validators.maxLength(400),
       ]),
     image: new FormControl,
-    createdOn: new FormControl(new Date()),
+    creationDate: new FormControl(new Date()),
     topicName: new FormControl(
       '',
       [
@@ -120,8 +120,8 @@ export class EditskillmodalComponent implements OnInit {
         return value;
       };
     };
-    if (this.addskillform.controls['createdOn'].value == null) {
-      this.addskillform.controls['createdOn'].patchValue(new Date());
+    if (this.addskillform.controls['creationDate'].value == null) {
+      this.addskillform.controls['creationDate'].patchValue(new Date());
     }
 
     this.topics.forEach(element => {

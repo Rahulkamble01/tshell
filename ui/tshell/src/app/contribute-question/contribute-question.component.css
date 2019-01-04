@@ -1,13 +1,15 @@
 .container{
     padding-top:65px;
 }
+.body{
+    background-color: #f3f3f3;
+}
 .card{
     background-color: #fbfbfb;
-    margin-bottom:10px; 
+    margin-top:10px; 
 }
 #optionButton{
-    margin-top: 18px;
-    margin-left: 5px;
+ 
      zoom:1.5;
      color: #3498db;
 }
@@ -15,16 +17,15 @@
     cursor: pointer;
     color: red;
 }
-.checkbox-container {
-    width: 83px;
-    height: 88px;
+label{
+    font-weight: bold;
 }
 
-.checkmark{
-    height: 25px;
-    width:25px;
-  
+
+.p{
+    font-weight: bold;
 }
+
 
   
 #optionText{
@@ -34,11 +35,13 @@
     color: #3498db;
     margin-left: 4px;
 }
-.addOption{
+.addOptionButton{
     margin-right: 3px;
+    zoom: 0.5;
 }
 .addButton{
-    margin-top: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 /* Tabs*/
 #tabs h6.section-title{
@@ -54,7 +57,7 @@
     font-weight: bold;
 }
 #tabs .nav-tabs .nav-link {
-    border: 1px solid transparent;
+    
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
     color:black;
@@ -63,19 +66,34 @@
 a{
     color: #3498db;
 }
-h3{
-    text-align: center;
+.h3{
+    align-content: center;
 }
 .upload{
     margin-top: 50px;
     margin-left: 20px; 
 
 }
-
-  
+.lhsNoteSpan{
+    float: right;
+    color:gray;
+}
+.active{
+    background-color:transparent;
+}
+  .uploadText{
+      margin-top: 10px;
+  }
   @media screen and (max-width: 600px) {
     .uploadText {
       font-size: medium;
     }
   }
+  .fa-trash-alt{
+      cursor: pointer;
+      color:#3498db;
+  }
+  .fa-trash-alt:hover{
+    color: red;
+}
   

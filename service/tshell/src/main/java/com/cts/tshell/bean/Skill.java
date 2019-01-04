@@ -2,7 +2,6 @@ package com.cts.tshell.bean;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,11 +19,16 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name = "skill")
 @NamedQueries({
+		@NamedQuery(name = "Skill.findPendingQuestionsCount", query = "select count(*), s.name, s.id from Skill s "
+				+ "join s.topics t " + "join t.questions q " + "where q.status='P' group by s.name "),
+
+		@NamedQuery(name = "Skill.findSkillNames", query = "select s.name,s.id from Skill s "
+				+ "where s.name LIKE CONCAT('%',:searchSkillName,'%') "),
+
 		@NamedQuery(name = "Skill.fetchRecentSkills", query = "select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-30   order by creationDate desc  "),
 		@NamedQuery(name = "Skill.fetchTopSearchedSkills", query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc") })
-
-@Table(name = "skill")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Skill {
 
@@ -53,31 +57,14 @@ public class Skill {
 
 	@Column(name = "sk_creation_date")
 	@Temporal(TemporalType.DATE)
-	private Date createdOn;
-	
+	private Date creationDate;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
 	private List<Topic> topics;
-
-	public Skill(int id, String name, int searchCount, String active, int testCount, String description, byte[] image,
-			Date createdOn, List<Topic> topics) {
+	
+	public Skill() {
 		super();
-		this.id = id;
-		this.name = name;
-		this.searchCount = searchCount;
-		this.active = active;
-		this.testCount = testCount;
-		this.description = description;
-		this.image = image;
-		this.createdOn = createdOn;
-		this.topics = topics;
-	}
-
-	public Date getCreationDate() {
-		return createdOn;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.createdOn = creationDate;
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -86,6 +73,7 @@ public class Skill {
 
 	public void setId(int id) {
 		this.id = id;
+
 	}
 
 	public String getName() {
@@ -127,7 +115,7 @@ public class Skill {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public byte[] getImage() {
 		return image;
 	}
@@ -144,22 +132,17 @@ public class Skill {
 		this.topics = topics;
 	}
 
-	public Date getCreatedOn() {
-		return createdOn;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public Skill() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", name=" + name + "]";
 	}
-	
+
 }

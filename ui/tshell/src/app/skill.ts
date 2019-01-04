@@ -7,14 +7,14 @@ export class Skill {
     active: string;
     testCount: number;
     description: string;
-    createdOn: Date;
+    creationDate: Date;
     topics: Topic[];
 
-    constructor(name, active, description, topics, createdOn) {
+    constructor(name, active, description, topics, creationDate) {
         this.name = name;
         this.active = active;
         this.description = description;
         this.topics = topics;
-        this.createdOn = createdOn;
+        this.creationDate = creationDate;
     }
 }

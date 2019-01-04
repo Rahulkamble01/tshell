@@ -36,5 +36,4 @@ export class AuthService {
   setRole(role: string) {
     this.role = role;
   }
-
 }

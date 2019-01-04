@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
+
 @NamedQueries({
 	@NamedQuery(name="User.findByEmpId",
 			query=	" select u from User u " + 
@@ -55,7 +56,7 @@ public class User {
 	@Column(name = "us_password")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "us_ur_id")
 	@JsonView(Views.Internal.class)
 	private Role role;
@@ -151,8 +152,6 @@ public class User {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
-	
 
 	public List<Skill> getSkills() {
 		return skills;

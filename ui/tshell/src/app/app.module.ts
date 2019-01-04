@@ -43,6 +43,7 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 import { GraphmodalComponent } from './graphmodal/graphmodal.component';
 import { ErrorComponent } from './error/error.component';
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
@@ -51,63 +52,66 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { ConfirmationDialogService } from './confirmation-dialog.service';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    PasswordMachingValidatorDirective,
-    PasswordNotEqualValidatorDirective,
-    DashboardComponent,
-    MostSearchedSkillsComponent,
-    AssessmenthistoryComponent,
-    SearchSkillComponent,
-    SkillmodalComponent,
-    RecentlyAddedSkillsComponent,
-    LoginComponent,
-    AdminSignupComponent,
-    SignupComponent,
-    ConfirmEqualValidatorDirective,
-    HeaderComponent,
-    ResetPasswordComponent,
-    LearnerHomepageComponent,
-    AdminHomepageComponent,
-    ChangepasswordComponent,
-    UserprofileComponent,
-    ViewlearnerComponent,
-    SearchExistingQuestionsComponent,
-    ContributeQuestionComponent,
-    PreviewQuestionsComponent,
-    CountOfQuestionsToReviewComponent,
-    HomeComponent,
-    SearchResultComponent,
-    QuestiongraphComponent,
-    TopAccessedTestsComponent,
-    ExitAssesmentComponent,
-    InstructionComponent,
-    ScoreAssesmentComponent,
-    SkillpageComponent,
-    FooterComponent,
-    ErrorComponent,
-    GraphmodalComponent,
-    EditskillmodalComponent,
-    ConfirmationDialogComponent
-  ],
 
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ChartsModule,
-    NgbModule
-  ],
-  providers: [
-    ContributeQuestionService,
-    AuthService,
-    HttpClientModule,
-    ConfirmationDialogService
-  ],
-  entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
-  bootstrap: [AppComponent],
+@NgModule({
+    declarations: [
+        AppComponent,
+        PasswordMachingValidatorDirective,
+        PasswordNotEqualValidatorDirective,
+        DashboardComponent,
+        MostSearchedSkillsComponent,
+        AssessmenthistoryComponent,
+        SearchSkillComponent,
+        SkillmodalComponent,
+        RecentlyAddedSkillsComponent,
+        LoginComponent,
+        AdminSignupComponent,
+        SignupComponent,
+        ConfirmEqualValidatorDirective,
+        HeaderComponent,
+        ResetPasswordComponent,
+        LearnerHomepageComponent,
+        AdminHomepageComponent,
+        ChangepasswordComponent,
+        UserprofileComponent,
+        ViewlearnerComponent,
+        SearchExistingQuestionsComponent,
+        ContributeQuestionComponent,
+        PreviewQuestionsComponent,
+        CountOfQuestionsToReviewComponent,
+        HomeComponent,
+        SearchResultComponent,
+        QuestiongraphComponent,
+        ExitAssesmentComponent,
+        InstructionComponent,
+        TopAccessedTestsComponent,
+        ScoreAssesmentComponent,
+        SkillpageComponent,
+        FooterComponent,
+        AddQuestionComponent,
+        ErrorComponent,
+        GraphmodalComponent,
+        EditskillmodalComponent,
+        ConfirmationDialogComponent
+    ],
+
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ChartsModule,
+        NgbModule,
+        HttpClientModule
+    ],
+    providers: [
+        ContributeQuestionService,
+        AuthService,
+        HttpClientModule,
+        ConfirmationDialogService
+    ],
+    entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }
