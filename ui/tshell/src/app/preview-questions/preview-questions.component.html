@@ -1,13 +1,20 @@
 <div class="container">
   <div class="card" *ngFor="let data of csvData ,let i=index">
     <div class="card-header" data-toggle="collapse" [attr.data-target]="'#content'+i+1">
-      {{i+1}}. {{data.question}}
+      <pre>{{i+1}}. {{data.question}}</pre>
     </div>
     <div [id]="'content'+i+1" class="collapse">
       <div class="card-body">
         <div *ngFor="let option of csvData[i].optionList, let j=index">
           <div *ngIf="option.description!=''">
-            <div><span class="option">{{j+1}}.</span><span> {{option.description}}</span> </div>
+            <div>
+              <pre><span class="option">{{j+1}}. </span>
+                <span>
+                {{option.description}}
+              </span>
+            </pre>
+              <span class="badge badge-danger">Length exceeds 250</span>
+            </div>
           </div>
         </div>
       </div>
@@ -15,7 +22,7 @@
         <span class="answer">Answer:</span>
         <span *ngFor="let option of csvData[i].optionList, let k=index">
           <span class="correctOption" *ngIf="option.answer==true">
-            Option {{k+1 }}
+            Option {{k+1}}
           </span>
         </span>
       </div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { environment } from './environment';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -11,9 +13,9 @@ const httpOptions = {
 })
 export class ContributeQuestionService {
   csvData: any;
-  uploadUrl: string = '/tShell/question/upload';
-  addQuestionUrl: string = '/tShell/question/';
-  submitQuestionsUrl: string = '/tShell/question/submitforreview';
+  uploadUrl: string = environment.serviceUrlPrefix + '/question/upload';
+  addQuestionUrl: string = environment.serviceUrlPrefix + '/question/';
+  submitQuestionsUrl: string = environment.serviceUrlPrefix + '/question/submitforreview';
 
   constructor(private http: HttpClient) {
     this.http = http;
