@@ -28,6 +28,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 
@@ -59,8 +61,8 @@ public class User {
 	@Column(name = "us_password")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "us_ur_id")	
 	private Role role;
 
 	@Min(value = 1, message = "Employee ID must be at least 6 digits")

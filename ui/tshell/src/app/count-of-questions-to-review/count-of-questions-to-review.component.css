@@ -18,8 +18,8 @@
 }
 .fa-plus-circle:hover{
     
-    transform:rotate(360deg);
-    -ms-transform:rotate(360deg);
-    -webkit-transform:rotate(360deg);
+    transform:rotate(180eg);
+    -ms-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
 }
 /*new cards9*/

@@ -25,6 +25,7 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
 
@@ -56,12 +57,14 @@ const routes: Routes = [
   { path: "skills/:id", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent },
+  {path:"addQuestion",component:AddQuestionComponent},
   { path: "graph",component:QuestiongraphComponent},
   { path: "top5Tests", component: TopAccessedTestsComponent }
 ];
 
 
 @NgModule({
+
   imports: [RouterModule.forRoot(routes ,{useHash: true})],
   exports: [RouterModule]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TotalQuestionsService } from '../totalQuestions.service';
+import { TotalQuestionsService } from '../totalquestions.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class QuestiongraphComponent implements OnInit {
   ];
   chartLabels = [];
   error:any;
-  EmployeeId=this.service.getEmployeeId();
+  
 
   constructor(private totalquestion: TotalQuestionsService,private service : AuthService) { }
   

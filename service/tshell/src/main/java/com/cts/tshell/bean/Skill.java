@@ -1,5 +1,6 @@
 package com.cts.tshell.bean;
 
+import java.util.Set;
 import java.sql.Date;
 import java.util.List;
 
@@ -27,11 +28,7 @@ query="select sk.id, sk.name from Skill sk where creationDate >=CURRENT_DATE()-3
 })
 
 @Table(name = "skill")
-
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-
-
-
 public class Skill {
 
 	@Id
@@ -133,6 +130,7 @@ public class Skill {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public byte[] getImage() {
 		return image;
 	}
