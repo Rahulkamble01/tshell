@@ -46,6 +46,7 @@ import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-
 import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
+import { NumberFormatterPipe } from './numberFormatterPipe';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ PasswordNotEqualValidatorDirective,
     SkillmodalComponent,
     FooterComponent,
     ErrorComponent,
-    TopAccessedTestsComponent
+    TopAccessedTestsComponent,
+    NumberFormatterPipe
   ],
 
   imports: [
@@ -108,6 +110,7 @@ PasswordNotEqualValidatorDirective,
     AuthService,
     HttpClientModule,
   ],
+  exports:[NumberFormatterPipe],
   entryComponents: [SkillmodalComponent],
   bootstrap: [AppComponent],
 })

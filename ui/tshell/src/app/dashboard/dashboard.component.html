@@ -53,7 +53,7 @@
                         <div class="card card-app-summary">
                                 <i class="fa fa-question-circle text-center " style="padding-top:20px;color: #e61111; font-size: 26px"></i>
                                 <div *ngIf="!error">
-                                        <div class=" text-center number">{{questionCount | number}}</div>
+                                        <div class=" text-center number">{{testnumber | numberFormatter}}</div>
                                 </div>
                                 <div *ngIf="error">
                                         <div class="error-padding-top">
