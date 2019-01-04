@@ -81,7 +81,7 @@ public class Skill {
 	}
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
-	private Set<Topic> topics;
+	private List<Topic> topics;
 
 	public int getId() {
 		return id;
@@ -139,11 +139,11 @@ public class Skill {
 		this.image = image;
 	}
 
-	public Set<Topic> getTopics() {
+	public List<Topic> getTopics() {
 		return topics;
 	}
 
-	public void setTopics(Set<Topic> topics) {
+	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
 

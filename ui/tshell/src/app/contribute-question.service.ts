@@ -13,8 +13,8 @@ const httpOptions={
 
 export class ContributeQuestionService {
 
-  url: string=environment.serviceUrlPrefix+ "/rest/addQuestion";
-  topicsUrl:string=environment.serviceUrlPrefix+"/rest/getTopics/";
+  url: string=environment.serviceUrlPrefix+ "/question/addQuestion";
+  topicsUrl:string=environment.serviceUrlPrefix+"/question/getTopics/";
 
   constructor(private http: HttpClient) {
     this.http = http;
