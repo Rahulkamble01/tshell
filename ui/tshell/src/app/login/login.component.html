@@ -1,12 +1,11 @@
 <div class="container-fluid">
-       <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
-        <div data-dismiss="alert">Invalid Name or Password!!!</div>
-    </div> 
+  
 
 
   <div class="row">
-    <div class="col-lg-8">
-      <br><br><h1 class="log">Test your skills with tShell...</h1>
+    <div class="col-lg-7">
+      <br><br>
+      <h1 class="log">Test your skills with tShell...</h1>
     </div>
     <div class="col-lg-4 col-sm-12">
 
@@ -17,8 +16,20 @@
             <div class="card-title" id="card1">Login</div>
 
           </div>
-          <div class="card-block" id="card2">
+          <div class="card-block" id="card2" >
             <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
+              <div *ngIf="!success">
+              <div class="col-12">
+                  <div class="alert alert-danger">
+                    Invalid Employee Id or Password!
+                  </div>
+              </div>
+              </div>
+            <div *ngIf="error">
+              <div>
+              <app-error></app-error>
+              </div>
+            </div>
             <form [formGroup]="form">
               <div class="form-group">
                 <div class="col-lg-12">
@@ -27,7 +38,7 @@
                 <div *ngIf="form.get('employeeId').touched && form.get('employeeId').invalid">
                   <div *ngIf="form.get('employeeId').errors.required" class="danger" id="card8">
                     Employee ID is required</div>
-
+                    <div *ngIf="form.get('employeeId').errors.pattern" class="danger" id="card8">Employee ID should be digits.</div>
                 </div>
               </div>
               <div class="form-group">
@@ -42,12 +53,14 @@
               </div>
               <div class="form-group">
 
-                <div class="col-lg-12"><button id="btn-login" class="btn btn-ts-primary" id="card7"
-                (click)="check(employeeId.value,password.value)"> Login</button>
+                <div class="col-lg-12"><button id="btn-login" class="btn btn-ts-primary" id="card7" [disabled]="!form.valid" (click)="check(employeeId.value, password.value)"> Login</button>
 
                 </div>
-                <div style="float: right; font-size: 100%;" class="btn forgotPassword" data-toggle="modal" data-target="#forgotModal">Forgot password?
-                </div>
+               <!--  <div style="float: right; font-size: 100%;" class="btn forgotPassword" data-toggle="modal" data-target="#forgotModal">Forgot password?
+                </div> -->
+                <div style="float: right;padding-right: 12px;cursor: pointer;" id="card3" data-toggle="modal" data-target="#forgotModal">
+                    <a style="color:#007bff">Forgot password?</a>&nbsp;
+              </div>
                 <!--  modal for forgot password -->
                 <div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -113,7 +126,12 @@
         </div>
       </div>
     </div>
-
+    <div class="col-lg-1 col-sm-12"></div>
 
   </div>
+
 </div>
+
+
+
+

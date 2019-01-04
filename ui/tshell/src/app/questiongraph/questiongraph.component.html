@@ -1,14 +1,27 @@
 
-                                <div class="card card2" > 
-                                        <div class="h3  d-flex justify-content-center "  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Total number of question contributed</div>
-                                    <canvas
-                                    
-                                        baseChart
-                                        [chartType]="'radar'"
-                                        [datasets]="chartData"
-                                        [labels]="chartLabels" 
-                                        [legend]="false"
-                                        [colors]="BarColors" 
-                                        (chartClick)="onChartClick($event)"  >
-                                    </canvas>
-                                </div>
+
+<div class="card card-chart"  > 
+    <div class="h3  d-flex justify-content-center">Questions Contributed</div>
+    <div *ngIf="!error">
+        <div *ngIf="chartLabels!=0" class="full">
+            <canvas
+                baseChart
+                [chartType]="'pie'"
+                [datasets]="chartData"
+                [labels]="chartLabels" 
+                [legend]="true"
+                [colors]="BarColors">
+            
+            </canvas>
+        </div>
+        <div  *ngIf="chartLabels==0" class="no-data alert alert-light">
+            You have not contributed any question
+         </div>
+    </div>
+
+    <div *ngIf="error">
+        <div class="error-padding-top">
+            <app-error></app-error>
+        </div>
+    </div> 
+</div>

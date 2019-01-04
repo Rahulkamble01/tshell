@@ -1,84 +1,22 @@
-<div class="row "  style="margin:3px; padding:10px;margin-bottom:0px;">
-    <div class="h3 "  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align: center">Recently Added Skills</div>
+<div class="row " style="margin:3px; padding:10px;margin-bottom:0px;">
+  <div class="h3 " style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-align: center">Recently
+    Added Skills</div>
+</div>
+<div class="row " style="margin:0px;padding:10px;margin-bottom:0px;">
+  <div>
+    <div *ngIf="recentSkillListLength==0">
+      <div>There are no skills added in last 30 days</div>
     </div>
-        <div class="row "  style="margin-top:0px;">
-            
-            <!-- <section class="section_0" style="margin-bottom: 0px;"> -->
-          <div class="col-lg-2 col-md-4">
-               
-                <div class="card card3">
-                        <!-- <div class="card-body"> -->
-                             
-                          <h1 class=" text-center my-auto" style=" color: rgb(1, 191, 248); ">JAVA</h1>
-                         
-                          
-                        <!-- </div> -->
-                 </div>
-    
-          </div>
-          <div class="col-lg-2  col-md-4">
-                    <div class="card card3">
-                                    <!-- <div class="card-body"> -->
-                                         
-                                      <h1 class=" text-center my-auto" style=" color: rgb(1, 191, 248); ">JAVA</h1>
-                                     
-                                      
-                                    <!-- </div> -->
-                             </div>
-              </div>
-              <div class="col-lg-2  col-md-4">
-                            <div class="card card3">
-                                            <!-- <div class="card-body"> -->
-                                                 
-                                              <h1 class=" text-center my-auto" style=" color: rgb(1, 191, 248); ">JAVA</h1>
-                                             
-                                              
-                                            <!-- </div> -->
-                                     </div>
-                  </div>
-                  <div class="col-lg-2  col-md-4">
-                            <div class="card card3">
-                                            <!-- <div class="card-body"> -->
-                                                 
-                                              <h1 class=" text-center my-auto" style=" color: rgb(1, 191, 248); ">JAVA</h1>
-                                             
-                                              
-                                            <!-- </div> -->
-                                     </div>
-                      </div>
-                      <div class="col-lg-2  col-md-4">
-                                    <div class="card card3">
-                                                    <!-- <div class="card-body"> -->
-                                                         
-                                                      <h1 class=" text-center my-auto" style=" color: rgb(1, 191, 248); ">JAVA</h1>
-                                                     
-                                                      
-                                                    <!-- </div> -->
-                                             </div>
-                          </div>
-        <!-- </section> -->
-        
+    <div *ngIf="recentSkillListLength>0">
+      <h2 *ngFor="let recentSkill of recentSkillList" style="display:inline-block">
+        <a href="/skills/:id" class="badge badge-primary viewskills">{{recentSkill[1]}}</a>
+      </h2>
+    </div>
+    <div *ngIf="error">
+        <div class="error-padding-top">
+            <app-error></app-error>
         </div>
-        
-    
-    
-    <!-- ****************************************************** -->
-    
-    
-    
-    
-    
-    
-    <br>
-    
-    
-    <!-- ************************************************* -->
-    
-    
-    
-    
-    
-    
-    
-    <!--card from praksah-->
-    
+    </div> 
+
+  </div>
+</div>
