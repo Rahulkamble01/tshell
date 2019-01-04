@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Topic } from '../topic';
@@ -8,8 +8,8 @@ import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
 import { AuthService } from '../auth.service';
 import { Skill } from '../skill';
 import { SkillserviceService } from '../skillservice.service';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, merge, filter } from 'rxjs/operators';
 import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
@@ -34,15 +34,18 @@ export class SearchResultComponent implements OnInit {
   userLoggedInn: any;
   imageUrl: string = null;
   fileToUpload: File = null;
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
   // tslint:disable-next-line:max-line-length
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) {
 
   }
   ngOnInit() {
-    this.skillService.getAll().subscribe(data => {
-      this.allSkills = data;
-      console.log(this.allSkills);
-    });
+    // this.skillService.getAll().subscribe(data => {
+    //   this.allSkills = data;
+    //   console.log(this.allSkills);
+    // });
 
     this.userRole = this.authService.getRole();
     if (this.userRole !== undefined || this.userRole !== 'Learner') {
@@ -91,13 +94,30 @@ export class SearchResultComponent implements OnInit {
 
   formatter = (x: { name: string }) => x.name;
   search = (text$: Observable<string>) => text$.pipe(
-    debounceTime(100),
+    debounceTime(200),
     distinctUntilChanged(),
-    map(term => term === '' ? []
-      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
-    ),
+    merge(this.focus$),
+    merge(this.click$.pipe(filter(() => !this.instance.isPopupOpen()))),
+    map(term => (term === '' ? [] : this.keyPressing(this.model).filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()))
+      // : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+    ))
+    // map(term => term === '' ? []
+    //   : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
+    // ),
     // map(term => term === '' ? [])
+
   )
+  keyPressing(model) {
+    console.log(model);
+    let allSkills1: Skill[] = [];
+    this.skillService.getAll().subscribe(data => {
+      allSkills1 = data;
+      console.log(data);
+    });
+    console.log(allSkills1);
+    return allSkills1;
+  }
+
 
 
 

@@ -10,8 +10,8 @@
           <ng-template #rt let-r="result" let-t="term">
             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
           </ng-template>
-          <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
-            placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" />
+          <input id="typeahead-template" type="text" class="form-control" #instance="ngbTypeahead" [(ngModel)]="model" [ngbTypeahead]="search"
+            placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" (focus)="focus$.next($event.target.value)"/>
         </div>
       </div>
       <ng-container *ngIf="skills.length != 0; else searchNotFoundTemplate">
