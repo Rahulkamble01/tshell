@@ -2,6 +2,7 @@ package com.cts.tshell.bean;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "question")
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 		@NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
 				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
 				+ " left join fetch q.createdUser " + "where q.id=:questionId"),
-
+		
 		@NamedQuery(name = "Question.fetchQuestionDetails", query = "select distinct q from Question q "
 				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
 				+ " left join fetch q.createdUser " + "left join fetch q.optionList " + "where q.id=:questionId"),
@@ -82,7 +82,7 @@ public class Question {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "topic_question", joinColumns = { @JoinColumn(name = "tq_qu_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "tq_tp_id") })
-	private List<Topic> topicList;
+	private Set<Topic> topicSet;
 
 	public int getId() {
 		return id;
@@ -164,12 +164,12 @@ public class Question {
 		this.optionList = optionList;
 	}
 
-	public List<Topic> getTopicList() {
-		return topicList;
+	public Set<Topic> getTopicList() {
+		return topicSet;
 	}
 
-	public void setTopicList(List<Topic> topicList) {
-		this.topicList = topicList;
+	public void setTopicList(Set<Topic> topicSet) {
+		this.topicSet = topicSet;
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class Question {
 		return "Question [id=" + id + ", question=" + question + ", status=" + status + ", createdDate=" + createdDate
 				+ ", reviewedDate=" + reviewedDate + ", questionDifficultyLevel=" + questionDifficultyLevel
 				+ ", questionAnswerType=" + questionAnswerType + ", createdUser=" + createdUser + ", reviewedUser="
-				+ reviewedUser + ", optionList=" + optionList + ", topicList=" + topicList + "]";
+				+ reviewedUser + ", optionList=" + optionList + ",topicSet="+ topicSet +"]";
 	}
 	
 	

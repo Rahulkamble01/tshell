@@ -24,7 +24,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 		   "left join q.questionDifficultyLevel "+
 		   "left join q.questionAnswerType " +
 		   "left join q.optionList " +
-		   "left join q.topicList t " +
+		   "left join q.topicSet t " +
 		   "where q.status ='Pending' " +
 		   "and t.skill.id = :skillId " + 
 		   "order by q.createdDate asc ")
