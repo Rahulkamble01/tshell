@@ -8,7 +8,7 @@ export class Question {
     status: string;
     level: QuestionDifficultyLevel;
     answerType: QuestionAnswerType;
-    options: Option[];
+    optionList: Option[];
     topicList: Topic[];
     answered: boolean;
 
@@ -19,9 +19,9 @@ export class Question {
         this.status = data.status;
         this.level = new QuestionDifficultyLevel(data.questionDifficultyLevel);
         this.answerType = new QuestionAnswerType(data.questionAnswerType);
-        this.options = [];
-        data.options.forEach(o => {
-            this.options.push(new Option(o, this.answerType.type));
+        this.optionList = [];
+        data.optionList.forEach(o => {
+            this.optionList.push(new Option(o, this.answerType.type));
         });
         this.topicList = [];
         data.topicList.forEach(t => {

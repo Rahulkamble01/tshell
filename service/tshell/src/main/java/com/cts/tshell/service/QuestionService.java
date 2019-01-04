@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
@@ -30,6 +31,11 @@ public class QuestionService {
 
 	public List<Question> getQuestionById(int questionId) {
 		List<Question> questionList = questionRepository.fetchQuestionById(questionId);
+		for(Question question : questionList){
+			for(Option option : question.getOptionList()){
+				option.setAnswer(false);
+			}
+		}
 		return questionList;
 		// System.out.println(questionList.size()); * for (Question question :
 		// questionList) { for (Topic topic : question.getTopicList()) {

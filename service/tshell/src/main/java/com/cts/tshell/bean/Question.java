@@ -1,5 +1,6 @@
 package com.cts.tshell.bean;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,9 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -31,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 				query = "select distinct q from Question q " +
 						"left join fetch q.questionDifficultyLevel t " + 
 						"left join fetch q.questionAnswerType t " + 
-						"left join fetch q.options t " + 
+						"left join fetch q.optionList t " + 
 						"left join fetch q.topicList t " + 
 						"where q.status ='Approved' " + 
 						"and q.id = :questionId "+ 
@@ -67,7 +66,7 @@ public class Question {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Set<Option> options;
+	private List<Option> optionList;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable( name = "topic_question", 
@@ -123,12 +122,12 @@ public class Question {
 		this.questionAnswerType = questionAnswerType;
 	}
 
-	public Set<Option> getOptions() {
-		return options;
+	public List<Option> getOptionList() {
+		return optionList;
 	}
 
-	public void setOptions(Set<Option> options) {
-		this.options = options;
+	public void setOptionList(List<Option> optionList) {
+		this.optionList = optionList;
 	}
 
 	public Set<Topic> getTopicList() {

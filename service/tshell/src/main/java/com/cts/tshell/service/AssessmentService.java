@@ -86,7 +86,7 @@ public class AssessmentService {
 
 			LOGGER.info("Starting AssessmentQuestionOption ");
 
-			for (Option option : question.getQuestion().getOptions()) {
+			for (Option option : question.getQuestion().getOptionList()) {
 				AssessmentQuestionOption opt = new AssessmentQuestionOption();
 				opt.setAssessmentQuestion(question);
 				opt.setAssessmentOption(option);
@@ -100,7 +100,7 @@ public class AssessmentService {
 			AssessmentQuestion question = assessmentQuestionRepository.findAssessmentQuestionById(assessmentQuestionId);
 			question.setQuestion(assessmentQuestion.getQuestion());
 
-			for (Option option : question.getQuestion().getOptions()) {
+			for (Option option : question.getQuestion().getOptionList()) {
 				int assessmentQuestionOptionId = assessmentQuestionOptionRepository
 						.fetchAssesmentQuestionOptionId(question.getId(), option.getId());
 				System.out.println("AssessmentQOption Id : " + assessmentQuestionOptionId);

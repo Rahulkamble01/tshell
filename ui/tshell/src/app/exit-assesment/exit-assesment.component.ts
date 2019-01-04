@@ -33,7 +33,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   topics: any = [];
   questions: any = [];
 
-  options: any = [];
+  optionList: any = [];
   answerStatus: any = [];
   mode = 'quiz';
   quizName: string;
@@ -108,8 +108,19 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
 
 
   loadQuestions(json, index: number) {
-    this.questionSet.splice(this.pager.index, 1, json);
+    // this.questionSet.splice(this.pager.index, 1, json);
     this.quiz = new Quiz(json, index);
+    // console.log(this.questionSet);
+    // tslint:disable-next-line:max-line-length
+    // if (this.questionSet.length != 0) {
+    if (this.questionSet[this.questionSet.indexOf(this.questionSet[this.pager.index])] == json) {
+      console.log('inside if');
+      this.questionSet[this.questionSet.indexOf(this.questionSet[this.pager.index][0])] = json;
+    } else {
+      console.log('inside else');
+      this.questionSet.splice(this.pager.index, 0, json);
+      console.log(this.questionSet[this.pager.index][0].id);
+    }
     console.log(this.questionSet);
   }
   // Without Service
@@ -153,7 +164,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     console.log(option);
     // AnswerType == 1 means radio button  and only one option is true
     if (question.answerType.id === 1) {
-      question.options.forEach((x) => {
+      question.optionList.forEach((x) => {
         if (x.id == option.id) {
           x.response = true;
           console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
@@ -165,7 +176,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     }
     // AnswerType == 2 means checkbox  button  and only multiple option are true
     if (question.answerType.id === 2) {
-      question.options.forEach((x) => {
+      question.optionList.forEach((x) => {
         if (x.id == option.id) {
           if (x.counter % 2 == 0) {
             // When user checks counter = even number and marked as Checked
@@ -198,12 +209,16 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     this.qId = question.id;
   }
   isAnswered(questId, index) {
+    // console.log(this.answerStatus.find(this.pager.index));
+
+
     if (this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] == this.pager.index + 1 && index == this.pager.index) {
       return 'Answered';
     } else {
       return 'Not Answered';
-      // return this.temp.options.find(x => x.response) ? 'Answered' : 'Not Answered';
+      // return this.temp.optionList.find(x => x.response) ? 'Answered' : 'Not Answered';
     }
+
   }
 
 
@@ -226,7 +241,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   saveResponse() {
     console.log(this.temp.length);
     if (this.temp.length !== 0) {
-      this.temp.options.forEach(o => {
+      this.temp.optionList.forEach(o => {
         this.assessmentOptions.push({
           id: o.id,
           description: o.description,
@@ -249,13 +264,13 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   }
   /*
   isAnswered(question) {
-    this.AnsweredStatus = question.options.find(x => x.response) ? 'Answered' : 'Not Answered';
+    this.AnsweredStatus = question.optionList.find(x => x.response) ? 'Answered' : 'Not Answered';
     this.qId = question.id;
 
   };*/
 
   isCorrect(question: Question) {
-    return question.options.every(x => x.response === x.answer) ? 'correct' : 'wrong';
+    return question.optionList.every(x => x.response === x.answer) ? 'correct' : 'wrong';
   }
 
   onSubmit() {

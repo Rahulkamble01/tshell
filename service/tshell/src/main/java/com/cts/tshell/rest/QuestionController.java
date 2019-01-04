@@ -30,7 +30,7 @@ public class QuestionController {
 	
 
 	@GetMapping("/questionId/{questionId}")
-	public String fetchAllQuestion(@PathVariable int questionId) throws JsonProcessingException {
+	public String fetchQuestionById(@PathVariable int questionId) throws JsonProcessingException {
 		LOGGER.info("START : getAllQuestion()  of QuestionController");
 		LOGGER.debug("Question Id {}", questionId);
 		
