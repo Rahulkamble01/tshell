@@ -107,7 +107,7 @@ public class Question {
 			empty = false;
 		}
 
-		if (getQuestion().length() > 100) {
+		if (getQuestion().length() > 500) {
 			lengthExceeded = true;
 		} else {
 			lengthExceeded = false;
