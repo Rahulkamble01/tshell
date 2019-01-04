@@ -66,10 +66,12 @@ public class AssessmentController {
 
 	}
 	
-	@GetMapping("/topicscore/{assessmentId}")
+	@GetMapping("/topicwisescore/{assessmentId}")
 	public List<TopicWiseScore> getTopicwiseScore(@PathVariable int assessmentId){
-		 List<TopicWiseScore> assessment = assessmentService.getTopicWiseScore(assessmentId);
-		 assessment.toArray();
-		 return assessment;
+		 LOGGER.info("Start : getTopicWiseScore() of AssessmentController");
+		 LOGGER.debug("Assessment Id : " , assessmentId);
+		 List<TopicWiseScore> topicWiseScore = assessmentService.getTopicWiseScore(assessmentId);
+		 LOGGER.info("End : getTopicWiseScore() of AssessmentController");
+		 return topicWiseScore;
 	}
 }

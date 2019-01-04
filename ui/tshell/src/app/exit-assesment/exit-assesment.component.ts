@@ -34,7 +34,7 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   questions: any = [];
 
   options: any = [];
-
+  answerStatus: any = [];
   mode = 'quiz';
   quizName: string;
   config: QuizConfig = {
@@ -89,8 +89,6 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     this.assesmentService.startAssessment(this.startAssesmentJson).subscribe(d => {
       this.assesmentDetails = d;
       console.log(this.assesmentDetails);
-      //  this.loadQuiz(this.questionSet);
-
       this.assesmentService.getQuestionId(1).subscribe(data => {
         this.questionIds = data;
         console.log(this.questionIds);
@@ -106,18 +104,13 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
       });
 
     });
-
-
-
-    // tslint:disable-next-line:max-line-length
-    // this.quizes = this.quizService.getAll();    // this.quizName = this.quizes[0].id;    // this.loadQuiz(this.quizName);  // this.loadQuiz(this.json);
-
   }
 
 
   loadQuestions(json, index: number) {
-    this.questionSet.splice(index, 0, json);
+    this.questionSet.splice(this.pager.index, 1, json);
     this.quiz = new Quiz(json, index);
+    console.log(this.questionSet);
   }
   // Without Service
   loadQuiz() {
@@ -185,23 +178,30 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
           }
           console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
         }
-        //  else {
-        //   x.response = false;
-        //   console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
-        // }
+
       });
     }
 
+    if (this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] == this.pager.index + 1) {
+      console.log('inside if');
+      this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] = (this.pager.index + 1);
+    } else {
+      console.log('inside else');
+      this.answerStatus.splice(this.pager.index, 0, (this.pager.index + 1));
+    }
+    console.log(this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)]);
+    console.log(this.answerStatus);
     if (this.config.autoMove) {
       this.goTo(this.pager.index + 1);
     }
     this.temp = question;
     this.qId = question.id;
-    // this.isAnswered(question);
-    // this.isAnsweredStatus();
   }
-  isAnswered(questId) {
-    if (questId == this.qId) {
+  isAnswered(questId, index) {
+    if (this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] == this.pager.index + 1 && index == this.pager.index) {
+      return 'Answered';
+    } else {
+      return 'Not Answered';
       // return this.temp.options.find(x => x.response) ? 'Answered' : 'Not Answered';
     }
   }

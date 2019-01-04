@@ -13,7 +13,7 @@ export class InstructionComponent implements OnInit {
   taken: any;
   len: any;
   samplearray: any = [];
-  // tslint:disable-next-line:max-line-length
+    // tslint:disable-next-line:max-line-length
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer2, private service: ExitAssesmentService) { }

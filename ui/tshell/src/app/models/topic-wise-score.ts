@@ -3,6 +3,7 @@ export class TopicWiseScore {
     topicName: string;
     weightage: number;
     totalScore: number;
+    outof: number;
 
     constructor(data: any) {
         data = data || {};

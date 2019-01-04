@@ -48,13 +48,4 @@ public class QuestionController {
 		return questionService.fetchQuestionsID(skillId);
 	}
 
-	/*@GetMapping("/topic")
-	public void sav(){
-		
-		System.out.println(questionService.getTopicListandWeightage());
-		for(Topic topic : questionService.getTopicListandWeightage()){
-			int weightage = topic.getWeightage();
-			System.out.println(weightage);
-		}
-	}*/
 }

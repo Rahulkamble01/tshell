@@ -63,7 +63,6 @@ public class AssessmentService {
 		LOGGER.debug(" Latest Inserted Id: " + assessment.getId());
 		LOGGER.info("End : START : startAssesment() of AssessmentController");
 		LOGGER.info("End : startAssesment() Service  of AssessmentService");
-		// return assessmentRepository.findAssessmentById(assessment.getId());
 		return "{\"id\":" + assessment.getId() + ",\"skillName\":\"" + assessment.getSkill().getName() + "\"" + "}";
 	}
 
@@ -77,35 +76,33 @@ public class AssessmentService {
 		int[] assmentQuestionId = assessmentQuestionRepository.fetchAssesmentQuestionId(assessmentId, questionId);
 
 		if (assmentQuestionId.length == 0) {
-			AssessmentQuestion a = new AssessmentQuestion();
-			a.setQuestion(assessmentQuestion.getQuestion());
-			a.setAssessmentQuestionOption(assessmentQuestion.getAssessmentQuestionOption());
+			AssessmentQuestion question = new AssessmentQuestion();
+			question.setQuestion(assessmentQuestion.getQuestion());
+			question.setAssessmentQuestionOption(assessmentQuestion.getAssessmentQuestionOption());
 			Assessment as = assessmentRepository.findAssessmentById(assessmentQuestion.getAssessment().getId());
-			a.setAssessment(as);
-			a.setCorrect(assessmentQuestion.isCorrect());
-			assessmentQuestionRepository.save(a);
+			question.setAssessment(as);
+			question.setCorrect(assessmentQuestion.isCorrect());
+			assessmentQuestionRepository.save(question);
 
-			System.out.println("Starting AssessmentQuestionOption ");
+			LOGGER.info("Starting AssessmentQuestionOption ");
 
-			for (Option option : a.getQuestion().getOptions()) {
+			for (Option option : question.getQuestion().getOptions()) {
 				AssessmentQuestionOption opt = new AssessmentQuestionOption();
-				opt.setAssessmentQuestion(a);
+				opt.setAssessmentQuestion(question);
 				opt.setAssessmentOption(option);
-				System.out.println(option.isResponse());
 				opt.setSelected(option.isResponse());
-				System.out.println("Starting save ");
+				LOGGER.info("Starting saving of Assessment Question's Option ");
 				assessmentQuestionOptionRepository.save(opt);
 			}
 
 		} else {
-			System.out.println("Inside else loop");
 			int assessmentQuestionId = assmentQuestionId[0];
-			AssessmentQuestion a = assessmentQuestionRepository.findAssessmentQuestionById(assessmentQuestionId);
-			a.setQuestion(assessmentQuestion.getQuestion());
+			AssessmentQuestion question = assessmentQuestionRepository.findAssessmentQuestionById(assessmentQuestionId);
+			question.setQuestion(assessmentQuestion.getQuestion());
 
-			for (Option option : a.getQuestion().getOptions()) {
+			for (Option option : question.getQuestion().getOptions()) {
 				int assessmentQuestionOptionId = assessmentQuestionOptionRepository
-						.fetchAssesmentQuestionOptionId(a.getId(), option.getId());
+						.fetchAssesmentQuestionOptionId(question.getId(), option.getId());
 				System.out.println("AssessmentQOption Id : " + assessmentQuestionOptionId);
 				int optionId = option.getId();
 				boolean selected = option.isResponse();
@@ -122,13 +119,7 @@ public class AssessmentService {
 		assessmentRepository.save(as);
 	}
 
-	// To view the Assesment object json data for GETMapping
-	/*
-	 * public Assessment evaluateScore(int assessmentId) { Assessment assessment
-	 * = assessmentRepository.fetchAssesmentDetailById(assessmentId); return
-	 * assessment; }
-	 */
-
+	
 	@Transactional
 	public Assessment evaluateScore(int assessmentId) {
 		LOGGER.info("START : evaluateScore() Service  of AssessmentService");
@@ -139,10 +130,7 @@ public class AssessmentService {
 			LOGGER.info("Taking Assessment Question");
 			int counter = 0;
 			boolean answerStatus = false;
-			System.out.println(assessmentQuestion.getQuestion().getTopicList().iterator().next().getName());
 			int optionsSize = assessmentQuestion.getAssessmentQuestionOption().size();
-			LOGGER.debug("The total no of options are : ", optionsSize);
-			System.out.println(optionsSize);
 			for (AssessmentQuestionOption assessmentQuestionOption : assessmentQuestion.getAssessmentQuestionOption()) {
 				LOGGER.info("Taking AssessmentQuestionOption");
 				if (assessmentQuestionOption.getAssessmentOption().isAnswer() == assessmentQuestionOption
@@ -163,10 +151,14 @@ public class AssessmentService {
 		LOGGER.info("Saving Assessment Score");
 		assessmentRepository.save(assessment);
 		LOGGER.info("Score saved Successfully");
+		LOGGER.info("End : evaluateScore() of AssessmentService");
 		return assessment;
 	}
 
-	public List<TopicWiseScore> getTopicWiseScore(int assessmentId){
+	public List<TopicWiseScore> getTopicWiseScore(int assessmentId) {
+		LOGGER.info("Start : getTopicWiseScore() of AssessmentService");
+		LOGGER.debug("Assessment ID : ", assessmentId);
+		LOGGER.info("End : getTopicWiseScore() of AssessmentService");
 		return assessmentRepository.getTopicWiseQuestionCount(assessmentId);
 	}
 }
