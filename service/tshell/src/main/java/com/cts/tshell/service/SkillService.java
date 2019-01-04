@@ -1,8 +1,9 @@
 package com.cts.tshell.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -28,21 +29,23 @@ public class SkillService {
 	}
 
 	@Transactional
-	public List<Skill> getRecent5Skills() {
+	public List<Skill> getRecent5Skills(Date date) {
 		LOGGER.info("start");
-		List<Skill> recent5Skills = skillRepository.fetchRecentSkills();
-		LOGGER.debug("recent5Skills -> " + recent5Skills);
-	/*	if (recent5Skills.size() >= 5) {
+		List<Skill> recent5Skills = skillRepository.fetchRecentSkills(date);
+		LOGGER.debug("recentSkills -> " + recent5Skills);
+		if (recent5Skills.size() >= 5) {
 			LOGGER.debug("size of json data ->" + recent5Skills);
 			return recent5Skills.subList(0, 5);
-		}*/
-		Calendar cal = GregorianCalendar.getInstance();
-		cal.add( Calendar.DAY_OF_YEAR, -30);
-		Date tenDaysAgo = cal.getTime();
-		LOGGER.debug("required",tenDaysAgo);
-		
+		}
 		return recent5Skills;
-
+	}
+	
+	public Date getCurrentTimeUsingCalendar() {
+	    Calendar cal = Calendar.getInstance();
+	    LOGGER.debug("CAL",cal);
+	    cal.add(Calendar.DAY_OF_YEAR,-30);
+	    Date date=cal.getTime();
+		return date;
 	}
 
 }

@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class SkillService {
 
-  url: string ="/tshell/skill/recentSkillList/"
+  url: string ="/tshell-service/skill/recentSkillList/"
 
   constructor(private http: HttpClient) { }
 
