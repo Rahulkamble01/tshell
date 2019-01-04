@@ -108,12 +108,14 @@ export class ContributeQuestionComponent implements OnInit {
     console.log('File Upload method is called!');
     console.log('File extension error is ' + this.fileExtensionError);
     console.log(this.fileExtensionMessage);
-    let formData = new FormData;
+
+    let formData = new FormData
     formData.append('file', this.userFile);
     this.contributeQuestionService.uploadQuestions(formData).subscribe(
       async data => {
         this.contributeQuestionService.csvData = await data;
         await this.contributeQuestionService.setCsvData(data);
+      console.log(this.contributeQuestionService.getCsvData());
       })
     await new Promise((resolve, reject) => setTimeout(resolve, 1000));
     this.router.navigate(['preview']);

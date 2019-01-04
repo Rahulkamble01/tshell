@@ -1,38 +1,41 @@
+
 <div class="container">
   <div class="card" *ngFor="let data of csvData ,let i=index">
     <div class="card-header" data-toggle="collapse" [attr.data-target]="'#content'+i+1">
-      <pre>{{i+1}}. {{data.question}}</pre>
-    </div>
-    <div [id]="'content'+i+1" class="collapse">
-      <div class="card-body">
-        <div *ngFor="let option of csvData[i].optionList, let j=index">
-          <div *ngIf="option.description!=''">
-            <div>
-              <pre><span class="option">{{j+1}}. </span>
-                <span>
-                {{option.description}}
-              </span>
-            </pre>
-              <span class="badge badge-danger">Length exceeds 250</span>
-            </div>
+      <pre>{{i+1}}. {{csvData[i].question}}</pre>
+      <span *ngIf="csvData[i].lengthExceeded" class="badge badge-danger" style="float:right"> Question Length Exceeded</span>
+  </div>
+  <div [id]="'content'+i+1" class="collapse">
+    <div class="card-body">
+      <div *ngFor="let option of csvData[i].optionList, let j=index">
+        <div *ngIf="option.description!=''">
+          <div>
+           <pre> <span class="option">{{j+1}}.</span> <span> {{option.description}}</span> </pre> 
+            <span *ngIf="option.lengthExceeded" class="badge badge-danger" style="float:right">Option Length Exceeded</span>
           </div>
         </div>
       </div>
-      <div class="card-footer">
-        <span class="answer">Answer:</span>
-        <span *ngFor="let option of csvData[i].optionList, let k=index">
-          <span class="correctOption" *ngIf="option.answer==true">
-            Option {{k+1}}
-          </span>
+    </div>
+    <div class="card-footer">
+      <span class="answer">Answer:</span>
+      <span *ngFor="let option of csvData[i].optionList, let k=index">
+        <span class="correctOption" *ngIf="option.answer==true && csvData[i].error==''">
+          Option {{k+1 }}
         </span>
-      </div>
+      </span>
+      <span class="badge badge-danger" style="float:right">{{csvData[i].error}}</span>
     </div>
   </div>
-  <div class="col-12 text-center action">
-    <span class="actions"><button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="review()">Approve and
-        Submit</button></span>
-    <span class="actions"><button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="review()">Submit for
-        Review</button></span>
-    <span class="actions"><button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="retry()">Retry</button></span>
-  </div>
+</div>
+<div class="col-12 text-center action">
+  <span class="actions">
+    <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="review()">Approve and Submit</button>
+  </span>
+  <span class="actions">
+    <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="review()">Submit for Review</button>
+  </span>
+  <span class="actions">
+    <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="retry()">Retry</button>
+  </span>
+</div>
 </div>
