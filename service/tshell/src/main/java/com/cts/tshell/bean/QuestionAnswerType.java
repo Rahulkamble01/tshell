@@ -32,7 +32,5 @@ public class QuestionAnswerType {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-	
-	
+	}	
 }

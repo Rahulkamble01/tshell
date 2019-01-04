@@ -6,7 +6,6 @@ import { ContributeQuestionComponent } from './contribute-question/contribute-qu
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
-import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
@@ -27,24 +26,23 @@ import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.componen
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
+import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
+import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
+
 
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'totalquestions', component: TotalquestionComponent },
+
   { path: 'search-skill', component: SearchSkillComponent },
-  { path: 'totalquestions', component: TotalquestionComponent },
   { path: 'reviewq', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent }, 
-  { path: 'totalquestions', component: TotalquestionComponent }, 
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   {path:'dash', component:DashboardComponent},
-  {path:'totalquestions',component:TotalquestionComponent},
   {path: "recentSkills", component: RecentlyAddedSkillsComponent},
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
@@ -56,16 +54,18 @@ const routes: Routes = [
   { path: 'assesment', component: ExitAssesmentComponent },
   { path: 'instruction', component: InstructionComponent },
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
-  { path: "skills", component: SearchResultComponent },
+  { path: "skills/:id", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent },
-  {path:"addQuestion",component:AddQuestionComponent}
+  {path:"addQuestion",component:AddQuestionComponent},
+  { path: "graph",component:QuestiongraphComponent},
+  { path: "top5Tests", component: TopAccessedTestsComponent }
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash: true}
-  ) ],
+
+  imports: [RouterModule.forRoot(routes ,{useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

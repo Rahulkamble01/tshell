@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +17,12 @@ import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.service.QuestionService;
-
+@ControllerAdvice
 @RestController
-@RequestMapping("/rest")
-public class QuestionController {
+@RequestMapping("/question")
+public class QuestionController extends TshellController{
 	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionController.class);
+	@Autowired
 	private QuestionService questionService;
 
 	@Autowired
@@ -52,6 +54,27 @@ public class QuestionController {
 		return user;
 		
 	}
+		@GetMapping("/contributed/{employeeId}")
+	public List<Question> totalQuestionContributed(@PathVariable("employeeId") int employeeId) {
+		LOGGER.info(" START");
+		List<Question> totalQuestion = questionService.findTotalQuestionContributed(employeeId);
+		LOGGER.debug("total no of question contributed for each subject : {} ", totalQuestion);
+		LOGGER.info("END");
+		return totalQuestion;
+
+		
+	}
+		
+	@GetMapping("/questioncount")
+	public long getQuestionCount() {
+		LOGGER.info("start");
+		long questionCount = questionService.getQuestionCount();
+		LOGGER.debug("QuestionCount  -> {}", questionCount );
+		return questionCount ;
+	}
 
 	
-}
+
+
+
+

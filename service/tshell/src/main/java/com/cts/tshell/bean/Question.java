@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "question")
@@ -26,6 +28,7 @@ import javax.persistence.Transient;
 	@NamedQuery(name="Question.fetchLatestQn",query="select q from Question q where"
 			+ " q.id=(select Max(q1.id) from Question q1)")
 })
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +45,10 @@ public class Question {
 	@JoinColumn(name = "qu_qd_id")
 	private QuestionDifficultyLevel questionDifficultyLevel;
 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_qt_id")
+	private QuestionAnswerType questionAnswerType;
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
 	private User createdUser;
@@ -129,13 +136,11 @@ public class Question {
 		this.createdUser = createdUser;
 	}
 
-	// public QuestionAnswerType getQuestionAnswerType() {
-	// return questionAnswerType;
-	// }
-	//
-	// public void setQuestionAnswerType(QuestionAnswerType questionAnswerType)
-	// {
-	// this.questionAnswerType = questionAnswerType;
-	// }
+	public QuestionAnswerType getQuestionAnswerType() {
+		return questionAnswerType;
+	}
 
+	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
+		this.questionAnswerType = questionAnswerType;
+	}
 }

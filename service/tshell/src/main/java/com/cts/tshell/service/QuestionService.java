@@ -24,7 +24,6 @@ public class QuestionService {
 
 	private QuestionRepository questionRepository;
 	private TopicRepository topicRepository;
-	
 	private OptionsRepository optionsRepository;
 	private UserRepository userRepository;
 
@@ -90,6 +89,23 @@ public class QuestionService {
 		LOGGER.info("end of getAllTopics method");
 		return topics;
 	}
+	@Transactional
+	public List<Question> findTotalQuestionContributed(int employeeId) {
+		LOGGER.info("START");
+		List<Question> question = questionRepository.findTotalQuestionContributedById(employeeId);
+		LOGGER.debug("list of total no of question for each subject contributed : {} ", question);
+		LOGGER.info("END");
+		return question;
+
+	}
+	
+	@Transactional
+	public long getQuestionCount(){
+		LOGGER.info("start");
+		long questionCount = questionRepository.totalQuestionsCount();
+		LOGGER.debug("QuestionCount -> {}", questionCount );
+		return questionCount;
+}
 
 	
 

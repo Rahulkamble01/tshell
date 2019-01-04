@@ -18,7 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
@@ -29,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	@NamedQuery(name="Topic.findTopics",query="select t.id,t.name from Topic t join t.skill s where s.id=:skillId")
 	
 })
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Topic {
 
 	@Override
@@ -53,6 +55,7 @@ public class Topic {
 				joinColumns= {@JoinColumn(name="tq_tp_id")},
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
+	
 	private List<Question> questions;
 
 	public int getId() {
@@ -87,5 +90,4 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	
 }
