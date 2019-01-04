@@ -33,7 +33,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 		@NamedQuery(name = "Question.fetchQuestionDetails", query = "select distinct q from Question q "
 				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
-				+ " left join fetch q.createdUser " + "left join fetch q.optionList " + "where q.id=:questionId") })
+				+ " left join fetch q.createdUser " + "left join fetch q.optionList " + "where q.id=:questionId"),
+		
+		@NamedQuery(name = "Question.findQuestionWithOptions", query = "select q from Question q join q.optionList o where q.id=:questionId")
+		})
 
 public class Question {
 

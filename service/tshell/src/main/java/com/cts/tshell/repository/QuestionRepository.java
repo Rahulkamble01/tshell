@@ -32,7 +32,10 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	public Question findById(int questionId);
 	
-	@Query(value = "SELECT * FROM question WHERE MATCH (qu_question) AGAINST (? IN NATURAL LANGUAGE MODE) ",
+	@Query(value = "SELECT * FROM question  WHERE MATCH (qu_question) AGAINST (? IN NATURAL LANGUAGE MODE) ",
 			nativeQuery = true)
-	public List<Question> fetchQuestionBasedOnKeyword (String searchedQuestion );
+	List<Question> fetchQuestionBasedOnKeyword (String searchedQuestion );
+	
+	
+	public Question findQuestionWithOptions (@Param("questionId")int questionId );
 }

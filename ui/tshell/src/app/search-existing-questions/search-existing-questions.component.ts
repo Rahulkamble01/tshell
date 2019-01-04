@@ -27,12 +27,12 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.questionId = this.question.id;
           this.optionList = this.question.optionList;
           this.countOption = this.optionList.length;
+          this.message = 'undefined';
         } else {
           this.message = 'NOPE, No questions found for review.';
         }
       }, error => {
         this.message = 'NOPE, No questions found for review.';
-        //this.error = error;
       }
     )
   }
@@ -40,12 +40,12 @@ export class SearchExistingQuestionsComponent implements OnInit {
   form = new FormGroup({
     description: new FormControl(
       '',
-      [Validators.required, Validators.maxLength(200)])
+      [Validators.required, Validators.maxLength(250)])
   })
 
   questionForm = new FormGroup({
     id: new FormControl(),
-    question: new FormControl('', [Validators.required, Validators.maxLength(300)])
+    question: new FormControl('', [Validators.required, Validators.maxLength(500)])
   })
 
   countOption: number;
@@ -57,12 +57,10 @@ export class SearchExistingQuestionsComponent implements OnInit {
   questionId: number;
   optionDescription: string = '';
   skillName: string;
-  message: string = 'undefined';
+  message: string ;
   selectedOptionId: number;
   deleteOptionStatus: string = 'undefined';
   searchedQuestionsList: any = '';
-  //optionId: number;
-  //description: string = '';
   queUpdateStatus: string = '';
   updateOptionStatus: string = '';
   editOptionStatus: string = '';
@@ -103,7 +101,6 @@ export class SearchExistingQuestionsComponent implements OnInit {
     this.questionForm.reset();
     this.queUpdateStatus = '';
     this.editOptionStatus = '';
-    //this.deleteOptionStatus = '';
   }
 
   approveQuestion(questionId: number) {
@@ -114,6 +111,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.question = data[0];
           this.questionId = this.question.id;
           this.optionList = this.question.optionList;
+          this.countOption = this.optionList.length;
         } else {
           this.message = 'NOPE, No Questions found for review';
         }
@@ -129,6 +127,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.question = data[0];
           this.questionId = this.question.id;
           this.optionList = this.question.optionList;
+          this.countOption = this.optionList.length;
         } else {
           this.message = 'NOPE, No Questions found for review';
         }
@@ -152,21 +151,20 @@ export class SearchExistingQuestionsComponent implements OnInit {
     this.service.deleteOption(this.selectedOptionId).subscribe(
       data => {
         if (data) {
-          this.form.patchValue({ description: '' });
           this.deleteOptionStatus = 'true';
           this.optionList.forEach(
             element => {
               if (element.id == this.selectedOptionId) {
                 this.optionList.splice(this.optionList.indexOf(element), 1);
               }
-              this.countOption = this.optionList.length;
             });
+          this.countOption = this.optionList.length;
         } else {
           this.deleteOptionStatus = 'false';
         }
       }, error => {
         this.deleteOptionStatus = 'false';
-      })
+      });
   }
 
   saveOption() {
@@ -180,10 +178,10 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.editOptionStatus = 'true';
           this.optionList.forEach(
             element => {
-              if (element.id == this.selectedOptionId ){
+              if (element.id == this.selectedOptionId) {
                 element.description = this.form.value.description;
-              }           
-          });
+              }
+            });
         } else {
           this.editOptionStatus = 'false';
         }
@@ -193,43 +191,24 @@ export class SearchExistingQuestionsComponent implements OnInit {
       });
   }
 
-  // closeOption() {
-  //   this.service.fetchReviewQuestion(this.skillId).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.question = data[0];
-  //       this.questionId = this.question.id;
-  //       this.optionList = this.question.optionList;
-  //       this.form.reset();
-  //       this.status = false;
-  //     }
-  //   )
-  // }
-
-  // getSelectedOptionDescription(optionId: number, description: string) {
-  //   this.optionId = optionId;
-  //   //this.description = description;
-  //   console.log("selected option Id is :" + optionId);
-  //   console.log("selected option Description is :" + description);
-  //   this.form.reset();
-  // }
-
   searchQ(searchquestion) {
     let json = JSON.stringify(
       {
         keyword: searchquestion
       }
     );
-    this.service.searchedQuestions(json).subscribe(
-      data => {
-        console.log(data);
-        if (data[0] == null) {
-          this.searchedQuestionsList = null;
-        } else {
-          this.searchedQuestionsList = data;
-        }
+    this.service.searchedQuestions(json).subscribe(data => {
+      if (data[0] != null) {
+        this.searchedQuestionsList = data;
+      } else {
+        this.searchedQuestionsList = null;
+      }
+    },
+      error => {
+        this.searchedQuestionsList = null;
       });
   }
+
 
   setQuestionForm() {
     this.queUpdateStatus = '';

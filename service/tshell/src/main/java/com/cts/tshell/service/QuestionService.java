@@ -40,8 +40,10 @@ public class QuestionService {
 		int questionId = option.getQuestion().getId();
 		LOGGER.debug("Question Id: {}", questionId);
 		Question question = questionRepository.fetchAllQuestionDetails(questionId);
-		/* this below line was added because the hibernate cache was not updating and it was
-		 * returning the same object without recently added option to front end.*/
+		/*
+		 * this below line was added because the hibernate cache was not updating and it
+		 * was returning the same object without recently added option to front end.
+		 */
 		question.getOptionList().add(option);
 		LOGGER.debug("Question: {}", question);
 		option.setQuestion(question);
@@ -51,16 +53,6 @@ public class QuestionService {
 		LOGGER.debug("Updated Question: {}", updatedQuestion);
 		LOGGER.info("end");
 		return updatedQuestion;
-	}
-
-	@Transactional
-	public Question getQuestion(int questionId) {
-		LOGGER.info("START");
-		Question question = questionRepository.findById(questionId);
-		LOGGER.debug("Question: {}", question);
-		LOGGER.debug("Option Count: {}", question.getOptionList().size());
-		LOGGER.info("END");
-		return question;
 	}
 
 	@Transactional
@@ -77,12 +69,13 @@ public class QuestionService {
 		List<Question> questionList = questionPage.getContent();
 		LOGGER.debug("Question List : {}", questionList);
 		// [BELOW] The below code is for changing the status of the obtained questions.
-		/*
-		 * for (Question eachQuestion : questionList) {
-		 * eachQuestion.setStatus("In Review");
-		 * LOGGER.debug("Question (Modified Status) : {}", eachQuestion);
-		 * questionRepository.save(eachQuestion); }
-		 */
+
+		for (Question eachQuestion : questionList) {
+			eachQuestion.setStatus("In Review");
+			LOGGER.debug("Question (Modified Status) : {}", eachQuestion);
+			questionRepository.save(eachQuestion);
+		}
+
 		return questionList;
 	}
 
@@ -104,13 +97,6 @@ public class QuestionService {
 		LOGGER.info("end of delete Option");
 		return optionDeleteStatus;
 	}
-
-	// @Transactional
-	// public Option getOptionById(int id) {
-	// Option option = optionRepository.fetchOptionDetailsById(id);
-	// LOGGER.debug(" Inside service......Option By Id details are{}", option);
-	// return option;
-	// }
 
 	@Transactional
 	public void updateStatus(int questionId, String status) {
@@ -139,6 +125,7 @@ public class QuestionService {
 		for (Question question : questions) {
 			LOGGER.debug("Qu Id: {}", question.getId());
 			LOGGER.debug("Question: {}", question.getQuestion());
+			question = questionRepository.findQuestionWithOptions(question.getId());
 		}
 		LOGGER.info("End");
 		return questions;
@@ -148,14 +135,14 @@ public class QuestionService {
 	public boolean saveOptionDescription(Option option) {
 		LOGGER.info("start");
 		Option actualOption = optionRepository.fetchOptionDetailsById(option.getId());
-		LOGGER.debug("Actual Option: {}",actualOption);
+		LOGGER.debug("Actual Option: {}", actualOption);
 		String initialDescription = actualOption.getDescription();
-		LOGGER.debug("Initial Description: {}",initialDescription);
+		LOGGER.debug("Initial Description: {}", initialDescription);
 		actualOption.setDescription(option.getDescription());
-		LOGGER.debug("Actual Option (modified) : {}",actualOption);
+		LOGGER.debug("Actual Option (modified) : {}", actualOption);
 		optionRepository.save(actualOption);
 		actualOption = optionRepository.fetchOptionDetailsById(option.getId());
-		LOGGER.debug("Actual Option (from database) : {}",actualOption);
+		LOGGER.debug("Actual Option (from database) : {}", actualOption);
 		if (actualOption.getDescription().equals(initialDescription))
 			return false;
 		else
@@ -186,19 +173,12 @@ public class QuestionService {
 		LOGGER.debug("Option {} ", option);
 		boolean initialOptionStatus = option.isAnswer();
 		LOGGER.debug("Initial Option Status: {} ", initialOptionStatus);
-		if (option.isAnswer()) {
-			option.setAnswer(false);
-		} else {
-			option.setAnswer(true);
-		}
+		option.setAnswer(!option.isAnswer());
 		LOGGER.debug("Option: {} ", option);
 		optionRepository.save(option);
 		Option uOption = optionRepository.findById(optionId);
 		LOGGER.debug("Updated Option: {} ", uOption);
-		if (uOption.isAnswer() == initialOptionStatus)
-			return false;
-		else
-			return true;
+		return !uOption.isAnswer() == initialOptionStatus;
 	}
 
 }

@@ -7,28 +7,55 @@ a{
     padding:0px 0px;
     width:19px;
 }
+.addOptionTextArea{
+    height:200px;
+}
 .approveBtnCmn{
     text-align: center;
 }
 .baseRow{
     padding-top: 20px;
 }
+.confirmDeleteOptionMessageSpan{
+    font-weight:450;
+    color:black;
+}
+.confirmDeleteOptionModalBody{
+padding-top:2px;
+}
+.confirmDeleteOptionMessage{
+    padding-top:10px;
+}
 .deleteModalTextArea{
     background-color:white;
-}
-.rejectBtnCmn{
-    text-align: center;
 }
 .existingQuestion{
     border-bottom:solid;
     border-color:rgb(177, 176, 176);
     border-width:1px;
 }
-/* .lhsApproveBtn{
+.headingFindSimilarQ{
+    color:grey;
+}
+.headingApproveOrRejQ{
+    color:grey;
+}
+.highlightSpan{
+    width:100px;
+    height: 100%;
+    border-bottom-left-radius:3px;
+    border-top-left-radius:3px;
+    background-color:rgb(90, 90, 90);
+}
+.horizontalLineInDeleteModal{
+    margin-top:2px;
+}
+/* --------------------------------------------------->
+ .lhsApproveBtn{
     font-size: 14px;
     padding:0px 4px;
     width:100%;   
-} */
+} ---------------------------------------------------*/
 
 .lhsApproveRejectBtnSpan{
     float: right;
@@ -47,18 +74,44 @@ a{
     float:right;
     color:gray;
 }
+.lhsOptionsHeadingRow{
+    padding-right:16px;
+    padding-left:16px;
+}
 .lhsOptionLabelCol{
     text-align: center;
 }
-/* .lhsRejectBtn{
+.lhsQueNumberDisplayRow{
+    padding:0px 8px;
+} 
+.lhsQueNumberDisplayCol{
+    background-color:rgb(240, 240, 240);
+    border-radius:4px;
+    padding-left:0px;
+    padding-top:1px;
+    padding-bottom:1px;
+    font-size:18px;
+}
+/*---------------------------------------------> 
+.lhsRejectBtn{
     font-size: 14px;  
     padding:0px 4px;
     width:100%;
-} */
-/* .nxtQuestionBtn{
+} ---------------------------------------------*/
+
+.lhsSuccesAlert{
+    margin: 13px 15px -3px 13px;
+}
+.lhsTopicBadgeDisplayRow{
+    padding-right:16px;
+    padding-left:16px;
+}
+
+/*-----------------------------------------------> 
+.nxtQuestionBtn{
     padding:0;
    width:100%
-} */
+} -----------------------------------------------*/
 .nxtQuestionCol{
     text-align: right;
 }
@@ -78,14 +131,20 @@ a{
 .questionDef{
     font-size:12px;
 }
+.questionNumber{
+    margin-left:10px;
+}
+.rejectBtnCmn{
+    text-align: center;
+}
 .revQuestionHeader{
     text-align: center;
 }
-/* --------- this code is for custom styling of the buttons specified below --------------
+/* ---- this code is for custom styling of the button specified below ------->
 .rhsApproveBtn{
     font-size: 13px;
     padding:2px 4px;  
-} */
+} ---------------------------------------------------------------------------*/
 .rhsNoteSpan{
     float:right;
     color:gray;
@@ -111,14 +170,11 @@ a{
 .rhsQIdLabel{
     font-size:13px;
 }
-/* --------- this code is for custom styling of the buttons specified below --------------
+/* --------- this code is for custom styling of the button specified below ------------->
  .rhsRejectBtn{
     font-size: 13px;
     padding:2px 4px;   
-} */
-/* .reviewQuestionsContainer{
-    padding-top:80px;
-} */
+} --------------------------------------------------------------------------------------*/
 .searchSpan{
     color:rgb(146, 146, 146);
 }
@@ -127,15 +183,22 @@ a{
     color:rgb(119, 119, 119);
 }
 .skillBadge{
+    margin-bottom:1px;
     text-transform: uppercase;
+}
+.ta{
+    background-color:white;
+    border:none;
 }
 .topicBadge{
     text-transform: capitalize;
 }
-
-
+.tsCardInRhsCol{
+    margin:0px 20px 40px 10px;
+}
+.validationAlert{
+ color:red;
+}
 .whitebackground{
     background-color: white;
   }
-
-

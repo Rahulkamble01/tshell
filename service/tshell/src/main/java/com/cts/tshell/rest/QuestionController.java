@@ -90,7 +90,7 @@ public class QuestionController {
 	}
 	
 	@PostMapping("/searchedquestionslist")
-	public String getAllQuestions(@RequestBody Search search) throws JsonProcessingException  {
+	public String getAllQuestions(@RequestBody Search search) throws JsonProcessingException {
 		LOGGER.info("Start Fetching Questions Based On Keyword .");
 		String searchedQuestion = search.getKeyword();
 		List<Question> allQuestions = questionService.fetchQuestionBasedOnKeyword(searchedQuestion);
