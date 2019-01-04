@@ -15,6 +15,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -26,24 +31,38 @@ public class User {
 	@Column(name = "us_id")
 	private int id;
 
+	@NotNull(message="User Name cannot be empty")
 	@Column(name = "us_name")
 	private String name;
-
+	
+	@NotNull(message="User Name cannot be empty")
+	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
 	@Column(name = "us_email")
 	private String email;
-
+	
+	@NotNull(message="Password cannot be empty")
+	@Size(min=6, max=100, message="Password must be 6 to 30 characters")
 	@Column(name = "us_password")
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_ur_id")	
+	//@JsonIgnore
 	private Role role;
-
+	
+	@Min(value=100000, message="Employee Id must contain six digits")
+	@Max(value=10000000000L, message="Employee Id must contain maximum 10 digits")
 	@Column(name = "us_emp_id")
 	private int employeeId;
 	
 	@Column(name = "us_image")
-	private byte image;
+	private byte[] image;
+	
+	@Column(name = "us_signup_date")
+	private String signupDate;
+	
+	@Column(name = "us_last_login_time")
+	private String lastLoginTime;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -98,12 +117,28 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public String getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(String signupDate) {
+		this.signupDate = signupDate;
+	}
+
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
 
 	public List<Skill> getSkills() {
@@ -112,6 +147,6 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
-	}	
+	}
 
 }
