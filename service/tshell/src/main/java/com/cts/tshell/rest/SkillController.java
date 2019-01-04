@@ -44,42 +44,30 @@ public class SkillController {
 	
 	@PostMapping("/addskill")
 	public int addOrUpdateSkill(@RequestBody Skill skill) {
-		
 		LOGGER.info("starting insertnewSkills" );
-		
 		String skillName = skill.getName();
-		
 		Skill skill1=skillService.getSkillByName(skillName);
 		System.out.println("the skill we get isisisisisisisis : :"+skill1);
 		int addStatus;
-		
-		
 		if(skill1!=null){
 			addStatus=1;
 		}
 		else{
 			List<Topic> topics = skill.getTopics();
 			LOGGER.debug("Recived skill from Browser: "+skill );
+			System.out.println("inpiuted skills slsl"+ topics);
 			LOGGER.debug("Recived topics from Browser: "+topics );
-			
-			skillService.saveSkill(skill);
-			
+			skillService.addOrUpdateSkill(skill);
 			Skill skill2 = skillService.getSkillByName(skill.getName());
-			
 			LOGGER.debug("Recived skill from sevice: "+skill2 );
-
 			for(Topic topic:topics){
 				topic.setSkill(skill2);
 				topicService.saveTopic(topic);
 			}
-			
 			skill.setTopics(topics);
-		
 			addStatus=2;
 			LOGGER.info("ending inserting Skill" );
-		
 		}
-		
 		return addStatus;	
 	}
 	

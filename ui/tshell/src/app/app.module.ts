@@ -34,7 +34,6 @@ import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TestComponent } from './top5AccessedTest/test.component';
@@ -53,7 +52,7 @@ import { ErrorComponent } from './error/error.component';
 PasswordMachingValidatorDirective,
 PasswordNotEqualValidatorDirective,
 
-    AddskillComponent,
+  
     DashboardComponent,
     MostSearchedSkillsComponent,
     TotalquestionComponent,
@@ -77,7 +76,6 @@ PasswordNotEqualValidatorDirective,
     CountOfQuestionsToReviewComponent,
     HomeComponent,
     SearchResultComponent,
-    AddskillComponent,
     QuestiongraphComponent,
     TestComponent,
      ExitAssesmentComponent,

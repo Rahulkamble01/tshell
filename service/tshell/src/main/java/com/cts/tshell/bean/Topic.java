@@ -40,6 +40,17 @@ public class Topic {
 				inverseJoinColumns= {@JoinColumn(name="tq_qu_id")}
 	)
 	private List<Question> questions;
+	
+	@Column(name = "tp_percentage")
+	private int percentage;
+
+	public int getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(int percentage) {
+		this.percentage = percentage;
+	}
 
 	public int getId() {
 		return id;
@@ -73,6 +84,11 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	
+
+	@Override
+	public String toString() {
+		return "Topic [id=" + id + ", name=" + name + ", percentage=" + percentage +"]";
+	}
+
 	
 }

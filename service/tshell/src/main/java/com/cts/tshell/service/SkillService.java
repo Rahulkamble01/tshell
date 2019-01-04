@@ -30,12 +30,12 @@ public class SkillService {
 	}
 	
 	@Transactional
-	public void saveSkill(Skill skill){
-		LOGGER.info("Starting saveSkill() inside SkillService");
-		LOGGER.debug("recived skill from controller: "+skill);
+	public void addOrUpdateSkill(Skill skill) {
+		LOGGER.debug("Updating {}'s SearchCount from {} to {}", skill.getName());
+		LOGGER.info("Skill Updated");
+		LOGGER.debug("Updated Skill", skill);
 		skillRepository.save(skill);
 	}
-	
 	
 	@Transactional
 	public Skill getSkillByName(String skillname){

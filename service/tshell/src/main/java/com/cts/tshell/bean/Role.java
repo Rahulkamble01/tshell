@@ -18,6 +18,8 @@ public class Role {
 	
 	@Column(name="ur_role")
 	private String name;
+	
+
 
 	public int getId() {
 		return id;
@@ -34,5 +36,7 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+
 	
 }

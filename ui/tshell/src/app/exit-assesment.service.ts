@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from './environment';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -14,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ExitAssesmentService {
-  testurl = '/tshell/test';
+  testurl =environment.serviceUrlPrefix+'/test';
   constructor(private http: HttpClient) { }
 
   test(): Observable<any> {

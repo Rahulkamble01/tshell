@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from './environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,8 +12,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SkillserviceService {
-  getAllSkillUrl = 'tShell/skills';
-  addSkillurl = 'tShell/addskill';
+  getAllSkillUrl = environment.serviceUrlPrefix+'/skills';
+  addSkillurl = environment.serviceUrlPrefix+'/addskill';
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +22,8 @@ export class SkillserviceService {
   }
 
 
-  addSkill(skilly): Observable<any> {
-    return this.http.post(this.addSkillurl, skilly, httpOptions);
+  addSkill(skillJson): Observable<any> {
+    return this.http.post(this.addSkillurl, skillJson, httpOptions);
   }
 
 }

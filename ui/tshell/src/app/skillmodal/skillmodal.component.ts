@@ -16,7 +16,10 @@ export class SkillmodalComponent implements OnInit {
   add: boolean;
   item: any;
   json: any;
-  error:any;
+  error: any;
+  sametopic = false;
+  emptyper = false;
+  bigper = false;
   status: number = 0;
   expression: any;
   @Input() name: any;
@@ -29,7 +32,6 @@ export class SkillmodalComponent implements OnInit {
      */
 
 
-  
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService) { }
 
@@ -39,45 +41,100 @@ export class SkillmodalComponent implements OnInit {
         '',
         [Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(25),
-        Validators.pattern(/^[a-zA-Z0-9 ._-]+$/),
-
+        Validators.maxLength(45)
         ]),
       description: new FormControl(
         '',
         [Validators.required,
-        Validators.minLength(10),
         Validators.maxLength(400),
         ]),
 
       topicName: new FormControl(
         '',
         [
-          Validators.minLength(2),
-          Validators.maxLength(60),
-          Validators.pattern(/^[a-zA-Z ._-]+$/),
+          Validators.minLength(1),
+          Validators.maxLength(70)
+        ]),
+      topicPercentage: new FormControl(
+        '',
+        [
+          Validators.minLength(1),
+          Validators.maxLength(2),
         ]),
       image: new FormControl(''),
     });
 
 
-  addTopic(topicname) {
-    const topic = new Topic(topicname);
+  addTopic(topicname, topicpercntage) {
+    const topic = new Topic(topicname, topicpercntage);
     // alert(JSON.stringify(topic.name));
-    this.topics.push(topic);
-    this.clearInput();
+    let counter = 0;
+    let percounter = 0;
+    let morethahun = 0;
+
+    if (topicname == '') {
+      counter = 1;
+    }
+
+    if (topicpercntage == '') {
+      percounter = 1;
+      this.emptyper = true;
+      this.bigper = false;
+    }
+
+    if (topicpercntage > 100) {
+      this.bigper = true;
+      this.emptyper = false;
+      morethahun = 1;
+    }
+
+
+    for (let i = 0; i < this.topics.length; i++) {
+      if (topicname.toUpperCase() == this.topics[i].name.toUpperCase() || topicname == '') {
+        counter = 1;
+      }
+    }
+    if (counter == 0 && percounter == 0 && morethahun == 0) {
+      this.topics.push(topic);
+      this.sametopic = false;
+      this.emptyper = false;
+      this.bigper = false;
+      this.clearInput();
+    }
+
+    if (counter != 0) {
+      this.sametopic = true;
+    }
+
+    if (counter == 0 && percounter != 0) {
+      this.sametopic = false;
+    }
+    else if (counter != 0 && percounter == 0) {
+      this.emptyper = false;
+    }
+
+
+
   }
+
+
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
     this.topics.splice(index, 1);
+    this.sametopic = false;
   }
 
   get topicName(): any {
     return this.addskillform.get('topicName');
   }
 
+  get topicPercentage(): any {
+    return this.addskillform.get('topicPercentage');
+  }
+
   clearInput() {
     this.topicName.reset();
+    this.topicPercentage.reset();
   }
 
   clearAllInput() {
@@ -87,7 +144,6 @@ export class SkillmodalComponent implements OnInit {
 
   addSkill() {
 
-    console.log(this.status);
 
     /* for (let i = 0; i < this.allskills.length; i++) {
       let userSkillname = this.addskillform.controls['name'].value;
@@ -98,48 +154,32 @@ export class SkillmodalComponent implements OnInit {
     } */
 
     /*  if (this.sameSkillName != true) { */
-    const skill = new Skill(this.addskillform.controls['name'].value, "Active", this.addskillform.controls['description'].value, this.topics, new Date());
+    const skill = new Skill(this.addskillform.controls['name'].value, "active", this.addskillform.controls['description'].value, this.topics, new Date());
     /*  console.log(this.sameSkillName); */
     console.log(skill);
     this.SkillService.addSkill(skill).subscribe(
       data => {
         console.log(data);
         this.status = data;
-
+        this.error = false;
         console.log(this.status);
-        /*******calling the service to fetch new list of skills**********/
-        this.SkillService.getAll().subscribe(
-          data => {
-            this.allskills = data;
-            console.log(this.allskills);
-          }
-          ,
-          error => {this.error = error
-            this.status=0;
-    }
-        );
-        /************************************************************* */
         if (this.status == 2) {
+
           this.addskillform.reset();
+          this.sametopic = false;
+          this.emptyper = false;
+          this.bigper = false;
           this.clearAllInput();
         }
 
+
+
       },
-      error => {this.error = error
-              this.status=0;
+      error => {
+        this.error = error;
+        this.status = 0;
       }
-    )
-    ;
-    /*  }
-     else {
- 
-       this.status = 3;
- 
-       console.log(this.status);
-       console.log("Skill already exists");
-       this.sameSkillName = false;
- 
-     } */
+    );
 
   }
 
@@ -147,14 +187,7 @@ export class SkillmodalComponent implements OnInit {
 
   ngOnInit() {
 
-    this.SkillService.getAll().subscribe(
-      data => {
-        this.allskills = data;
-        console.log(this.allskills);
-      }
-    );
   }
 
 }
-
 
