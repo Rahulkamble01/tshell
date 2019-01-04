@@ -52,6 +52,8 @@ public class Question {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
 	private User createdUser;
+	
+	
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
 	private List<Option> optionList;

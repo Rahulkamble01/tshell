@@ -34,7 +34,7 @@ import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tes
 const routes: Routes = [
 
   { path: 'search-skill', component: SearchSkillComponent },
-  { path: 'reviewq', component: SearchExistingQuestionsComponent },
+  { path: 'reviewq/:id/:name', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent }, 
   { path: "", component: HomeComponent },

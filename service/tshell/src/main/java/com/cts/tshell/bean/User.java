@@ -3,7 +3,6 @@ package com.cts.tshell.bean;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,27 +17,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-
 import com.fasterxml.jackson.annotation.JsonView;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
-
-@NamedQueries({
-	@NamedQuery(name="User.findByEmpId",
-			query=	" select u from User u " + 
-					" left join fetch u.role r " + 
-				    " where u.employeeId = :employeeId ")
-})
+@NamedQueries({ @NamedQuery(name = "User.findByEmpId", query = " select u from User u " + " left join fetch u.role r "
+		+ " where u.employeeId = :employeeId ") })
 
 public class User {
 
@@ -62,7 +51,7 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "us_ur_id")	
+	@JoinColumn(name = "us_ur_id")
 	private Role role;
 
 	@Min(value = 1, message = "Employee ID must be at least 6 digits")
@@ -157,8 +146,6 @@ public class User {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
-	
 
 	public List<Skill> getSkills() {
 		return skills;

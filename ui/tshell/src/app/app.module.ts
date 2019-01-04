@@ -105,7 +105,8 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [
     ContributeQuestionService,

@@ -1,25 +1,46 @@
-/*.touch:hover{
-    cursor:pointer;
-    color:  #262626;
-    border:1px solid #a6a6a6;
-}*/
+
 .textArea{
     margin-top: 10px;
 }
-.fa-plus-circle{
-  font-size:50px; 
-    float: right;
-    margin-top: 3px;
-    color: #0e5bd6;
-    cursor: pointer;
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    -ms-transition: -ms-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out; 
+
+.head{
+    background-color: #dee2e6;
+    margin-top: 5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.fa-plus-circle:hover{
-    
-    transform:rotate(180eg);
-    -ms-transform:rotate(180deg);
-    -webkit-transform:rotate(180deg);
+
+.headerPending{
+    padding-left:6px;
+    font-size:20px; 
+
 }
-/*new cards9*/
+.headerCard{
+    background-color: white;
+    border-left:6px solid #0e5bd6;
+}
+.headerTitle{
+    font-size:20px;
+    margin-left: 2%;
+}
+
+.aliginCards{
+    margin-top: 3%;
+}
+
+.cardsColumns{
+    color:#808080;
+    background-color: white;
+    margin-bottom: 3%;
+    cursor:pointer;
+}
+.cardText1{
+    font-size:20px;
+    text-align: center;
+}
+.cardText2{
+    font-size:38px;
+    text-align: center;
+    font-weight: 600;
+}
+
+
