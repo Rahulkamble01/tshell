@@ -4,6 +4,7 @@ import { Topic } from '../topic';
 import { SkillserviceService } from '../skillservice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 
 
@@ -28,7 +29,8 @@ export class SkillmodalComponent implements OnInit {
   allskills: any;
   sameSkillName: boolean = false;
 
-  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private SkillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) { }
 
   addskillform = new FormGroup
     ({
@@ -153,6 +155,10 @@ export class SkillmodalComponent implements OnInit {
         this.status = 0;
       }
     );
+
+    this.confirmationDialogService.alert(`Addition of "${skill.name}"`,
+      `Skill is Added`)
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
   ngOnInit() {
   }

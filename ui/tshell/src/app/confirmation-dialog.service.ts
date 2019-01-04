@@ -19,11 +19,28 @@ export class ConfirmationDialogService {
       // { size: dialogSize },
       { centered: true }
     );
+    modalRef.componentInstance.confirmDialoge = true;
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
     modalRef.componentInstance.btnOkText = btnOkText;
     modalRef.componentInstance.btnCancelText = btnCancelText;
 
+    return modalRef.result;
+  }
+
+  public alert(
+    title: string,
+    message: string,
+    btnOkText: string = 'OK',
+    dialogSize: 'sm' | 'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(ConfirmationDialogComponent,
+      // { size: dialogSize },
+      { centered: true }
+    );
+    modalRef.componentInstance.confirmDialoge = false;
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.btnOkText = btnOkText;
     return modalRef.result;
   }
 

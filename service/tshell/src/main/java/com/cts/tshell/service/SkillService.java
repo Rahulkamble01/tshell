@@ -114,11 +114,14 @@ public class SkillService {
 		LOGGER.info("Fetching Reference Skill Through skillService()");
 		List<ReferenceSkill> result = refernceSkillRepository.findBySkillId(skillId);
 		
-		List<Skill> referenceSkills = new ArrayList<Skill>();
-		for (ReferenceSkill referenceSkill : result) {
-			
-		}
-		return null;
+//		List<Skill> referenceSkills = new ArrayList<Skill>();
+//		for (ReferenceSkill referenceSkill : result) {
+//			referenceSkills.add(referenceSkill.getReferenceSkill());
+//			referenceSkills.add(referenceSkill.getClassifier());
+//			LOGGER.debug("Skill Added {}", referenceSkill.getReferenceSkill());
+//			
+//		}
+		return result;
 	}
 }
 
