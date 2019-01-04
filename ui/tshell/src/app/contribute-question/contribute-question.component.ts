@@ -137,4 +137,7 @@ export class ContributeQuestionComponent implements OnInit {
       this.questionTemp=1;
     }
   }
+  upload(){
+    console.log("upload()");
+  }
 }

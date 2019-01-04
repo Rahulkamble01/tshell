@@ -8,7 +8,7 @@
         <!--select skill-->
         <div class="input-group mb-3" style="margin-top:3%">
           <input type="text" class="form-control" placeholder="Choose a skill to manage questions" 
-            aria-label="Recipient's username" aria-describedby="basic-addon2"
+            aria-label="Recipient's username" aria-describedby="basic-addon2" 
             [(ngModel)]="name" (keyup)="pressSkill(name);disableAddbtn();" id="ajax" list="json-datalist" 
               (change)="currentSkill(name)" autocomplete="off" style="margin-left:2%;margin-right:2%">
           <datalist id="json-datalist">

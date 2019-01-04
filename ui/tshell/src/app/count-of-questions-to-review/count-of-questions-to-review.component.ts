@@ -12,6 +12,7 @@ export class CountOfQuestionsToReviewComponent implements OnInit {
   show: boolean = false;
   showAddButton:boolean = false;
   skillId: any;
+  name:any;
   previousSelectedSkill: any;
   constructor(private countPendingService: CountOfPendingQuestionsService) { }
 
