@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'totalquestions', component: TotalquestionComponent },
   { path: 'search-skill', component: SearchSkillComponent },
   { path: 'totalquestions', component: TotalquestionComponent },
-  { path: 'reviewq', component: SearchExistingQuestionsComponent },
+  { path: 'reviewq/:id/:name', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent }, 
   { path: 'totalquestions', component: TotalquestionComponent }, 

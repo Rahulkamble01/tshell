@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 
@@ -48,12 +50,13 @@ public class User {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
+	@JsonIgnore
 	private List<Skill> skills;
 
 	public int getId() {
 		return id;
 	}
-
+ 
 	public void setId(int id) {
 		this.id = id;
 	}

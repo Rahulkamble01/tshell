@@ -30,7 +30,7 @@ public class Topic {
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="tp_sk_id")	
+	@JoinColumn(name="tp_sk_id")
 	private Skill skill;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -71,6 +71,5 @@ public class Topic {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-
 	
 }

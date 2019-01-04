@@ -8,11 +8,26 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "skill")
+
+@NamedQueries({
+		@NamedQuery(name = "Skill.findPendingQuestionsCount", query = "select count(*), s.name, s.id from Skill s "
+				+ "join s.topics t " + "join t.questions q " + "where q.status='P' group by s.name "),
+
+		@NamedQuery(name = "Skill.findSkillNames", query = "select s.name,s.id from Skill s "
+				+ "where s.name LIKE CONCAT('%',:searchSkillName,'%') "),
+
+		/*@NamedQuery(name = "Skill.findSkillId", query = "select s.id from Skill s " + "where s.name=:SkillName ")*/
+		})
+
 public class Skill {
 
 	@Id
@@ -30,15 +45,15 @@ public class Skill {
 	private String active;
 
 	@Column(name = "sk_test_count")
-	private int testCount;	
-	
+	private int testCount;
+
 	@Column(name = "sk_description")
 	private String description;
-	
+
 	@Column(name = "sk_image")
-	private byte image;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="skill")
+	private byte[] image;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
 	private List<Topic> topics;
 
 	public int getId() {
@@ -47,6 +62,7 @@ public class Skill {
 
 	public void setId(int id) {
 		this.id = id;
+
 	}
 
 	public String getName() {
@@ -89,11 +105,11 @@ public class Skill {
 		this.description = description;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -104,6 +120,4 @@ public class Skill {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-
-	
 }

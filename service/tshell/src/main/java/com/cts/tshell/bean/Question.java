@@ -38,6 +38,8 @@ public class Question {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
 	private User createdUser;
+	
+	
 
 	
 	public int getId() {
@@ -86,8 +88,6 @@ public class Question {
 
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
-	}	
-	
-	
+	}
 
 }
