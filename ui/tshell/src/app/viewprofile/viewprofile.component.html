@@ -1,13 +1,5 @@
-<!-- <form #imageForm=ngForm>
-    <img [src]="imageUrl" style="width : 150px; height: 150px; border-radius: 50%">
-    <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
-   
-  </form> 
-
- -->
-
-<div class="container-fluid" style="padding:15px;">
-
+<div class="container-fluid">
+    <div class="titlename">Profile<hr></div>
   <div class="row" style="margin-top:15px;padding-right: 30px">
     <div class="col-lg-1 col-12 col-sm-1 col-md-1">
 
@@ -22,9 +14,9 @@
               <div class="avatar-upload">
                 <form #imageForm=ngForm>
                   <div class="avatar-edit">
-                   <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
-                     <label for="imageUpload"></label> 
-                  </div>
+                  <!--  <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
+                     <label for="imageUpload"></label> -->
+                  </div> 
                   <div class="avatar-preview">
                     <img [src]="imageUrl" id="imagePreview" style="border-radius:50%;height:100%;width:100%;background-image: url(https://www.loopconnect.net/images/main/avatar.png);" />
                   </div>
@@ -45,7 +37,8 @@
                   <input type="hidden" value="{{userDetails.employeeId}}" #employeeid> </span>
               </span>
               <span style="font-size:16px; color:grey"><i class="fas fa-user-edit" style="zoom:0.5px" data-toggle="modal"
-                  data-target="#exampleModal1" data-whatever="@mdo" (click)="getUserData(employeeid.value)" style="color:gray"></i></span>
+                  data-target="#exampleModal1" data-whatever="@mdo" (click)="modalOpen()"
+                  style="color:gray"></i></span>
               <span style="color:blue;">
                 <br>{{ userDetails.email}}
               </span>
@@ -64,38 +57,48 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalClose()">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <form [formGroup]="form1 " (ngSubmit)="save()">
                 <div class="modal-body">
-                  <form [formGroup]="form">
+                  <div *ngIf="updateStatus" class="alert alert-success">Updated Successfully</div>
+                  <div *ngIf="!updateStatus">
+                 
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Employee Id:</label>
-                      <input type="text" class="form-control" name="employeeId" [value]="userDetails.employeeId"
-                        readonly #empId>
+                      <input type="text" class="form-control" formControlName="employeeId"    readonly >
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Name</label>
-                      <input type="text" class="form-control" formControlName="name" name="name" [value]="userDetails.name" #name>
-                      <div *ngIf="form.get('name').touched && form.get('name').invalid">
-                        <div *ngIf="form.get('name').errors.required" class="danger validation">Name is required</div>
-                        <div *ngIf="form.get('name').errors.maxlength" class="danger validation">Name must contain maximum 45 characters</div>
+                      <input type="text" class="form-control" formControlName="name"   >
+                      <div *ngIf="form1.get('name').touched && form1.get('name').invalid">
+                        <div *ngIf="form1.get('name').errors.required" class="danger validation">Name is required</div>
+                        <div *ngIf="form1.get('name').errors.maxlength" class="danger validation">Name must contain maximum 45 characters</div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Email</label>
-                      <input type="text" class="form-control" formControlName="email" name="email" [value]="userDetails.email" #email>
-                      <div *ngIf="form.get('email').touched && form.get('email').invalid">
-                        <div *ngIf="form.get('email').errors.required" class="danger validation">Email is required</div>
-                        <div *ngIf="form.get('email').errors.pattern" class="danger validation">Email pattern is not valid. Example: "tShell@cognizant.com"</div>
+                      <input type="text" class="form-control" formControlName="email"   >
+                      <div *ngIf="form1.get('email').touched && form1.get('email').invalid">
+                        <div *ngIf="form1.get('email').errors.required" class="danger validation">Email is required</div>
+                        <div *ngIf="form1.get('email').errors.pattern" class="danger validation">Email pattern is not valid. Example: "tShell@cognizant.com"</div>
                       </div>
                     </div>
-                  </form>
+                 
+                  </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-ts-primary" (click)="save(empId.value,name.value,email.value)">Update</button>
+                    <!-- <div *ngIf="updateStatus">
+                        <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="modalClose()" >Close</button>
+                    </div> -->
+                  <div *ngIf="!updateStatus">
+                    <button type="submit" class="btn btn-ts-primary" [disabled]="!form1.valid">Update</button>
+                  </div>
+                  
                 </div>
+              </form>
               </div>
             </div>
           </div>

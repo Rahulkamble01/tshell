@@ -1,7 +1,7 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 body {
-  background-color: #dee2e6;
+  /* background-color: #dee2e6; */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /*background-image: url("./assets/images/im1.jpg");*/
   background-size: cover;
@@ -378,4 +378,9 @@ footer p {
   padding-bottom: 20px;
 }
 
-
+/* TITLE NAME */
+.titlename{
+  font-weight: 610;
+  font-size:18px;
+  padding-top:15px;
+  }

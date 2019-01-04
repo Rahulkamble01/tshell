@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../app/environment';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -13,11 +14,11 @@ const httpOptions={
 })
 export class ViewprofileService {
 
-  url = "/tShell/getUser/";
-  url1 = "/tShell/getAssessment/";
-  url2 = "/tShell/save";
-  url3 = "/tShell/getRoles";
-  url4 = "/tShell/update";
+  url = environment.serviceUrlPrefix + "/getUser/";
+  url1 = environment.serviceUrlPrefix + "/getAssessment/";
+  url2 = environment.serviceUrlPrefix + "/save";
+  url3 = environment.serviceUrlPrefix + "/getRoles";
+  url4 = environment.serviceUrlPrefix + "/update";
 
   constructor(private http: HttpClient) { }
 

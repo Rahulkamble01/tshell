@@ -29,6 +29,8 @@ export class UserprofileComponent implements OnInit {
   constructor(private viewprofileService: ViewprofileService, private service: AuthService) { }
 
   ngOnInit() {
+
+ 
   }
 
   searchById(searchid) {
@@ -103,10 +105,7 @@ export class UserprofileComponent implements OnInit {
       this.imageUrl = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
-
-
-
-  }
+ }
   changeRole() {
     console.log(this.changedRole);
     for (let role of this.roles) {
