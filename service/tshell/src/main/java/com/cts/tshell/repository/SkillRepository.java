@@ -14,13 +14,19 @@ import com.cts.tshell.bean.Skill;
 
 
 @Repository
-public interface SkillRepository extends JpaRepository<Skill, Integer> {
+
+public interface SkillRepository extends JpaRepository<Skill, Integer>{
+	
 	List<Skill> findPendingQuestionsCount();
 
 	List<Skill> findSkillNames(@Param("searchSkillName") String searchSkillName);
 	
 	@Query("select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
 	Page<Skill> findBySkillTop4(Pageable pageable);
+
+	Skill findByName(String skillname);
+	Skill findById(int id);
+
 	List<Skill> fetchRecentSkills();
 	
 	@Query("select s.name, s.testCount from Skill s  where s.testCount>0 order by testCount desc")

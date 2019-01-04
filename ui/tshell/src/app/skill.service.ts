@@ -13,8 +13,8 @@ export class SkillService {
 
   getrecentSkill(): Observable<any> {
 
-    console.log("in skillService")
-    console.log(this.url)
+    console.log("in skillService");
+    console.log(this.url);
     return this.http.get<any>(this.url);
 
   }

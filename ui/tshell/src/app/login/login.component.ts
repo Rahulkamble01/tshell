@@ -13,8 +13,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 export class LoginComponent implements OnInit {
   message: string;
   status: boolean = false;
-  error:any;
-  success=true;
+  error: any;
+  success = true;
   employeeIdPattern = "^(0|[1-9][0-9]*)$";
 
   constructor(private router: Router, public service: AuthService,
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   form = new FormGroup({
     employeeId: new FormControl(
       '', [Validators.required,
-        Validators.pattern(this.employeeIdPattern)
+      Validators.pattern(this.employeeIdPattern)
       ]),
 
     password: new FormControl(
@@ -56,24 +56,24 @@ export class LoginComponent implements OnInit {
     console.log(json);
     this.loginService.authenticateUser(json)
       .subscribe(data => {
-        console.log("incoming Data: "+data.authenticated)
+        console.log("incoming Data: " + data.authenticated)
         if (data.authenticated) {
           this.service.login();
           this.service.setRole(data.user.role.name);
           this.service.setEmployeeId(data.user.employeeId);
           this.router.navigate(['/dash']);
         }
-        else{
-          this.success=false;
-          this.error=false;
-          
+        else {
+          this.success = false;
+          this.error = false;
+
         }
       },
-      error => {
-        this.error=error;
-        this.success=true;
-        console.log(this.error);
-      }
+        error => {
+          this.error = error;
+          this.success = true;
+          console.log(this.error);
+        }
       );
   }
 

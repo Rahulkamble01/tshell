@@ -3,6 +3,7 @@ package com.cts.tshell.bean;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,18 +23,23 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
-@NamedQueries({ @NamedQuery(name = "User.findByEmpId", query = " select u from User u " + " left join fetch u.role r "
-		+ " where u.employeeId = :employeeId ") })
 
+@NamedQueries({
+	@NamedQuery(name="User.findByEmpId",
+			query=	" select u from User u " + 
+					" left join fetch u.role r " + 
+				    " where u.employeeId = :employeeId ")
+})
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "us_id")
+	@Column(name = "us_id")	
 	private int id;
 
 	@NotNull(message = "User Name cannot be empty")
@@ -52,6 +58,7 @@ public class User {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "us_ur_id")
+	@JsonView(Views.Internal.class)
 	private Role role;
 
 	@Min(value = 1, message = "Employee ID must be at least 6 digits")
@@ -60,19 +67,18 @@ public class User {
 	@JsonView(Views.Public.class)
 	private int employeeId;
 
-	@Column(name = "us_image")
+	@Column(name = "us_image")	
 	private byte[] image;
 
-	@Column(name = "us_signup_date")
+	@Column(name = "us_signup_date")	
 	private Date signupDate;
 
-	@Column(name = "us_last_login_time")
+	@Column(name = "us_last_login_time")	
 	private Time lastLoginTime;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
-	@JsonView(Views.Internal.class)
 	private List<Skill> skills;
 
 	public int getId() {

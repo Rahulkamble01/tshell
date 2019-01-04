@@ -15,17 +15,17 @@ export class AuthService {
     return this.employeeId;
   }
 
-  setEmployeeId(employeeId:any) {
+  setEmployeeId(employeeId: any) {
     this.employeeId = employeeId;
   }
 
   login() {
-    console.log("Inside auth service login()")
+    console.log("Inside auth service login()");
     this.loggedIn = true;
   }
 
   logout() {
-    console.log("Inside auth service logout()")
+    console.log("Inside auth service logout()");
     this.loggedIn = false;
   }
 
