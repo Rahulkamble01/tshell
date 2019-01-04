@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-score-assesment',
@@ -42,9 +42,10 @@ export class ScoreAssesmentComponent implements OnInit {
   totalOutOf: number = 0;
   overallpecent: number = 0;
   overallClass: any;
-  constructor(private router: Router) { }
+  constructor(private router: Router,private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', '#989D9E');
     this.topics.forEach(x => {
       x.percentage = Math.floor((x.score / x.outof) * 100);
       this.total += x.score;

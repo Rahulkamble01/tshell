@@ -1,5 +1,5 @@
 #signupbox{
-    margin-top: 50px;
+    margin-top: 40px;
 }
 #card1{
     text-align: center;font-family:Segoe UI;font-weight: 700;font-size: 25px;}
@@ -27,6 +27,17 @@
   .container-fluid{
   background-image: url("/assets/images/im1.jpg");
   min-height:90vh;
+}
+
+.message{
+   margin-left:15px;
+   margin-right:15px;
+   text-align: center;
+   margin-top:20px;
+   margin-bottom:1px;
+}
+#login-link{
+    padding-top:10px;text-align: center; font-size: 85%;
 }
 
   

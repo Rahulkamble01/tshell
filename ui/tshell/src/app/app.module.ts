@@ -13,7 +13,6 @@ import { SearchExistingQuestionsComponent } from './search-existing-questions/se
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { ContributeQuestionService } from './contribute-question.service';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component'
-import { TotalquestionComponent } from './totalquestion/totalquestion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
 import { SignupComponent } from './signup/signup.component';
@@ -37,7 +36,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { AddskillComponent } from './addskill/addskill.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
-import { TestComponent } from './top5AccessedTest/test.component';
+
  import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
  import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
@@ -45,6 +44,8 @@ import { SkillmodalComponent } from './skillmodal/skillmodal.component';
 import { PasswordMachingValidatorDirective } from './header/password-matching-validator.directive';
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
+import { ErrorComponent } from './error/error.component';
+import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +56,13 @@ PasswordNotEqualValidatorDirective,
     AddskillComponent,
     DashboardComponent,
     MostSearchedSkillsComponent,
-    TotalquestionComponent,
     AssessmenthistoryComponent,
     SearchSkillComponent,
+    SkillmodalComponent,
+    DashboardComponent,
+    MostSearchedSkillsComponent,
+    
+    
     RecentlyAddedSkillsComponent,
     LoginComponent,
     AdminSignupComponent,
@@ -78,13 +83,15 @@ PasswordNotEqualValidatorDirective,
     SearchResultComponent,
     AddskillComponent,
     QuestiongraphComponent,
-    TestComponent,
+    TopAccessedTestsComponent,
      ExitAssesmentComponent,
      InstructionComponent,
      ScoreAssesmentComponent,
     SkillpageComponent,
     SkillmodalComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent,
+    TopAccessedTestsComponent
   ],
 
   imports: [
