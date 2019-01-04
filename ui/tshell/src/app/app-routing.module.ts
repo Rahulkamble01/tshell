@@ -55,6 +55,7 @@ const routes: Routes = [
   { path: 'instruction', component: InstructionComponent },
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
   { path: "skills/:id", component: SearchResultComponent },
+  { path: "skills", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent },
   {path:"addQuestion",component:AddQuestionComponent},

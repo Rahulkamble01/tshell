@@ -9,7 +9,7 @@
 }
 
 .textcustomize{
-  font-size:58px;
+  font-size:50px;
   height: 90px;
   color: rgb(255, 255, 255);
   font-weight: 600;
@@ -54,14 +54,17 @@
   -webkit-animation-direction: alternate;
 }
 
-@media screen and (min-width: 601px) {
-  div.textcustomize {
-    font-size: 60px;
+@media screen and (min-width: 600px) {
+  .textcustomize {
+    font-size: 50px;
+  height: 120px;
+  
   }
 }
 
-@media screen and (max-width: 600px) {
-  div.textcustomize {
-    font-size: 30px;
+@media screen and (max-width: 1000px) {
+  .textcustomize {
+    font-size: 22px;
+    height: 70px
   }
 } 
