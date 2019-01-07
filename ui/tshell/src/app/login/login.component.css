@@ -77,3 +77,30 @@
 }
 
 
+.errormessage{
+color: red;
+}
+.requestSucesss{
+  color: #008000;
+  font-size: 15px;
+}
+.requestfailure{
+  color:#ff3333;
+  font-size: 15px;
+}
+.image{
+  margin-left: 200px;
+  width: 45px;
+}
+.reset{
+  color: #007bff
+}
+
+.resendButton{
+  background:none;
+  color: #007bff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.resendButton:focus { outline: none; }

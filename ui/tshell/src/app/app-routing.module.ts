@@ -11,7 +11,6 @@ import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.co
 import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { LoginComponent } from './login/login.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
@@ -44,7 +43,6 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   {path: "recentSkills", component: RecentlyAddedSkillsComponent},
-  { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
   { path: "changepassword", component: ChangepasswordComponent },
   { path: "userprofile", component: UserprofileComponent },
@@ -65,8 +63,7 @@ const routes: Routes = [
 
 
 @NgModule({
-
-  imports:  [RouterModule.forRoot(routes , { useHash:  true })],
+  imports: [RouterModule.forRoot(routes ,{useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

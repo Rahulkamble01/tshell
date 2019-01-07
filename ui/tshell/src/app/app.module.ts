@@ -23,7 +23,6 @@ import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { HeaderComponent } from './header/header.component';
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { NgbModule, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminHomepageComponent } from './admin-homepage/admin-homepage.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
@@ -70,7 +69,6 @@ import { NumberFormatterPipe } from './numberFormatterPipe';
     SignupComponent,
     ConfirmEqualValidatorDirective,
     HeaderComponent,
-    ResetPasswordComponent,
     LearnerHomepageComponent,
     AdminHomepageComponent,
     ChangepasswordComponent,

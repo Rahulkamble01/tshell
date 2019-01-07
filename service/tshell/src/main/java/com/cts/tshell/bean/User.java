@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.sql.Time;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -69,14 +70,21 @@ public class User {
 	@JsonView(Views.Public.class)
 	private int employeeId;
 
-	@Column(name = "us_image")	
-	private byte[] image;
+	
 
 	@Column(name = "us_signup_date")	
 	private String signupDate;
 
 	@Column(name = "us_last_login_time")	
 	private String lastLoginTime;
+	@Column(name = "us_image")
+	private byte[] image;
+
+	@Column(name = "us_otp")
+	private String otp;
+
+	@Column(name = "us_otp_generated_time")
+	private String otpGeneratedTime;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -173,10 +181,28 @@ public class User {
 		this.skills = skills;
 	}
 
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public String getOtpGeneratedTime() {
+		return otpGeneratedTime;
+	}
+
+	public void setOtpGeneratedTime(String otpGeneratedTime) {
+		this.otpGeneratedTime = otpGeneratedTime;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
-				+ lastLoginTime + ", skills=" + skills + "]";
+				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
+				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + "]";
 	}
+
+
 }
