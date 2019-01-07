@@ -33,7 +33,7 @@ public class AssessmentController {
 	public String startAssesment(@RequestBody Assessment assessment) {
 
 		LOGGER.info("START : startAssesment() of AssessmentController");
-		LOGGER.debug("Assesment Object : ", assessment);
+		LOGGER.debug("Assesment Object : {}", assessment);
 		return assessmentService.startAssessment(assessment);
 
 	}
@@ -42,7 +42,7 @@ public class AssessmentController {
 	public void saveAssesmentResponse(@RequestBody AssessmentQuestion assessmentQuestion) {
 
 		LOGGER.info("START : saveAssesmentResponse() of AssessmentController");
-		LOGGER.debug("AssessmentQuestionOption Object : ", assessmentQuestion);
+		LOGGER.debug("AssessmentQuestionOption Object : {}", assessmentQuestion);
 		assessmentService.saveAssessmentResponse(assessmentQuestion);
 	}
 
@@ -50,7 +50,7 @@ public class AssessmentController {
 	public void submitAssesment(@RequestBody Assessment assessment) {
 
 		LOGGER.info("START : st() of AssessmentController");
-		LOGGER.debug("Assessment Object : ", assessment);
+		LOGGER.debug("Assessment Object : {}", assessment);
 		assessmentService.submitAssesment(assessment);
 	}
 
@@ -69,7 +69,8 @@ public class AssessmentController {
 	@GetMapping("/topicwisescore/{assessmentId}")
 	public List<TopicWiseScore> getTopicwiseScore(@PathVariable int assessmentId){
 		 LOGGER.info("Start : getTopicWiseScore() of AssessmentController");
-		 LOGGER.debug("Assessment Id : " , assessmentId);
+		 LOGGER.debug("Assessment Id : {}" , assessmentId);
+		 Assessment assessment = assessmentService.evaluateScore(assessmentId);
 		 List<TopicWiseScore> topicWiseScore = assessmentService.getTopicWiseScore(assessmentId);
 		 LOGGER.info("End : getTopicWiseScore() of AssessmentController");
 		 return topicWiseScore;

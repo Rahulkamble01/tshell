@@ -1,7 +1,6 @@
 package com.cts.tshell.service;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
-import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
+import com.cts.tshell.bean.Util;
 import com.cts.tshell.repository.QuestionRepository;
 import com.cts.tshell.repository.SkillRepository;
 import com.cts.tshell.repository.TopicRepository;
@@ -31,11 +30,12 @@ public class QuestionService {
 
 	public List<Question> getQuestionById(int questionId) {
 		List<Question> questionList = questionRepository.fetchQuestionById(questionId);
-		for(Question question : questionList){
-			for(Option option : question.getOptionList()){
-				option.setAnswer(false);
-			}
-		}
+
+//		for(Question question : questionList){
+//			for(Option option : question.getOptionList()){
+//				option.setAnswer(false);
+//			}
+//		}
 		return questionList;
 		// System.out.println(questionList.size()); * for (Question question :
 		// questionList) { for (Topic topic : question.getTopicList()) {
@@ -66,7 +66,7 @@ public class QuestionService {
 			Set<Integer> generated = new HashSet<Integer>();
 
 			while (generated.size() < numbersNeeded) {
-				int next = rng.nextInt(max) + 1;
+				int next = rng.nextInt(max);
 				// As we're adding to a set, this will automatically do a
 				// containment check
 				int questionId = (int) mapping[next];

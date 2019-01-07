@@ -37,6 +37,9 @@ public class Option {
 	
 	@Transient
 	private boolean response;
+	
+	@Transient
+	private int counter =0;
 
 	public int getId() {
 		return id;
@@ -76,6 +79,14 @@ public class Option {
 
 	public void setResponse(boolean response) {
 		this.response = response;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 
 	

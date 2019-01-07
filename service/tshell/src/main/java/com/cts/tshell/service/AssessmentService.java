@@ -52,7 +52,7 @@ public class AssessmentService {
 
 	public String startAssessment(Assessment assessment) {
 		LOGGER.info("START : startAssesment() Service  of AssessmentService");
-		LOGGER.debug("Assesment Object : ", assessment);
+		LOGGER.debug("Assesment Object : {}", assessment);
 		System.out.println(assessment.getSkill().getId());
 		Skill skill = skillRepository.findSkillById(assessment.getSkill().getId());
 		User user = userRepository.findUserByEmployeeId(assessment.getUser().getEmployeeId());
@@ -72,7 +72,7 @@ public class AssessmentService {
 		LOGGER.info("START : saveAssessmentResponse() Service  of AssessmentService");
 		int assessmentId = assessmentQuestion.getAssessment().getId();
 		int questionId = assessmentQuestion.getQuestion().getId();
-		LOGGER.debug("Assessment ID ", assessmentId + " Question Id : ", questionId);
+		LOGGER.debug("Assessment ID {}", assessmentId + " Question Id : {}", questionId);
 		int[] assmentQuestionId = assessmentQuestionRepository.fetchAssesmentQuestionId(assessmentId, questionId);
 
 		if (assmentQuestionId.length == 0) {
@@ -157,7 +157,7 @@ public class AssessmentService {
 
 	public List<TopicWiseScore> getTopicWiseScore(int assessmentId) {
 		LOGGER.info("Start : getTopicWiseScore() of AssessmentService");
-		LOGGER.debug("Assessment ID : ", assessmentId);
+		LOGGER.debug("Assessment ID : {}", assessmentId);
 		LOGGER.info("End : getTopicWiseScore() of AssessmentService");
 		return assessmentRepository.getTopicWiseQuestionCount(assessmentId);
 	}

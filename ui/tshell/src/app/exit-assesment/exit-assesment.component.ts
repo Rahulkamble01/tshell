@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
-import { Option, Question, Quiz, QuizConfig, Topic, } from '../models/index';
 import { ExitAssesmentService } from '../exit-assesment.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 // declare var countdown: any;
@@ -12,47 +11,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./exit-assesment.component.css'],
 })
 export class ExitAssesmentComponent implements OnInit, OnDestroy {
-  quizes: any[];
-  qId: any;
+  skillId: number;
+  skillName: string;
+  assessmentType: string;
+  assessmentDuration = 1200;   // in secs i.e.1200 = 20 mins
   questionIds: any;
   questionId: number;
-  result: any;
-  taken: any;
-  len: any;
+  question: any;
   QuesJson: any;
-  question: Question;
-  samplearray: any = [];
+
   startAssesmentJson: any;
   assesmentDetails: any;
-  questionSet: any = [];
+  // tslint:disable-next-line:max-line-length
+  questionSet: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
   temp: any = [];
   assessmentOptions: any = [];
-  quiz: Quiz = new Quiz(null, null);
-  // topics: Topic = new Topic(null);
-
-  topics: any = [];
-  questions: any = [];
 
   optionList: any = [];
-  answerStatus: any = [];
+  // tslint:disable-next-line:max-line-length
+  answerStatus: any = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   mode = 'quiz';
-  quizName: string;
-  config: QuizConfig = {
-    'allowBack': true,
-    'allowReview': true,
-    'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 1200,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
-    'pageSize': 1,
-    'requiredAll': false,  // indicates if you must answer all the questions before submitting.
-    'richText': false,
-    'shuffleQuestions': false,
-    'shuffleOptions': false,
-    'showClock': false,
-    'showPager': true,
-    'theme': 'none'
-  };
-  AnsweredStatus: any;
-  AnsweredStatusArray: any = [];
+  // tslint:disable-next-line:max-line-length
+  presentStatus: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
   pager = {
     index: 0,
     size: 1,
@@ -63,23 +43,25 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
   endTime: Date;
   ellapsedTime = '00:00';
   duration = '';
-  responseanswer: any;
 
 
   title = 'cognilearn';
 
-  type = 'checkbox';
-
   // tslint:disable-next-line:max-line-length
-  constructor(private quizService: ExitAssesmentService, private router: Router, private elementRef: ElementRef, private renderer: Renderer2, private assesmentService: ExitAssesmentService) { }
+  constructor(private quizService: ExitAssesmentService, private router: Router, private elementRef: ElementRef, private renderer: Renderer2, private assesmentService: ExitAssesmentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', 'white');
+    this.route.params.subscribe(params => {
+      this.skillId = params['skillid'];
+      this.skillName = params['skillname'];
+      this.assessmentType = params['type'];
+    });
     this.startAssesmentJson = JSON.stringify({
       date: Date.now(),
-      type: 'exit',
+      type: this.assessmentType,
       skill: {
-        id: 1
+        id:  this.skillId
       },
       user: {
         employeeId: 729703
@@ -94,8 +76,9 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
         console.log(this.questionIds);
         this.questionId = this.questionIds[this.pager.index];
         console.log(this.questionId);
-        this.assesmentService.getQuestion(this.questionId).subscribe(d => {
-          this.question = d;
+
+        this.assesmentService.getQuestion(this.questionId).subscribe(q => {
+          this.question = q;
           this.loadQuiz();
           this.loadQuestions(this.question, this.pager.index);
           console.log(this.question);
@@ -108,36 +91,26 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
 
 
   loadQuestions(json, index: number) {
-    // this.questionSet.splice(this.pager.index, 1, json);
-    this.quiz = new Quiz(json, index);
-    // console.log(this.questionSet);
-    // tslint:disable-next-line:max-line-length
-    // if (this.questionSet.length != 0) {
-    if (this.questionSet[this.questionSet.indexOf(this.questionSet[this.pager.index])] == json) {
-      console.log('inside if');
-      this.questionSet[this.questionSet.indexOf(this.questionSet[this.pager.index][0])] = json;
-    } else {
-      console.log('inside else');
-      this.questionSet.splice(this.pager.index, 0, json);
-      console.log(this.questionSet[this.pager.index][0].id);
+    // this.quiz = new Quiz(json, index);
+    if (this.presentStatus[index] != 'visited') {
+      this.questionSet[index] = json[0];
+      this.presentStatus[index] = 'visited';
     }
     console.log(this.questionSet);
   }
-  // Without Service
+
   loadQuiz() {
     this.pager.count = 40;
-    console.log('length of json is' + this.pager.count);
-    console.log(this.quiz.questions);
     this.startTime = new Date();
     this.timer = setInterval(() => { this.tick(); }, 1000);
-    this.duration = this.parseTime(1200);
+    this.duration = this.parseTime(this.assessmentDuration);
     this.mode = 'quiz';
   }
 
   tick() {
     const now = new Date();
     const diff = (now.getTime() - this.startTime.getTime()) / 1000;
-    if (diff >= this.config.duration) {
+    if (diff >= this.assessmentDuration) {
       this.onSubmit();
     }
     this.ellapsedTime = this.parseTime(diff);
@@ -154,16 +127,14 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
 
 
   get filteredQuestions() {
-    return this.quiz.questions;
-    // console.log(this.questionSet.slice(this.pager.index, this.pager.index + this.pager.size));
-    // return this.questionSet ? this.questionSet.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+    return this.questionSet ? this.questionSet.slice(this.pager.index, this.pager.index + this.pager.size) : [];
   }
 
-  onSelect(question: Question, option: Option) {
+  onSelect(question: any, option: any) {
     console.log(question);
     console.log(option);
     // AnswerType == 1 means radio button  and only one option is true
-    if (question.answerType.id === 1) {
+    if (question.questionAnswerType.id == 1) {
       question.optionList.forEach((x) => {
         if (x.id == option.id) {
           x.response = true;
@@ -175,50 +146,32 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
       });
     }
     // AnswerType == 2 means checkbox  button  and only multiple option are true
-    if (question.answerType.id === 2) {
+    if (question.questionAnswerType.id == 1) {
       question.optionList.forEach((x) => {
         if (x.id == option.id) {
           if (x.counter % 2 == 0) {
             // When user checks counter = even number and marked as Checked
             x.response = true;
             x.counter++;
+            console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
           } else {
             // When user unchecks counter = odd number and marked as Checked
             x.response = false;
+            this.answerStatus[this.pager.index] = 0;
             x.counter++;
+            console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
           }
-          console.log('Option : ' + option.id + ', x.id : ' + x.id + ', response : ' + x.response);
-        }
 
+        }
       });
     }
-
-    if (this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] == this.pager.index + 1) {
-      console.log('inside if');
-      this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] = (this.pager.index + 1);
-    } else {
-      console.log('inside else');
-      this.answerStatus.splice(this.pager.index, 0, (this.pager.index + 1));
-    }
-    console.log(this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)]);
-    console.log(this.answerStatus);
-    if (this.config.autoMove) {
-      this.goTo(this.pager.index + 1);
-    }
+    // tslint:disable-next-line:max-line-length
+    question.optionList.every(e => e.response == false) ? this.answerStatus[this.pager.index] = 0 : this.answerStatus[this.pager.index] = 1;
     this.temp = question;
-    this.qId = question.id;
   }
-  isAnswered(questId, index) {
-    // console.log(this.answerStatus.find(this.pager.index));
 
-
-    if (this.answerStatus[this.answerStatus.indexOf(this.pager.index + 1)] == this.pager.index + 1 && index == this.pager.index) {
-      return 'Answered';
-    } else {
-      return 'Not Answered';
-      // return this.temp.optionList.find(x => x.response) ? 'Answered' : 'Not Answered';
-    }
-
+  correctanswer(index) {
+    return this.answerStatus[index] ? 'Answered' : 'Not Answered';
   }
 
 
@@ -234,13 +187,12 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
         this.saveResponse();
       });
       this.mode = 'quiz';
-      console.log(this.quiz.questions);
     }
   }
 
   saveResponse() {
     console.log(this.temp.length);
-    if (this.temp.length !== 0) {
+    if (this.temp.length != 0) {
       this.temp.optionList.forEach(o => {
         this.assessmentOptions.push({
           id: o.id,
@@ -262,16 +214,6 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
       this.temp = [];
     }
   }
-  /*
-  isAnswered(question) {
-    this.AnsweredStatus = question.optionList.find(x => x.response) ? 'Answered' : 'Not Answered';
-    this.qId = question.id;
-
-  };*/
-
-  isCorrect(question: Question) {
-    return question.optionList.every(x => x.response === x.answer) ? 'correct' : 'wrong';
-  }
 
   onSubmit() {
     this.saveResponse();
@@ -279,12 +221,12 @@ export class ExitAssesmentComponent implements OnInit, OnDestroy {
     console.log('saving');
     this.assesmentService.submitAssessment(this.assesmentDetails).subscribe();
     clearTimeout(this.timer);
-    this.router.navigate(['/assesmentscore']);
+    this.router.navigate(['/assesmentscore', this.assesmentDetails.id]);
 
   }
 
   ngOnDestroy() {
-    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', '#989D9E');
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', '#dee2e6');
   }
 
 

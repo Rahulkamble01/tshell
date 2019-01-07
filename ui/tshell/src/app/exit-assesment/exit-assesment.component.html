@@ -24,9 +24,9 @@
     <div class=" badge badge-info float-right"></div>
     <h3 class=" border-bottom border-dark pb-4 text-center "> Question {{pager.index + 1}} of {{pager.count}}. </h3>
     <div class="p-1 scroll-questions" id="style-1">
-      <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
+
       <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of questionIds; let index = index;">
-        <button type="button" class="{{ isAnswered(question,index)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
+        <button type="button" class="{{ correctanswer(index)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
           (click)="goTo(index)">{{index + 1}}</button>
       </span>
       <!-- <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
@@ -43,16 +43,6 @@
   </div>
 
 </div>
-<!--
-
-      <div class="col-6 text-right">
-        Select Quiz:
-        <select [(ngModel)]="quizName" (change)="loadQuiz(quizName)">
-          <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
-        </select>
-      </div>
-
--->
 
 <div class="questions qbody ">
   <div class="container-fluid">
@@ -71,13 +61,13 @@
         <!--****************       DISPLAYING QUESTIONS  *****************************-->
         <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <div *ngIf="config.duration" class="mt-2 badge badge-info time-badge float-right">Time: {{ellapsedTime}} /
+            <div  class="mt-2 badge badge-info time-badge float-right">Time: {{ellapsedTime}} /
               {{duration}}</div>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="display-question ">
 
-              <h3 class="border-bottom border-dark pb-3 test-name ">{{assesmentDetails.skillName}} Entry Level Test</h3>
+              <h3 class="border-bottom border-dark pb-3 test-name ">{{skillName}} Entry Level Test</h3>
             </div>
 
 
@@ -98,15 +88,25 @@
 
                     <!-- <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"   (change)="onSelect(question, option);" /><label for="{{option.id}}" >{{option.name}}</label> -->
 
-                    <span *ngIf="option.answerType == 'Single'">
-                      <input type="radio" id="{{option.id}}" name="option" [value]="option.selected" (change)="onSelect(question, option);">
+                    <span *ngIf="question.questionAnswerType.id == 1">
+
+                      <input type="radio" id="{{option.id}}" name="option" [value]="option.response" (change)="onSelect(question, option);"
+                        [checked]="option.response">
                       <label for="{{option.id}}">{{option.description}}</label>
                     </span>
 
-                    <span *ngIf="option.answerType == 'Multiple'">
-                      <input id="{{option.id}}" type="checkbox" ng-model="option.selected" (change)="onSelect(question, option);">
+
+
+                    <span *ngIf="question.questionAnswerType.id == 2">
+                      <input id="{{option.id}}" type="checkbox" [value]="option.response" (change)="onSelect(question, option);"
+                        [checked]="option.response">
                       <label for="{{option.id}}">{{option.description}}</label>
                     </span>
+                    <!--                    
+                    <span *ngIf="question.questionAnswerType.id == 1">
+                      <input id="{{option.id}}" type="checkbox" ng-model="option.response" (change)="onSelect(question, option);">
+                      <label for="{{option.id}}">{{option.description}}</label>
+                    </span> -->
 
 
                   </div>
@@ -131,8 +131,8 @@
 
                       <div class="scroll-questions" id="style-1">
                         <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
-                        <span class="col-lg-1 col-sm-1 modal-span-blocks" *ngFor="let question of quiz.questions; let index = index;">
-                          <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
+                        <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of questionIds; let index = index;">
+                          <button type="button" class="{{ correctanswer(index)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
                             (click)="goTo(index)" data-dismiss="modal">{{index + 1}}</button>
                         </span>
                       </div>
@@ -157,11 +157,11 @@
 
             <div class="text-center float-right navigate-buttons-div mb-3">
 
-              <button class="btn btn-ts-primary previous-nav-button" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+              <button class="btn btn-ts-primary previous-nav-button" (click)="goTo(pager.index - 1);">Prev</button>
               <button class="btn btn-ts-primary next-nav-button" (click)="goTo(pager.index + 1);">Next</button>
 
             </div>
-            <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
+            <!--<pagination  direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
           </div>
         </div>
       </div>

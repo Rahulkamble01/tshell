@@ -24,5 +24,4 @@ export class AssessmentScoreService {
     return this.http.get(this.topicWiseScoreUrl + assessmentId);
   }
 
-
 }
