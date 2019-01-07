@@ -1,5 +1,5 @@
 #loginbox {
-  margin-top: 120px;
+  margin-top: 140px;
 }
 
 #card1 {
@@ -15,8 +15,8 @@
 
 #card3 {
   padding-top: 10px;
-  text-align: center;
   font-size: 85%;
+  padding-left: 15px;
 }
 
 #card4 {
@@ -57,13 +57,23 @@
 
 .log {
   color: whitesmoke;
-  font-size: 75px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
+  font-size: 55px;
   }
 
 .container-fluid{
   background-image: url("/assets/images/im1.jpg");
   min-height:90vh;
 }
+
+@media screen and (max-width: 600px){
+  #loginbox {
+    margin-top: 80px;
+  } 
+  .log {
+   font-size:xx-large;
+  }
+}
+
 

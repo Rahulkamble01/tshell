@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
-
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -21,57 +24,94 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+
 @Entity
 @Table(name = "user")
 
+@NamedQueries({
+	@NamedQuery(name="User.findByEmpId",
+			query=	" select u from User u " + 
+					" left join fetch u.role r " + 
+				    " where u.employeeId = :employeeId ")
+})
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "us_id")
+	@Column(name = "us_id")	
 	private int id;
 
-	@NotNull(message="User Name cannot be empty")
+	@NotNull(message = "User Name cannot be empty")
 	@Column(name = "us_name")
 	private String name;
-	
-	@NotNull(message="User Name cannot be empty")
-	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
+
+	@NotNull(message = "Email cannot be empty")
+	@Pattern(regexp = ".+@.+\\..+", message = "Email address is invalid")
 	@Column(name = "us_email")
 	private String email;
-	
-	@NotNull(message="Password cannot be empty")
-	@Size(min=6, max=100, message="Password must be 6 to 30 characters")
+
+	@NotNull(message = "Password cannot be empty")
+	@Size(min = 6, max = 100, message = "Password must be 6 to 30 characters")
 	@Column(name = "us_password")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
-	//@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "us_ur_id")
+	@JsonView(Views.Internal.class)
 	private Role role;
-	
-	@Min(value=100000, message="Employee Id must contain six digits")
-	@Max(value=10000000000L, message="Employee Id must contain maximum 10 digits")
+
+	@Min(value = 1, message = "Employee ID must be at least 6 digits")
+	@Max(value = 10000000000L, message = "Employee ID cannot exceed 10 digits")
 	@Column(name = "us_emp_id")
+	@JsonView(Views.Public.class)
 	private int employeeId;
-	
-	@Column(name = "us_image")
+
+	@Column(name = "us_image")	
 	private byte[] image;
-	
-	@Column(name = "us_signup_date")
+
+	@Column(name = "us_signup_date")	
 	private String signupDate;
-	
-	@Column(name = "us_last_login_time")
+
+	@Column(name = "us_last_login_time")	
 	private String lastLoginTime;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "uk_sk_id") })
+	@JoinColumn(name = "uk_sk_id") })
 	private List<Skill> skills;
 
 	public int getId() {
 		return id;
 	}
+
+	
+
+	public String getSignupDate() {
+		return signupDate;
+	}
+
+
+
+	public void setSignupDate(String signupDate) {
+		this.signupDate = signupDate;
+	}
+
+
+
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+
+
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -125,22 +165,6 @@ public class User {
 		this.image = image;
 	}
 
-	public String getSignupDate() {
-		return signupDate;
-	}
-
-	public void setSignupDate(String signupDate) {
-		this.signupDate = signupDate;
-	}
-
-	public String getLastLoginTime() {
-		return lastLoginTime;
-	}
-
-	public void setLastLoginTime(String lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
-
 	public List<Skill> getSkills() {
 		return skills;
 	}
@@ -149,4 +173,10 @@ public class User {
 		this.skills = skills;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", employeeId=" + employeeId + ", image=" + image + ", signupDate=" + signupDate + ", lastLoginTime="
+				+ lastLoginTime + ", skills=" + skills + "]";
+	}
 }

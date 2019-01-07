@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cts.tshell.bean.AuthenticationStatus;
 import com.cts.tshell.bean.ChangePasswordStatus;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.bean.Util;
@@ -77,4 +76,23 @@ public class UserService {
 	}
 
 	
+	
+	@Transactional
+	public User getUser(int employeeId) {
+		LOGGER.info("Start");
+		LOGGER.debug("EmployeeId: {}", employeeId);
+		LOGGER.info("End");
+		return userRepository.findByEmpId(employeeId);
+	}
+	
+	
+	@Transactional
+	public long getUserCount(){
+		LOGGER.info("start");
+		long userCount = userRepository.totalUserCount();
+		LOGGER.debug("totalUserCount -> ",  userCount );
+		
+		return userCount; 
+	}
+
 }

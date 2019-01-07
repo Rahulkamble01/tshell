@@ -18,6 +18,7 @@ public class TshellController {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleError(Exception ex){
 		LOGGER.info("start");
+		LOGGER.error(ex.getMessage(), ex);
 		ErrorResponse error = new ErrorResponse();
 		error.setTimestamp(ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT));
 		LOGGER.debug("error : {} ", error);
@@ -27,3 +28,4 @@ public class TshellController {
 		return new ResponseEntity<ErrorResponse>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
+

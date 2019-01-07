@@ -12,8 +12,8 @@ const httpOptions={
   providedIn: 'root'
 })
 export class DeactivateActivateSkillService {
-  url: string = "/tShell-webservice/skill/list/";
-  url1: string = "/tShell-webservice/skill/save";
+  url: string = "/tShell/skill/list/";
+  url1: string = "/tShell/skill/save";
   constructor(private http: HttpClient) { }
 
   gettingSkill(name): Observable<any>{  

@@ -4,6 +4,7 @@ public class ErrorResponse {
 	
 	private static final long serialVersionUID = 5776681206288518465L;
 	
+
 	private String timestamp;	
 	private String errorMessage;
 	private int reasonCode;
