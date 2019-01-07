@@ -2,6 +2,7 @@ package com.cts.tshell.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -34,20 +35,12 @@ public class UserService {
 			return false;
 		}
 		user.setOtp(Util.encryptToMD5(String.valueOf(Util.generateOTP())));
-		user.setOtpGeneratedTime(getCurrentDateTime());
+		user.setOtpGeneratedTime(Calendar.getInstance());
 		userRepository.save(user);
 		LOGGER.info("end");
 		return true;
 	}
-
-	public String getCurrentDateTime() {
-		LOGGER.info("Start");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date();
-		LOGGER.info("end");
-		return formatter.format(date);
-	}
-
+	
 	public boolean verifyOTP(int employeeId, String encryptedOTP) {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
@@ -59,36 +52,17 @@ public class UserService {
 		return false;
 	}
 
-	boolean validateTime(String dateStart) {
+	boolean validateTime(Calendar dateStart) {
 		LOGGER.info("Start");
-		String dateStop = getCurrentDateTime();
-		LOGGER.debug(" current date-> {}", dateStop);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d1 = null;
-		Date d2 = null;
-		try {
-			d1 = format.parse(dateStart);
-			d2 = format.parse(dateStop);
-			LOGGER.debug(" Formatted current date-> {}", d2);
-			long diff = d2.getTime() - d1.getTime();
-
-			if (diff / (24 * 60 * 60 * 1000) >= 1) {
+		Calendar dateStop = Calendar.getInstance();
+		LOGGER.debug(" start time -> {}", dateStart.getTimeInMillis());
+			LOGGER.debug(" end time -> {}", dateStop.getTimeInMillis());
+			long diff = (dateStop.getTimeInMillis()/1000) - (dateStart.getTimeInMillis()/1000);
+			LOGGER.debug("difference of time --> {}",diff);
+			if (diff > 120) {
 				return false;
-			} else {
-				if (diff / (60 * 60 * 1000) % 24 >= 1) {
-					return false;
-				} else {
-					if (diff / (60 * 1000) % 60 >= 1) {
-						return false;
-					} else {
-						return true;
-					}
-				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+			return true;
 	}
 
 	public boolean restPassword(int employeeId, String encryptedPassword) {

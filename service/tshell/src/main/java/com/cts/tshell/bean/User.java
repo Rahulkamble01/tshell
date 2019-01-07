@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class User {
 	private String otp;
 
 	@Column(name = "us_otp_generated_time")
-	private String otpGeneratedTime;
+	private Calendar otpGeneratedTime;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -129,12 +130,12 @@ public class User {
 		this.otp = otp;
 	}
 
-	public String getOtpGeneratedTime() {
+	public Calendar getOtpGeneratedTime() {
 		return otpGeneratedTime;
 	}
 
-	public void setOtpGeneratedTime(String otpGeneratedTime) {
-		this.otpGeneratedTime = otpGeneratedTime;
+	public void setOtpGeneratedTime(Calendar calendar) {
+		this.otpGeneratedTime = calendar;
 	}
 
 	@Override
