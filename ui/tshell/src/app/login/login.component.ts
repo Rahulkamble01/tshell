@@ -167,6 +167,7 @@ export class LoginComponent implements OnInit {
           this.message = "";
           this.status = true;
           this.otpStatus = true;
+          this.resendmessage="";
         }
         else {
           this.message = "OTP is incorrect or expried"
