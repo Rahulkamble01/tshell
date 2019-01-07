@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -175,11 +174,18 @@ public class SkillController {
 	public List<ReferenceSkill> getReferenceSkill(@PathVariable("skillId") int skillId){
 		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", skillId);
-		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);
-		
-		
-		
+		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);		
 		return result;
+	}
+	
+	@RequestMapping(value = "/addreferenceskill", method = RequestMethod.POST)
+	public void addReferenceSkill(@RequestBody Object referenceSkills){
+		LOGGER.info("Adding ReferenceSkils");
+		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}");
+//		for (ReferenceSkill referenceSkill : referenceSkills) {
+//			LOGGER.info("Adding ReferenceSkils itration {}", referenceSkill);
+//			
+//		}		
 	}
 }
 

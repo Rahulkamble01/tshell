@@ -18,3 +18,12 @@ export class Skill {
         this.creationDate = creationDate;
     }
 }
+
+export class ReferenceSkill {
+    id: number;
+    name: string;
+    constructor(id, name) {
+        this.name = name;
+        this.id = id;
+    }
+}

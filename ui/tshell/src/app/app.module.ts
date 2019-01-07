@@ -51,6 +51,7 @@ import { EditskillmodalComponent } from './editskillmodal/editskillmodal.compone
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog.service';
 import { CommonModule } from '@angular/common';
+import { ReferenceSkillModelComponent } from './reference-skill-model/reference-skill-model.component';
 
 
 
@@ -93,7 +94,8 @@ import { CommonModule } from '@angular/common';
         ErrorComponent,
         GraphmodalComponent,
         EditskillmodalComponent,
-        ConfirmationDialogComponent
+        ConfirmationDialogComponent,
+        ReferenceSkillModelComponent
     ],
 
     imports: [
@@ -112,7 +114,11 @@ import { CommonModule } from '@angular/common';
         HttpClientModule,
         ConfirmationDialogService
     ],
-    entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
+    entryComponents: [
+        SkillmodalComponent,
+        EditskillmodalComponent,
+        ConfirmationDialogComponent,
+        ReferenceSkillModelComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule { }

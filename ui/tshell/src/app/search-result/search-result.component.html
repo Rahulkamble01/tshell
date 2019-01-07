@@ -10,8 +10,9 @@
           <ng-template #rt let-r="result" let-t="term">
             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
           </ng-template>
-          <input id="typeahead-template" type="text" class="form-control" #instance="ngbTypeahead" [(ngModel)]="model" [ngbTypeahead]="search"
-            placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" (focus)="focus$.next($event.target.value)"/>
+          <input id="typeahead-template" type="text" class="form-control" #instance="ngbTypeahead" [(ngModel)]="model"
+            [ngbTypeahead]="search" placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter"
+            (selectItem)="itemSelected($event)" (focus)="focus$.next($event.target.value)" />
         </div>
       </div>
       <ng-container *ngIf="skills.length != 0; else searchNotFoundTemplate">
@@ -54,7 +55,8 @@
                       <label for="imageUpload"></label>
                     </div>
                     <div class="avatar-preview">
-                      <img src="./../assets/images/default-skill.png" id="imagePreview" style="border-radius:50%;height:100%;width:100%;" height="450"/>
+                      <img src="./../assets/images/default-skill.png" id="imagePreview" style="border-radius:50%;height:100%;width:100%;"
+                        height="450" />
                     </div>
                   </form>
                 </div>
@@ -64,71 +66,89 @@
             </div>
 
           </div>
-          <div class="col-lg-1 col-sm-0 col-md-1 col-xs-0"></div>
+          <!-- <div class="col-lg-1 col-sm-0 col-md-1 co  l-xs-0"></div> -->
           <div class="col-lg-9 col-sm-10 col-xs-12 col-md-9" style="padding:10px;">
-            <div class="row">
-              <div class="col-lg-9 col-sm-9 col-9 col-md-9">
-                <span style="font-size:35px; font-weight: bold;">
-                  {{skills.name}}<span class="ml-2" style="font-size:20px;">({{skills.id}}) </span>
-                </span>
-                <span style="color:blue;">
-                  <br>{{skills.description}}
-                </span>
-              </div>
-              <div class="col-lg-3 col-sm-3 col-3 col-md-3">
-
-                <span class="float-left" style="font-size:20px; color:grey;"><i class="far fa-edit" style=" margin-top: 32px; cursor: pointer; font-size: 25px"
-                    (click)="editSkillModel(skills)"></i></span>
+            <div class="row" class="ml-12 mr-12">
+              <span style="font-size:35px; font-weight: bold;">
+                {{skills.name}}
                 <ng-container *ngIf="skills.active == 'active'; else elseTemplate">
-                    <h4><span value="Activated" class="badge badge-success float-right" (click)="toggllingSkill(skills)" style="margin-top: 32px; cursor: pointer;" >Active</span></h4>
+                  <h5 class="d-inline"><span value="Activated" class="badge badge-success" (click)="toggllingSkill(skills)"
+                      style="cursor: pointer;">Active</span></h5>
                 </ng-container>
                 <ng-template #elseTemplate>
-                  <h4><span value="Deactivated" class="badge badge-danger float-right" (click)="toggllingSkill(skills)" style="margin-top: 32px; cursor: pointer;">Inactive</span></h4>
+                  <h5><span value="Deactivated" class="badge badge-danger" (click)="toggllingSkill(skills)" style="margin-top: 19px; cursor: pointer;">Inactive</span></h5>
                 </ng-template>
-
-
-
-
-
-                <!-- <span class="float-left" style="font-size:20px; color:grey;"><i class="far fa-edit" style=" margin-top: 32px; cursor: pointer; font-size: 25px"
+                &nbsp;<span class="d-inline" style="font-size:31px; color:grey;"><i class="far fa-edit" style=" margin-top: 19px; cursor: pointer; font-size: 25px"
                     (click)="editSkillModel(skills)"></i></span>
-                <span class="float-right" style="font-size:20px; color:grey;"><i class="fas fa-user-edit" style=" margin-top: 32px; cursor: pointer; font-size: 25px"
-                    (click)="editSkillModel(skills)"></i></span> -->
-              </div>
+              </span>
+              <span style="color:darkslateblue; line-height: 1.07">
+                <br>{{skills.description}}
+              </span>
             </div>
             <br>
-
-            <h4><span class="badge badge-secondary viewskills" *ngFor="let item of skills.topics">{{item.name}}</span>
-            </h4>
+            <h5 class="d-inline"><span class="badge badge-secondary viewskills" *ngFor="let item of skills.topics">{{item.name}}</span>
+            </h5>&nbsp;
+            <i class="d-inline fas fa-plus-square" style="font-size: 1.5rem; color: rgb(19, 114, 158)" (click)="editSkillModel(skills)"></i>
           </div>
-
         </div>
       </div>
       <div class="col-lg-1 col-12 col-sm-1 col-md-1">
-
       </div>
     </div>
-
-
     <div class="row" style="margin-top:15px;">
       <div class="col-lg-1 col-sm-12">
-
       </div>
       <div class="col-lg-10 col-sm-12">
+        <h3>Reference Skills</h3>
+        <hr>
+        <div class="container" style="margin-top:4%;margin-bottom: 1%;">
+          <div class="card-group">
+            <div class="card bg-white ts-card">
+              <div class="card-body text-center">
+                <p class="card-text">Dependent Skills <span> <i class="fas fa-plus" (click)="editRef(referenceSkill)" style="font-size: 20px;color:mediumaquamarine;cursor: pointer;"></i></span></p>
+                <hr>
+                <div *ngFor="let item of referenceSkill">
+                  <h5 *ngIf="item.classifier == 'pre'" class="mb-0"><span class="badge badge-secondary">{{item.referenceSkill.name}}
+                      </span>
+                    <i class="fas fa-arrow-down" style="margin: 0px 12px 0px 8px;font-size: 15px;"></i></h5>
+                </div>
+                <hr>
+              </div>
+            </div>
+            <i class="fas fa-arrow-circle-right" style="margin: 120px 0px 0px 30px;font-size: 40px;"></i>
+            <div class="card bg-white ts-card ts-card1" style="margin-left:5%;">
+              <div class="card-body text-center" style="font-size:20px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                {{skills.name}}
+              </div>
+            </div>
+            <i class="fas fa-arrow-circle-right" style="margin: 120px 0px 0px 30px;font-size: 40px;"></i>
+            <div class="card bg-white ts-card" style="margin-left:5%;">
+              <div class="card-body text-center">
+                <p class="card-text"></p>
+                <i class="fas fa-plus" style="margin: 0px 0px 0px 130px;font-size: 20px;color:mediumturquoise;cursor: pointer;"></i>
+                <div *ngFor="let item of referenceSkill">
+                  <h4 *ngIf="item.classifier == 'post'"><span class="badge badge-secondary">{{item.referenceSkill.name}}
+                      <i class="fas fa-times" style="cursor: pointer;color: lightgrey;"></i></span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div class="row" style="padding-bottom:15px;">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12" style="margin-top:20px;">
 
-            <div class=" ts-card card" style="height:100%;">
+            <div class="ts-card card" style="height:100%;">
               <div class="card-body">
-                <h2>Top 5 Performers</h2>
+                <h2>Top Performers</h2>
                 <hr>
                 <div class="row" *ngFor="let p of toppers">
                   <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <span class="badge " style="font-weight:400;font-size:16px;background-color:blue;color:white;opacity:0.7;">
+                    <span class="badge float-left" style="font-weight:400;font-size:16px;background-color:blue;color:white;opacity:0.7;">
                       <b>{{p.user.name}}</b>
-                    </span><br>
-                    <span class="testdate">8 Dec 2018</span>
+                    </span>
+                    <span class="testdate float-right">8 Dec 2018</span>
                   </div>
                   <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="progress">
@@ -139,13 +159,13 @@
                     </div>
                   </div>
                   <hr>
-                  <!-- <div class="col-lg-5 col-5 col-sm-5">
-                        <span class="percent">80<span style="font-size:25px;">%</span></span>
-                      </div>
-                      <div class="col-lg-2 col-2 col-sm-2">
-                        <div class="vertical-center"><button data-toggle="modal" data-target="#myModal" class="fas fa-ellipsis-v show-result"></button></div>
-      
-                      </div> -->
+                </div>
+                <div class="float-right">
+                  <h6 class="d-inline">Put Your Name Here</h6>&nbsp;<span>
+                    <a href="#" [routerLink]="['/instruction', skills.id, skills.name ]" class="badge badge-primary"><i class="fas fa-pen-nib"></i>Take
+                      test
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>

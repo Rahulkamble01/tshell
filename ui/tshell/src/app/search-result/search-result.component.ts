@@ -12,6 +12,7 @@ import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, merge, filter } from 'rxjs/operators';
 import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
+import { ReferenceSkillModelComponent } from '../reference-skill-model/reference-skill-model.component';
 
 
 declare var abc: any;
@@ -27,6 +28,7 @@ export class SearchResultComponent implements OnInit {
   model: any;
   skills: any = [];
   allSkills: Skill[] = [];
+  referenceSkill: any = [];
   toppers: any[] = [];
   graphData: any[] = [];
   topics: Array<Topic>;
@@ -42,10 +44,10 @@ export class SearchResultComponent implements OnInit {
 
   }
   ngOnInit() {
-    // this.skillService.getAll().subscribe(data => {
-    //   this.allSkills = data;
-    //   console.log(this.allSkills);
-    // });
+    this.skillService.getAll().subscribe(data => {
+      this.allSkills = data;
+      console.log(this.allSkills);
+    });
 
     this.userRole = this.authService.getRole();
     if (this.userRole !== undefined || this.userRole !== 'Learner') {
@@ -84,12 +86,12 @@ export class SearchResultComponent implements OnInit {
 
   editSkillModel(item) {
     console.log(item);
-    const modalRef = this.modalService.open(EditskillmodalComponent, { centered: true });
+    const modalRef = this.modalService.open(EditskillmodalComponent);
     modalRef.componentInstance.item = item;
   }
 
   addSkillModel() {
-    const modalRef = this.modalService.open(SkillmodalComponent, { centered: true });
+    const modalRef = this.modalService.open(SkillmodalComponent);
   }
 
   formatter = (x: { name: string }) => x.name;
@@ -98,8 +100,9 @@ export class SearchResultComponent implements OnInit {
     distinctUntilChanged(),
     merge(this.focus$),
     merge(this.click$.pipe(filter(() => !this.instance.isPopupOpen()))),
-    map(term => (term === '' ? [] : this.keyPressing(this.model).filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()))
-      // : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+    map(term => (term === '' ? []
+      // this.keyPressing(this.model).filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()))
+      : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
     ))
     // map(term => term === '' ? []
     //   : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
@@ -107,7 +110,7 @@ export class SearchResultComponent implements OnInit {
     // map(term => term === '' ? [])
 
   )
-  keyPressing(model) {
+  async keyPressing(model) {
     console.log(model);
     let allSkills1: Skill[] = [];
     this.skillService.getAll().subscribe(data => {
@@ -115,12 +118,9 @@ export class SearchResultComponent implements OnInit {
       console.log(data);
     });
     console.log(allSkills1);
+    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
     return allSkills1;
   }
-
-
-
-
 
   itemSelected($event) {
     this.skills = $event.item;
@@ -128,11 +128,10 @@ export class SearchResultComponent implements OnInit {
     this.skillService.updateSearch($event.item).subscribe();
     this.skillService.getSkillTopper($event.item.id).subscribe(data => {
       this.toppers = data;
-      console.log(data);
     });
-    // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
-    //   this.graphData = data;
-    // });
+    this.skillService.getReferenceSkill($event.item.id).subscribe(data => {
+      this.referenceSkill = data;
+    });
   }
 
   handleFileInput(file: FileList) {
@@ -143,11 +142,13 @@ export class SearchResultComponent implements OnInit {
       this.imageUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
-
-
-
   }
 
+  editRef(item) {
+    const modalRef = this.modalService.open(ReferenceSkillModelComponent);
+    modalRef.componentInstance.allReferenceSkills = item;
+    modalRef.componentInstance.allSkills = this.allSkills;
+  }
 }
 
 

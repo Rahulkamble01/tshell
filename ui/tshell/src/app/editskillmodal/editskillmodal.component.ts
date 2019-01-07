@@ -70,7 +70,6 @@ export class EditskillmodalComponent implements OnInit {
     let counter = 0;
     let percounter = 0;
     let morethahun = 0;
-    console.log(id + " " + topicname + " " + percentage + "%");
     if (topicname === '') {
       counter = 1;
     }
