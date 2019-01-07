@@ -1,5 +1,6 @@
 package com.cts.tshell.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -27,12 +28,14 @@ public interface SkillRepository extends JpaRepository<Skill, Integer>{
 	Skill findByName(String skillname);
 	Skill findById(int id);
 
-	List<Skill> fetchRecentSkills();
 	
 	@Query("select s.name, s.testCount from Skill s  where s.testCount>0 order by testCount desc")
 	Page<Skill> findBySkillTop5(Pageable pageable);
 
 	@Query( "select count(s.id) from Skill s ")
 	long totalSkillCount();
+	
+	@Query("select sk.id, sk.name from Skill sk where creationDate >=:inputDate   order by creationDate desc  ")
+	List<Skill> fetchRecentSkills(@Param("inputDate") Date inputDate);
 }
 

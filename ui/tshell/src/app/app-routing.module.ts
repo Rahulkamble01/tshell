@@ -5,6 +5,8 @@ import { SearchExistingQuestionsComponent } from './search-existing-questions/se
 import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
+
 import { LearnerHomepageComponent } from './learner-homepage/learner-homepage.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminSignupComponent } from './admin-signup/admin-signup.component';
@@ -33,13 +35,15 @@ const routes: Routes = [
   { path: 'reviewq/:id/:name', component: SearchExistingQuestionsComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'contributeQuestion', component: ContributeQuestionComponent },
+  { path: 'preview', component: PreviewQuestionsComponent }, 
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
-  { path: 'dash', component: DashboardComponent },
-  { path: "recentSkills", component: RecentlyAddedSkillsComponent },
+  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
   { path: "reset", component: ResetPasswordComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
   { path: "changepassword", component: ChangepasswordComponent },

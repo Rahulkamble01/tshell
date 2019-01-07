@@ -51,6 +51,7 @@ import { EditskillmodalComponent } from './editskillmodal/editskillmodal.compone
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog.service';
 
+import { NumberFormatterPipe } from './numberFormatterPipe';
 
 
 @NgModule({
@@ -93,9 +94,9 @@ import { ConfirmationDialogService } from './confirmation-dialog.service';
     ErrorComponent,
     GraphmodalComponent,
         EditskillmodalComponent,
-        ConfirmationDialogComponent
-  ],
-
+        ConfirmationDialogComponent,
+        NumberFormatterPipe
+    ],
 
     imports: [
         BrowserModule,
@@ -115,5 +116,7 @@ import { ConfirmationDialogService } from './confirmation-dialog.service';
     ],
     entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
     bootstrap: [AppComponent],
+    exports:[NumberFormatterPipe],
+ 
 })
 export class AppModule { }
