@@ -1,5 +1,6 @@
 package com.cts.tshell.rest;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -139,7 +140,8 @@ public class SkillController {
 	@RequestMapping(value = "/recentSkillList", method = RequestMethod.GET)
 	public List<Skill> getRecentSkills() {
 		LOGGER.info("start");
-		List<Skill> skills = skillService.getRecent5Skills();
+		Date date=skillService.getCurrentTimeUsingCalendar();
+		List<Skill> skills = skillService.getRecent5Skills(date);
 		LOGGER.debug("SkillController -> {}", skills);
 		return skills;
 	}
@@ -171,6 +173,10 @@ public class SkillController {
 		
 		return result;
 	}
+	
+	
+
+	
 }
 
 

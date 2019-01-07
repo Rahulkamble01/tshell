@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TotalQuestionsService } from '../totalquestions.service';
 import { AuthService } from '../auth.service';
 
+
 @Component({
   selector: 'app-questiongraph',
   templateUrl: './questiongraph.component.html',
