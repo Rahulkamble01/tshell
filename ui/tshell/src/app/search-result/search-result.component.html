@@ -99,7 +99,7 @@
       <div class="col-lg-1 col-sm-12">
       </div>
       <div class="col-lg-10 col-sm-12">
-        <h3>Reference Skills</h3>
+        <!--  <h3>Reference Skills</h3>
         <hr>
         <div class="container" style="margin-top:4%;margin-bottom: 1%;">
           <div class="card-group">
@@ -133,7 +133,81 @@
               </div>
             </div>
           </div>
+        </div> -->
+
+
+        <!------------------------------------------Reference Skills-------------------------------------------------------------->
+
+        <h3>Reference Skills</h3>
+        <hr>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-sm-12">
+              <div class="card-group">
+                <div class="card bg-white ts-card">
+                  <div class="card-body text-center">
+                    <h6>Dependent Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
+                    <hr>
+                    <div *ngFor="let item of referenceSkill">
+                      <h6 *ngIf="item.classifier == 'pre'" class="d-inline"><span class="badge badge-info d-inline">{{item.referenceSkill.name}}
+                          <i class="fas fa-times cross d-inline"></i></span>
+                        <i class="fas fa-arrow-right arr1"></i></h6>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1 bigScreen"> <i class="fas fa-arrow-right arr2"></i></div>
+            <div class="col-lg-1 smallScreen center1"> <i class="fas fa-arrow-down"></i></div>
+            <div class="col-lg-3 col-sm-12">
+
+              <div class="card bg-white ts-card bigScreen m1">
+                <div class="card-body text-center f1">
+                  {{skills.name}}
+                </div>
+              </div>
+
+              <div class="card bg-white ts-card smallScreen m1">
+                <div class="card-body text-center f1">
+                  {{skills.name}}
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-lg-1 bigScreen"> <i class="fas fa-arrow-right arr2"></i></div>
+            <div class="col-lg-1 smallScreen center2"> <i class="fas fa-arrow-down"></i></div>
+
+            <div class="col-lg-4 col-sm-12">
+
+              <div class="card bg-white ts-card bigScreen">
+                <div class="card-body text-center">
+                  <h6>Additional Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
+                  <hr>
+                  <div *ngFor="let item of referenceSkill">
+                    <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{skill.referenceSkill.name}} <i class="fas fa-times cross"></i></span></h5>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card bg-white ts-card smallScreen m1">
+                <div class="card-body text-center">
+                  <h6>Additional Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
+                  <hr>
+                  <div *ngFor="let item of referenceSkill">
+                    <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{skill.referenceSkill.name}} <i class="fas fa-times cross"></i></span></h5>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
         </div>
+
+        <!---------------------------------------------------------------------------------------------------------------------->
+
 
 
         <div class="row" style="padding-bottom:15px;">
@@ -162,7 +236,8 @@
                 </div>
                 <div class="float-right">
                   <h6 class="d-inline">Put Your Name Here</h6>&nbsp;<span>
-                    <a href="#" [routerLink]="['/instruction', skills.id, skills.name ]" class="badge badge-primary"><i class="fas fa-pen-nib"></i>Take
+                    <a href="#" [routerLink]="['/instruction', skills.id, skills.name ]" class="badge badge-primary"><i
+                        class="fas fa-pen-nib"></i>Take
                       test
                     </a>
                   </span>
