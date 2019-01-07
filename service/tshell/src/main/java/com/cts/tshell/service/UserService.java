@@ -40,7 +40,7 @@ public class UserService {
 		LOGGER.info("end");
 		return true;
 	}
-	
+
 	public boolean verifyOTP(int employeeId, String encryptedOTP) {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
@@ -56,13 +56,13 @@ public class UserService {
 		LOGGER.info("Start");
 		Calendar dateStop = Calendar.getInstance();
 		LOGGER.debug(" start time -> {}", dateStart.getTimeInMillis());
-			LOGGER.debug(" end time -> {}", dateStop.getTimeInMillis());
-			long diff = (dateStop.getTimeInMillis()/1000) - (dateStart.getTimeInMillis()/1000);
-			LOGGER.debug("difference of time --> {}",diff);
-			if (diff > 120) {
-				return false;
-			}
-			return true;
+		LOGGER.debug(" end time -> {}", dateStop.getTimeInMillis());
+		long diff = (dateStop.getTimeInMillis() / 1000) - (dateStart.getTimeInMillis() / 1000);
+		LOGGER.debug("difference of time --> {}", diff);
+		if (diff > 120) {
+			return false;
+		}
+		return true;
 	}
 
 	public boolean restPassword(int employeeId, String encryptedPassword) {
