@@ -39,7 +39,6 @@ public class QuestionController {
 		LOGGER.debug("Option: {}", option);
 		Question question = questionService.saveOption(option);
 		LOGGER.info("Getting New Question");
-		//Question question = questionService.getQuestion(option.getQuestion().getId());
 		LOGGER.debug("Question: {}", question);
 		ObjectMapper mapper = new ObjectMapper();
 		String questionString = mapper.writerWithView(Views.Public.class).writeValueAsString(question);

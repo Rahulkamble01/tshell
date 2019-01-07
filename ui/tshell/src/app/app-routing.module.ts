@@ -26,6 +26,7 @@ import { SkillpageComponent } from './skillpage/skillpage.component';
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 
 const routes: Routes = [
@@ -57,7 +58,8 @@ const routes: Routes = [
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
   { path: "skills", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
-  { path: "skillpage", component: SkillpageComponent }
+  { path: "skillpage", component: SkillpageComponent },
+  { path: "addQuestion", component: AddQuestionComponent }
 ];
 
 

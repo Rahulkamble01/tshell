@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -39,7 +40,8 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
+	@JoinColumn(name = "us_ur_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Role role;
 
 	@Column(name = "us_emp_id")

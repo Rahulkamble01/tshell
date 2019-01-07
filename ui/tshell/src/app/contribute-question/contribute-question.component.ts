@@ -84,15 +84,15 @@ export class ContributeQuestionComponent implements OnInit {
     const file = event.target.files[0];
     this.userFile = file;
   }
-  upload() {
-    console.log('File Upload method is called!');
-    let formData = new FormData;
-    formData.append('file', this.userFile);
-    this.contributeQuestionService.uploadQuestions(formData).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-    this.router.navigate(['preview']);
-  }
+  // upload() {
+  //   console.log('File Upload method is called!');
+  //   let formData = new FormData;
+  //   formData.append('file', this.userFile);
+  //   this.contributeQuestionService.uploadQuestions(formData).subscribe(
+  //     data => {
+  //       console.log(data);
+  //     }
+  //   )
+  //   this.router.navigate(['preview']);
+  // }
 }

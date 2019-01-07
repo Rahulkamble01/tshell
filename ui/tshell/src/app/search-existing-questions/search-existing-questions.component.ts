@@ -57,7 +57,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
   questionId: number;
   optionDescription: string = '';
   skillName: string;
-  message: string ;
+  message: string = 'undefined';
   selectedOptionId: number;
   deleteOptionStatus: string = 'undefined';
   searchedQuestionsList: any = '';
