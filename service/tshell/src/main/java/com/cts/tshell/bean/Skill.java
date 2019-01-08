@@ -18,15 +18,18 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "skill")
 @NamedQueries({
 		@NamedQuery(name = "Skill.findPendingQuestionsCount", query = "select count(*), s.name, s.id from Skill s "
 				+ "join s.topics t " + "join t.questions q " + "where q.status='Pending' group by s.name "),
-		
+
 		@NamedQuery(name = "Skill.findSkillNames", query = "select s.name,s.id from Skill s "
 				+ "where s.name LIKE CONCAT('%',:searchSkillName,'%') "),
-		
+
 		@NamedQuery(name = "Skill.fetchTopSearchedSkills", query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc") })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Skill {
@@ -60,7 +63,7 @@ public class Skill {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
 	private List<Topic> topics;
-	
+
 	public Skill() {
 		super();
 		// TODO Auto-generated constructor stub

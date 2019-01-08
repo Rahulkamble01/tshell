@@ -34,7 +34,6 @@ import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SkillpageComponent } from './skillpage/skillpage.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
-
 import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
@@ -54,46 +53,54 @@ import { NumberFormatterPipe } from './numberFormatterPipe';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PasswordMachingValidatorDirective,
-    PasswordNotEqualValidatorDirective,
-    DashboardComponent,
-    MostSearchedSkillsComponent,
-  
-    AssessmenthistoryComponent,
-    SearchSkillComponent,
-    RecentlyAddedSkillsComponent,
-    LoginComponent,
-    AdminSignupComponent,
-    SignupComponent,
-    ConfirmEqualValidatorDirective,
-    HeaderComponent,
-    LearnerHomepageComponent,
-    AdminHomepageComponent,
-    ChangepasswordComponent,
-    UserprofileComponent,
-    ViewlearnerComponent,
-    SearchExistingQuestionsComponent,
-    ContributeQuestionComponent,
-    PreviewQuestionsComponent,
-    CountOfQuestionsToReviewComponent,
-    HomeComponent,
-    SearchResultComponent,
-    QuestiongraphComponent,
-     ExitAssesmentComponent,
-     InstructionComponent,
-     ScoreAssesmentComponent,
-    SkillpageComponent,
-    SkillmodalComponent,
-    FooterComponent,
-    AddQuestionComponent,
-    TopAccessedTestsComponent,
-    ErrorComponent,
-    GraphmodalComponent,
+    declarations: [
+        AppComponent,
+        PasswordMachingValidatorDirective,
+        PasswordNotEqualValidatorDirective,
+        DashboardComponent,
+        MostSearchedSkillsComponent,
+        AssessmenthistoryComponent,
+        SearchSkillComponent,
+        RecentlyAddedSkillsComponent,
+        LoginComponent,
+        AdminSignupComponent,
+        SignupComponent,
+        ConfirmEqualValidatorDirective,
+        HeaderComponent,
+        LearnerHomepageComponent,
+        AdminHomepageComponent,
+        ChangepasswordComponent,
+        UserprofileComponent,
+        ViewlearnerComponent,
+        SearchExistingQuestionsComponent,
+        ContributeQuestionComponent,
+        PreviewQuestionsComponent,
+        CountOfQuestionsToReviewComponent,
+        HomeComponent,
+        SearchResultComponent,
+        QuestiongraphComponent,
+        ExitAssesmentComponent,
+        InstructionComponent,
+        ScoreAssesmentComponent,
+        SkillpageComponent,
+        SkillmodalComponent,
+        FooterComponent,
+        AddQuestionComponent,
+        TopAccessedTestsComponent,
+        ErrorComponent,
+        GraphmodalComponent,
         EditskillmodalComponent,
         ConfirmationDialogComponent,
-        NumberFormatterPipe
+        NumberFormatterPipe,
+        ExitAssesmentComponent,
+        InstructionComponent,
+        ScoreAssesmentComponent,
+        SkillpageComponent,
+        SkillmodalComponent,
+        FooterComponent,
+        ErrorComponent,
+        AddQuestionComponent
+
     ],
 
     imports: [
@@ -114,7 +121,7 @@ import { NumberFormatterPipe } from './numberFormatterPipe';
     ],
     entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
     bootstrap: [AppComponent],
-    exports:[NumberFormatterPipe],
- 
+    exports: [NumberFormatterPipe],
+
 })
 export class AppModule { }

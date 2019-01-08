@@ -18,7 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -47,12 +47,12 @@ public class Topic {
 	private String name;
 
 	@Column(name = "tp_percentage")
-	private float percentage;
+	private int percentage;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tp_sk_id")
-	@JsonIgnore
 	@JsonView(Views.Internal.class)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Skill skill;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -93,11 +93,11 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	public float getPercentage() {
+	public int getPercentage() {
 		return percentage;
 	}
 
-	public void setPercentage(float percentage) {
+	public void setPercentage(int percentage) {
 		this.percentage = percentage;
 	}
 

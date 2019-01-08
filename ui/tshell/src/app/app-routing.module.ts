@@ -28,6 +28,7 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
 
+
 const routes: Routes = [
 
   { path: 'search-skill', component: SearchSkillComponent },
@@ -36,13 +37,13 @@ const routes: Routes = [
   { path: 'preview', component: PreviewQuestionsComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'contributeQuestion', component: ContributeQuestionComponent },
-  { path: 'preview', component: PreviewQuestionsComponent }, 
+  { path: 'preview', component: PreviewQuestionsComponent },
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "authenticate", component: AdminSignupComponent },
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
-  {path: "recentSkills", component: RecentlyAddedSkillsComponent},
+  { path: "recentSkills", component: RecentlyAddedSkillsComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
   { path: "changepassword", component: ChangepasswordComponent },
   { path: "userprofile", component: UserprofileComponent },
@@ -54,7 +55,7 @@ const routes: Routes = [
   { path: 'assesmentscore', component: ScoreAssesmentComponent },
   { path: "skills", component: SearchResultComponent },
   { path: "skillpage", component: SkillpageComponent },
-  { path: "addQuestion", component: AddQuestionComponent },
+  { path: "addquestion", component: AddQuestionComponent },
   { path: "graph", component: QuestiongraphComponent },
   { path: "top5Tests", component: TopAccessedTestsComponent },
   { path: "skills/:id", component: SearchResultComponent },
@@ -63,7 +64,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes ,{useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

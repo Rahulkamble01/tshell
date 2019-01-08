@@ -88,7 +88,7 @@
             <div class="alert-danger" id="status" role="alert" style="color:red">{{status.message}}</div>
 
             <div class="form-group">
-              <input type="text" name="oldPassword" formControlName="oldPassword" appConfirmEqualValidator="newpassword"
+              <input type="password" name="oldPassword" formControlName="oldPassword" appConfirmEqualValidator="newpassword"
                 class="form-control" placeholder="Enter Current Password">
               <span id="errfn"></span>
               <div *ngIf="form.get('oldPassword')?.touched && form.get('oldPassword').invalid">
@@ -104,7 +104,7 @@
             </div>
 
             <div class="form-group">
-              <input type="text" formControlName="newPassword" name="newPassword" (input)="form.get('confirmPassword').updateValueAndValidity()" class="form-control" placeholder="Enter New Password">
+              <input type="password" formControlName="newPassword" name="newPassword" (input)="form.get('confirmPassword').updateValueAndValidity()" class="form-control" placeholder="Enter New Password">
               <div *ngIf="form.get('newPassword')?.touched && form.get('newPassword').invalid">
                 <div *ngIf="form.get('newPassword').errors.required" class="danger validation">Password is
                   required
@@ -124,7 +124,7 @@
             </div>
 
             <div class="form-group">
-              <input type="text" formControlName="confirmPassword" name="confirmPassword" appConfirmEqualValidator="newPassword"
+              <input type="password" formControlName="confirmPassword" name="confirmPassword" appConfirmEqualValidator="newPassword"
                 class="form-control" placeholder="Enter New Password Again">
               <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword').invalid">
                 <div *ngIf="form.get('confirmPassword')?.errors.required" class="danger validation">Password is
