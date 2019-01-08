@@ -111,6 +111,7 @@
                               <form [formGroup]="resetform">
                                 <br>
                                 <div class="form-group">
+                                  <h5 class="alert alert-success">Set password</h5>
                                   <div class="danger validate"> {{message}}</div>
                                   <div class="col-lg-12">
                                     <input id="recipient-name" (input)="resetform.get('confirmPassword').updateValueAndValidity()" type="password" class="form-control" formControlName="newpassword" placeholder="New Password"
