@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       ])
   });
 
-  forms = new FormGroup({
+  resetRequestForm = new FormGroup({
     employeeid: new FormControl(
       '',
       [Validators.required,
@@ -141,7 +141,7 @@ export class LoginComponent implements OnInit {
     this.status = false;
     this.resetStatus = false;
     this.otpStatus = false;
-    this.forms.reset();
+    this.resetRequestForm.reset();
     this.otpform.reset();
     this.resetform.reset();
     this.error = false;
