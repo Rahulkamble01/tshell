@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +33,11 @@ export class SearchResultComponent implements OnInit {
   graphData: any[] = [];
   topics: Array<Topic>;
   userRole: any;
+  Role: any;
+  showEdit = false;
+  showActive = false;
+  showAddskill = false;
+  showEdittopic = false;
   userLoggedInn: any;
   imageUrl: string = null;
   fileToUpload: File = null;
@@ -40,7 +45,7 @@ export class SearchResultComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) {
+  constructor(private http: HttpClient, public router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) {
 
   }
   ngOnInit() {
@@ -49,13 +54,44 @@ export class SearchResultComponent implements OnInit {
       console.log(this.allSkills);
     });
 
-    this.userRole = this.authService.getRole();
+    /* this.userRole = this.authService.getRole();
     if (this.userRole !== undefined || this.userRole !== 'Learner') {
       this.userRole = 0;
     }
     if (this.userRole !== 'Learner' || this.userRole !== 'Admin' || this.userRole !== 'SME') {
       this.userLoggedInn = true;
+    } */
+
+    console.log("Role of user12: " + this.authService.role);
+    this.Role = this.authService.role;
+    this.userLoggedInn = this.authService.loggedIn;
+    console.log("is he logged in:  " + this.userLoggedInn);
+
+    if (this.Role === undefined) {
+      this.showEdit = false;
+      this.showActive = false;
+      this.showAddskill = false;
+      this.showEdittopic = false;
     }
+    if (this.Role.toUpperCase() === "Learner".toUpperCase()) {
+      this.showEdit = false;
+      this.showActive = false;
+      this.showAddskill = false;
+      this.showEdittopic = false;
+    }
+    if (this.Role.toUpperCase() === "admin".toUpperCase()) {
+      this.showEdit = true;
+      this.showActive = true;
+      this.showAddskill = true;
+      this.showEdittopic = true;
+    }
+    if (this.Role.toUpperCase() === "sme".toUpperCase()) {
+      this.showEdit = true;
+      this.showActive = false;
+      this.showAddskill = true;
+      this.showEdittopic = true;
+    }
+
 
   }
 
@@ -147,10 +183,49 @@ export class SearchResultComponent implements OnInit {
 
   editRef(item) {
     const modalRef = this.modalService.open(ReferenceSkillModelComponent);
-    modalRef.componentInstance.allReferenceSkills = item;
+    console.log("inside ediref");
+    const dependentSkills = [];
+    item.forEach(element => {
+      if (element.classifier === 'pre') { dependentSkills.push(element); }
+    });
+    modalRef.componentInstance.allReferenceSkills = dependentSkills;
     modalRef.componentInstance.allSkills = this.allSkills;
+    modalRef.componentInstance.skill = this.skills;
+  }
+
+
+  gotoLogin() {
+    console.log("inside gotoLogin!");
+    let timeOut: boolean;
+    timeOut = false;
+    console.log(timeOut);
+    setTimeout(function () {
+      timeOut = true;
+      console.log(timeOut);
+    }, 3000);
+
+    if (timeOut) {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  deleteReferenceSkill(item) {
+    console.log(item.id);
+    // tslint:disable-next-line:max-line-length
+    this.confirmationDialogService.confirm(`Delete "${item.referenceSkill.name}"`, `Do you really want to delete ${item.referenceSkill.name} from ${item.skill.name}?`)
+      .then((confirmed) => {
+        if (confirmed) {
+          console.log('User confirmed:', confirmed);
+          this.skillService.deleteReferenceSkill(item.id).subscribe();
+        } else {
+          console.log('User confirmed:', confirmed);
+          return;
+        }
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 }
+
 
 
 

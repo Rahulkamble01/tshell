@@ -17,12 +17,12 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`skill` (
   `sk_search_count` INT(11) NULL DEFAULT NULL ,
   `sk_active` VARCHAR(45) NOT NULL ,
   `sk_test_count` INT(11) NULL DEFAULT NULL ,
-  `sk_description` VARCHAR(140) NULL DEFAULT NULL ,
+  `sk_description` VARCHAR(500) NULL DEFAULT NULL ,
   `sk_image` BLOB NULL DEFAULT NULL ,
   `sk_creation_date` DATE NULL DEFAULT NULL ,
   PRIMARY KEY (`sk_id`) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 17
+AUTO_INCREMENT = 25
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -51,10 +51,15 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`user` (
   `us_email` VARCHAR(45) NOT NULL ,
   `us_password` VARCHAR(45) NOT NULL ,
   `us_ur_id` INT(11) NOT NULL ,
-  `us_emp_id` VARCHAR(15) NULL DEFAULT NULL ,
+  `us_emp_id` VARCHAR(10) NULL DEFAULT NULL ,
   `us_image` LONGBLOB NULL DEFAULT NULL ,
   `us_signup_date` DATE NULL DEFAULT NULL ,
   `us_last_login_time` DATETIME NULL DEFAULT NULL ,
+  `us_otp` VARCHAR(10) NULL DEFAULT NULL ,
+  `us_otp_generated_time` DATETIME NULL DEFAULT NULL ,
+  `us_signup_otp` VARCHAR(45) NULL DEFAULT NULL ,
+  `us_signup_otp_time` DATETIME NULL DEFAULT NULL ,
+  `us_signup_otp_verify_status` VARCHAR(6) NULL DEFAULT NULL ,
   PRIMARY KEY (`us_id`) ,
   INDEX `us_ur_id` (`us_ur_id` ASC) ,
   CONSTRAINT `us_ur_id`
@@ -63,7 +68,7 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`user` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -171,6 +176,7 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`assessment_question` (
   `aq_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `aq_as_id` INT(11) NOT NULL ,
   `aq_qu_id` INT(11) NOT NULL ,
+  `aq_is_correct` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`aq_id`) ,
   INDEX `aq_as_id` (`aq_as_id` ASC) ,
   INDEX `aq_qu_id` (`aq_qu_id` ASC) ,
@@ -195,7 +201,7 @@ DROP TABLE IF EXISTS `tshell`.`option` ;
 
 CREATE  TABLE IF NOT EXISTS `tshell`.`option` (
   `op_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `op_description` VARCHAR(250) NOT NULL ,
+  `op_description` VARCHAR(200) NOT NULL ,
   `op_qu_id` INT(11) NOT NULL ,
   `op_is_correct` TINYINT(1) NULL DEFAULT NULL ,
   PRIMARY KEY (`op_id`) ,
@@ -260,7 +266,7 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`reference_skill` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 8
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = latin1
 ROW_FORMAT = DYNAMIC;
 
@@ -274,7 +280,7 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`topic` (
   `tp_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `tp_name` VARCHAR(45) NOT NULL ,
   `tp_sk_id` INT(11) NOT NULL ,
-  `tp_percentage` FLOAT NULL DEFAULT '0' ,
+  `tp_percentage` INT(11) NULL DEFAULT '0' ,
   PRIMARY KEY (`tp_id`) ,
   INDEX `tp_sk_id` (`tp_sk_id` ASC) ,
   CONSTRAINT `tp_sk_id`
@@ -283,7 +289,7 @@ CREATE  TABLE IF NOT EXISTS `tshell`.`topic` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 77
+AUTO_INCREMENT = 87
 DEFAULT CHARACTER SET = latin1;
 
 

@@ -47,7 +47,7 @@ public class Topic {
 	private String name;
 
 	@Column(name = "tp_percentage")
-	private float percentage;
+	private int percentage;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tp_sk_id")
@@ -93,11 +93,11 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	public float getPercentage() {
+	public int getPercentage() {
 		return percentage;
 	}
 
-	public void setPercentage(float percentage) {
+	public void setPercentage(int percentage) {
 		this.percentage = percentage;
 	}
 

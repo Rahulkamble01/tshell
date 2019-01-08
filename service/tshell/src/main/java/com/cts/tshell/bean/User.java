@@ -75,6 +75,21 @@ public class User {
 
 	@Column(name = "us_last_login_time")	
 	private Time lastLoginTime;
+	
+	@Column(name = "us_otp")	
+	private Time otp;
+	
+	@Column(name = "us_otp_generated_time")	
+	private Date otpGeneratedTime;
+	
+	@Column(name = "us_signup_otp")	
+	private String signupOtp;
+	
+	@Column(name = "us_signup_otp_time")	
+	private Date signupOtpTime;
+	
+	@Column(name = "us_signup_otp_verify_status")	
+	private String StatusVerified;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -159,6 +174,46 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
+	}
+
+	public Time getOtp() {
+		return otp;
+	}
+
+	public void setOtp(Time otp) {
+		this.otp = otp;
+	}
+
+	public Date getOtpGeneratedTime() {
+		return otpGeneratedTime;
+	}
+
+	public void setOtpGeneratedTime(Date otpGeneratedTime) {
+		this.otpGeneratedTime = otpGeneratedTime;
+	}
+
+	public String getSignupOtp() {
+		return signupOtp;
+	}
+
+	public void setSignupOtp(String signupOtp) {
+		this.signupOtp = signupOtp;
+	}
+
+	public Date getSignupOtpTime() {
+		return signupOtpTime;
+	}
+
+	public void setSignupOtpTime(Date signupOtpTime) {
+		this.signupOtpTime = signupOtpTime;
+	}
+
+	public String getStatusVerified() {
+		return StatusVerified;
+	}
+
+	public void setStatusVerified(String statusVerified) {
+		StatusVerified = statusVerified;
 	}
 
 	@Override

@@ -597,3 +597,22 @@ a {
 .m1{
   margin: 90px 0px 0px 0px;
 }
+
+.inlineelements{
+  display: inline-block;
+}
+
+.skillnameStyle{
+  font-size:35px;
+   font-weight: bold;
+}
+
+.padding1opx{
+  padding: 10px;
+}
+
+.edittopics{
+  font-size: 1.5rem;
+   color: rgb(19, 114, 158);
+   cursor: pointer;
+  }

@@ -179,13 +179,19 @@ public class SkillController {
 	}
 	
 	@RequestMapping(value = "/addreferenceskill", method = RequestMethod.POST)
-	public void addReferenceSkill(@RequestBody Object referenceSkills){
+	public void addReferenceSkill(@RequestBody ReferenceSkill referenceSkill){
 		LOGGER.info("Adding ReferenceSkils");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}");
-//		for (ReferenceSkill referenceSkill : referenceSkills) {
-//			LOGGER.info("Adding ReferenceSkils itration {}", referenceSkill);
-//			
-//		}		
+		LOGGER.info("Adding ReferenceSkils itration {}", referenceSkill.getId());
+		skillService.addReferenceSkill(referenceSkill);
+				
+	}
+	
+	@RequestMapping(value = "/deleteReferenceskill/{refskillId}", method = RequestMethod.GET)
+	public void deleteReferenceSkill(@PathVariable("refskillId") int refskillId){
+		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
+		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", refskillId);
+		skillService.deleteReferenceSkill(refskillId);		
 	}
 }
 

@@ -80,7 +80,7 @@ public class SkillService {
 		LOGGER.debug("Updated Skill", skill);
 		skillRepository.save(skill);
 	}
-
+	
 	@Transactional
 	public List<Skill> getRecent5Skills() {
 		LOGGER.info("start");
@@ -122,6 +122,21 @@ public class SkillService {
 //			
 //		}
 		return result;
+	}
+	
+	@Transactional
+	public void addReferenceSkill(ReferenceSkill referenceSkill) {		
+//		Skill skill = 
+		LOGGER.info("saving {}", referenceSkill);
+		refernceSkillRepository.save(referenceSkill);
+		
+		LOGGER.info("ReferenceSkill Updated");
+	}
+	
+	public void deleteReferenceSkill(int refskillId) {
+		ReferenceSkill referenceSkill=new ReferenceSkill();
+		referenceSkill.setId(refskillId);		
+		refernceSkillRepository.delete(referenceSkill);		
 	}
 
 	public List<Skill> getSkillByKeys(String pressedKeys) {

@@ -22,6 +22,9 @@ export class SkillserviceService {
   ReferenceSkillUrl = environment.serviceUrlPrefix + '/skill/referenceskill/';
   // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/skill/graph/';
   keySearchUrl = environment.serviceUrlPrefix + "/skill/getSkillsOnSearch/";
+  addReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/addreferenceskill";
+  deleteReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/deleteReferenceskill/";
+
 
 
   constructor(private http: HttpClient) { }
@@ -36,6 +39,15 @@ export class SkillserviceService {
   updateSkill(json): Observable<any> {
     console.log(json);
     return this.http.post(this.updateSkillUrl, json, httpOptions);
+  }
+
+  addReferenceSkill(json): Observable<any> {
+    console.log(json);
+    return this.http.post(this.addReferenceSkillUrl, json, httpOptions);
+  }
+
+  deleteReferenceSkill(id): Observable<any> {
+    return this.http.get(this.deleteReferenceSkillUrl + id);
   }
 
   getSkillTopper(id): Observable<any> {

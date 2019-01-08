@@ -21,9 +21,13 @@ export class Skill {
 
 export class ReferenceSkill {
     id: number;
-    name: string;
-    constructor(id, name) {
-        this.name = name;
+    skill: Skill;
+    referenceSkill: Skill;
+    classifier: string;
+    constructor(id, skill, referenceSkill, classifier) {
         this.id = id;
+        this.skill = skill;
+        this.referenceSkill = referenceSkill;
+        this.classifier = classifier;
     }
 }

@@ -3,7 +3,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { Skill, ReferenceSkill } from '../skill';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, delay } from 'rxjs/operators';
+import { SkillserviceService } from '../skillservice.service';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-reference-skill-model',
@@ -14,25 +17,25 @@ export class ReferenceSkillModelComponent implements OnInit {
 
   @Input() allReferenceSkills: any;
   @Input() allSkills: any;
+  @Input() skill: any;
   model: any;
   sameSkill = false;
 
   addReferenceSkillForm = new FormGroup({
     id: new FormControl(),
+    skill: new FormControl(this.skill),
     classifier: new FormControl(),
-    referenceSkillName: new FormControl(),
-    referenceSkill: this.fb.array([]),
+    referenceSkill: new FormControl(),
   });
 
   referenceSkillName: Array<ReferenceSkill> = [];
 
-  constructor(private activeModal: NgbActiveModal, private fb: FormBuilder) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private activeModal: NgbActiveModal, private fb: FormBuilder, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
-    this.addReferenceSkillForm.patchValue(this.allReferenceSkills);
-    const control = <FormArray>this.addReferenceSkillForm.controls['referenceSkill'];
     this.allReferenceSkills.forEach(element => {
-      this.addReferenceSkill(element.referenceSkill.id, element.referenceSkill.name);
+      this.addReferenceSkill(element.id, element.skill, element.referenceSkill, element.classifier);
     });
   }
 
@@ -48,25 +51,45 @@ export class ReferenceSkillModelComponent implements OnInit {
   itemSelected($event) {
     let counter = 0;
     this.referenceSkillName.forEach(element => {
-      if ($event.item.name.toLowerCase() === element.name.toLowerCase()) {
+      if ($event.item.name.toLowerCase() === element.referenceSkill.name.toLowerCase()) {
         this.sameSkill = true;
         counter = 1;
       }
     });
     if (counter === 0) {
-      this.addReferenceSkill($event.item.id, $event.item.name);
+      this.addReferenceSkill(0, this.skill, $event.item, 'pre');
       this.sameSkill = false;
     }
   }
 
-  addReferenceSkill(id, skillName) {
+  addReferenceSkill(id, skill1, InputReferenceSkill, classifier) {
     console.log('inside Adding Skills');
-    const skill = new ReferenceSkill(id, skillName);
+    const skill = new ReferenceSkill(id, skill1, InputReferenceSkill, classifier);
     console.log(skill);
     this.referenceSkillName.push(skill);
   }
 
-  clearInput() {
-    this.addReferenceSkillForm.get('referenceSkillName').reset();
+  submitReferenceSkill() {
+    this.referenceSkillName.forEach(element => {
+      this.addReferenceSkillForm.controls['id'].patchValue(element.id);
+      this.addReferenceSkillForm.controls['skill'].patchValue(this.skill);
+      this.allSkills.forEach(element1 => {
+        if (element.referenceSkill.name === element1.name) {
+          this.addReferenceSkillForm.controls['referenceSkill'].patchValue(element1);
+        }
+      });
+      // this.addReferenceSkillForm.controls['referenceSkill'].patchValue(element.name);
+      this.addReferenceSkillForm.controls['classifier'].patchValue('pre');
+      // console.log(JSON.stringify(this.addReferenceSkillForm.value));
+      this.skillService.addReferenceSkill(JSON.stringify(this.addReferenceSkillForm.value)).subscribe();
+    });
+
+    this.confirmationDialogService.alert(`Skills Are Added to The Dependancies..`,
+      `Skill is Added`)
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+    delay(3000);
+    this.activeModal.dismiss('Cross click');
+
   }
 }
