@@ -1,6 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,12 +39,26 @@ public class Question {
 	@JoinColumn(name = "qu_qt_id")
 	private QuestionAnswerType questionAnswerType;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "qu_created_by_us_id")
 	private User createdUser;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
 	private List<Option> optionList;
+
+	@Column(name = "qu_created_date")
+	private Date createdDate;
+
+	@Column(name = "qu_reviewed_date")
+	private Date reviewedDate;
+
+	public Date getReviewedDate() {
+		return reviewedDate;
+	}
+
+	public void setReviewedDate(Date reviewedDate) {
+		this.reviewedDate = reviewedDate;
+	}
 
 	@Transient
 	private boolean empty;
@@ -67,6 +82,18 @@ public class Question {
 		this.lengthExceeded = lengthExceeded;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Question() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -84,6 +111,10 @@ public class Question {
 		builder.append(createdUser);
 		builder.append(", optionList=");
 		builder.append(optionList);
+		builder.append(", createdDate=");
+		builder.append(createdDate);
+		builder.append(", reviewedDate=");
+		builder.append(reviewedDate);
 		builder.append(", empty=");
 		builder.append(empty);
 		builder.append(", lengthExceeded=");

@@ -1,6 +1,6 @@
 package com.cts.tshell.bean;
 
-
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,11 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
-
+@NamedQueries({ @NamedQuery(name = "User.findByEmpId", query = " select u from User u " + " left join fetch u.role r "
+		+ " where u.employeeId = :employeeId ") })
 public class User {
 
 	@Id
@@ -26,25 +37,46 @@ public class User {
 	@Column(name = "us_id")
 	private int id;
 
+	@NotNull(message = "User Name cannot be empty")
 	@Column(name = "us_name")
 	private String name;
 
+	@NotNull(message = "Email cannot be empty")
+	@Pattern(regexp = ".+@.+\\..+", message = "Email address is invalid")
 	@Column(name = "us_email")
 	private String email;
 
+	@NotNull(message = "Password cannot be empty")
+	@Size(min = 6, max = 100, message = "Password must be 6 to 30 characters")
 	@Column(name = "us_password")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "us_ur_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonView(Views.Internal.class)
 	private Role role;
 
+	@Min(value = 1, message = "Employee ID must be at least 6 digits")
+	@Max(value = 10000000000L, message = "Employee ID cannot exceed 10 digits")
 	@Column(name = "us_emp_id")
+	@JsonView(Views.Public.class)
 	private int employeeId;
-	
+
+	@Column(name = "us_signup_date")
+	private String signupDate;
+
+	@Column(name = "us_last_login_time")
+	private String lastLoginTime;
 	@Column(name = "us_image")
-	private byte image;
-	
+	private byte[] image;
+
+	@Column(name = "us_otp")
+	private String otp;
+
+	@Column(name = "us_otp_generated_time")
+	private String otpGeneratedTime;
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
@@ -52,6 +84,22 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(String signupDate) {
+		this.signupDate = signupDate;
+	}
+
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
 
 	public void setId(int id) {
@@ -98,11 +146,11 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -112,6 +160,29 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
-	}	
+	}
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public String getOtpGeneratedTime() {
+		return otpGeneratedTime;
+	}
+
+	public void setOtpGeneratedTime(String otpGeneratedTime) {
+		this.otpGeneratedTime = otpGeneratedTime;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
+				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + "]";
+	}
 
 }

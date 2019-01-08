@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "'option'")
+@Table(name = "`option`")
 public class Option {
 
 	@Id
@@ -108,6 +108,10 @@ public class Option {
 
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
+	}
+
+	public Option() {
+		super();
 	}
 
 }
