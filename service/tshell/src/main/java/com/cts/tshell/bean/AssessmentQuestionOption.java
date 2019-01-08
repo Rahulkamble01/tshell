@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="assessment_question_option")
 public class AssessmentQuestionOption {
@@ -22,6 +24,7 @@ public class AssessmentQuestionOption {
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="ao_aq_id")
+	@JsonIgnore
 	private AssessmentQuestion assessmentQuestion;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -62,6 +65,12 @@ public class AssessmentQuestionOption {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-
+/*
+	@Override
+	public String toString() {
+		return "AssessmentQuestionOption [id=" + id + ", assessmentQuestion=" + assessmentQuestion
+				+ ", assessmentOption=" + assessmentOption + ", selected=" + selected + "]";
+	}
+*/
 }
 

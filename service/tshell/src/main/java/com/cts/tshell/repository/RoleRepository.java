@@ -6,5 +6,5 @@ import com.cts.tshell.bean.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer>{
 	Role findRoleByName(String role);
-
+	Role findById(int Id);
 }

@@ -78,6 +78,7 @@ a{
     border:3px solid white;
     color:white;
     font-size:25px;
+    font-weight:400;
     border-radius:.5rem;
     opacity:.7;
 }
@@ -88,12 +89,13 @@ a{
     border:3px solid white;
     color:white;
     font-size:25px;
+    font-weight:400;
     border-radius:.5rem;
     opacity:.7;
 }
 
 .avatar-upload {
-    padding-left: 25px;
+    padding-left: 15px;
     position: relative;
     max-width: 205px;
   }
@@ -152,10 +154,150 @@ a{
     background-position: center;
   }
   .modal-header{
-    background-color: rgb(221, 233, 205);
+    background-color: rgb(219, 217, 219);
     
 }
 
 .modal-content{
     margin-top:95px;
+}
+
+.addskill{
+    color:lightsalmon;
+    font-size:20px;
+    margin:2px;
+}
+
+.litopic {
+
+    cursor: default;
+    position: relative;
+    display: inline-block;
+    margin: 4px 4px 0 0;
+    padding: 7px;
+    font-size: 14px;
+  }
+  
+  .review{
+    font-weight: 700;
+    color: #0897CA;
+  }
+
+  .marginzero {
+    margin-bottom: 2px;
+  }
+
+  #imagePreview{
+    border-radius:50%;
+    height:100%;
+    width:100%;
+    background-image: url(https://www.loopconnect.net/images/main/avatar.png);
+  }
+
+  .username{
+    margin-top:15px;
+    padding-right: 30px;
+  }
+  
+.cardalignment{
+    margin: 0px 0px 0px 16px ;
+}
+
+.imagepreview{
+    padding:5px;
+}
+
+.userdetails{
+    padding:10px;
+}
+
+.userdetail{
+    font-size:35px;
+    font-weight: bold;
+}
+
+.employeeid{
+    font-size:20px;
+}
+
+.useremail{
+    color:blue;
+}
+
+.editprofile{
+    font-size:16px;
+    color:grey;
+}
+
+.editicon{
+    zoom:0.5px;
+}
+
+.searchskill{
+    margin-top:3%;
+}
+
+.addskill{
+    margin-left:2%;
+    margin-right:2%;
+}
+
+.skillname{
+    display:inline-block;
+}
+
+.useremail{
+    zoom:0.5px;
+}
+
+.assessmentskill{
+    margin-top:15px;
+}
+
+.assessmentskills{
+    padding-bottom:15px;
+}
+
+.skilltitle{
+    height:100%;
+}
+
+.skillnames{
+    margin-top:20px;
+}
+
+.assessmententry{
+    font-weight:400;
+    font-size:16px;
+    background-color:blue;
+    color:white;
+    opacity:0.7;
+}
+
+.assessmentexit{
+    font-weight:400;
+    font-size:16px;
+    background-color:green;
+    color:white;
+    opacity:0.7;
+}
+
+.assessmentscore{
+    font-size:25px;
+}
+
+.correctanswer{
+    height:20px;
+    width:20px;
+    background-color:green;
+    color:green;
+    opacity:.7;
+}
+
+.wronganswer{
+    height:20px;
+    width:20px;
+    background-color:red;
+    color:red;
+    opacity:.7;
 }

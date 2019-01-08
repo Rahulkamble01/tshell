@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { SearchExistingQuestionsComponent } from './search-existing-questions/search-existing-questions.component';
-import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { ContributeQuestionService } from './contribute-question.service';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -28,7 +27,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ChartsModule } from 'ng2-charts';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
-import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
+
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
@@ -51,6 +50,7 @@ import { ConfirmationDialogService } from './confirmation-dialog.service';
 
 import { NumberFormatterPipe } from './numberFormatterPipe';
 
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 @NgModule({
     declarations: [
@@ -71,9 +71,8 @@ import { NumberFormatterPipe } from './numberFormatterPipe';
         AdminHomepageComponent,
         ChangepasswordComponent,
         UserprofileComponent,
-        ViewlearnerComponent,
+        ViewprofileComponent,
         SearchExistingQuestionsComponent,
-        ContributeQuestionComponent,
         PreviewQuestionsComponent,
         CountOfQuestionsToReviewComponent,
         HomeComponent,
@@ -99,7 +98,34 @@ import { NumberFormatterPipe } from './numberFormatterPipe';
         SkillmodalComponent,
         FooterComponent,
         ErrorComponent,
-        AddQuestionComponent
+        AddQuestionComponent,
+        DashboardComponent,
+        MostSearchedSkillsComponent,
+        AssessmenthistoryComponent,
+        SearchSkillComponent,
+        RecentlyAddedSkillsComponent,
+        LoginComponent,
+        AdminSignupComponent,
+        SignupComponent,
+        ConfirmEqualValidatorDirective,
+        HeaderComponent,
+        LearnerHomepageComponent,
+        AdminHomepageComponent,
+        ChangepasswordComponent,
+        UserprofileComponent,
+        ViewprofileComponent,
+        SearchExistingQuestionsComponent,
+        PreviewQuestionsComponent,
+        CountOfQuestionsToReviewComponent,
+        HomeComponent,
+        SearchResultComponent,
+        QuestiongraphComponent,
+         ExitAssesmentComponent,
+         InstructionComponent,
+         ScoreAssesmentComponent,
+        SkillpageComponent,
+        SkillmodalComponent,
+        FooterComponent
 
     ],
 

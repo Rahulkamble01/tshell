@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
 
   message: any;
-  employeeId: any = 123456;
+  employeeId: any;
   password: any;
   newPassword: any;
   currentPassword: any;
@@ -66,8 +66,8 @@ export class HeaderComponent implements OnInit {
     this.error = false;
     this.status.message = '';
     this.status.currentPasswordIncorrect = false,
-      this.status.passwordChanged = false,
-      this.status.newAndOldPasswordSame = false
+    this.status.passwordChanged = false,
+    this.status.newAndOldPasswordSame = false
     
   } 
 

@@ -41,6 +41,13 @@ public class AssessmentService {
 		LOGGER.info("End");
 		return assessments;
 	}
+
+	@Transactional
+	public List<Assessment> getAssessmentsOfUserById(int userId){
+		List<Assessment> assesments = assessmentRepository.findUserHistory(userId);
+
+		return assesments;
+	}
 	// public List<Assessment> findTop5AssessmentBasedSkill(int skillId){
 	// LOGGER.debug("SkillId : "+skillId);
 	// return assessmentRepository.findTop5BySkill(skillId, new PageRequest(0,

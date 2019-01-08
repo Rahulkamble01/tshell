@@ -26,15 +26,21 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "user")
 @NamedQueries({ @NamedQuery(name = "User.findByEmpId", query = " select u from User u " + " left join fetch u.role r "
-		+ " where u.employeeId = :employeeId ") })
+		+ " where u.employeeId = :employeeId ") , 
+		@NamedQuery(name = "User.fetchByEmployeeId", query = " select distinct u from User "
+		+ "u left join fetch u.skills "
+		+ "left join fetch u.role "
+		+ " where u.employeeId=:employeeId ") })
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "us_id")
+	@Column(name = "us_id")	
 	private int id;
 
 	@NotNull(message = "User Name cannot be empty")
@@ -80,6 +86,7 @@ public class User {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
+	@JsonView(Views.Internal.class)
 	private List<Skill> skills;
 
 	public int getId() {

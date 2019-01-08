@@ -1,6 +1,7 @@
 package com.cts.tshell.rest;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +11,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.ChangePasswordStatus;
+import com.cts.tshell.bean.Role;
+import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.User;
+import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ControllerAdvice
 @RestController
@@ -80,5 +88,55 @@ public class UserController extends TshellController {
 	public boolean resetPassword(@PathVariable int employeeId, @PathVariable String encryptedPassword) {
 		LOGGER.info("Start");
 		return userService.restPassword(employeeId, encryptedPassword);
+	}
+	@GetMapping("/getUser/{employeeId}")
+	public String getUserId(@PathVariable("employeeId") int employeeId) throws JsonProcessingException {
+		LOGGER.info("start");
+		LOGGER.debug("employeeId: {} " , employeeId);
+		LOGGER.info("end");
+		User user=userService.getUserId(employeeId);
+		ObjectMapper mapper = new ObjectMapper();
+		String result=mapper.writerWithView(Views.Internal.class).writeValueAsString(user);
+		return result;
+	}
+	
+	@PostMapping("/save")
+		public void saveUser(@RequestBody User user){
+		LOGGER.info("start");
+		LOGGER.debug("User: {} " , user.getName());
+		LOGGER.debug("User: {} " , user.getEmail());
+		LOGGER.info("end");
+		userService.save(user);
+	}
+	
+	@GetMapping("/getRoles")
+		public List<Role> getRoles(){
+		LOGGER.info("start");
+		LOGGER.debug("roleId: {} ");
+		LOGGER.info("end");
+		return userService.getRoles();
+		}
+	
+	
+	@PostMapping("/update")
+	public void save(@RequestBody User user){
+		LOGGER.info("start");
+		LOGGER.debug("User: {} " , user.getRole());
+		LOGGER.info("end");
+		userService.update(user);
+	}
+	
+	@PostMapping("/getSkillsOnSearch")
+	public List<Skill> skillName(@RequestBody String searchSkillName) {
+		LOGGER.debug("searchName: {}", searchSkillName);
+		LOGGER.info("------For getting skill ----");
+		List<Skill> skill = userService.getSkillName(searchSkillName);
+		LOGGER.debug("skill: {}", skill);
+		return skill;
+	}
+
+	@PostMapping("/saveskill")
+	public void skillNames(@RequestBody User user ){
+		userService.saveSkills(user);
 	}
 }

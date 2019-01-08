@@ -13,16 +13,11 @@ import com.cts.tshell.bean.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findByEmpId(@Param("employeeId") int employeeId);
-
-List<User> findAllById(@Param("id") int userId);
-	
+	List<User> findAllById(@Param("id") int userId);
 	User getUserByEmail(String email);
-	
 	User getUserByEmployeeId(int userId);
-	
 	@Query("select count(u.id) from User u ")
 	long totalUserCount();
-
-	User findByEmployeeId(int employeeID);
-
+	User fetchByEmployeeId(@Param("employeeId")int employeeId);
+	User findByEmployeeId(int employeeid);
 }

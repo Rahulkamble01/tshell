@@ -14,20 +14,19 @@ import { CountOfPendingQuestionsService } from '../count-of-pending-questions.se
 export class AddQuestionComponent implements OnInit {
 
 
-  max = 500;
-  empId: any;
-  skillId:any;
+  max=500;
+  empId:any;
+  skillId :number;
   skillName:any;
-  userDetails: any[];
-  checkedCount = 0;
+  checkedCount=0;
   topicList: any[];
   isChecked: boolean = false;
   count = 1;
   temp = 0;
   question: any;
   option: any = '';
-  optionTemp: any;
-  questionTemp: any;
+  optionTemp:any;
+  questionTemp:any;
   topic: any;
   answer: any;
   status = "Pending";
@@ -43,7 +42,6 @@ export class AddQuestionComponent implements OnInit {
   ngOnInit() {
     this.skillId = this.countOfPendingQuestionsService.skillId;
     this.skillName = this.countOfPendingQuestionsService.skillName;
-
     this.contributeQuestionService.getTopics(this.skillId).subscribe(
 
       data => {
@@ -51,19 +49,13 @@ export class AddQuestionComponent implements OnInit {
         console.log(this.topicList)
       },
     );
-    this.empId = this.authService.getEmployeeId();
+    this.empId=this.authService.getEmployeeId();
     console.log(this.empId);
-    this.contributeQuestionService.getUserDetails(this.empId).subscribe(
 
-      data => {
-        this.userDetails = data;
-        console.log(this.userDetails);
-      },
-    );
 
   }
   constructor(private fb: FormBuilder,
-    private contributeQuestionService: ContributeQuestionService, private router: Router, private authService: AuthService, private countOfPendingQuestionsService : CountOfPendingQuestionsService) {
+    private contributeQuestionService: ContributeQuestionService, private router: Router,private authService:AuthService,private countOfPendingQuestionsService: CountOfPendingQuestionsService) {
     this.uploadForm = fb.group({
       csvFile: ['', Validators.required]
     })
@@ -76,14 +68,16 @@ export class AddQuestionComponent implements OnInit {
       question: this.question,
       status: this.status,
       questionDifficultyLevel: {
-        id: "3",
+        id: "2",
         description: this.questionDifficultyLevel
       },
       questionAnswerType: {
         id: this.questionAnswerTypeIdFunction(),
-        type: this.questionAnswerTypeDescriptionFunction()
+        type:this.questionAnswerTypeDescriptionFunction()
       },
-      createdUser: this.createdUser,
+      createdUser: {
+        employeeId:this.empId
+      },
       optionList: this.optionsList,
       topic: this.topic
     });
@@ -116,12 +110,12 @@ export class AddQuestionComponent implements OnInit {
   }
   saveQuestion() {
     console.log(this.question);
-
+  
     this.questionDescriptionValidation();
 
   }
   saveOption() {
-    console.log("description" + this.optionsList[0].description);
+    console.log("description"+this.optionsList[0].description);
     console.log(this.optionsList);
     this.optionDescriptionValidation();
   }
@@ -130,50 +124,50 @@ export class AddQuestionComponent implements OnInit {
     this.userFile = file;
   }
   check(event) {
-
+   
     if (event.target.checked) {
       this.isChecked = true;
       this.checkedCount++;
     }
     else {
       this.isChecked = false;
-
+      
     }
-
+   
     console.log(this.isChecked);
   }
-  optionDescriptionValidation() {
+  optionDescriptionValidation(){
     console.log(this.optionsList);
-    this.optionTemp = 1;
-    for (let i = 0; i < this.optionsList.length; i++) {
-      if (this.optionsList[i].description == '') {
+    this.optionTemp=1;
+    for(let i=0;i<this.optionsList.length;i++){
+      if(this.optionsList[i].description==''){
         console.log(this.optionsList[i].description);
-        this.optionTemp = 0;
+         this.optionTemp=0;
       }
     }
     console.log(this.optionTemp);
   }
-  questionDescriptionValidation() {
-    this.questionTemp = 0;
-    if (this.question.length >= this.max) {
-      console.log("max length reached");
+  questionDescriptionValidation(){
+    this.questionTemp=0;
+    if(this.question.length >= this.max){
+            console.log("max length reached");
     }
-    if (this.question == '') {
-      this.questionTemp = 1;
+    if(this.question==''){
+      this.questionTemp=1;
     }
   }
 
-  questionAnswerTypeIdFunction() {
-    if (this.checkedCount > 1) {
+  questionAnswerTypeIdFunction(){
+    if(this.checkedCount>1){
       return 2;
-    } else {
+    }else{
       return 1;
     }
   }
-  questionAnswerTypeDescriptionFunction() {
-    if (this.checkedCount > 1) {
+  questionAnswerTypeDescriptionFunction(){
+    if(this.checkedCount>1){
       return "Multiple";
-    } else {
+    }else{
       return "Single";
     }
   }

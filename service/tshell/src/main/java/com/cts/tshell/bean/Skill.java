@@ -21,6 +21,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "skill")
 @NamedQueries({
@@ -62,6 +64,7 @@ public class Skill {
 	private Date creationDate;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "skill")
+	@JsonView(Views.Internal.class)
 	private List<Topic> topics;
 
 	public Skill() {

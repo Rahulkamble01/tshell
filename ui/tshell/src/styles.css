@@ -1,7 +1,7 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 body {
-  background-color: #dee2e6;
+   background-color: 	#FFFFFF; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /*background-image: url("./assets/images/im1.jpg");*/
   background-size: cover;
@@ -365,6 +365,11 @@ a {
   box-shadow: 2px 2px 18px 6px rgba(0, 0, 0, 0.20);
 }
 
+.validation{
+  color:red;
+  font-size: 12px;
+}
+
 /* FOOTER */
 
 footer {
@@ -396,4 +401,9 @@ footer p {
   font-size: 12px;
 }
 
-
+/* TITLE NAME */
+.titlename{
+  font-weight: 610;
+  font-size:18px;
+  padding-top:15px;
+  }

@@ -49,21 +49,27 @@ public class QuestionService {
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+	
+	
+
 
 	@Transactional
 	public void saveQuestion(Question question) {
 		LOGGER.info("starting saveQuestion method");
 		LOGGER.debug("Question (from front end): {}",question);
+		int employeeId = question.getCreatedUser().getEmployeeId();
+		LOGGER.info("employeeId {}" + employeeId);
+		User user = userRepository.findByEmployeeId(employeeId);
+		LOGGER.info("User details:{}" + user);
+		for (Option option : question.getOptionList()) {
+			option.setId(0);
+		}
+		question.setCreatedUser(user);
 		Topic topic = topicRepository.findTopicByName(question.getTopic());
 		LOGGER.debug("Topic : {}",topic);
 		Date questionCreatedDate = new Date ();
 		LOGGER.debug("Question Created Date : {}",questionCreatedDate);
 		question.setCreatedDate(questionCreatedDate);
-		LOGGER.debug("Question (modified): {}",question);
-		for (Option option : question.getOptionList()) {
-			option.setId(0);
-		}
-		LOGGER.debug("Question (modified Option List): {}",question);
 		if (topic.getQuestions() != null) {
 			List<Question> questionList = topic.getQuestions();
 			LOGGER.debug("Question List : {}",questionList);

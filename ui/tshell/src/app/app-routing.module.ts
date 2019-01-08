@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchSkillComponent } from './search-skill/search-skill.component';
 import { SearchExistingQuestionsComponent } from './search-existing-questions/search-existing-questions.component';
-import { ContributeQuestionComponent } from './contribute-question/contribute-question.component';
 import { PreviewQuestionsComponent } from './preview-questions/preview-questions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MostSearchedSkillsComponent } from './most-searched-skills/most-searched-skills.component';
@@ -16,7 +15,6 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AssessmenthistoryComponent } from './assessmenthistory/assessmenthistory.component';
 import { RecentlyAddedSkillsComponent } from './recently-added-skills/recently-added-skills.component';
-import { ViewlearnerComponent } from './viewlearner/viewlearner.component';
 import { CountOfQuestionsToReviewComponent } from './count-of-questions-to-review/count-of-questions-to-review.component';
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
@@ -27,16 +25,15 @@ import { ScoreAssesmentComponent } from './score-assesment/score-assesment.compo
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 
 const routes: Routes = [
 
   { path: 'search-skill', component: SearchSkillComponent },
   { path: 'reviewq/:id/:name', component: SearchExistingQuestionsComponent },
-  { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'contributeQuestion', component: ContributeQuestionComponent },
   { path: 'preview', component: PreviewQuestionsComponent },
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
@@ -48,7 +45,7 @@ const routes: Routes = [
   { path: "changepassword", component: ChangepasswordComponent },
   { path: "userprofile", component: UserprofileComponent },
   { path: "assessmenthistory", component: AssessmenthistoryComponent },
-  { path: "viewprofile", component: ViewlearnerComponent },
+  { path: "viewprofile", component: ViewprofileComponent },
   { path: "questions", component: CountOfQuestionsToReviewComponent },
   { path: 'assesment', component: ExitAssesmentComponent },
   { path: 'instruction', component: InstructionComponent },
