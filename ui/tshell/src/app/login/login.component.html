@@ -59,6 +59,10 @@
                       <div *ngIf="!status">
                         <div class="modal-body">
                           <form [formGroup]="forms">
+
+                              <div *ngIf="error">
+                                  <app-error></app-error>
+                                </div>
                             <div class="danger validate"> {{message}}</div>
                             <div class="form-group">
                               <label class="col-form-label"></label>
@@ -87,8 +91,8 @@
                           <form [formGroup]="otpform">
                             <div class="modal-body">
                               <div>
-                                <div style="margin-bottom: 10px;">OTP sent to Email
-                                  <button (click)="resendOtp()" class="resendButton" style="float:right">Resend ? </button>
+                                <div>OTP sent to Email
+                                  <button (click)="resendOtp()" class="resendButton">Resend ? </button>
                                 </div>
                                 <div class="danger validate"> {{resendmessage}}</div>
                                 <input type="text" class="form-control" formControlName="otp" placeholder="OTP" #otp>
@@ -111,7 +115,7 @@
                               <form [formGroup]="resetform">
                                 <br>
                                 <div class="form-group">
-                                  <h5 class="alert alert-success">Set password</h5>
+                                  <h5 class="text-primary">Reset Password</h5>
                                   <div class="danger validate"> {{message}}</div>
                                   <div class="col-lg-12">
                                     <input id="recipient-name" (input)="resetform.get('confirmPassword').updateValueAndValidity()" type="password" class="form-control" formControlName="newpassword" placeholder="New Password"

@@ -14,6 +14,7 @@ import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 })
 export class LoginComponent implements OnInit {
 
+  error = false;
   numberPattern = "^[0-9]{6}$";
   message: string;
   resendmessage:string;
@@ -109,8 +110,13 @@ export class LoginComponent implements OnInit {
         else{
           this.message="User doesn't exists"
         }
+      },
+      error => {
+        this.error = true;
       }
     );
+    
+    
   }
 
 
@@ -120,8 +126,8 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         if (data == true) {
+          alert("OTP resent successfully");
           this.status = true;
-          this.resendmessage="OTP resent successfully"
           this.message="";
           this.otpform.reset();
         }
@@ -138,6 +144,7 @@ export class LoginComponent implements OnInit {
     this.forms.reset();
     this.otpform.reset();
     this.resetform.reset();
+    this.error = false;
   }
   submitOtp() {
     console.log(this.employeeId);

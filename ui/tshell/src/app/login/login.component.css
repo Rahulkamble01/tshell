@@ -92,5 +92,6 @@ color: red;
   text-decoration: none;
   border: none;
   cursor: pointer;
+  float:right;
 }
 .resendButton:focus { outline: none; }
