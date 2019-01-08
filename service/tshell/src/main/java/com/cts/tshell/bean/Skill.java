@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,6 +17,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "skill")
+@NamedQueries({
+	@NamedQuery(name = "Skill.findSkillNames", query = "select s.name,s.id from Skill s "
+			+ "where s.name LIKE CONCAT('%',:searchSkillName,'%') ")
+})
 public class Skill {
 
 	@Id

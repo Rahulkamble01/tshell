@@ -18,42 +18,41 @@
     <div class="col-lg-4  col-12">
     </div>
     <div class="col-lg-4  col-12">
-      <div class="alert alert-danger" style="margin-top:20px" *ngIf="userDetails.id==-1">EmployeeId incorrect</div>
+      <div class="alert alert-danger incorrect"  *ngIf="userDetails.id==-1">EmployeeId incorrect</div>
     </div>
     <div class="col-lg-4  col-12">
     </div>
 
   </div>
 
-  <div class="row" style="margin-top:15px;padding-right: 30px" *ngIf="userDetails.id>0">
+  <div class="row imagespace"  *ngIf="userDetails.id>0">
     <div class="col-lg-1 col-12 col-sm-1 col-md-1">
 
     </div>
-    <div class="col-lg-10 col-12 col-sm-10 col-md-10 ts-card card" style="margin: 0px 0px 0px 16px ">
+    <div class="col-lg-10 col-12 col-sm-10 col-md-10 ts-card card cardalignment">
       <div class="row">
-        <div class="col-lg-2 col-sm-4 col-12 col-md-3" style="padding:5px;">
+        <div class="col-lg-2 col-sm-4 col-12 col-md-3 imagepreview" >
           <div class="row">
             <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
             <div class="col-lg-12 col-md-10 col-sm-10 col-8 ">
               <div class="avatar-upload">
               <div class="avatar-preview">
-                  <img [src]="imageUrl" id="imagePreview" style="border-radius:50%;height:100%;width:100%;background-image: url(https://www.loopconnect.net/images/main/avatar.png);" />
+                  <img [src]="imageUrl" id="imagePreview" class="preview" />
                 </div>
               </div>
             </div>
             <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
           </div>
-
         </div>
-        <div class="col-lg-10 col-sm-8 col-12 col-md-9" style="padding:10px;">
+        <div class="col-lg-10 col-sm-8 col-12 col-md-9 userdetails" >
           <div class="row">
             <div class="col-lg-9 col-sm-12 col-12 col-md-9">
-              <span style="font-size:35px; font-weight: bold;">
+              <span class="userdetail">
 
-                {{ userDetails.name}}<span style="font-size:20px;">({{ userDetails.employeeId}})
+                {{ userDetails.name}}<span class="employeeid">({{ userDetails.employeeId}})
                   <input type="hidden" value="{{userDetails.employeeId}}" #employeeid> </span>
               </span>
-              <span class="badge badge-info" style="font-size:15px;">
+              <span class="badge badge-info rolename" >
                 {{userDetails.role.name}}</span><i class="fas fa-pencil-alt editrole" data-toggle="modal"
                 data-target="#exampleModal2" data-whatever="@mdo"></i>
                 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -68,107 +67,79 @@
                     </div>
                     
                     <div class="modal-body">
-                        <!-- <div class="col-lg-3 col-sm-12 col-12 col-md-3">
-                            <select class="btn btn-ts-primary dropdown-toggle" [(ngModel)]="changedRole" (change)="changeRole();">
-                              <option>Change Role</option>
-                              <option value="{{userRole.id}}" class="dropdown-item" *ngFor="let userRole of roles">{{userRole.name}}</option>
-                            </select>
-                          </div> -->
-                          <div class="radio" >
-                              <label><input type="radio" name="optradio" > Admin  </label>&nbsp;
-                              <label><input type="radio" name="optradio" > Learner  </label>&nbsp;
-                              <label><input type="radio" name="optradio" > SME</label>
+                      <div class="radio" *ngFor="let userRole of roles"   >
+                             <div *ngIf="userDetails.role.name == userRole.name" > <label><input type="radio" value="{{userRole.id}}" (click)="changeRole(role.value);" checked #role>{{userRole.name}}  </label>&nbsp;</div>
+                              <div *ngIf="userDetails.role.name != userRole.name" ><label><input type="radio" value="{{userRole.id}}" (click)="changeRole(role1.value);" #role1>{{userRole.name}}  </label>&nbsp;</div>
                             </div>
                     </div>
                     <div class="modal-footer">
-                       
-                     
                         <button type="submit" class="btn btn-ts-cancel" data-dismiss="modal">Close</button>
-                    
-                      
                     </div>
-                
                   </div>
                 </div>
               </div>
-              <span style="color:blue;">
+              <span class="useremail">
                 <br>{{ userDetails.email}}
               </span>
             </div>
-            
           </div>
           <br>
-
-
+          <div *ngIf="userDetails.role.name=='SME'">
           <h4>
-            <span class="badge badge-secondary viewskills" *ngFor="let skill of userDetails.skills ">{{skill.name}}</span></h4>
-
+            <span class="badge badge-secondary viewskills" *ngFor="let skill of userDetails.skills " >{{skill.name}}</span></h4>
+          </div>
         </div>
-
       </div>
     </div>
     <div class="col-lg-1 col-12 col-sm-1 col-md-1">
-
     </div>
   </div>
-
-  <div class="row" style="margin-top:15px;">
+  <div class="row assessmenthistory" >
     <div class="col-lg-1 col-12 col-sm-1 col-md-1 ">
-
     </div>
-    <div class="col-lg-10 col-12 col-sm-10 col-md-10">
-
-      <div class="row" style="padding-bottom:15px;">
-        <div class="col-lg-12 col-sm-12 ts-card card" *ngIf="assessmentsData.length==0 && userDetails.id>0">
-          <span>Assessment yet to be taken</span>
+    <div class="col-lg-10 col-12 col-sm-10 col-md-10" >
+      <div class="row assessmentnottaken" >
+        <div class="col-lg-12 col-sm-12 " *ngIf="assessmentsData.length==0 && userDetails.id>0">
+          <span class="ts-card card nottaken" >Assessment yet to be taken</span>
         </div>
-        <div class="col-lg-4 col-12 col-sm-6 col-md-6" style="margin-top:20px;" *ngFor="let skill of assessmentsData">
-
-          <div class=" ts-card card" style="height:100%;">
+        <div class="col-lg-4 col-12 col-sm-6 col-md-6 skillname"  *ngFor="let skill of assessmentsData">
+          <div class=" ts-card card skilltitle">
             <div class="card-body">
               <h2>{{skill.skillname}}</h2>
               <hr>
               <div *ngFor="let assessment of skill.assessments">
                 <div class="row">
                   <div class="col-lg-5 col-5 col-sm-5">
-                    <span class="badge " style="font-weight:400;font-size:16px;background-color:blue;color:white;opacity:0.7;"
-                      *ngIf="assessment.type=='Entry'">
+                    <span class="badge assessmententry" *ngIf="assessment.type=='Entry'">
                       <input type="hidden" value="assessment.skill.id" #skillid>
                       {{assessment.type}}
                     </span>
-                    <span class="badge " style="font-weight:400;font-size:16px;background-color:green;color:white;opacity:0.7;"
-                      *ngIf="assessment.type=='Exit'">
+                    <span class="badge assessmentexit" *ngIf="assessment.type=='Exit'">
                       {{assessment.type}}
                     </span>
                     <div class="col-lg-7 col-7 col-sm-7" *ngIf="assessment.type!='Exit' && assessment.type=='Entry' && !assessment.skill ">
-                      <span class="testdate"><span style="color: blue;">Assessment yet to be taken</span></span>
+                      <span class="testdate"><span >Assessment yet to be taken</span></span>
                     </div>
                     <br><span class="testdate">{{assessment.date}}</span>
                   </div>
                   <div class="col-lg-5 col-5 col-sm-5">
-                    <span class="percent">{{assessment.score}}<span style="font-size:25px;">%</span></span>
+                    <span class="percent">{{assessment.score}}<span class="assessmentscore">%</span></span>
                   </div>
                   <div class="col-lg-2 col-2 col-sm-2">
                     <div class="vertical-center"><button data-toggle="modal" [attr.data-target]="'#myModal'+assessment.id"
                         class="fas fa-ellipsis-v show-result"></button></div>
-
                   </div>
                 </div>
                 <hr>
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
     <div class="col-lg-1 col-12 col-sm-1 col-md-1">
-
     </div>
   </div>
-
-
 </div>
 <!-- Modal -->
 <div [id]="'myModal'+assessment.id" class="modal fade" role="dialog" *ngFor="let assessment of assessmentsForQn">
@@ -185,10 +156,10 @@
         <div class="row">
           <div class="col-lg-2 col-3 col-md-2 col-sm-2" *ngFor="let item of assessment.assessmentQuestions; let i = index"
             [attr.data-index]="i">
-            <div class="badge answercardsright" style="font-weight:400;" *ngIf="item.correct">
+            <div class="badge answercardsright" *ngIf="item.correct">
               {{i+1}}
             </div>
-            <div class="badge answercardswrong" style="font-weight:400;" *ngIf="!item.correct">
+            <div class="badge answercardswrong" *ngIf="!item.correct">
               {{i+1}}
             </div>
           </div>
@@ -196,9 +167,9 @@
         </div>
         <hr>
 
-        <div class="badge" style="height:20px;width:20px;background-color:green;color:green;opacity:.7;">0</div>&nbsp;Correct
+        <div class="badge correctanswer" >0</div>&nbsp;Correct
         Answers&nbsp;&nbsp;&nbsp;
-        <div class="badge" style="height:20px;width:20px;background-color:red;color:red;opacity:.7;">0</div>&nbsp;Incorrect
+        <div class="badge wronganswer" >0</div>&nbsp;Incorrect
         Answers
 
       </div>

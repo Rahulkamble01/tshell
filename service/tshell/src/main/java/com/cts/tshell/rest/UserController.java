@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.tshell.bean.Role;
+import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.UserService;
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class UserController {
 	public UserService userService;
-
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentController.class);
 	
 	@Autowired
@@ -51,6 +52,9 @@ public class UserController {
 	
 	@GetMapping("/getRoles")
 		public List<Role> getRoles(){
+		LOGGER.info("start");
+		LOGGER.debug("roleId: {} ");
+		LOGGER.info("end");
 		return userService.getRoles();
 		}
 	
@@ -63,6 +67,18 @@ public class UserController {
 		userService.update(user);
 	}
 	
-	
+	@PostMapping("/getSkillsOnSearch")
+	public List<Skill> skillName(@RequestBody String searchSkillName) {
+		LOGGER.debug("searchName: {}", searchSkillName);
+		LOGGER.info("------For getting skill ----");
+		List<Skill> skill = userService.getSkillName(searchSkillName);
+		LOGGER.debug("skill: {}", skill);
+		return skill;
+	}
 
+	@PostMapping("/saveskill")
+	public void skillNames(@RequestBody User user ){
+		userService.saveSkills(user);
+	}
+	
 }

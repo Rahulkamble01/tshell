@@ -1,7 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -63,7 +63,7 @@ public class Assessment {
 //				inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
 //	)
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessment")
-	private List<AssessmentQuestion> assessmentQuestions;
+	private Set<AssessmentQuestion> assessmentQuestions;
 
 	public int getId() {
 		return id;
@@ -113,11 +113,11 @@ public class Assessment {
 		this.user = user;
 	}
 
-	public List<AssessmentQuestion> getAssessmentQuestions() {
+	public Set<AssessmentQuestion> getAssessmentQuestions() {
 		return assessmentQuestions;
 	}
 
-	public void setAssessmentQuestions(List<AssessmentQuestion> assessmentQuestions) {
+	public void setAssessmentQuestions(Set<AssessmentQuestion> assessmentQuestions) {
 		this.assessmentQuestions = assessmentQuestions;
 	}
 

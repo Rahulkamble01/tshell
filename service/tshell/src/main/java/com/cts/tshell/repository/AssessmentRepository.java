@@ -8,8 +8,6 @@ import org.springframework.data.repository.query.Param;
 import com.cts.tshell.bean.Assessment;
 
 public interface AssessmentRepository extends JpaRepository<Assessment, Integer> {
-
 	List<Assessment> findUserHistory(@Param("id")int assessmentId);
-	Assessment findById(int assessmentId);
-	
+	Assessment findById(int assessmentId);	
 }

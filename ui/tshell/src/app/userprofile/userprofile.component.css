@@ -89,6 +89,7 @@ a{
     border:3px solid white;
     color:white;
     font-size:25px;
+    font-weight:400;
     border-radius:.5rem;
     opacity:.7;
 }
@@ -100,6 +101,7 @@ a{
     border:3px solid white;
     color:white;
     font-size:25px;
+    font-weight:400;
     border-radius:.5rem;
     opacity:.7;
 }
@@ -216,8 +218,8 @@ a{
     margin-top:20px;
 }
 
-#ts-card card{
-    height:100%;
+.cardalignment{
+    margin: 0px 0px 0px 16px ;
 }
 
 #typetrue{
@@ -262,3 +264,100 @@ a{
     color: grey;
     margin-left:10px;
 }  
+
+.incorrect{
+    margin-top:20px;
+}
+
+.imagespace{
+    margin-top:15px;
+    padding-right: 30px;
+}
+
+.preview{
+    border-radius:50%;
+    height:100%;
+    width:100%;
+    background-image: url(https://www.loopconnect.net/images/main/avatar.png);
+}
+
+.imagepreview{
+    padding:5px;
+}
+
+.userdetails{
+    padding:10px;
+}
+
+.userdetail{
+    font-size:35px;
+    font-weight: bold;
+}
+
+.employeeid{
+    font-size:20px;
+}
+
+.rolename{
+    font-size:15px;
+}
+
+.useremail{
+    color:blue;
+}
+
+.assessmenthistory{
+    margin-top:15px;
+}
+
+.assessmentnottaken{
+    padding-bottom:15px;
+}
+
+.nottaken{
+    font-weight: 650
+}
+
+.skillname{
+    margin-top:20px;
+}
+
+.skilltitle{
+    height:100%;
+}
+
+.assessmententry{
+    font-weight:400;
+    font-size:16px;
+    background-color:blue;
+    color:white;
+    opacity:0.7;
+}
+
+.assessmentexit{
+    font-weight:400;
+    font-size:16px;
+    background-color:green;
+    color:white;
+    opacity:0.7;
+}
+
+.assessmentscore{
+    font-size:25px;
+}
+
+.correctanswer{
+    height:20px;
+    width:20px;
+    background-color:green;
+    color:green;
+    opacity:.7;
+}
+
+.wronganswer{
+    height:20px;
+    width:20px;
+    background-color:red;
+    color:red;
+    opacity:.7;
+}

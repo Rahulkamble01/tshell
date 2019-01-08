@@ -106,10 +106,11 @@ export class UserprofileComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
  }
-  changeRole() {
-    console.log(this.changedRole);
+  changeRole(roleid) {
+    console.log("Role id :="+roleid);
+    
     for (let role of this.roles) {
-      if (role.id == this.changedRole) {
+      if (role.id ==roleid) {
         this.userDetails.role = role;
         this.viewprofileService.updateUser(this.userDetails).subscribe();
 

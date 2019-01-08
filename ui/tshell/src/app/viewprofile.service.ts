@@ -19,6 +19,8 @@ export class ViewprofileService {
   url2 = environment.serviceUrlPrefix + "/save";
   url3 = environment.serviceUrlPrefix + "/getRoles";
   url4 = environment.serviceUrlPrefix + "/update";
+  url5 = environment.serviceUrlPrefix + "/saveskill";
+  skillnames: string = environment.serviceUrlPrefix + "/getSkillsOnSearch/";
 
   constructor(private http: HttpClient) { }
 
@@ -42,5 +44,13 @@ export class ViewprofileService {
     console.log("inside updateUser");
     console.log(user);
     return this.http.post<any>(this.url4,user,httpOptions);
+  }
+  
+  skillsOnSearch(name): Observable<any> {
+    return this.http.post<any>(this.skillnames, name, httpOptions);
+  }
+
+  saveskills(user){
+    return this.http.post<any>(this.url5,user,httpOptions);
   }
 }

@@ -66,14 +66,14 @@
                   maximun 60
                   characters</div>
                 <div *ngIf="addskillform.get('topicName').errors.pattern" class="aletry"> Topic Name must not
-                  contain numbers and special charecters
+                  contain numbers ands special charecters
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
+              <ul *ngFor="let topic of topics" class="list-inline marginzero inlinetopics">
                 <li class="badge badge-primary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
                     (click)="removeTopic(topic)"></i></li>
               </ul>
