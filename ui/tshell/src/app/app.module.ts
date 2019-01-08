@@ -47,7 +47,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
 import { TopAccessedTestsComponent } from './top-accessed-tests/top-accessed-tests.component';
 import { NumberFormatterPipe } from './numberFormatterPipe';
-import { ReferenceComponent } from './reference/reference.component';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +95,7 @@ PasswordNotEqualValidatorDirective,
     ErrorComponent,
     TopAccessedTestsComponent,
     NumberFormatterPipe,
-    ReferenceComponent
+   
   ],
 
   imports: [
