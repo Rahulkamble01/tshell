@@ -25,7 +25,7 @@ import com.cts.tshell.service.QuestionService;
 public class QuestionController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionController.class);
 	private QuestionService questionService;
-
+	private List<Question> questionsList;
 	@Autowired
 	public void setQuestionService(QuestionService questionService) {
 		this.questionService = questionService;

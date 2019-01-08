@@ -1,41 +1,41 @@
-
 <div class="container">
   <div class="card" *ngFor="let data of csvData ,let i=index">
-    <div class="card-header" data-toggle="collapse" [attr.data-target]="'#content'+i+1">
-      <pre>{{i+1}}. {{csvData[i].question}}</pre>
-      <span *ngIf="csvData[i].lengthExceeded" class="badge badge-danger" style="float:right"> Question Length Exceeded</span>
-  </div>
-  <div [id]="'content'+i+1" class="collapse">
-    <div class="card-body">
-      <div *ngFor="let option of csvData[i].optionList, let j=index">
-        <div *ngIf="option.description!=''">
-          <div>
-           <pre> <span class="option">{{j+1}}.</span> <span> {{option.description}}</span> </pre> 
-            <span *ngIf="option.lengthExceeded" class="badge badge-danger" style="float:right">Option Length Exceeded</span>
-          </div>
+    <div class="card-header" data-toggle="collapse" [attr.data-target]="'#content'+i+1  ">
+      <div *ngIf="csvData[i].error">
+        <pre>{{i+1}}. {{csvData[i].question}}<i class="fa fa-exclamation-triangle text-center icon text-danger "></i></pre>
+      </div>
+      <div *ngIf="!csvData[i].error">
+        <pre>{{i+1}}. {{csvData[i].question}} </pre>
+      </div>
+      <span *ngIf="csvData[i].lengthExceeded" class=" lengtherrorbadge badge badge-danger"> Question Length Exceeded</span>
+    </div>
+    <div [id]="'content'+i+1" class="collapse">
+      <div class="card-body">
+        <div *ngFor="let option of csvData[i].optionList, let j=index">
+          <span class="wrongOption" *ngIf="!option.answer ">
+            <span>
+              <pre>{{j+1}}.{{option.description}} </pre> </span>
+          </span>
+          <span class="correctOption" *ngIf="option.answer">
+            <span>
+              <pre>{{j+1}}.{{option.description}} <i class="fa fa-check-circle text-center icon text-success " ></i> </pre>
+            </span>
+          </span>
+          <span *ngIf="option.lengthExceeded" class="badge badge-danger">Option Length Exceeded</span>
         </div>
+        <span class="errorbadge badge badge-danger">{{csvData[i].error}}</span>
       </div>
     </div>
-    <div class="card-footer">
-      <span class="answer">Answer:</span>
-      <span *ngFor="let option of csvData[i].optionList, let k=index">
-        <span class="correctOption" *ngIf="option.answer==true && csvData[i].error==''">
-          Option {{k+1}}
-        </span>
-      </span>
-      <span class="badge badge-danger" style="float:right">{{csvData[i].error}}</span>
-    </div>
   </div>
-</div>
-<div class="col-12 text-center action">
-  <span class="actions">
-    <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="review()">Approve and Submit</button>
-  </span>
-  <span class="actions">
-    <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="review()">Submit for Review</button>
-  </span>
-  <span class="actions">
-    <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="retry()">Retry</button>
-  </span>
-</div>
+  <div class="col-12 text-center action">
+    <span class="actions">
+      <button type="submit" class="btn btn-ts-primary btn-ts-sm" *ngIf="errorCount==0" (click)="approveSubmittted()">Approve and Submit</button>
+    </span>
+    <span class="actions">
+      <button type="submit" class="btn btn-ts-primary btn-ts-sm" *ngIf="errorCount==0" (click)="submitForReview()">Submit for Review</button>
+    </span>
+    <span class="actions">
+      <button type="submit" class="btn btn-ts-primary btn-ts-sm" (click)="retry()">Retry</button>
+    </span>
+  </div>
 </div>

@@ -59,19 +59,15 @@ public class QuestionService {
 		List<Question> uploadedQuestions = new ArrayList<Question>();
 		// Reading file using InputStreamReader..
 		try {
-
 			reader = new InputStreamReader(file.getInputStream());
 			csvReader = new CSVReaderBuilder(reader).withSkipLines(12).build();
 			List<String[]> csvData = csvReader.readAll();
-
 			for (String questionData[] : csvData) {
 				Question question = new Question(questionData);
 				uploadedQuestions.add(question);
 			}
-
 			csvReader.close();
 			reader.close();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

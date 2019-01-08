@@ -15,8 +15,8 @@ export class ContributeQuestionService {
   csvData: any;
   uploadUrl: string = environment.serviceUrlPrefix + '/question/upload';
   addQuestionUrl: string = environment.serviceUrlPrefix + '/question/';
-  submitQuestionsUrl: string = environment.serviceUrlPrefix + '/question/submitforreview';
-
+  submitForReviewUrl: string = environment.serviceUrlPrefix + '/question/submitforreview';
+  approveSubmittedUrl: string = environment.serviceUrlPrefix + '/question/approveandsubmit';
   constructor(private http: HttpClient) {
     this.http = http;
   }
@@ -27,9 +27,10 @@ export class ContributeQuestionService {
     return this.http.post<any>(this.addQuestionUrl, json);
   }
   submitForReview(questionsList): Observable<any> {
-    console.log('submitForReview() is called!');
-    console.log(this.submitQuestionsUrl);
-    return this.http.post<any>(this.submitQuestionsUrl, questionsList, httpOptions);
+    return this.http.post<any>(this.submitForReviewUrl, questionsList, httpOptions);
+  }
+  approveSubmittted(questionsList): Observable<any> {
+    return this.http.post<any>(this.approveSubmittedUrl, questionsList, httpOptions);
   }
   getCsvData() {
     return this.csvData;

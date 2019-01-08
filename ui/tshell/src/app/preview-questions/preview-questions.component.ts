@@ -11,46 +11,35 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 export class PreviewQuestionsComponent implements OnInit {
   questionsList: any;
   csvData = [];
-
+  length: any;
+  errorCount: any;
   constructor(private router: Router, private contributeQuestionService: ContributeQuestionService) { }
 
   ngOnInit() {
     this.csvData = this.contributeQuestionService.getCsvData();
-    for (let data of this.csvData) {
-      let correctAnswerCount = 0;
-      let invalidinput = 0;
-      let count = 0;
-      for (let option of data.optionList) {
-
-        if (option.answer) {
-          correctAnswerCount += 1;
-        }
-        if ((option.description == '' && !option.invalidAnswerFormat) || (option.description != '' && option.invalidAnswerFormat)) {
-          invalidinput += 1;
-        }
-        if (option.description != '' && (option.description == 'TRUE' || option.description == 'FALSE')) {
-          if (option.answer) {
-            count += 1;
-          }
-        }
-      }
-      if (correctAnswerCount < 1 || invalidinput > 0 || count == 2) {
-        data.error = "Invalid Answer Format";
-      }
-      else {
-        data.error = "";
+    this.errorCount = 0;
+    this.length = this.csvData.length;
+    for (let i = 0; i < this.length; i++) {
+      if (this.csvData[i].error != null) {
+        this.errorCount += 1;
       }
     }
-    this.csvData = this.contributeQuestionService.getCsvData();
-    console.log(this.csvData);
   }
 
-  review() {
+  submitForReview() {
     this.questionsList = this.csvData;
     alert('Questions are submitted successfully for Review!');
     this.contributeQuestionService.submitForReview(this.questionsList).subscribe(
-      data => {
-        console.log(data);
+      data=>{
+      }
+    );
+    this.router.navigate(['/contributeQuestion']);
+  }
+  approveSubmittted() {
+    this.questionsList = this.csvData;
+    alert('Questions saved successfully as Approved!');
+    this.contributeQuestionService.approveSubmittted(this.questionsList).subscribe(
+      data=>{
       }
     );
     this.router.navigate(['/contributeQuestion']);

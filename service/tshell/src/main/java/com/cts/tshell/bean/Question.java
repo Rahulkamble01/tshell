@@ -2,7 +2,9 @@ package com.cts.tshell.bean;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -66,6 +68,17 @@ public class Question {
 	@Transient
 	private boolean lengthExceeded;
 
+	@Transient
+	private String error;
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
 	public boolean isEmpty() {
 		return empty;
 	}
@@ -124,14 +137,70 @@ public class Question {
 	}
 
 	public Question(String[] csvContent) {
-		List<Option> options = new ArrayList<Option>(5);
-		this.question = csvContent[1];
-		options.add(new Option(csvContent[2], csvContent[3]));
-		options.add(new Option(csvContent[4], csvContent[5]));
-		options.add(new Option(csvContent[6], csvContent[7]));
-		options.add(new Option(csvContent[8], csvContent[9]));
-		options.add(new Option(csvContent[10], csvContent[11]));
+
+		List<Option> options = new ArrayList<Option>();
+		this.question = csvContent[1].trim();
+		if (!csvContent[2].equals("") || !csvContent[3].equals("")) {
+			options.add(new Option(csvContent[2].trim(), csvContent[3].trim()));
+		}
+		if (!csvContent[4].equals("") || !csvContent[5].equals("")) {
+			options.add(new Option(csvContent[4].trim(), csvContent[5].trim()));
+		}
+		if (!csvContent[6].equals("") || !csvContent[7].equals("")) {
+
+			options.add(new Option(csvContent[6].trim(), csvContent[7].trim()));
+		}
+		if (!csvContent[8].equals("") || !csvContent[9].equals("")) {
+			options.add(new Option(csvContent[8].trim(), csvContent[9].trim()));
+		}
+		if (!csvContent[10].equals("") || !csvContent[11].equals("")) {
+			options.add(new Option(csvContent[10].trim(), csvContent[11].trim()));
+		}
+
 		this.optionList = options;
+		int correctAnswerCount = 0;
+		int invalidinput = 0;
+		int count = 0;
+		int invalidAnswerCount = 0;
+		Set<String> optionsSet = new HashSet<String>();
+		for (Option option : optionList) {
+			optionsSet.add(option.getDescription().toLowerCase());
+			if (option.isAnswer()) {
+				correctAnswerCount += 1;
+			}
+			if ((option.getDescription().equals("") && !option.isInvalidAnswerFormat())) {
+				invalidinput += 1;
+			}
+			if (!option.getDescription().equals("") && ((option.getDescription().toLowerCase().equals("true")
+					|| option.getDescription().toLowerCase().equals("false"))
+					|| (option.getDescription().toLowerCase().equals("yes")
+							|| option.getDescription().toLowerCase().equals("no"))
+					|| (option.getDescription().toLowerCase().equals("active")
+							|| option.getDescription().toLowerCase().equals("inactive")))) {
+				if (option.isAnswer()) {
+					count += 1;
+				}
+			}
+			if (!option.getDescription().equals("") && option.isInvalidAnswerFormat()) {
+				invalidAnswerCount += 1;
+			}
+
+		}
+
+		if (correctAnswerCount < 1) {
+			setError("At least one option should be selected as answer");
+		}
+
+		else if (count == 2) {
+			setError("All option can not be true");
+		} else if (invalidinput > 0) {
+			setError("Option is missing  ");
+		} else if (optionsSet.size() != getOptionList().size()) {
+			setError("Multiple option can not have same value");
+		} else if (invalidAnswerCount > 0) {
+			setError("Answer is missing or in incorrect format ");
+		}
+
 		if (csvContent[2].isEmpty()) {
 			empty = true;
 		} else {
@@ -143,6 +212,7 @@ public class Question {
 		} else {
 			lengthExceeded = false;
 		}
+
 	}
 
 	public List<Option> getOptionList() {
