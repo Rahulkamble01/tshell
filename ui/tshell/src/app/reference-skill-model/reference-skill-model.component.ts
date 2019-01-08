@@ -18,6 +18,7 @@ export class ReferenceSkillModelComponent implements OnInit {
   @Input() allReferenceSkills: any;
   @Input() allSkills: any;
   @Input() skill: any;
+  @Input() type: any;
   model: any;
   sameSkill = false;
 
@@ -57,7 +58,11 @@ export class ReferenceSkillModelComponent implements OnInit {
       }
     });
     if (counter === 0) {
-      this.addReferenceSkill(0, this.skill, $event.item, 'pre');
+      if (this.type === 1) {
+        this.addReferenceSkill(0, this.skill, $event.item, 'post');
+      } else {
+        this.addReferenceSkill(0, this.skill, $event.item, 'pre');
+      }
       this.sameSkill = false;
     }
   }
@@ -65,7 +70,6 @@ export class ReferenceSkillModelComponent implements OnInit {
   addReferenceSkill(id, skill1, InputReferenceSkill, classifier) {
     console.log('inside Adding Skills');
     const skill = new ReferenceSkill(id, skill1, InputReferenceSkill, classifier);
-    console.log(skill);
     this.referenceSkillName.push(skill);
   }
 
@@ -78,9 +82,11 @@ export class ReferenceSkillModelComponent implements OnInit {
           this.addReferenceSkillForm.controls['referenceSkill'].patchValue(element1);
         }
       });
-      // this.addReferenceSkillForm.controls['referenceSkill'].patchValue(element.name);
-      this.addReferenceSkillForm.controls['classifier'].patchValue('pre');
-      // console.log(JSON.stringify(this.addReferenceSkillForm.value));
+      if (this.type === 1) {
+        this.addReferenceSkillForm.controls['classifier'].patchValue('post');
+      } else {
+        this.addReferenceSkillForm.controls['classifier'].patchValue('pre');
+      }
       this.skillService.addReferenceSkill(JSON.stringify(this.addReferenceSkillForm.value)).subscribe();
     });
 

@@ -111,8 +111,6 @@ export class EditskillmodalComponent implements OnInit {
   }
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
-    console.log(index + " " + this.topics[index].name);
-
     this.confirmationDialogService.confirm(`Deletion of "${this.topics[index].name}"`, 'Do you really want to Delete ?')
       .then((confirmed) => {
         if (confirmed) {
@@ -155,14 +153,10 @@ export class EditskillmodalComponent implements OnInit {
       this.addskillform.controls['creationDate'].patchValue(new Date());
     }
 
-    this.topics.forEach(element => {
-      console.log(element);
-    });
     this.skillService.updateSkill(JSON.stringify(this.addskillform.value, getCircularReplacer())).subscribe(
       data => {
         this.status = data;
         this.error = false;
-        console.log(this.status);
         if (this.status === 2) {
           this.addskillform.reset();
           this.clearAllInput();
@@ -191,7 +185,6 @@ export class EditskillmodalComponent implements OnInit {
       // );
       this.cd.markForCheck();
       this.imgURL = reader.result;
-      console.log(this.imgURL);
     };
   }
 

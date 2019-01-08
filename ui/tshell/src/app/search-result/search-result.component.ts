@@ -51,7 +51,6 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {
     this.skillService.getAll().subscribe(data => {
       this.allSkills = data;
-      console.log(this.allSkills);
     });
 
     /* this.userRole = this.authService.getRole();
@@ -181,16 +180,26 @@ export class SearchResultComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
-  editRef(item) {
+  editRef(item, control) {
     const modalRef = this.modalService.open(ReferenceSkillModelComponent);
-    console.log("inside ediref");
+    console.log("inside ediref" + control);
     const dependentSkills = [];
     item.forEach(element => {
-      if (element.classifier === 'pre') { dependentSkills.push(element); }
+      if (control === 1) {
+        if (element.classifier === 'post') {
+          dependentSkills.push(element);
+        }
+      }
+      if (control === 2) {
+        if (element.classifier === 'pre') {
+          dependentSkills.push(element);
+        }
+      }
     });
     modalRef.componentInstance.allReferenceSkills = dependentSkills;
     modalRef.componentInstance.allSkills = this.allSkills;
     modalRef.componentInstance.skill = this.skills;
+    modalRef.componentInstance.type = control;
   }
 
 
@@ -225,32 +234,3 @@ export class SearchResultComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 }
-
-
-
-
-// const tooltip = d3.select("#graphID")
-// .append("div")
-// .attr("class", "tooltip")
-// .style("opacity", 0);
-
-// d3.json(this.graphData, function (error, graph) {
-// if (error) { throw error; }
-// const svg = d3.select('svg'),
-//   width = +svg.attr('width'),
-//   height = +svg.attr('height');
-
-// const simulation = d3.forceSimulation()
-//   .nodes(graph.nodes)
-//   .force('link', d3.forceLink().id(d => d.id))
-//   .force('charge', d3.forceManyBody())
-//   .force('center', d3.forceCenter(width / 2, height / 2))
-//   .on('tick', ticked());
-
-// simulation.force('link')
-//   .links(graph.links);
-
-// const R = 6;
-
-
-// });

@@ -525,9 +525,11 @@ a {
   .dropdown-menu {
     width: 729px;
   }
+
   .ml-12 {
     margin-left: 35px;
   }
+
   .mr-12 {
     margin-right: 0px
   }
@@ -535,84 +537,157 @@ a {
 
 @media screen and (max-width: 1001px) {
   .bigScreen {
-    display:none;
+    display: none;
   }
+
   .smallScreen {
-    display:block;
+    display: block;
   }
 }
 
 @media screen and (min-width: 1000px) {
   .bigScreen {
-    display:block;
+    display: block;
   }
+
   .smallScreen {
-    display:none;
+    display: none;
   }
 }
 
 .center1 {
-  position: absolute;
+
   left: 0;
-  top: 37%;
+
   width: 100%;
   text-align: center;
   font-size: 40px;
 }
 
-.center2 {
+/* .center2 {
   position: absolute;
   left: 0;
   top: 23%;
   width: 100%;
   text-align: center;
   font-size: 40px;
-}
- 
-.plus{
+} */
+
+.plus {
   font-size: 20px;
   cursor: pointer;
 }
 
-.cross{
+.cross {
   cursor: pointer;
   color: lightgrey;
 }
 
-.arr1{
+.arr1 {
   margin: 0px 12px 24px 8px;
   font-size: 15px;
 }
 
-.arr2{
+.arr2 {
   margin: 120px 0px 0px 0px;
   font-size: 40px;
 }
 
-.f1{
-  font-size:20px;
+.f1 {
+  font-size: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-.m1{
+.m1 {
   margin: 90px 0px 0px 0px;
 }
 
-.inlineelements{
+.inlineelements {
   display: inline-block;
 }
 
-.skillnameStyle{
-  font-size:35px;
-   font-weight: bold;
+.skillnameStyle {
+  font-size: 35px;
+  font-weight: bold;
 }
 
-.padding1opx{
+.padding1opx {
   padding: 10px;
 }
 
-.edittopics{
+.edittopics {
   font-size: 1.5rem;
-   color: rgb(19, 114, 158);
-   cursor: pointer;
-  }
+  color: rgb(19, 114, 158);
+  cursor: pointer;
+}
+
+
+.mb-40px {
+  margin-bottom: 40px
+}
+
+.mt-14px {
+  margin-top: 15px;
+}
+
+.p-5px {
+  padding: 5px;
+}
+
+.skill-default-image {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.cursorpointer {
+  cursor: pointer;
+}
+
+.mt-19px {
+  margin-top: 19px;
+}
+
+.description-icon {
+  font-size: 31px;
+  color: grey;
+}
+
+.inside-des-icon {
+  margin-top: 19px;
+  cursor: pointer;
+  font-size: 25px
+}
+
+.description-style {
+  color: #888;
+  line-height: 1;
+  font-size: 14px
+}
+
+.pb-15px {
+  padding-bottom: 15px;
+}
+
+.mt-20px {
+  margin-top: 20px;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+.performeer-name {
+  font-weight: 400;
+  font-size: 16px;
+  background-color: blue;
+  color: white;
+  opacity: 0.7;
+}
+.min-height-additional-skill{
+  min-height: 245px
+}
+.text-not-center{
+  text-align: initial!important;
+  display: inline;
+}

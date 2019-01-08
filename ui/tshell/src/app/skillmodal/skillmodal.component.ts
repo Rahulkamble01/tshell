@@ -135,13 +135,10 @@ export class SkillmodalComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     const skill = new Skill(this.addskillform.controls['name'].value, "active", this.addskillform.controls['description'].value, this.topics, new Date());
 
-    console.log(skill);
     this.SkillService.addSkill(skill).subscribe(
       data => {
-        console.log(data);
         this.status = data;
         this.error = false;
-        console.log(this.status);
         if (this.status === 2) {
           this.addskillform.reset();
           this.sametopic = false;
