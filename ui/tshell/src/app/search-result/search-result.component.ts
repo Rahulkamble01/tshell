@@ -131,6 +131,7 @@ export class SearchResultComponent implements OnInit {
     });
     this.skillService.getReferenceSkill($event.item.id).subscribe(data => {
       this.referenceSkill = data;
+      console.log(this.referenceSkill);
     });
   }
 

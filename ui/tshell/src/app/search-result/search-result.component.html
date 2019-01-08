@@ -146,7 +146,7 @@
               <div class="card-group">
                 <div class="card bg-white ts-card">
                   <div class="card-body text-center">
-                    <h6>Dependent Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
+                    <h6>Dependent Skills <span> <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill)"></i></span></h6>
                     <hr>
                     <div *ngFor="let item of referenceSkill">
                       <h6 *ngIf="item.classifier == 'pre'" class="d-inline"><span class="badge badge-info d-inline">{{item.referenceSkill.name}}
@@ -186,7 +186,7 @@
                   <h6>Additional Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
                   <hr>
                   <div *ngFor="let item of referenceSkill">
-                    <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{skill.referenceSkill.name}} <i class="fas fa-times cross"></i></span></h5>
+                    <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{item.referenceSkill.name}} <i class="fas fa-times cross"></i></span></h5>
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@
                   <h6>Additional Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
                   <hr>
                   <div *ngFor="let item of referenceSkill">
-                    <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{skill.referenceSkill.name}} <i class="fas fa-times cross"></i></span></h5>
+                    <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{item.referenceSkill.name}} <i class="fas fa-times cross"></i></span></h5>
                   </div>
                 </div>
               </div>
