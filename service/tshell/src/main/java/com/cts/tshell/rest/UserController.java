@@ -48,7 +48,7 @@ public class UserController extends TshellController {
 	 */
 
 	@GetMapping("/changepassword/{employeeId}/{currentPassword}/{newPassword}")
-	public ResponseEntity<ChangePasswordStatus> changePassword(@PathVariable int employeeId,
+	public ResponseEntity<ChangePasswordStatus> changePassword(@PathVariable String employeeId,
 			@PathVariable String currentPassword, @PathVariable String newPassword) throws NoSuchAlgorithmException {
 		LOGGER.info("start");
 		LOGGER.debug("employeeId:{}; currentPassword:{}; newPassword:{}", employeeId, currentPassword, newPassword);

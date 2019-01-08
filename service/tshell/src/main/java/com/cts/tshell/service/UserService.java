@@ -27,7 +27,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public User findByEmployeeId(int employeeId) {
+	public User findByEmployeeId(String employeeId) {
 		LOGGER.info("start");
 		LOGGER.debug("employeeId" + employeeId);
 		User user = userRepository.findByEmployeeId(employeeId);
@@ -52,20 +52,21 @@ public class UserService {
 		LOGGER.debug("encryptedNewPassword : {} ", encryptedNewPassword);
 		
 		if (encryptedFormPassword.equals(encryptedNewPassword)) {
+			LOGGER.info("inside the first checked in userService");
 			status.setNewAndOldPasswordSame(true);
 			status.setMessage("New Password and Current Password not same!");
 			
 		}
 		
 		if (!encryptedFormPassword.equals(encryptedCurrentPassword)) {
-			LOGGER.info("inside the 2 checked");
+			LOGGER.info("inside the second checked in userService");
 			status.setCurrentPasswordIncorrect(true);
 			status.setMessage("Current Password Invalid!");
 			
 		}
 		
 		if (encryptedFormPassword.equals(encryptedCurrentPassword) && !encryptedFormPassword.equals(encryptedNewPassword)) {
-			LOGGER.info("inside the third checked");
+			LOGGER.info("inside the third checked in userService");
 			user.setPassword(encryptedNewPassword);
 			userRepository.save(user);
 			status.setPasswordChanged(true);
@@ -78,7 +79,7 @@ public class UserService {
 	
 	
 	@Transactional
-	public User getUser(int employeeId) {
+	public User getUser(String employeeId) {
 		LOGGER.info("Start");
 		LOGGER.debug("EmployeeId: {}", employeeId);
 		LOGGER.info("End");

@@ -46,7 +46,7 @@ public class QuestionController extends TshellController{
 	}
 	
 	@GetMapping("/getUser/{userId}")
-	public List<User> getUser(@PathVariable int userId){
+	public List<User> getUser(@PathVariable String userId){
 		LOGGER.info("starting getUser method" );
 		List<User> user = questionService.getUser(userId);
 		LOGGER.debug("User details are:{}" + user);

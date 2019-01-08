@@ -65,7 +65,7 @@ public class SignupService {
 	}
 	
 	@Transactional
-	public User findUserById(int userId){
+	public User findUserById(String userId){
 		LOGGER.info("Finding user by employeeId");
 		return userRepository.getUserByEmployeeId(userId);
 	}

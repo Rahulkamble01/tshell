@@ -35,7 +35,7 @@ public class SignupController {
 		User actualUserEmail = signupService.findUserByEmail(email);
 		LOGGER.debug("ActualEmail :{} ", actualUserEmail);
 
-		int userId = user.getEmployeeId();
+		String userId = user.getEmployeeId();
 		
 		User actualUserbyId = signupService.findUserById(userId);
 		LOGGER.debug("ActualId :{} ", actualUserbyId);

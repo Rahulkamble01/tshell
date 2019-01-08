@@ -73,7 +73,7 @@ public class QuestionService {
 
 	}
 	@Transactional
-	public List<User> getUser(int userId){
+	public List<User> getUser(String userId){
 		LOGGER.info("starting getUser method");
 		List<User> userInfo = (List<User>) userRepository.findAllById(userId);
 		LOGGER.info("userInfo :{}"+userInfo);

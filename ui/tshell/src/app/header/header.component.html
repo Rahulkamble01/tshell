@@ -1,4 +1,4 @@
-<nav class="body navbar navbar-expand-lg navbar-dark" style="background-color:#242628; padding: 0px 16px;">
+<nav class="body navbar navbar-expand-lg navbar-dark navbarStyle">
   <a class="navbar-brand" href="#"><img src="./assets/images/logotshell.png" height="40px" width="120px"> </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
       </ul>
     </ng-container>
     <ng-template #elseTemplate>
-      <ul class="navbar-nav ml-auto" style="margin-top: 11px">
+      <ul class="navbar-nav ml-auto navbarLink">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a> &nbsp;
         </li>
@@ -85,7 +85,7 @@
 
           <h5 *ngIf="status.passwordChanged" id="status" class="alert alert-success">{{status.message}}</h5>
           <div *ngIf="!status.passwordChanged" id="status">
-            <div class="alert-danger" id="status" role="alert" style="color:red">{{status.message}}</div>
+            <div class="alert-danger" id="backendErrorstatus" role="alert" >{{status.message}}</div>
 
             <div class="form-group">
               <input type="password" name="oldPassword" formControlName="oldPassword" appConfirmEqualValidator="newpassword"
@@ -115,9 +115,8 @@
                 <div *ngIf="form.get('newPassword').errors.maxlength" class="danger validation">Password must be
                   maximun 30 characters
                 </div>
-                <div class="help-block" *ngIf="form.get('newPassword').touched && !(form.get('newPassword').errors?.notEqual) && !form.get('newPassword').errors.required && 
-              !form.get('newPassword').errors.minlength && !form.get('newPassword').errors.maxlength && !message"
-                  style="color: red">
+                <div class="help-block validation" *ngIf="form.get('newPassword').touched && !(form.get('newPassword').errors?.notEqual) && !form.get('newPassword').errors.required && 
+              !form.get('newPassword').errors.minlength && !form.get('newPassword').errors.maxlength && !message">
                   Password and New Password cannot be same
                 </div>
               </div>
@@ -139,8 +138,7 @@
                   must be maximun 30 characters
                 </div>
                 <div class="help-block validation" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword')?.errors.notEqual && !form.get('confirmPassword')?.errors.required
-              && !form.get('confirmPassword')?.errors.minlength && !form.get('confirmPassword')?.errors.maxlength"
-                  style="color: red">
+              && !form.get('confirmPassword')?.errors.minlength && !form.get('confirmPassword')?.errors.maxlength">
                   New Password and Confirm Password doesnot match
                 </div>
               </div>
