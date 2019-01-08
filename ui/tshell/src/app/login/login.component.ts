@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       '',
       [Validators.required,
       Validators.minLength(6),
-      Validators.pattern(this.numberPattern)
+     Validators.maxLength(10),
       ]
 
     )
@@ -173,6 +173,7 @@ export class LoginComponent implements OnInit {
           this.status = true;
           this.resetStatus = true;
           this.message = "";
+          alert("Password changed successfully");
         }
         else {
           this.message = "issue in seting the password"
