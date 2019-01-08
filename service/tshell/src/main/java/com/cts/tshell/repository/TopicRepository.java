@@ -8,12 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.cts.tshell.bean.Topic;
 
-public interface TopicRepository extends JpaRepository<Topic,Integer> {
+public interface TopicRepository extends JpaRepository<Topic, Integer> {
 
-	
-	@Query(value = "select * from topic  "+
-			       "where tp_sk_id = :skillId "+
-			  " ", nativeQuery = true)
-	List<Topic> getTopicIdAndWeightage(@Param("skillId")int skillId);
-		
+	@Query(value = "select * from topic  " + "where tp_sk_id = :skillId " + " ", nativeQuery = true)
+	List<Topic> getTopicIdAndWeightage(@Param("skillId") int skillId);
+
 }

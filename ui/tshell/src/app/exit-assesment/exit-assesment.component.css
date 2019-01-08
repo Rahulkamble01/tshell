@@ -40,6 +40,9 @@ body{
   color: black;
 }
 
+.question-pre{
+white-space: pre-wrap;
+}
 
 
 .test-name {

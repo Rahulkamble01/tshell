@@ -43,7 +43,7 @@ public class User {
 	private Role role;
 
 	@Column(name = "us_emp_id")
-	private int employeeId;
+	private String employeeId;
 	
 	@Column(name = "us_image")
 	private byte[] image;
@@ -93,11 +93,11 @@ public class User {
 		this.role = role;
 	}
 
-	public int getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -116,12 +116,7 @@ public class User {
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", skills=" + skills + "]";
-	}	
+	
 
 	
 }

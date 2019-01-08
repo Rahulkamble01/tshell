@@ -1,7 +1,7 @@
 export class TopicWiseScore {
     score: number;
     topicName: string;
-    weightage: number;
+    percentage: number;
     totalScore: number;
     outof: number;
 
@@ -9,7 +9,7 @@ export class TopicWiseScore {
         data = data || {};
         this.score = data.score;
         this.topicName = data.topicName;
-        this.weightage = data.weightage;
+        this.percentage = data.percentage;
         this.totalScore = data.totalScore;
 
     }

@@ -51,16 +51,17 @@ public class AssessmentService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentService.class);
 
 	public String startAssessment(Assessment assessment) {
-		LOGGER.info("START : startAssesment() Service  of AssessmentService");
+		LOGGER.info("START : Saving Start of Assessment in  startAssesment() Service  of AssessmentService");
 		LOGGER.debug("Assesment Object : {}", assessment);
-		System.out.println(assessment.getSkill().getId());
+		LOGGER.debug("Assesment taken in Skill Id  : {}", assessment.getSkill().getId());
 		Skill skill = skillRepository.findSkillById(assessment.getSkill().getId());
+		LOGGER.debug("Employee Id : {}", assessment.getUser().getEmployeeId());
 		User user = userRepository.findUserByEmployeeId(assessment.getUser().getEmployeeId());
-		LOGGER.debug("User : ", user);
+		LOGGER.debug("User : {}", user);
 		assessment.setSkill(skill);
 		assessment.setUser(user);
 		assessmentRepository.save(assessment);
-		LOGGER.debug(" Latest Inserted Id: " + assessment.getId());
+		LOGGER.debug(" Latest Inserted Id: {}" + assessment.getId());
 		LOGGER.info("End : START : startAssesment() of AssessmentController");
 		LOGGER.info("End : startAssesment() Service  of AssessmentService");
 		return "{\"id\":" + assessment.getId() + ",\"skillName\":\"" + assessment.getSkill().getName() + "\"" + "}";
@@ -114,13 +115,13 @@ public class AssessmentService {
 	}
 
 	public void submitAssesment(Assessment assessment) {
+		LOGGER.info("START : Saving Assessment Submission submitAssesment() Service  of AssessmentService");
 		Assessment as = assessmentRepository.findAssessmentById(assessment.getId());
 		as.setEndTime(assessment.getEndTime());
 		assessmentRepository.save(as);
 	}
 
 	
-	@Transactional
 	public Assessment evaluateScore(int assessmentId) {
 		LOGGER.info("START : evaluateScore() Service  of AssessmentService");
 		Assessment assessment = assessmentRepository.fetchAssesmentDetailById(assessmentId);
@@ -152,7 +153,7 @@ public class AssessmentService {
 		assessmentRepository.save(assessment);
 		LOGGER.info("Score saved Successfully");
 		LOGGER.info("End : evaluateScore() of AssessmentService");
-		return assessment;
+		 return assessment;
 	}
 
 	public List<TopicWiseScore> getTopicWiseScore(int assessmentId) {

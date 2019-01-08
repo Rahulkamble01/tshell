@@ -7,8 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.cts.tshell.bean.Skill;
 
-public interface SkillRepository extends JpaRepository<Skill,Integer> {
+public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
-	
-	 Skill findSkillById(int id);
+	Skill findSkillById(int id);
 }

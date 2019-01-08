@@ -6,7 +6,7 @@ public interface TopicWiseScore {
 
 	public String gettopicName();
 
-	public Integer getweightage();
+	public Integer getpercentage();
 	
 	public float gettotalScore();
 }

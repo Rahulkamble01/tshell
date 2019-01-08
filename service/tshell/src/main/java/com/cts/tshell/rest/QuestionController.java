@@ -27,25 +27,24 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 
-	
+	@GetMapping("/allquestionid/{skillId}")
+	public Set<Integer> fetchAllQuestionId(@PathVariable int skillId) {
+		LOGGER.info("START : Getting all Question Ids from fetchAllQuestionId()  of QuestionController");
+		LOGGER.debug("SkillId :  {}", skillId);
+
+		return questionService.fetchQuestionsID(skillId);
+	}
 
 	@GetMapping("/questionId/{questionId}")
 	public String fetchQuestionById(@PathVariable int questionId) throws JsonProcessingException {
-		LOGGER.info("START : getAllQuestion()  of QuestionController");
+		LOGGER.info("START :Getting Question By Id from  fetchQuestionById()  of QuestionController");
 		LOGGER.debug("Question Id {}", questionId);
-		
-		List<Question> questions =  questionService.getQuestionById(questionId);
+
+		List<Question> questions = questionService.getQuestionById(questionId);
+		LOGGER.info("Start Writing JSON String using JSON VIEW CLASS");
 		ObjectMapper mapper = new ObjectMapper();
 		String result = mapper.writerWithView(Views.Public.class).writeValueAsString(questions);
 		return result;
-	}
-
-	@GetMapping("/allquestionid/{skillId}")
-	public Set<Integer> fetchAllQuestionId(@PathVariable int skillId) {
-		LOGGER.info("START :Getting all Question Ids from fetchAllQuestionId()  of QuestionController");
-		LOGGER.debug("SkillId :  {}", skillId);
-		
-		return questionService.fetchQuestionsID(skillId);
 	}
 
 }

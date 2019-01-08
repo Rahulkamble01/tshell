@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExitAssesmentService } from '../exit-assesment.service';
 
@@ -19,13 +19,12 @@ export class InstructionComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private elementRef: ElementRef, private renderer: Renderer2, private service: ExitAssesmentService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private service: ExitAssesmentService, private route: ActivatedRoute) { }
   ngOnInit() {
-    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'background-color', 'white');
     this.route.params.subscribe(params => {
       this.skillId = params['skillid'];
       this.skillName = params['skillname'];
-      this.assessmentType = params['type']
+      this.assessmentType = params['type'];
     });
 
   }

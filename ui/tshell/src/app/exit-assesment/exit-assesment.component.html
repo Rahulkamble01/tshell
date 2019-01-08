@@ -1,19 +1,3 @@
-<!-- <div class="container-fluid navbar-dark bg-light">
-  <div class="row">
-    <div class="col-5 col-sm-5 col-md-5 col-lg-5">
-      <h2>tShell</h2>
-    </div>
-    
-
-    <div class="col-1 col-sm-1 col-md-1 col-lg-1"></div>
-    <div class=" col-3 col-sm-3 col-md-3 col-lg-3">
-
-       <div id="countdowntimer" id="timer"></div> 
-    </div>
-
-  </div>
-</div> -->
-
 <!--
 <nav class="navbar navbar-dark bg-dark">
     <span class="navbar-brand mb-0 h1">tShell</span>
@@ -29,10 +13,6 @@
         <button type="button" class="{{ correctanswer(index)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
           (click)="goTo(index)">{{index + 1}}</button>
       </span>
-      <!-- <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of quiz.questions; let index = index;">
-        <button type="button" class="{{ isAnswered(question)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
-          (click)="goTo(index)">{{index + 1}}</button>
-      </span> -->
     </div>
     <div class="legends pt-2">
       <span class="unanswered-legend-buttons default-cursor"> </span>Not Answered
@@ -57,24 +37,25 @@
         </button> <!-- <a class="btn btn-primary " id="myModalBtn">Launch demo modal</a> -->
 
 
-
         <!--****************       DISPLAYING QUESTIONS  *****************************-->
         <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <div  class="mt-2 badge badge-info time-badge float-right">Time: {{ellapsedTime}} /
+            <div class="mt-2 badge badge-info time-badge float-right">Time: {{ellapsedTime}} /
               {{duration}}</div>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="display-question ">
-
-              <h3 class="border-bottom border-dark pb-3 test-name ">{{skillName}} Entry Level Test</h3>
+              <h3 class="border-bottom border-dark pb-3 test-name ">{{skillName | titlecase}} {{assessmentType |
+                titlecase}} Level Test</h3>
             </div>
 
 
             <div *ngFor="let question of filteredQuestions;">
               <div class="quest pt-1">
                 <span class="question-legends btn-danger">Q{{pager.index + 1}}</span>
-                <div class="quest pl-3">{{question.question}}</div>
+                <div class="quest pl-3">
+                  <pre class="question-pre quest">{{question.question}}</pre>
+                </div>
               </div>
 
               <!--********************************       DISPLAYING OPTIONS  *****************************-->
@@ -84,31 +65,18 @@
                 <span class="answer-legends btn-success">A. </span>
                 <div class="example-radio-group ">
                   <div class=" option-container " *ngFor="let option of question.optionList">
-                    <!-- <input id="{{option.id}}" type="radio" name="favoriteSeason" [(ngModel)]="favoriteSeason"  [(ngModel)]="option.selected" (change)="onSelect(question, option);" > <label [attr.for]="option.id">{{option.name}}</label> -->
-
-                    <!-- <input type="radio"  id="{{option.id}}" name="option"  [value]="option.selected"   (change)="onSelect(question, option);" /><label for="{{option.id}}" >{{option.name}}</label> -->
 
                     <span *ngIf="question.questionAnswerType.id == 1">
-
                       <input type="radio" id="{{option.id}}" name="option" [value]="option.response" (change)="onSelect(question, option);"
                         [checked]="option.response">
                       <label for="{{option.id}}">{{option.description}}</label>
                     </span>
-
-
 
                     <span *ngIf="question.questionAnswerType.id == 2">
                       <input id="{{option.id}}" type="checkbox" [value]="option.response" (change)="onSelect(question, option);"
                         [checked]="option.response">
                       <label for="{{option.id}}">{{option.description}}</label>
                     </span>
-                    <!--                    
-                    <span *ngIf="question.questionAnswerType.id == 1">
-                      <input id="{{option.id}}" type="checkbox" ng-model="option.response" (change)="onSelect(question, option);">
-                      <label for="{{option.id}}">{{option.description}}</label>
-                    </span> -->
-
-
                   </div>
                 </div>
               </div>
@@ -123,14 +91,13 @@
                     <div class="modal-header">
                       <h5 class="modal-title text-center" id="questionPalleteModalLabel"> Question {{pager.index + 1}}
                         of {{pager.count}}</h5>
-                      <button type="button" class="close  btn btn-ts-cancel" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
 
                       <div class="scroll-questions" id="style-1">
-                        <!-- <button type="button" class="question-buttons btn-dark " *ngFor="let quest of questions">{{quest}}</button> -->
                         <span class="col-lg-1 col-sm-1 span-blocks" *ngFor="let question of questionIds; let index = index;">
                           <button type="button" class="{{ correctanswer(index)  == 'Answered'? 'answered-legend-buttons' : 'unanswered-legend-buttons' }}"
                             (click)="goTo(index)" data-dismiss="modal">{{index + 1}}</button>
@@ -161,7 +128,6 @@
               <button class="btn btn-ts-primary next-nav-button" (click)="goTo(pager.index + 1);">Next</button>
 
             </div>
-            <!--<pagination  direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
           </div>
         </div>
       </div>
@@ -177,7 +143,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="submitConfirmationLabel"> Submit Confirmation</h5>
-          <button type="button" class="close btn btn-ts-cancel" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -193,22 +159,4 @@
       </div>
     </div>
   </div>
-
-  <!-- 
-  <div class="result" *ngIf="mode=='result'">
-      <h2>Quiz Result</h2>
-      <div *ngFor="let question of quiz.questions; let index = index">
-        <div class="result-question">
-          <h5>{{index + 1}}. {{question.name}}</h5>
-          <div class="row">
-            <div class="col-6 option-container" *ngFor="let Option of question.options">
-              <input id="{{Option.id}}" type="checkbox" disabled="disabled" [value]="Option.selected" /> {{Option.name}}
-              
-            </div>
-          </div>
-          <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
-        </div>
-      </div>
-      <h4 class="alert alert-info text-center">You may close this window now.</h4>
-    </div> -->
 </div>

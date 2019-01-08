@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @NamedNativeQueries({
 @NamedNativeQuery(name = "Assessment.getTopicWiseQuestionCount", 
 				query = "SELECT count(CASE WHEN aq_is_correct = true THEN 1 END ) as score , "
-						+ "tp_name as topicName, tp_weightage as weightage, as_score as totalScore "
+						+ "tp_name as topicName, tp_percentage as percentage, as_score as totalScore "
 						+ "FROM assessment_question "
 						+ "left join topic_question on tq_qu_id = aq_qu_id "
 						+ "left join topic on tp_id=tq_tp_id "
@@ -76,11 +76,6 @@ public class Assessment {
 	@JsonView(Views.Internal.class)
 	private User user;
 
-	// @ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	// @JoinTable(name="assessment_question",
-	// joinColumns= {@JoinColumn(name="aq_as_id")},
-	// inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
-	// )
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assessment")
 	private Set<AssessmentQuestion> assessmentQuestions;
 

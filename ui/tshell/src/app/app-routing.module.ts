@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: "questions", component: CountOfQuestionsToReviewComponent },
   { path: 'assesment/:skillid/:skillname/:type', component: ExitAssesmentComponent },
   { path: 'instruction/:skillid/:skillname/:type', component: InstructionComponent },
-  { path: 'assesmentscore/:assessmentid', component: ScoreAssesmentComponent },
+  { path: 'assesmentscore/:skillname/:assessmentid', component: ScoreAssesmentComponent },
   { path: "skills", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent }

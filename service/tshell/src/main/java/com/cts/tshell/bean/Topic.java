@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -24,7 +26,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "topic")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-
 
 public class Topic {
 
@@ -47,8 +48,8 @@ public class Topic {
 	@JsonView(Views.Internal.class)
 	private List<Question> questions;
 
-	@Column(name = "tp_weightage")
-	private int weightage;
+	@Column(name = "tp_percentage")
+	private int percentage;
 
 	@Transient
 	private float topicScore;
@@ -85,8 +86,12 @@ public class Topic {
 		this.questions = questions;
 	}
 
-	public int getWeightage() {
-		return weightage;
+	public int getPercentage() {
+		return percentage;
+	}
+	
+	public void setPercentage(int percentage) {
+		this.percentage = percentage;
 	}
 
 	public float getTopicScore() {
@@ -97,8 +102,6 @@ public class Topic {
 		this.topicScore = topicScore;
 	}
 
-	public void setWeightage(int weightage) {
-		this.weightage = weightage;
-	}
+	
 
 }

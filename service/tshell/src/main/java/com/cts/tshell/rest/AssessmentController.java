@@ -32,7 +32,7 @@ public class AssessmentController {
 	@PostMapping("/start")
 	public String startAssesment(@RequestBody Assessment assessment) {
 
-		LOGGER.info("START : startAssesment() of AssessmentController");
+		LOGGER.info("START :Creating Entry for assessment from startAssesment() of AssessmentController");
 		LOGGER.debug("Assesment Object : {}", assessment);
 		return assessmentService.startAssessment(assessment);
 
@@ -41,7 +41,7 @@ public class AssessmentController {
 	@PostMapping("/saveresponse")
 	public void saveAssesmentResponse(@RequestBody AssessmentQuestion assessmentQuestion) {
 
-		LOGGER.info("START : saveAssesmentResponse() of AssessmentController");
+		LOGGER.info("START : Saving Response for Assessment Question from saveAssesmentResponse() of AssessmentController");
 		LOGGER.debug("AssessmentQuestionOption Object : {}", assessmentQuestion);
 		assessmentService.saveAssessmentResponse(assessmentQuestion);
 	}
@@ -49,15 +49,19 @@ public class AssessmentController {
 	@PostMapping("/submit")
 	public void submitAssesment(@RequestBody Assessment assessment) {
 
-		LOGGER.info("START : st() of AssessmentController");
+		LOGGER.info("START : Submitting the assessment submitAssesment() of AssessmentController");
 		LOGGER.debug("Assessment Object : {}", assessment);
 		assessmentService.submitAssesment(assessment);
+		LOGGER.info("Assessment with End Time And Responses Saved Successfully.......");
+		LOGGER.info("End : Saved the assessment submitAssesment() of AssessmentController");
 	}
 
+	// This Method is just to view the data for get mapping in Browser no call
+	// is made from angular.
 	@GetMapping("/score/{assessmentId}")
-	public String evaluateAssesment(@PathVariable("assessmentId") int assessmentId) throws JsonProcessingException  {
+	public String evaluateAssesment(@PathVariable("assessmentId") int assessmentId) throws JsonProcessingException {
 
-		LOGGER.info("START : evaluateAssesment() of AssessmentController");
+		LOGGER.info("START : Evaluating Score from evaluateAssesment() of AssessmentController");
 		LOGGER.debug("Assessment Id : ", assessmentId);
 		Assessment assessment = assessmentService.evaluateScore(assessmentId);
 		ObjectMapper mapper = new ObjectMapper();
@@ -65,14 +69,18 @@ public class AssessmentController {
 		return result;
 
 	}
-	
+
 	@GetMapping("/topicwisescore/{assessmentId}")
-	public List<TopicWiseScore> getTopicwiseScore(@PathVariable int assessmentId){
-		 LOGGER.info("Start : getTopicWiseScore() of AssessmentController");
-		 LOGGER.debug("Assessment Id : {}" , assessmentId);
-		 Assessment assessment = assessmentService.evaluateScore(assessmentId);
-		 List<TopicWiseScore> topicWiseScore = assessmentService.getTopicWiseScore(assessmentId);
-		 LOGGER.info("End : getTopicWiseScore() of AssessmentController");
-		 return topicWiseScore;
+	public List<TopicWiseScore> getTopicwiseScore(@PathVariable int assessmentId) {
+		LOGGER.info("Start : getTopicWiseScore() of AssessmentController");
+		LOGGER.debug("Assessment Id : {}", assessmentId);
+		LOGGER.info("Start Evaluating Score .......");
+		assessmentService.evaluateScore(assessmentId);
+		LOGGER.info("Evaluating Score Ended...........");
+		LOGGER.info("-----------------------------------");
+		LOGGER.info("Getting Topic Wise Score.........");
+		List<TopicWiseScore> topicWiseScore = assessmentService.getTopicWiseScore(assessmentId);
+		LOGGER.info("End : getTopicWiseScore() of AssessmentController");
+		return topicWiseScore;
 	}
 }
