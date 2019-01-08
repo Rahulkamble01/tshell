@@ -1,50 +1,47 @@
 <div class="container-fluid">
-       <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
-        <div data-dismiss="alert">Invalid Name or Password!!!</div>
-    </div> 
+  <div class="alert alert-danger" *ngIf="service.isLearnerLoggedIn" style="text-align: center;">
+    <div data-dismiss="alert">Invalid Name or Password!!!</div>
+  </div>
 
 
   <div class="row">
     <div class="col-lg-8">
-      <br><br><h1 class="log">Test your skills with tShell...</h1>
+      <br>
+      <br>
+      <h1 class="log">Test your skills with tShell...</h1>
     </div>
     <div class="col-lg-4 col-sm-12">
-
       <div id="loginbox" class="mainbox">
         <div class="card card-inverse card-info">
-
           <div class="card-header">
             <div class="card-title" id="card1">Login</div>
-
           </div>
           <div class="card-block" id="card2">
             <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
             <form [formGroup]="form">
               <div class="form-group">
                 <div class="col-lg-12">
-                  <input type="text" class="form-control" formControlName="employeeId" name="employeeId" placeholder="Employee ID" #employeeId/>
+                  <input type="text" class="form-control" formControlName="employeeId" name="employeeId" placeholder="Employee ID" #employeeId
+                  />
                 </div>
                 <div *ngIf="form.get('employeeId').touched && form.get('employeeId').invalid">
                   <div *ngIf="form.get('employeeId').errors.required" class="danger" id="card8">
                     Employee ID is required</div>
-
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-lg-12">
-                  <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password" #password/>
+                  <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password" #password />
                 </div>
                 <div *ngIf="form.get('password').touched && form.get('password').invalid">
                   <div *ngIf="form.get('password').errors.required" class="danger" id="card8">
                     Password is required</div>
-
                 </div>
               </div>
               <div class="form-group">
-
-                <div class="col-lg-12"><button id="btn-login" class="btn btn-ts-primary" id="card7"
-                (click)="check(employeeId.value,password.value)"> Login</button>
-
+                <div class="col-lg-12">
+                  <button id="btn-login" class="btn btn-ts-primary" id="card7" (click)="check(employeeId.value,password.value)">
+                    Login</button>
                 </div>
                 <div style="float: right; font-size: 100%;" class="btn forgotPassword" data-toggle="modal" data-target="#forgotModal">Forgot password?
                 </div>
@@ -52,50 +49,121 @@
                 <div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <div *ngIf="!status">
-                        <div class="modal-header">
-                          <h6 class="modal-title" id="forgotModalLabel">Forgot Password?</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+                      <div class="modal-header">
+                        <h6 class="modal-title" id="forgotModalLabel">Forgot Password?</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                        </div>
+                      </div>
+                      <!-- Landing modal and If employee id is not correct  -->
+                      <div *ngIf="!status">
                         <div class="modal-body">
                           <form [formGroup]="forms">
-                            {{message}}
-                            <div class="form-group">
-                              <label class="col-form-label"></label>
-                              <input type="text" class="form-control" formControlName="employeeid" placeholder="Employee Id" #employeeid>
-                              <div *ngIf="forms.get('employeeid').touched && forms.get('employeeid').invalid">
-                                <div *ngIf="forms.get('employeeid').errors.required" class="danger" style="color:red">Employee Id is required
+
+                              <div *ngIf="error">
+                                  <app-error></app-error>
                                 </div>
-                              </div>
-                            </div>
+                            <div class="danger validate"> {{message}}</div>
                             <div class="form-group">
                               <label class="col-form-label"></label>
-                              <input type="text" class="form-control" formControlName="email" placeholder="Email" #email>
-                              <div *ngIf="forms.get('email').touched && forms.get('email').invalid">
-                                <div *ngIf="forms.get('email').errors.required" class="danger" style="color:red">Email is required</div>
+                              <input type="text" class="form-control" formControlName="employeeid" placeholder="Employee Id" maxlength="6" #employeeid>
+                              <div *ngIf="forms.get('employeeid').touched && forms.get('employeeid').invalid">
+                                <div *ngIf="forms.get('employeeid').errors.required" class="danger validate">Employee Id is required</div>
+                                <div *ngIf="forms.get('employeeid').errors.pattern" class="danger validate" >Employee Id should only contain 6 digits</div>
+                              </div>
+                              <div class="alert alert-danger" *ngIf="employeeid?.length >= 6">
+                                <span>Employee Must be 6 digits</span>
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> &nbsp;&nbsp;
-                              <button type="button" class="btn btn-primary" (click)="sendMail(employeeid.value,email.value)" [disabled]="!forms.valid">Send mail</button>
-
-
+                              <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="close()">Close</button>
+                              &nbsp;&nbsp;
+                              <button type="button" class="btn btn-ts-primary" (click)="requestPasswordReset(employeeid.value)" [disabled]="!forms.valid">Send mail</button>
                             </div>
                           </form>
                         </div>
-
                       </div>
+                      <!--   -->
+                      <!-- If employee id is correct then showing the otp text box -->
                       <div *ngIf="status">
-                        <div class="modal-header">
-
-
-                          <h5 class="modal-title" id="forgotModalLabel">Mail Sent</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
+                        <!--  OTP landing page and entered otp is incorrect -->
+                        <div *ngIf="!otpStatus">
+                          <form [formGroup]="otpform">
+                            <div class="modal-body">
+                              <div>
+                                <div>OTP sent to Email
+                                  <button (click)="resendOtp()" class="resendButton">Resend ? </button>
+                                </div>
+                                <div class="danger validate"> {{resendmessage}}</div>
+                                <input type="text" class="form-control" formControlName="otp" placeholder="OTP" #otp>
+                                <div class="danger validate"> {{message}}</div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="close()">Close</button>
+                              &nbsp;&nbsp;
+                              <button type="button" class="btn btn-ts-primary" (click)="submitOtp()">Submit OTP</button>
+                            </div>
+                          </form>
                         </div>
+                        <!--  -->
+                        <!-- OTP is correct then showing the text boxs to reset password -->
+                        <div *ngIf="otpStatus">
+                          <div class="modal-body">
+                            <div *ngIf="!resetStatus">
+                               
+                              <form [formGroup]="resetform">
+                                <br>
+                                <div class="form-group">
+                                  <h5 class="text-primary">Reset Password</h5>
+                                  <div class="danger validate"> {{message}}</div>
+                                  <div class="col-lg-12">
+                                    <input id="recipient-name" (input)="resetform.get('confirmPassword').updateValueAndValidity()" type="password" class="form-control" formControlName="newpassword" placeholder="New Password"
+                                      #newpassword>
+                                    <div *ngIf="resetform.get('newpassword')?.touched && resetform.get('newpassword').invalid">
+                                      <div *ngIf="resetform.get('newpassword').errors.required" class="danger validate" >Password is required</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-lg-12">
+                                    <div>
+                                      <input type="password" class="form-control" formControlName="confirmPassword" appConfirmEqualValidator="newpassword" placeholder="Confirm Password "
+                                        #confirmPassword>
+                                    </div>
+                                    <div *ngIf="resetform.get('confirmPassword')?.touched && resetform.get('confirmPassword').invalid">
+                                      <div *ngIf="resetform.get('confirmPassword').errors.required" class="danger validate" >Password is required</div>
+                                      <div *ngIf="resetform.get('confirmPassword').errors.minlength" class="danger validate" >Password must be minimum 6 characters
+                                      </div>
+                                      <div *ngIf="resetform.get('confirmPassword').errors.maxlength" class="danger validate" >Password must be maximun 30 characters
+                                      </div>
+                                    </div>
+                                    <div class="help-block danger validate" *ngIf="resetform.get('confirmPassword').touched && resetform.get('confirmPassword').errors?.notEqual && !resetform.get('confirmPassword').errors.required
+                                    && !resetform.get('confirmPassword').errors.minlength && !resetform.get('confirmPassword').errors.maxlength"
+                                      >
+                                      Password and confirm password does not match
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="close()">Close</button>
+                                  &nbsp;&nbsp;
+                                  <button type="button" class="btn btn-ts-primary" (click)="resetPassword()" [disabled]="!resetform.valid">Reset Password</button>
+                                </div>
+                              </form>
+                            </div>
+                            <div *ngIf="resetStatus">
+                              <div class="modal-body">
+                                <div id="reset">Reset Password is done.Please Login
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="close()">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--  -->
                       </div>
                     </div>
                   </div>

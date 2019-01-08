@@ -1,6 +1,8 @@
 package com.cts.tshell.bean;
 
-
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,11 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-
 public class User {
 
 	@Id
@@ -36,15 +38,21 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "us_ur_id")	
+	@JoinColumn(name = "us_ur_id")
 	private Role role;
 
 	@Column(name = "us_emp_id")
-	private int employeeId;
-	
+	private String employeeId;
+
 	@Column(name = "us_image")
-	private byte image;
-	
+	private byte[] image;
+
+	@Column(name = "us_otp")
+	private String otp;
+
+	@Column(name = "us_otp_generated_time")
+	private Calendar otpGeneratedTime;
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "uk_sk_id") })
@@ -90,19 +98,21 @@ public class User {
 		this.role = role;
 	}
 
-	public int getEmployeeId() {
+	
+
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -112,6 +122,30 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
-	}	
+	}
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public Calendar getOtpGeneratedTime() {
+		return otpGeneratedTime;
+	}
+
+	public void setOtpGeneratedTime(Calendar calendar) {
+		this.otpGeneratedTime = calendar;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
+				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + "]";
+	}
+
 
 }
