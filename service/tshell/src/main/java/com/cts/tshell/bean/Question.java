@@ -156,12 +156,12 @@ public class Question {
 		if (!csvContent[10].equals("") || !csvContent[11].equals("")) {
 			options.add(new Option(csvContent[10].trim(), csvContent[11].trim()));
 		}
-
 		this.optionList = options;
 		int correctAnswerCount = 0;
 		int invalidinput = 0;
 		int count = 0;
 		int invalidAnswerCount = 0;
+
 		Set<String> optionsSet = new HashSet<String>();
 		for (Option option : optionList) {
 			optionsSet.add(option.getDescription().toLowerCase());
@@ -184,12 +184,16 @@ public class Question {
 			if (!option.getDescription().equals("") && option.isInvalidAnswerFormat()) {
 				invalidAnswerCount += 1;
 			}
+			if (option.isLengthExceeded()) {
+				setError("option description length exceeded");
+			}
 
 		}
 
 		if (correctAnswerCount < 1) {
 			setError("At least one option should be selected as answer");
-		}
+		} 
+		
 
 		else if (count == 2) {
 			setError("All option can not be true");
@@ -209,8 +213,10 @@ public class Question {
 
 		if (getQuestion().length() > 500) {
 			lengthExceeded = true;
+			setError("question length exceeded");
 		} else {
 			lengthExceeded = false;
+
 		}
 
 	}

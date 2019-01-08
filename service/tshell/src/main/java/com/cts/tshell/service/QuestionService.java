@@ -16,9 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
+import com.cts.tshell.bean.QuestionDifficultyLevel;
+import com.cts.tshell.bean.Topic;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.repository.OptionRepository;
+import com.cts.tshell.repository.QuestionDifficultyLevelRepository;
 import com.cts.tshell.repository.QuestionRepository;
+import com.cts.tshell.repository.TopicRepository;
 import com.cts.tshell.repository.UserRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -34,6 +38,8 @@ public class QuestionService {
 	private UserRepository userRepository;
 	private QuestionRepository questionRepository;
 	private OptionRepository optionRepository;
+	private QuestionDifficultyLevelRepository questionDifficultyLevelRepository;
+	private TopicRepository topicRepository;
 
 	@Autowired
 	public void setOptionRepository(OptionRepository optionRepository) {
@@ -48,6 +54,26 @@ public class QuestionService {
 	@Autowired
 	public void setQuestionRepository(QuestionRepository questionRepository) {
 		this.questionRepository = questionRepository;
+	}
+
+	@Autowired
+	public void setQuestionDifficultyLevelRepository(
+			QuestionDifficultyLevelRepository questionDifficultyLevelRepository) {
+		this.questionDifficultyLevelRepository = questionDifficultyLevelRepository;
+	}
+
+	@Autowired
+	public void setTopicRepository(TopicRepository topicRepository) {
+		this.topicRepository = topicRepository;
+	}
+
+	@Transactional
+	public List<Topic> getAllTopics(int skillId) {
+		LOGGER.info("starting getAllTopics method");
+		List<Topic> topics = (List<Topic>) topicRepository.findTopics(skillId);
+		LOGGER.debug("Topic List : {}" + topics);
+		LOGGER.info("end of getAllTopics method");
+		return topics;
 	}
 
 	@Transactional
@@ -79,13 +105,17 @@ public class QuestionService {
 	public void saveQuestionsForReview(List<Question> questions) {
 		LOGGER.info("saveQuestionsForReview() service is called!");
 		User user = userRepository.findByEmployeeId(123456);
+		QuestionDifficultyLevel questionDifficultyLevel = questionDifficultyLevelRepository.findById(2);
+		LOGGER.debug("Question Difiiculty Level -> {}", questionDifficultyLevel);
 		LOGGER.debug("Created user details -> {}", user);
 		Date createdDate = new Date();
 		for (Question question : questions) {
 			question.setCreatedDate(createdDate);
 			question.setStatus("Pending");
 			question.setCreatedUser(user);
+			question.setQuestionDifficultyLevel(questionDifficultyLevel);
 			for (Option option : question.getOptionList()) {
+				option.setQuestion(question);
 				optionRepository.save(option);
 			}
 			questionRepository.save(question);
@@ -97,12 +127,16 @@ public class QuestionService {
 	public void saveQuestionsAsApproved(List<Question> questions) {
 		LOGGER.info("saveQuestionsAsApproved() service is called!");
 		User user = userRepository.findByEmployeeId(123456);
+		QuestionDifficultyLevel questionDifficultyLevel = questionDifficultyLevelRepository.findById(2);
+		LOGGER.debug("Question Difiiculty Level -> {}", questionDifficultyLevel);
 		Date createdDate = new Date();
 		for (Question question : questions) {
 			question.setCreatedDate(createdDate);
 			question.setStatus("Approved");
+			question.setQuestionDifficultyLevel(questionDifficultyLevel);
 			question.setCreatedUser(user);
 			for (Option option : question.getOptionList()) {
+				option.setQuestion(question);
 				optionRepository.save(option);
 			}
 			questionRepository.save(question);

@@ -13,12 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "topic")
+@NamedQuery(name="Topic.findTopics",query="select t.id,t.name from Topic t join t.skill s where s.id=:skillId")
 public class Topic {
 
 	@Id
