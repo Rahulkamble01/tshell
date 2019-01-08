@@ -202,12 +202,4 @@ public class Question {
 		this.topicSet = topicSet;
 	}
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", question=" + question + ", status=" + status + ", createdDate=" + createdDate
-				+ ", reviewedDate=" + reviewedDate + ", questionDifficultyLevel=" + questionDifficultyLevel
-				+ ", questionAnswerType=" + questionAnswerType + ", createdUser=" + createdUser + ", reviewedUser="
-				+ reviewedUser + ", optionList=" + optionList + ",topicSet=" + topicSet + "]";
-	}
-
 }

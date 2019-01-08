@@ -14,12 +14,12 @@ export class SearchExistingQuestionsComponent implements OnInit {
   constructor(private service: SearchExistingQuestionsService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
-    /*this.route.params.subscribe(params => {
-      console.log("Id " + params['id']);
-      this.skillId = +params['id'];
-        });*/
-    this.skillId = 1;
-    this.skillName = 'Java';
+    this.route.params.subscribe(
+      params => {
+        this.skillId = params['id'];
+        this.skillName = params['name'];
+      }
+    )
     this.service.fetchReviewQuestion(this.skillId).subscribe(
       data => {
         if (data[0] != null) {
@@ -48,6 +48,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
     question: new FormControl('', [Validators.required, Validators.maxLength(500)])
   })
 
+
   countOption: number;
   error: any;
   status = false;
@@ -57,7 +58,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
   questionId: number;
   optionDescription: string = '';
   skillName: string;
-  message: string = 'undefined';
+  message: string;
   selectedOptionId: number;
   deleteOptionStatus: string = 'undefined';
   searchedQuestionsList: any = '';
