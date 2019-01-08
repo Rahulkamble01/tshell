@@ -9,5 +9,19 @@
     font-family: 'Courier New', Courier, monospace;
     margin-top: 8px;
 }
+.headingrow{
+    margin:3px;
+     padding:10px;
+    margin-bottom:0px;
+}
+.bodyrow{
+    margin:0px;
+    padding:10px;
+    margin-bottom:0px;
+
+}
+.heading{
+    text-align: center
+}
 
 
