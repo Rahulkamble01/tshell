@@ -7,10 +7,19 @@ export class AuthService {
 
   loggedIn = false;
   role: string;
-  employeeId: any;
+  employeeId: string;
+  isDefaultAdmin=false;
 
   constructor() { }
 
+   getisDefaultAdmin() {
+    return this.isDefaultAdmin;
+  }
+
+  setisDefaultAdmin(isDefaultAdmin:any) {
+    this.isDefaultAdmin = isDefaultAdmin;
+  }
+  
   getEmployeeId() {
     return this.employeeId;
   }
@@ -18,6 +27,8 @@ export class AuthService {
   setEmployeeId(employeeId:any) {
     this.employeeId = employeeId;
   }
+
+ 
 
   login() {
     console.log("Inside auth service login()")

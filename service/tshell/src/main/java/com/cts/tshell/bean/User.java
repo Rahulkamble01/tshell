@@ -53,7 +53,7 @@ public class User {
 
 	@Column(name = "us_emp_id")
 	@JsonView(Views.Public.class)
-	private int employeeId;
+	private String employeeId;
 
 	@Column(name = "us_image")
 	private byte[] image;
@@ -126,11 +126,11 @@ public class User {
 		this.role = role;
 	}
 
-	public int getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 

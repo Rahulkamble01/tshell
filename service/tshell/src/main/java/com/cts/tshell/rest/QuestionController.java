@@ -24,7 +24,7 @@ public class QuestionController extends TshellController{
 	private QuestionService questionService;
 
 	@GetMapping("/contributed/{employeeId}")
-	public List<Question> totalQuestionContributed(@PathVariable("employeeId") int employeeId) {
+	public List<Question> totalQuestionContributed(@PathVariable("employeeId") String employeeId) {
 		LOGGER.info(" START");
 		List<Question> totalQuestion = questionService.findTotalQuestionContributed(employeeId);
 		LOGGER.debug("total no of question contributed for each subject : {} ", totalQuestion);

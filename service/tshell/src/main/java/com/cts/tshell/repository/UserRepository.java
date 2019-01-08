@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.cts.tshell.bean.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-	User findByEmpId(@Param("employeeId") int employeeId);
+public interface UserRepository extends JpaRepository<User, String> {
+	User findByEmpId(@Param("employeeId") String employeeId);
 }

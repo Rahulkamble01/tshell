@@ -12,13 +12,13 @@
         <li class="nav-item  ">
           <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item " *ngIf="service.role!='learner'">
+        <li class="nav-item " *ngIf="service.role!='Learner'">
           <a class="nav-link" [routerLink]="['/questions']">Questions <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" *ngIf="service.role!='learner'">
+        <li class="nav-item" *ngIf="service.role!='Learner'">
           <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown ">
@@ -26,25 +26,25 @@
             aria-haspopup="true" aria-expanded="false">
             Profile
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
             <a class="dropdown-item" [routerLink]="['/viewprofile']">View Profile</a>
             <a class="dropdown-item"   #exampleModal data-target="#exampleModal" data-toggle="modal" (click)="getData();">Change Password</a>
           </div>
         </li>
         <li><a class="nav-item btn btn-light col-12" routerLink="/" (click)="check(employeeId.value,password.value)">
-            <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            <i class="fas fa-power-off"></i> Logout</a></li>
       </ul>
     </ng-container>
     <ng-template #elseTemplate>
-      <ul class="navbar-nav ml-auto" style="margin-top: 11px">
+      <ul class="navbar-nav ml-auto nav1">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/']">Skills <span class="sr-only">(current)</span></a> &nbsp;
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']"> Login</a>&nbsp;
+          <a class="nav-link" [routerLink]="['/login']"> Login<span class="sr-only">(current)</span></a>&nbsp;
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/signup']"> Signup</a>&nbsp;
+          <a class="nav-link" [routerLink]="['/signup']"> Signup<span class="sr-only">(current)</span></a>&nbsp;
         </li>
       </ul>
     </ng-template>

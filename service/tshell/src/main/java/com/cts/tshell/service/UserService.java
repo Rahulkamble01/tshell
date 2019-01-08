@@ -23,7 +23,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public User getUser(int employeeId) {
+	public User getUser(String employeeId) {
 		LOGGER.info("Start");
 		LOGGER.debug("EmployeeId: {}", employeeId);
 		LOGGER.info("End");

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-admin-signup',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, public service: AuthService) { }
 
   ngOnInit() {
+  }
+
+  sign() {
+    this.service.setisDefaultAdmin(true);
+    this.router.navigate(['/signup']);
   }
 
 }

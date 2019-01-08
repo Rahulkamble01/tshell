@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, config } from 'rxjs';
+import {environment} from '../app/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class LoginService {
 
-  url: string = "/tShell/authenticate";
+  url = environment.serviceUrlPrefix + "/authenticate";
 
   constructor(private http: HttpClient) { }
 

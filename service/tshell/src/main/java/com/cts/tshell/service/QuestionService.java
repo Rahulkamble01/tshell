@@ -18,7 +18,7 @@ public class QuestionService {
 	private QuestionRepository questionRepository;
 
 	@Transactional
-	public List<Question> findTotalQuestionContributed(int employeeId) {
+	public List<Question> findTotalQuestionContributed(String employeeId) {
 		LOGGER.info("START");
 		List<Question> question = questionRepository.findTotalQuestionContributedById(employeeId);
 		LOGGER.debug("list of total no of question for each subject contributed : {} ", question);
