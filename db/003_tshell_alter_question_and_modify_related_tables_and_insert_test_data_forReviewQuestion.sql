@@ -11,8 +11,8 @@ VALUES (2,'Which of the following is not OOPS concept in Java?','Pending','2013-
        (2,'Which concept of Java is a way of converting real world objects in terms of class?','Pending','2018-12-05'),
        (2,'Which concept of Java is achieved by combining methods and attribute into a class?','Pending','2016-02-12');    
        
-UPDATE `tshell`.`question` SET `qu_status`='Pending';
-UPDATE `tshell`.`question` SET `qu_qd_id`=2;
+UPDATE `tshell`.`question` SET `qu_status`='Pending' where qu_id!=0;
+UPDATE `tshell`.`question` SET `qu_qd_id`=2 where qu_id!=0;
 
 INSERT INTO `tshell`.`skill` (sk_name,sk_search_count,sk_active,sk_test_count,sk_description)
 VALUES ('Core Java',100,'Yes',5,'A high level programming language');

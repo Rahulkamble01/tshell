@@ -1,1 +1,0 @@
-ALTER TABLE assessment_question ADD aq_is_correct BOOLEAN;

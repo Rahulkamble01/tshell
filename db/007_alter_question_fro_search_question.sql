@@ -1,1 +1,0 @@
-ALTER TABLE question ADD FULLTEXT(qu_question);
