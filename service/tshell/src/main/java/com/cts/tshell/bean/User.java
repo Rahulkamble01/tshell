@@ -42,7 +42,7 @@ public class User {
 	private Role role;
 
 	@Column(name = "us_emp_id")
-	private int employeeId;
+	private String employeeId;
 
 	@Column(name = "us_image")
 	private byte[] image;
@@ -98,11 +98,13 @@ public class User {
 		this.role = role;
 	}
 
-	public int getEmployeeId() {
+	
+
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -144,5 +146,6 @@ public class User {
 				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
 				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + "]";
 	}
+
 
 }

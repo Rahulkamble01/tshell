@@ -6,6 +6,6 @@ import com.cts.tshell.bean.User;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-	User findByEmployeeId(int employeeID);
+	User findByEmployeeId(String employeeId);
 
 }

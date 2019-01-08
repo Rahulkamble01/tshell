@@ -27,7 +27,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public Boolean requestPasswordReset(int employeeId) throws NoSuchAlgorithmException {
+	public Boolean requestPasswordReset(String employeeId) throws NoSuchAlgorithmException {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
@@ -41,7 +41,7 @@ public class UserService {
 		return true;
 	}
 
-	public boolean verifyOTP(int employeeId, String encryptedOTP) {
+	public boolean verifyOTP(String employeeId, String encryptedOTP) {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
@@ -65,7 +65,7 @@ public class UserService {
 		return true;
 	}
 
-	public boolean restPassword(int employeeId, String encryptedPassword) {
+	public boolean restPassword(String employeeId, String encryptedPassword) {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
