@@ -16,33 +16,8 @@ export class PreviewQuestionsComponent implements OnInit {
 
   ngOnInit() {
     this.csvData = this.contributeQuestionService.getCsvData();
-    for (let data of this.csvData) {
-      let correctAnswerCount = 0;
-      let invalidinput = 0;
-      let count = 0;
-      for (let option of data.optionList) {
-
-        if (option.answer) {
-          correctAnswerCount += 1;
-        }
-        if ((option.description == '' && !option.invalidAnswerFormat) || (option.description != '' && option.invalidAnswerFormat)) {
-          invalidinput += 1;
-        }
-        if (option.description != '' && (option.description == 'TRUE' || option.description == 'FALSE')) {
-          if (option.answer) {
-            count += 1;
-          }
-        }
-      }
-      if (correctAnswerCount < 1 || invalidinput > 0 || count == 2) {
-        data.error = "Invalid Answer Format";
-      }
-      else {
-        data.error = "";
-      }
-    }
-    this.csvData = this.contributeQuestionService.getCsvData();
     console.log(this.csvData);
+   
   }
 
   review() {

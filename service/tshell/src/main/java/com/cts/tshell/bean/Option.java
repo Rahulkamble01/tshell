@@ -56,7 +56,7 @@ public class Option {
 	public Option(String description, String answer) {
 		super();
 		this.description = description;
-		if (getDescription().length() > 45) {
+		if (getDescription().length() > 200) {
 			lengthExceeded = true;
 		} else {
 			lengthExceeded = false;
