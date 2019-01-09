@@ -95,3 +95,6 @@ color: red;
   float:right;
 }
 .resendButton:focus { outline: none; }
+.resethead{
+  margin-left: 20px;
+}

@@ -46,7 +46,7 @@
                 <div style="float: right; font-size: 100%;" class="btn forgotPassword" data-toggle="modal" data-target="#forgotModal">Forgot password?
                 </div>
                 <!--  modal for forgot password -->
-                <div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel" aria-hidden="true">
+                <div class="modal fade" id="forgotModal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -58,7 +58,7 @@
                       <!-- Landing modal and If employee id is not correct  -->
                       <div *ngIf="!status">
                         <div class="modal-body">
-                          <form [formGroup]="forms">
+                          <form [formGroup]="resetRequestForm">
 
                               <div *ngIf="error">
                                   <app-error></app-error>
@@ -67,18 +67,16 @@
                             <div class="form-group">
                               <label class="col-form-label"></label>
                               <input type="text" class="form-control" formControlName="employeeid" placeholder="Employee Id" #employeeid>
-                              <div *ngIf="forms.get('employeeid').touched && forms.get('employeeid').invalid">
-                                <div *ngIf="forms.get('employeeid').errors.required" class="danger validate">Employee Id is required</div>
-                                <div *ngIf="forms.get('employeeid').errors.pattern" class="danger validate" >Employee Id should only contain 6 digits</div>
-                              </div>
-                              <div class="alert alert-danger" *ngIf="employeeid?.length >= 6">
-                                <span>Employee Must be 6 digits</span>
+                              <div *ngIf="resetRequestForm.get('employeeid').touched && resetRequestForm.get('employeeid').invalid">
+                                <div *ngIf="resetRequestForm.get('employeeid').errors.required" class="danger validation">Employee Id is required</div>
+                                <div *ngIf="resetRequestForm.get('employeeid').errors.minlength" class="danger validation" >Employee Id must contain minimum 6 characters</div>
+                                <div *ngIf="resetRequestForm.get('employeeid').errors.maxlength" class="danger validation" >Employee Id must contain maximum 10 characters</div>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="close()">Close</button>
                               &nbsp;&nbsp;
-                              <button type="button" class="btn btn-ts-primary" (click)="requestPasswordReset(employeeid.value)" [disabled]="!forms.valid">Send mail</button>
+                              <button type="button" class="btn btn-ts-primary" (click)="requestPasswordReset(employeeid.value)" [disabled]="!resetRequestForm.valid">Send mail</button>
                             </div>
                           </form>
                         </div>
@@ -94,15 +92,18 @@
                                 <div>OTP sent to Email
                                   <button (click)="resendOtp()" class="resendButton">Resend ? </button>
                                 </div>
-                                <div class="danger validate"> {{resendmessage}}</div>
                                 <input type="text" class="form-control" formControlName="otp" placeholder="OTP" #otp>
+                                <div *ngIf="otpform.get('otp').touched && otpform.get('otp').invalid">
+                                <div *ngIf="otpform.get('otp').errors.required" class="danger validation">OTP is required</div>
+                                <div *ngIf="otpform.get('otp').errors.pattern" class="danger validation" >OTP should contain 6 digits</div>
+                              </div>
                                 <div class="danger validate"> {{message}}</div>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-ts-cancel" data-dismiss="modal" (click)="close()">Close</button>
                               &nbsp;&nbsp;
-                              <button type="button" class="btn btn-ts-primary" (click)="submitOtp()">Submit OTP</button>
+                              <button type="button" class="btn btn-ts-primary" (click)="submitOtp()" [disabled]="!otpform.valid">Submit OTP</button>
                             </div>
                           </form>
                         </div>
@@ -113,15 +114,14 @@
                             <div *ngIf="!resetStatus">
                                
                               <form [formGroup]="resetform">
-                                <br>
                                 <div class="form-group">
-                                  <h5 class="text-primary">Reset Password</h5>
+                                  <h5 class="text-primary resethead">Reset Password</h5>
                                   <div class="danger validate"> {{message}}</div>
                                   <div class="col-lg-12">
                                     <input id="recipient-name" (input)="resetform.get('confirmPassword').updateValueAndValidity()" type="password" class="form-control" formControlName="newpassword" placeholder="New Password"
                                       #newpassword>
                                     <div *ngIf="resetform.get('newpassword')?.touched && resetform.get('newpassword').invalid">
-                                      <div *ngIf="resetform.get('newpassword').errors.required" class="danger validate" >Password is required</div>
+                                      <div *ngIf="resetform.get('newpassword').errors.required" class="danger validation" >Password is required</div>
                                     </div>
                                   </div>
                                 </div>
@@ -132,10 +132,10 @@
                                         #confirmPassword>
                                     </div>
                                     <div *ngIf="resetform.get('confirmPassword')?.touched && resetform.get('confirmPassword').invalid">
-                                      <div *ngIf="resetform.get('confirmPassword').errors.required" class="danger validate" >Password is required</div>
-                                      <div *ngIf="resetform.get('confirmPassword').errors.minlength" class="danger validate" >Password must be minimum 6 characters
+                                      <div *ngIf="resetform.get('confirmPassword').errors.required" class="danger validation" >Password is required</div>
+                                      <div *ngIf="resetform.get('confirmPassword').errors.minlength" class="danger validation" >Password must be minimum 6 characters
                                       </div>
-                                      <div *ngIf="resetform.get('confirmPassword').errors.maxlength" class="danger validate" >Password must be maximun 30 characters
+                                      <div *ngIf="resetform.get('confirmPassword').errors.maxlength" class="danger validation" >Password must be maximun 30 characters
                                       </div>
                                     </div>
                                     <div class="help-block danger validate" *ngIf="resetform.get('confirmPassword').touched && resetform.get('confirmPassword').errors?.notEqual && !resetform.get('confirmPassword').errors.required
