@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from './enviroment';
+import { environment } from './environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +19,13 @@ export class SkillserviceService {
   // graphDataUrl = environment.serviceUrlPrefix + '/skill/graph';
   addSkillurl = environment.serviceUrlPrefix + '/skill/addskill';
   deleteTopicUrl = environment.serviceUrlPrefix + '/skill/deleteTopic';
+  ReferenceSkillUrl = environment.serviceUrlPrefix + '/skill/referenceskill/';
   // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/skill/graph/';
+  keySearchUrl = environment.serviceUrlPrefix + "/skill/getSkillsOnSearch/";
+  addReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/addreferenceskill";
+  deleteReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/deleteReferenceskill/";
+
+
 
   constructor(private http: HttpClient) { }
 
@@ -35,9 +41,28 @@ export class SkillserviceService {
     return this.http.post(this.updateSkillUrl, json, httpOptions);
   }
 
+  addReferenceSkill(json): Observable<any> {
+    console.log(json);
+    return this.http.post(this.addReferenceSkillUrl, json, httpOptions);
+  }
+
+  deleteReferenceSkill(id): Observable<any> {
+    return this.http.get(this.deleteReferenceSkillUrl + id);
+  }
+
   getSkillTopper(id): Observable<any> {
     console.log(this.skillToppersUrl + id);
     return this.http.get(this.skillToppersUrl + id);
+  }
+
+  getReferenceSkill(id): Observable<any> {
+    console.log(this.ReferenceSkillUrl + id);
+    return this.http.get(this.ReferenceSkillUrl + id);
+  }
+
+  skillsOnSearch(key): Observable<any> {
+    console.log(this.keySearchUrl + key);
+    return this.http.get(this.keySearchUrl);
   }
 
   // getGraphDataOfSkill(skillName): Observable<any> {

@@ -1,28 +1,25 @@
 package com.cts.tshell.repository;
 
 
-
-
-
-
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import java.util.List;
+
 import com.cts.tshell.bean.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-	User findByEmpId(@Param("employeeId") int employeeId);
 
-List<User> findAllById(@Param("id") int userId);
-	
+public interface UserRepository extends JpaRepository<User, String> {
+
+	User findByEmpId(@Param("employeeId") String employeeId);
+	List<User> findAllById(@Param("id") String userId);
 	User getUserByEmail(String email);
-	
-	User getUserByEmployeeId(int userId);
-	
+	User getUserByEmployeeId(String userId);
 	@Query("select count(u.id) from User u ")
 	long totalUserCount();
+	User fetchByEmployeeId(@Param("employeeId") String employeeId);
+	User findByEmployeeId(String employeeId);
 
 }

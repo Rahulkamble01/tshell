@@ -1,5 +1,5 @@
 <div class=" container-fluid ">
-        <div class=" h3 font-weight-bold" style="padding-left:10px; ">
+        <div class=" h3 font-weight-bold dashboardHeading">
                 Dashboard
         </div>
 
@@ -8,7 +8,7 @@
                         <div class="card card-app-summary">
                                 <div class="text-center"> <i class="fa fa-cogs  icon "></i></div>
                                 <div *ngIf="!error">
-                                        <div class=" text-center number">{{skillCount}}</div>
+                                        <div class=" text-center number">{{skillCount | number}}</div>
                                 </div>
                                 <div *ngIf="error">
                                         <div class="error-padding-top">
@@ -21,9 +21,9 @@
 
                 <div class=" col-lg-3 col-md-6 col-12">
                         <div class="card card-app-summary">
-                                <i class="fa fa-pen text-center " style="padding-top:20px;color: #14ac00; font-size: 26px"></i>
+                                <i class="fa fa-pen text-center assessmentIcon" ></i>
                                 <div *ngIf="!error">
-                                        <div class=" text-center number">{{assessmentCount}}</div>
+                                        <div class=" text-center number">{{assessmentCount | number}}</div>
                                 </div>
                                 <div *ngIf="error">
                                         <div class="error-padding-top">
@@ -36,9 +36,9 @@
 
                 <div class=" col-lg-3 col-md-6 col-12">
                         <div class="card card-app-summary">
-                                <i class="fa fa-users text-center " style="padding-top:20px;color: #360fe4; font-size: 26px"></i>
+                                <i class="fa fa-users text-center userIcon"></i>
                                 <div *ngIf="!error">
-                                        <div class=" text-center number">{{userCount}}</div>
+                                        <div class=" text-center number">{{userCount | number}}</div>
                                 </div>
                                 <div *ngIf="error">
                                         <div class="error-padding-top">
@@ -51,9 +51,9 @@
 
                 <div class=" col-lg-3 col-md-6 col-12">
                         <div class="card card-app-summary">
-                                <i class="fa fa-question-circle text-center " style="padding-top:20px;color: #e61111; font-size: 26px"></i>
+                                <i class="fa fa-question-circle text-center questionIcon" ></i>
                                 <div *ngIf="!error">
-                                        <div class=" text-center number">{{questionCount}}</div>
+                                        <div class=" text-center number">{{questionCount | numberFormatter}}</div>
                                 </div>
                                 <div *ngIf="error">
                                         <div class="error-padding-top">
@@ -74,6 +74,7 @@
                         <app-most-searched-skills></app-most-searched-skills>
                 </div>
                 <div class="col-lg-4 ">
+
                         <app-questiongraph></app-questiongraph>
 
                 </div>
@@ -84,6 +85,7 @@
                         <app-top-accessed-tests></app-top-accessed-tests>
 
                 </div>
+
         </div>
 
 

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal-lg">
+<div>
     <form [formGroup]="addskillform">
       <div class="modal-content">
         <div class="modal-header modal-head-background">
@@ -15,7 +15,6 @@
           <div [hidden]="fail" role="alert"> -->
         <div class="modal-body">
           <div class="container ">
-  
             <div *ngIf="status==2" class="alert alert-success" role="alert">
               New Skill Added
             </div>
@@ -131,7 +130,7 @@
   
             <div class="row">
               <div class="col-lg-12">
-                <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
+                <ul *ngFor="let topic of topics" class="list-inline marginzero inlinetopics">
                   <li class="badge badge-secondary litopic">{{topic.name}} ({{topic.percentage}}%) &nbsp; <i class="fa fa-times makepointer"
                       (click)="removeTopic(topic)"></i></li>
                 </ul>

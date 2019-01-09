@@ -12,6 +12,7 @@ export class CountOfQuestionsToReviewComponent implements OnInit {
   show: boolean = false;
   showAddButton:boolean = false;
   skillId: any;
+  skillName : any;
   name:any;
   previousSelectedSkill: any;
   constructor(private countPendingService: CountOfPendingQuestionsService) { }
@@ -42,7 +43,9 @@ export class CountOfQuestionsToReviewComponent implements OnInit {
     for(let skillOfNameAndId of this.skillList){
       if(skillOfNameAndId[0]==name){
         this.skillId = skillOfNameAndId[1];
+        this.skillName = skillOfNameAndId[0];
         this.countPendingService.skillId=this.skillId;
+       this.countPendingService.skillName=this.skillName;
         this.show = true;
       }
     }

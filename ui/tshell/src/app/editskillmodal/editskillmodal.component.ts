@@ -18,6 +18,8 @@ export class EditskillmodalComponent implements OnInit {
   skills: any = [];
   topics: Array<Topic> = [];
   sametopic = false;
+  emptyper = false;
+  bigper = false;
   public imagePath;
   imgURL: any;
   public message: string;
@@ -51,37 +53,64 @@ export class EditskillmodalComponent implements OnInit {
         Validators.maxLength(60),
         Validators.pattern(/^[a-zA-Z ._-]+$/),
       ]),
+    topicPercentage: new FormControl(
+      '',
+      [
+        Validators.minLength(1),
+        Validators.maxLength(2),
+      ]),
     topics: this.fb.array([])
 
   });
 
   // tslint:disable-next-line:max-line-length
   constructor(private cd: ChangeDetectorRef, public activeModal: NgbActiveModal, private skillService: SkillserviceService, private fb: FormBuilder, private confirmationDialogService: ConfirmationDialogService) { }
-  addTopic(id, topicname) {
-    const topic1 = new Topic(id, topicname, 0);
-    console.log(id + " " + topicname);
+  addTopic(id, topicname, percentage) {
+    const topic1 = new Topic(id, topicname, percentage);
     let counter = 0;
+    let percounter = 0;
+    let morethahun = 0;
     if (topicname === '') {
       counter = 1;
     }
+
+    if (percentage === '') {
+      percounter = 1;
+      this.emptyper = true;
+      this.bigper = false;
+    }
+    if (percentage > 100) {
+      this.bigper = true;
+      this.emptyper = false;
+      morethahun = 1;
+    }
     this.topics.forEach(element => {
-      if (topicname === element.name || topicname === '') {
+      if (topicname.toLowerCase() === element.name.toLowerCase() || topicname === '') {
         counter = 1;
       }
     });
 
-    if (counter === 0) {
+    if (counter === 0 && percounter === 0 && morethahun === 0) {
       this.topics.push(topic1);
       this.sametopic = false;
+      this.emptyper = false;
+      this.bigper = false;
       this.clearInput();
-    } else {
+    }
+
+    if (counter !== 0) {
       this.sametopic = true;
     }
+
+    if (counter === 0 && percounter !== 0) {
+      this.sametopic = false;
+    } else if (counter !== 0 && percounter === 0) {
+      this.emptyper = false;
+    }
+
   }
   removeTopic(topic) {
     const index = this.topics.indexOf(topic);
-    console.log(index + " " + this.topics[index].name);
-
     this.confirmationDialogService.confirm(`Deletion of "${this.topics[index].name}"`, 'Do you really want to Delete ?')
       .then((confirmed) => {
         if (confirmed) {
@@ -124,14 +153,10 @@ export class EditskillmodalComponent implements OnInit {
       this.addskillform.controls['creationDate'].patchValue(new Date());
     }
 
-    this.topics.forEach(element => {
-      console.log(element);
-    });
     this.skillService.updateSkill(JSON.stringify(this.addskillform.value, getCircularReplacer())).subscribe(
       data => {
         this.status = data;
         this.error = false;
-        console.log(this.status);
         if (this.status === 2) {
           this.addskillform.reset();
           this.clearAllInput();
@@ -160,7 +185,6 @@ export class EditskillmodalComponent implements OnInit {
       // );
       this.cd.markForCheck();
       this.imgURL = reader.result;
-      console.log(this.imgURL);
     };
   }
 
@@ -180,7 +204,7 @@ export class EditskillmodalComponent implements OnInit {
     this.addskillform.patchValue(this.item);
     const control = <FormArray>this.addskillform.controls['topics'];
     this.item.topics.forEach(element => {
-      this.addTopic(element.id, element.name);
+      this.addTopic(element.id, element.name, element.percentage);
     });
   }
 

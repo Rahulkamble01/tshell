@@ -1,7 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,16 +20,24 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "assessment")
-@NamedQueries({
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@NamedQueries({@NamedQuery(name="Assessment.findUserHistory",query="select distinct a from Assessment a "
+		+ "left join fetch a.skill "
+		+ "left join fetch a.user "
+		+ "u left join fetch u.role "		
+		+ " where u.employeeId=:id") ,
+		
 		@NamedQuery(name = "Assessment.findTop5BySkill", query = "select distinct a from Assessment a "
-				+ "join a.skill s " + "join a.user u " + "where s.id=:skillId order by a.score desc")
+		+ "join a.skill s " + "join a.user u " + "where s.id=:skillId order by a.score desc")
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Assessment {
+
+
+public class Assessment {	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +46,9 @@ public class Assessment {
 
 	@Column(name = "as_type")
 	private String type;
-
-	@Column(name = "as_start_time")
+	
+	@Column(name="as_start_time")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy ")
 	private Date date;
 
 	@Column(name = "as_score")
@@ -63,7 +72,7 @@ public class Assessment {
 	// )
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assessment")
 	@JsonView(Views.Internal.class)
-	private List<AssessmentQuestion> assessmentQuestions;
+	private Set<AssessmentQuestion> assessmentQuestions;
 
 	public int getId() {
 		return id;
@@ -113,11 +122,11 @@ public class Assessment {
 		this.user = user;
 	}
 
-	public List<AssessmentQuestion> getAssessmentQuestions() {
+	public Set<AssessmentQuestion> getAssessmentQuestions() {
 		return assessmentQuestions;
 	}
 
-	public void setAssessmentQuestions(List<AssessmentQuestion> assessmentQuestions) {
+	public void setAssessmentQuestions(Set<AssessmentQuestion> assessmentQuestions) {
 		this.assessmentQuestions = assessmentQuestions;
 	}
 

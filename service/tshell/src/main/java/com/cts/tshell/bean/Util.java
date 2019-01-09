@@ -2,7 +2,7 @@ package com.cts.tshell.bean;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import java.util.Random;
 public class Util {
 
 	public static String encryptToMD5(String input) throws NoSuchAlgorithmException {
@@ -17,4 +17,15 @@ public class Util {
 		return encryptedPassword;
 	}
 
+	public static int generateSignupOTP() {
+		Random rand = new Random();
+		return rand.nextInt(899999) + 100000;
+	}
+
+	public static int generateOTP() {
+		Random ramd = new Random();
+		return ramd.nextInt(899999)+100000;
+	}
 }
+
+

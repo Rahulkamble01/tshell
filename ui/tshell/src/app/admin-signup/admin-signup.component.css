@@ -40,7 +40,7 @@
 }
 #message{
   font-weight: 450;
-
+  font-size: large;
 }
 .container-fluid{
   background-image: url("/assets/images/im1.jpg");

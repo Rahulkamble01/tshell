@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppinfoService } from '../appinfo.service';
+import { NumberFormatterPipe } from '../numberFormatterPipe';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  providers:[NumberFormatterPipe]
 })
 export class DashboardComponent implements OnInit {
 
@@ -14,6 +16,7 @@ export class DashboardComponent implements OnInit {
   userCount:number;
   questionCount:number;
   error:any;
+  
   constructor(private route: ActivatedRoute, private router: Router,
                private appinfoService: AppinfoService) { }
 

@@ -11,13 +11,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
 	@NamedQuery(name="ReferenceSkill.findBySkillId",query="from ReferenceSkill r "
-			+ "left join fetch r.skill s where s.id=:skillId")
+			+ "left join fetch r.skill s where s.id=:skillId"),
+	@NamedQuery(name="ReferenceSkill.saveBySkillIdAndRefSkillId",query="from ReferenceSkill r "
+			+ "left join fetch r.skill s where s.id=:skillId and s.id =:refSkillId")
+//			+ "left join fetch r.skill s1 where s1.id=:refSkillId")
 })
 @Table(name = "reference_skill")
 public class ReferenceSkill {
@@ -27,12 +31,11 @@ public class ReferenceSkill {
 	@Column(name = "rs_id")
 	private int id;
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.MERGE)
 	@JoinColumn(name = "rs_sk_id")
 	private Skill skill;
 	
-//	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.MERGE)
 	@JoinColumn(name="rs_ref_id")
 	private Skill referenceSkill;
 	

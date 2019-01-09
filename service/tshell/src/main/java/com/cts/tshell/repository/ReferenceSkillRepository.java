@@ -14,4 +14,6 @@ public interface ReferenceSkillRepository extends JpaRepository<ReferenceSkill, 
 	
 	List<ReferenceSkill> findBySkillId(@Param("skillId") int skillId);
 
+	void saveBySkillIdAndRefSkillId(int skillId, int refSkillId);
+
 }

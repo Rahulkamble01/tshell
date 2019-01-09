@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.tshell.bean.Assessment;
 import com.cts.tshell.bean.Views;
 import com.cts.tshell.service.AssessmentService;
+import com.cts.tshell.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +25,11 @@ private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentControlle
 	
 	@Autowired
 	private AssessmentService assessmentService;
-	
+
+	@Autowired
+	public UserService userService;
+
+
 //	@RequestMapping(value = "/top5list/{skillId}", method = RequestMethod.GET)
 //	public List<Assessment> findTop5Performers(@PathVariable("skillId") int skillId){
 //		LOGGER.info("AssessmentController->findTop5PerformersOfSkill");
@@ -49,5 +54,16 @@ private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentControlle
 		long assessmentCount = assessmentService.getAssessmentCount();
 		LOGGER.debug("totalAssessments -> {}", assessmentCount);
 		return assessmentCount;
+	}
+	
+	@GetMapping("/getAssessment/{userId}")
+	public String getAssessmentsOfUserById(@PathVariable("userId") int userId) throws JsonProcessingException{
+		LOGGER.info("start");
+		LOGGER.debug("userId: {} " , userId);
+		LOGGER.info("end");
+		List<Assessment> assessments=assessmentService.getAssessmentsOfUserById(userId);
+		ObjectMapper mapper = new ObjectMapper();
+		String result=mapper.writerWithView(Views.Public.class).writeValueAsString(assessments);
+		return result;
 	}
 }

@@ -1,4 +1,5 @@
 export const environment = {
-  // runtime variables
-  serviceUrlPrefix: "/tshell-service"
-} 
+    serviceUrlPrefix : "/tshell-service"
+
+}
+

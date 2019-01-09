@@ -15,6 +15,8 @@ const httpOptions = {
 export class CountOfPendingQuestionsService {
 
   skillId:any;
+  skillName:any;
+
   constructor(private http: HttpClient) { }
 
   count: string = environment.serviceUrlPrefix + "/questionHome/getcountReviewQ/";
