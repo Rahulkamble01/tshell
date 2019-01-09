@@ -13,19 +13,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "topic")
-
+@NamedQuery(name = "Topic.fetchTopics", query = "select t.name from Topic t "
+		+ "join t.skill s where s.id=:skillId")	
 public class Topic {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tp_id")
 	private int id;
-
-
 
 	@Column(name = "tp_name")
 	private String name;

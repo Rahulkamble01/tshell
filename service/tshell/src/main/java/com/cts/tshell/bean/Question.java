@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "question")
 public class Question {
@@ -70,12 +72,15 @@ public class Question {
 
 	@Transient
 	private String error;
-	
+
 	@Transient
 	private String Topic;
-	
+
 	@Transient
 	private boolean validTopic;
+	@JsonIgnore
+	@Transient
+	private int answerType;
 
 	public String getTopic() {
 		return Topic;
@@ -160,13 +165,16 @@ public class Question {
 		builder.append(Topic);
 		builder.append(", validTopic=");
 		builder.append(validTopic);
+		builder.append(", answerType=");
+		builder.append(answerType);
 		builder.append("]");
 		return builder.toString();
 	}
 
 	public Question(String[] csvContent) {
-		Topic topic=new Topic(csvContent[0]);
+		Topic topic = new Topic(csvContent[0]);
 		List<Option> options = new ArrayList<Option>();
+
 		this.question = csvContent[1].trim();
 		if (!csvContent[2].equals("") || !csvContent[3].equals("")) {
 			options.add(new Option(csvContent[2].trim(), csvContent[3].trim()));
@@ -184,6 +192,7 @@ public class Question {
 		if (!csvContent[10].equals("") || !csvContent[11].equals("")) {
 			options.add(new Option(csvContent[10].trim(), csvContent[11].trim()));
 		}
+
 		this.optionList = options;
 		int correctAnswerCount = 0;
 		int invalidinput = 0;
@@ -225,11 +234,11 @@ public class Question {
 		else if (count == 2) {
 			setError("All option can not be true");
 		} else if (invalidinput > 0) {
-			setError("Option is missing  ");
+			setError("Option is missing");
 		} else if (optionsSet.size() != getOptionList().size()) {
-			setError("Multiple option can not have same value");
+			setError("Multiple option cannot have same value");
 		} else if (invalidAnswerCount > 0) {
-			setError("Answer is missing or in incorrect format ");
+			setError("Answer is missing or in incorrect format");
 		}
 
 		if (csvContent[2].isEmpty()) {
@@ -243,9 +252,13 @@ public class Question {
 			setError("question length exceeded");
 		} else {
 			lengthExceeded = false;
-
 		}
+		if (correctAnswerCount > 1) {
+			setAnswerType(2);
 
+		} else {
+			setAnswerType(1);
+		}
 	}
 
 	public List<Option> getOptionList() {
@@ -302,6 +315,14 @@ public class Question {
 
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
+	}
+
+	public int getAnswerType() {
+		return answerType;
+	}
+
+	public void setAnswerType(int answerType) {
+		this.answerType = answerType;
 	}
 
 }

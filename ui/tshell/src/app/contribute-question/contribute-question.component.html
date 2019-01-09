@@ -80,7 +80,7 @@
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="card">
               <h3 class="uploadText">Want to upload Questions in bulk?<div> Upload your questions as in the
-                  <a href="./assets/Questions Format.csv">template</a> format.</div>
+                  <a href="{{templateUrl}}">template</a> format.</div>
               </h3>
               <form [formGroup]="uploadForm" (ngSubmit)="upload()">
                 <h5 *ngIf="fileExtensionError" class="alert alert-danger row align-items-center justify-content-center" >{{fileExtensionMessage}}</h5>

@@ -10,19 +10,20 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class PreviewQuestionsComponent implements OnInit {
   questionsList: any;
-  csvData = [];
-  length: any;
+  csvData: any = null;
   errorCount: any;
   constructor(private router: Router, private contributeQuestionService: ContributeQuestionService) { }
 
   ngOnInit() {
     this.csvData = this.contributeQuestionService.getCsvData();
     this.errorCount = 0;
-    this.length = this.csvData.length;
-    for (let i = 0; i < this.length; i++) {
-      if (this.csvData[i].error != null) {
-        this.errorCount += 1;
+    if(this.csvData!=null){
+      for (let i = 0; i < this.csvData.length; i++) {
+        if (this.csvData[i].error != null || !this.csvData[i].validTopic) {
+          this.errorCount += 1;
+        }
       }
+      console.log(this.errorCount);
     }
   }
 
@@ -30,7 +31,7 @@ export class PreviewQuestionsComponent implements OnInit {
     this.questionsList = this.csvData;
     alert('Questions are submitted successfully for Review!');
     this.contributeQuestionService.submitForReview(this.questionsList).subscribe(
-      data=>{
+      data => {
       }
     );
     this.router.navigate(['/contributeQuestion']);
@@ -39,7 +40,7 @@ export class PreviewQuestionsComponent implements OnInit {
     this.questionsList = this.csvData;
     alert('Questions saved successfully as Approved!');
     this.contributeQuestionService.approveSubmittted(this.questionsList).subscribe(
-      data=>{
+      data => {
       }
     );
     this.router.navigate(['/contributeQuestion']);

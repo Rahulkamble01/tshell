@@ -16,11 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.tshell.bean.Option;
 import com.cts.tshell.bean.Question;
+import com.cts.tshell.bean.QuestionAnswerType;
 import com.cts.tshell.bean.QuestionDifficultyLevel;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.repository.OptionRepository;
+import com.cts.tshell.repository.QuestionAnswerTypeRepsoitory;
 import com.cts.tshell.repository.QuestionDifficultyLevelRepository;
 import com.cts.tshell.repository.QuestionRepository;
 import com.cts.tshell.repository.SkillRepository;
@@ -43,6 +45,7 @@ public class QuestionService {
 	private QuestionDifficultyLevelRepository questionDifficultyLevelRepository;
 	private TopicRepository topicRepository;
 	private SkillRepository skillRepository;
+	private QuestionAnswerTypeRepsoitory questionAnswerTypeRepository;
 
 	@Autowired
 	public void setOptionRepository(OptionRepository optionRepository) {
@@ -75,6 +78,20 @@ public class QuestionService {
 		this.skillRepository = skillRepository;
 	}
 
+	@Autowired
+	public void setQuestionAnswerTypeRepository(QuestionAnswerTypeRepsoitory questionAnswerTypeRepository) {
+		this.questionAnswerTypeRepository = questionAnswerTypeRepository;
+	}
+
+	@Transactional
+	public List<Topic> getNamesOfTopics(int skillId) {
+		LOGGER.info("getNamesOfTopics() is called!");
+		List<Topic> topics = topicRepository.fetchTopics(skillId);
+		LOGGER.info("getNamesOfTopics() execution is completed!");
+		LOGGER.debug("No. of Topics are {}", topics.size());
+		return topics;
+	}
+
 	@Transactional
 	public List<Topic> getTopics(int skillId) {
 		LOGGER.info("getTopics() is called!");
@@ -87,7 +104,6 @@ public class QuestionService {
 
 	@Transactional
 	public List<Question> readFile(MultipartFile file) {
-
 		LOGGER.info("readFile() is called!");
 		InputStreamReader reader = null;
 		CSVReader csvReader = null;
@@ -97,21 +113,28 @@ public class QuestionService {
 		// Reading file using InputStreamReader..
 		try {
 			reader = new InputStreamReader(file.getInputStream());
-			csvReader = new CSVReaderBuilder(reader).withSkipLines(12).build();
+			csvReader = new CSVReaderBuilder(reader).withSkipLines(13).build();
 			List<String[]> csvData = csvReader.readAll();
 			for (String questionData[] : csvData) {
 				Question question = new Question(questionData);
 				// Validating entered topic with database
-				boolean isTopicFound = false;
+
 				for (Topic topic : topics) {
+					boolean isTopicFound = false;
 					isTopicFound = topic.getName().equalsIgnoreCase(questionData[0]);
+					if (isTopicFound) {
+						LOGGER.info("Inside if block!");
+						LOGGER.debug("Topic name matches with DB.. {}", questionData[0]);
+						question.setValidTopic(true);
+						question.setTopic(questionData[0]);
+						break;
+					} else {
+						LOGGER.info("Inside else block!");
+						question.setValidTopic(false);
+						question.setTopic(questionData[0]);
+					}
 				}
-				if (isTopicFound) {
-					question.setValidTopic(true);
-					question.setTopic(questionData[0]);
-				} else {
-					question.setValidTopic(false);
-				}
+				LOGGER.debug("Question Data -> {}", question);
 				uploadedQuestions.add(question);
 			}
 			csvReader.close();
@@ -127,13 +150,17 @@ public class QuestionService {
 	public void saveQuestionsForReview(List<Question> questions) {
 		LOGGER.info("saveQuestionsForReview() service is called!");
 		User user = userRepository.findByEmployeeId("123456");
+		QuestionAnswerType answerType = null;
+		Topic topic = null;
 		QuestionDifficultyLevel questionDifficultyLevel = questionDifficultyLevelRepository.findById(2);
 		LOGGER.debug("Question Difiiculty Level -> {}", questionDifficultyLevel);
 		LOGGER.debug("Created user details -> {}", user);
 		Date createdDate = new Date();
 		for (Question question : questions) {
-			Topic topic = topicRepository.findByName(question.getTopic());
+			topic = topicRepository.findByName(question.getTopic());
+			answerType = questionAnswerTypeRepository.findById(question.getAnswerType());
 			List<Question> topicQuestions = topic.getQuestions();
+			question.setQuestionAnswerType(answerType);
 			question.setCreatedDate(createdDate);
 			question.setStatus("Pending");
 			question.setCreatedUser(user);
@@ -142,7 +169,7 @@ public class QuestionService {
 			topic.setQuestions(topicQuestions);
 			for (Option option : question.getOptionList()) {
 				option.setQuestion(question);
-				optionRepository.save(option);
+				optionRepository.saveAndFlush(option);
 			}
 			topicRepository.save(topic);
 
@@ -156,12 +183,16 @@ public class QuestionService {
 		LOGGER.info("saveQuestionsAsApproved() service is called!");
 		User user = userRepository.findByEmployeeId("123456");
 		QuestionDifficultyLevel questionDifficultyLevel = questionDifficultyLevelRepository.findById(2);
+		QuestionAnswerType answerType = null;
+		Topic topic = null;
 		LOGGER.debug("Question Difiiculty Level -> {}", questionDifficultyLevel);
 		Date createdDate = new Date();
 		for (Question question : questions) {
-			Topic topic = topicRepository.findByName(question.getTopic());
+			topic = topicRepository.findByName(question.getTopic());
+			answerType = questionAnswerTypeRepository.findById(question.getAnswerType());
 			List<Question> topicQuestions = topic.getQuestions();
 			question.setCreatedDate(createdDate);
+			question.setQuestionAnswerType(answerType);
 			question.setStatus("Approved");
 			question.setQuestionDifficultyLevel(questionDifficultyLevel);
 			question.setCreatedUser(user);
@@ -169,7 +200,7 @@ public class QuestionService {
 			topic.setQuestions(topicQuestions);
 			for (Option option : question.getOptionList()) {
 				option.setQuestion(question);
-				optionRepository.save(option);
+				optionRepository.saveAndFlush(option);
 			}
 			topicRepository.save(topic);
 		}

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
 import { Route, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ContributeQuestionService } from '../contribute-question.service';
+import { environment } from '../environment';
 
 
 @Component({
@@ -11,9 +12,10 @@ import { ContributeQuestionService } from '../contribute-question.service';
   styleUrls: ['./contribute-question.component.css']
 })
 export class ContributeQuestionComponent implements OnInit {
-
   ngOnInit() {
+    this.templateUrl =  this.templateUrl+ '1';
   }
+  templateUrl: string = environment.serviceUrlPrefix + '/question/template/';
   userFile: any = File;
   uploadForm: any = FormGroup;
   fileName: any;

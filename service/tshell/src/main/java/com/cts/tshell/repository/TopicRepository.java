@@ -12,5 +12,6 @@ public interface TopicRepository extends JpaRepository<Topic, Integer> {
 
 	public List<Topic> findBySkill(Skill skill);
 	public Topic findByName(String topicName);
+	public List<Topic> fetchTopics(@Param("skillId") int skillId);
 
 }
