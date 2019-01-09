@@ -16,11 +16,11 @@ export class ViewprofileService {
 
   url = environment.serviceUrlPrefix + "/user/getUser/";
   url1 = environment.serviceUrlPrefix + "/assessment/getAssessment/";
-  url2 = environment.serviceUrlPrefix + "/save";
-  url3 = environment.serviceUrlPrefix + "/getRoles";
-  url4 = environment.serviceUrlPrefix + "/update";
-  url5 = environment.serviceUrlPrefix + "/saveskill";
-  skillnames: string = environment.serviceUrlPrefix + "/getSkillsOnSearch/";
+  url2 = environment.serviceUrlPrefix + "/user/save";
+  url3 = environment.serviceUrlPrefix + "/user/getRoles";
+  url4 = environment.serviceUrlPrefix + "/user/update";
+  url5 = environment.serviceUrlPrefix + "/user/saveskill";
+  skillnames: string = environment.serviceUrlPrefix + "/user/getSkillsOnSearch/";
 
   constructor(private http: HttpClient) { }
 
