@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environment';
 
-const httpOptions ={
+const httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json'
     })
@@ -10,17 +11,32 @@ const httpOptions ={
 @Injectable({
     providedIn: 'root'
 })
-export class SignupService{
-    url: string = "/tShell/signup/"
-    //url1 = "/tShell/checkUserExist"
-    constructor(private http: HttpClient){}
-    
-    signup(json): Observable<any>{
+export class SignupService {
+    url: string = environment.serviceUrlPrefix + "/signup/"
+    url1: string = environment.serviceUrlPrefix + "/requestSignupOtp"
+    url2: string = environment.serviceUrlPrefix + "/verifySignupOtp"
+    url3: string = environment.serviceUrlPrefix + "/validateOtpTime"
+    url4: string = environment.serviceUrlPrefix + "/regenerateOtp"
+    constructor(private http: HttpClient) { }
+
+    signup(json): Observable<any> {
         return this.http.post<any>(this.url, json, httpOptions);
     }
 
-   
-    /* checkUserExist(json): Observable<any>{
-        return this.http.post<any>(this.url1, json, httpOptions);
-    } */
+    requestSignupOtp(employeeId): Observable<any> {
+        return this.http.post<any>(this.url1, employeeId, httpOptions);
+    }
+
+    verifySignupOtp(user): Observable<any> {
+        return this.http.post<any>(this.url2, user, httpOptions);
+    }
+    validateOtpTime(user): Observable<any> {
+        return this.http.post<any>(this.url3, user, httpOptions);
+    }
+    regenerateOtp(user): Observable<any> {
+        return this.http.post<any>(this.url4, user, httpOptions);
+    }
+
+
+
 }

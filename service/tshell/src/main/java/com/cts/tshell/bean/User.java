@@ -22,7 +22,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "user")
 
@@ -51,20 +50,27 @@ public class User {
 	@JoinColumn(name = "us_ur_id")
 	private Role role;
 
-	@Min(value = 1, message = "Employee ID must be at least 6 digits")
-	@Max(value = 10000000000L, message = "Employee ID cannot exceed 10 digits")
+	@Size(min = 5, max = 10, message = "Employee ID  must be 5 to 10 characters")
 	@Column(name = "us_emp_id")
-	private int employeeId;
+	private String employeeId;
 
 	@Column(name = "us_image")
-	private byte image;
+	private byte[] image;
 
 	@Column(name = "us_signup_date")
 	private Date signupDate;
 
-	
 	@Column(name = "us_last_login_time")
 	private Date lastLoginTime;
+
+	@Column(name = "us_signup_otp_verify_status")
+	public String signupOtpVerifyStatus;
+
+	@Column(name = "us_signup_otp")
+	private String signupOtp;
+
+	@Column(name = "us_signup_otp_time")
+	private Date signupOtpTime;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -111,19 +117,19 @@ public class User {
 		this.role = role;
 	}
 
-	public int getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -149,6 +155,37 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
+	}
+
+	public String getSignupOtp() {
+		return signupOtp;
+	}
+
+	public void setSignupOtp(String signupOtp) {
+		this.signupOtp = signupOtp;
+	}
+
+	public Date getSignupOtpTime() {
+		return signupOtpTime;
+	}
+
+	public void setSignupOtpTime(Date signupOtpTime) {
+		this.signupOtpTime = signupOtpTime;
+	}
+
+	public String getSignupOtpVerifyStatus() {
+		return signupOtpVerifyStatus;
+	}
+
+	public void setSignupOtpVerifyStatus(String signupOtpVerifyStatus) {
+		this.signupOtpVerifyStatus = signupOtpVerifyStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", employeeId=" + employeeId + ", signupOtpVerifyStatus=" + signupOtpVerifyStatus + ", signupOtp="
+				+ signupOtp + "]";
 	}
 
 }
