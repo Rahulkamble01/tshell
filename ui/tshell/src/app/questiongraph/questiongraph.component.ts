@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TotalQuestionsService } from '../totalQuestions.service';
+import { TotalQuestionsService } from '../totalquestions.service';
 import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-questiongraph',
@@ -14,6 +15,7 @@ export class QuestiongraphComponent implements OnInit {
   ];
   chartLabels = [];
   error:any;
+  
 
   constructor(private totalquestion: TotalQuestionsService,private service : AuthService) { }
   

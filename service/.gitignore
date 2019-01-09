@@ -2,5 +2,9 @@
 /RemoteSystemsTempFiles
 /Servers
 /.recommenders
+<<<<<<< HEAD
+/.project
+=======
 /.project
 
+>>>>>>> login

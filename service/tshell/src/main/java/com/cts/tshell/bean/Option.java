@@ -9,12 +9,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "`option`")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@NamedQueries({
+		@NamedQuery(name = "Option.fetchOptionDetailsById", query = "select o from Option o join o.question where o.id=:optionId")
+
+})
+
 public class Option {
-	
+	public Option() {
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "op_id")
@@ -22,12 +37,14 @@ public class Option {
 
 	@Column(name = "op_description")
 	private String description;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="op_qu_id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "op_qu_id")
+	@JsonView(Views.Internal.class)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Question question;
-	
-	@Column(name="op_is_correct")
+
+	@Column(name = "op_is_correct")
 	private boolean answer;
 
 	public int getId() {
@@ -60,5 +77,10 @@ public class Option {
 
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
+	}
+
+	@Override
+	public String toString() {
+		return "Option [id=" + id + ", description=" + description + ", answer=" + answer + "]";
 	}
 }

@@ -1,7 +1,7 @@
 package com.cts.tshell.bean;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,41 +12,67 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "assessment")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@NamedQueries({@NamedQuery(name="Assessment.findUserHistory",query="select distinct a from Assessment a "
+		+ "left join fetch a.skill "
+		+ "left join fetch a.user "
+		+ "u left join fetch u.role "		
+		+ " where u.employeeId=:id") ,
+		
+		@NamedQuery(name = "Assessment.findTop5BySkill", query = "select distinct a from Assessment a "
+		+ "join a.skill s " + "join a.user u " + "where s.id=:skillId order by a.score desc")
+})
+
+
 public class Assessment {	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="as_id")
+	@Column(name = "as_id")
 	private int id;
-	
-	@Column(name="as_type")
+
+	@Column(name = "as_type")
 	private String type;
 	
 	@Column(name="as_start_time")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy ")
 	private Date date;
-	
-	@Column(name="as_score")
+
+	@Column(name = "as_score")
 	private float score;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="as_sk_id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "as_sk_id")
+	@JsonView(Views.Internal.class)
 	private Skill skill;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="as_us_id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "as_us_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User user;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessment")
-	private List<AssessmentQuestion> assessmentQuestions;
+
+
+	// @ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	// @JoinTable(name="assessment_question",
+	// joinColumns= {@JoinColumn(name="aq_as_id")},
+	// inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
+	// )
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assessment")
+	@JsonView(Views.Internal.class)
+	private Set<AssessmentQuestion> assessmentQuestions;
 
 	public int getId() {
 		return id;
@@ -96,11 +122,11 @@ public class Assessment {
 		this.user = user;
 	}
 
-	public List<AssessmentQuestion> getAssessmentQuestions() {
+	public Set<AssessmentQuestion> getAssessmentQuestions() {
 		return assessmentQuestions;
 	}
 
-	public void setAssessmentQuestions(List<AssessmentQuestion> assessmentQuestions) {
+	public void setAssessmentQuestions(Set<AssessmentQuestion> assessmentQuestions) {
 		this.assessmentQuestions = assessmentQuestions;
 	}
 

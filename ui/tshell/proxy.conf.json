@@ -1,9 +1,7 @@
 {
 
-  "/tShell/*": {
-    "target": "http://localhost:9090",
-
-
+  "/tshell-service/*": {
+    "target": "http://localhost:8080",
     "secure": false,
     "loglevel": "debug",
     "changeOrigin": true

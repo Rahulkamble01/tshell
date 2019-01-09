@@ -1,5 +1,9 @@
 package com.cts.tshell.bean;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,16 +12,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "question")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@NamedQueries({
+		@NamedQuery(name = "Question.fetchLatestQuestion", query = "select q from Question q where"
+				+ " q.id=(select Max(q1.id) from Question q1)"),
+
+		@NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
+				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
+				+ " left join fetch q.createdUser " + "where q.id=:questionId"),
+
+		@NamedQuery(name = "Question.fetchQuestionDetails", query = "select distinct q from Question q "
+				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
+				+ " left join fetch q.createdUser " + "left join fetch q.optionList " + "where q.id=:questionId"),
+
+		@NamedQuery(name = "Question.findQuestionWithOptions", query = "select q from Question q join q.optionList o where q.id=:questionId")
+
+})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Question {
+
+	public Question() {
+	}
+
+	public Question(int id, String question, String status, QuestionDifficultyLevel questionDifficultyLevel,
+			User createdUser, List<Option> optionList) {
+		super();
+		this.id = id;
+		this.question = question;
+		this.status = status;
+		this.questionDifficultyLevel = questionDifficultyLevel;
+		this.createdUser = createdUser;
+		this.optionList = optionList;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "qu_id")
@@ -29,17 +69,50 @@ public class Question {
 	@Column(name = "qu_status")
 	private String status;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Column(name = "qu_created_date")
+	private Date createdDate;
+
+	@Column(name = "qu_reviewed_date")
+	private Date reviewedDate;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "qu_qd_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private QuestionDifficultyLevel questionDifficultyLevel;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private QuestionAnswerType questionAnswerType;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_created_by_us_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User createdUser;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "qu_reviewed_by_us_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private User reviewedUser;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "topic_question", joinColumns = { @JoinColumn(name = "tq_qu_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "tq_tp_id") })
+	private Set<Topic> topicSet;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+	private List<Option> optionList;
+
+	@Transient
+	private String topic;
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
 
 	public int getId() {
 		return id;
@@ -88,4 +161,45 @@ public class Question {
 	public void setQuestionAnswerType(QuestionAnswerType questionAnswerType) {
 		this.questionAnswerType = questionAnswerType;
 	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getReviewedDate() {
+		return reviewedDate;
+	}
+
+	public void setReviewedDate(Date reviewedDate) {
+		this.reviewedDate = reviewedDate;
+	}
+
+	public User getReviewedUser() {
+		return reviewedUser;
+	}
+
+	public void setReviewedUser(User reviewedUser) {
+		this.reviewedUser = reviewedUser;
+	}
+
+	public List<Option> getOptionList() {
+		return optionList;
+	}
+
+	public void setOptionList(List<Option> optionList) {
+		this.optionList = optionList;
+	}
+
+	public Set<Topic> getTopicList() {
+		return topicSet;
+	}
+
+	public void setTopicList(Set<Topic> topicSet) {
+		this.topicSet = topicSet;
+	}
+
 }

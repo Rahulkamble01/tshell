@@ -1,185 +1,72 @@
-<div style="background-color: #dee2e6;padding: 4%;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-<div class="container-fluid">
-    <div class=" h3 font-weight-bold" style="padding-left:6px; margin-top: -44px;    margin-left: -40px;">
-        Question
-</div>
-<br>
-    
-  <!--new carsfd-->
-  <div class="row mb-2 card-header" style="background-color: white;border-left:6px solid #0e5bd6;">
-    <span style="font-size:20px;"> Pending Questions..</span>
-  </div>
-  <div class="card-group">
-    <div class="card bg-white ts-card" [routerLink]="['/reviewq']" style="margin-left:3%;color:#808080">
-      <div class="card-body text-center">
-        <p class="card-text" style="font-size:25px;">Java</p> 
-        <p class="card-text" style="font-size:35px;font-weight: 700">50</p> 
-      </div>
-    </div>
-    <div class="card bg-white ts-card" [routerLink]="['/reviewq']" style="margin-left:3%;color:#808080">
-      <div class="card-body text-center">
-        <p class="card-text" style="font-size:25px;">HTML</p> 
-        <p class="card-text" style="font-size:35px;font-weight: 700">8</p> 
-      </div>
-    </div>
-    <div class="card bg-white ts-card" [routerLink]="['/reviewq']" style="margin-left:3%;color:#808080">
-      <div class="card-body text-center">
-        <p class="card-text" style="font-size:25px;">CSS</p> 
-        <p class="card-text" style="font-size:35px;font-weight: 700">21</p> 
-    </div>
-    </div> 
-    <div class="card bg-white ts-card" [routerLink]="['/reviewq']" style="margin-left:3%;color:#808080">
-      <div class="card-body text-center">
-        <p class="card-text" style="font-size:25px;">Angular</p> 
-        <p class="card-text" style="font-size:35px;font-weight: 700">31</p> 
-    </div>
-    </div> 
-    <div class="card bg-white ts-card" [routerLink]="['/reviewq']" style="margin-left:3%;color:#808080">
-      <div class="card-body text-center">
-        <p class="card-text" style="font-size:24px;">Javascript</p> 
-        <p class="card-text" style="font-size:35px;font-weight: 700">49</p> 
-    </div>
-    </div>  
-   </div>
-   <hr>
-</div>
-
-<!--search-->
-<div class="container" style="margin-top: 2%">
-  <div class="row mb-2 card-header" style="background-color: white;border-left:6px solid #0e5bd6">
-    <span style="font-size:20px;"> For adding, viewing Questions based on Skills</span>
-  </div>
+<div class="container-fluid head">
   <div class="row">
-    <div class="col-lg-4">
-      <select class="form-control" value="Select Skills">
-        <option>Hibernate</option>
-        <option>Spring MVC</option>
-        <option>Java</option>
-        <option>Java</option>
-        <option>Java</option>
-      </select>
-    </div>
-    <div class="col-lg-8">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for questions">
-        <div class="input-group-append">
-          <button class="btn btn-secondary" style="background-color: #5A6268" type="button">
-            <i class="fa fa-search"></i>
-          </button>
+    <!--first part-->
+    <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12 ts-card cardsColumns" style="padding:3%">
+        <div class="headerTitle">Manage Questions </div>
+
+        <!--select skill-->
+        <div class="input-group mb-3" style="margin-top:3%">
+          <input type="text" class="form-control" placeholder="Choose a skill to manage questions" 
+            aria-label="Recipient's username" aria-describedby="basic-addon2" 
+            [(ngModel)]="name" (keyup)="pressSkill(name);disableAddbtn();" id="ajax" list="json-datalist" 
+              (change)="currentSkill(name)" autocomplete="off" style="margin-left:2%;margin-right:2%">
+          <datalist id="json-datalist">
+            <select>
+              <option *ngFor="let skill of skillList" [value]="skill[0]"></option>
+            </select>
+          </datalist>
         </div>
+
+          <!--search button-->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top:3%" *ngIf="show">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Find if a question already exists" (keyup)="disableAddbtn();">
+              <div class="input-group-append" (click)="showAddbtn()">
+                <button class="btn btn-secondary" style="background-color: #5A6268" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--add-->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top:3%" *ngIf="showAddButton">
+            <button type="button" [routerLink]="['/addquestion']" class="btn btn-ts-primary">
+              <i class="fas fa-plus"></i>
+            </button> Add Question
+          </div>
+
+          <!--sangamesh portion-->
       </div>
     </div>
-  </div>
-  <div class="col-12 col-lg-12 col-sm-12 mt-3 searchResultColumn">
-    <div class="row mt-3 existingQuestion">
-      <div class="col-12 col-sm-12 col-lg-12">
-        <label class="rhsQIdLabel"># Id</label> &nbsp;
-        <span class="rhsQId">33456</span>&nbsp;
-        <a href="#" data-toggle="modal" data-target="#editQuestion">
-          <i class="fas fa-pencil-alt" style="color:#0056B3"></i>
-        </a>
-      </div>
-      <div class="col-12 col-sm-12 col-lg-12 questionDef">
-        Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-        data type variable?
-        <span class="rhsOptionsBtnSpan">
-          <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet1" aria-expanded="false"
-            aria-controls="collapseExample" style="color:#0056B3;text-decoration: none">
-            Options
-          </button>
-        </span>
-      </div>
-      <div class="col-12 col-sm-12 col-lg-12 collapse optionList" id="optionSet1">
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>1.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11 font-weight-bold">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
-        </div>
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>2.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11">byte x = (byte)100L;</div>
-        </div>
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>3.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11"> long y = (byte)100;</div>
-        </div>
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>4.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11">byte z = (byte)100L;</div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-lg-12">
-            <span class="rhsNoteSpan">
-              <i class="fas fa-info-circle"></i>&nbsp;&nbsp;Answers are in bold text</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-3 existingQuestion">
-      <div class="col-12 col-sm-12 col-lg-12">
-        <label class="rhsQIdLabel"># Id</label> &nbsp;
-        <span class="rhsQId">33456</span>&nbsp;
-        <a href="#" data-toggle="modal" data-target="#editQuestion">
-          <i class="fas fa-pencil-alt" style="color:#0056B3"></i>
-        </a>
-      </div>
-      <div class="col-12 col-sm-12 col-lg-12 questionDef">
-        Which data type value is returned by all transcendental math functions? Which of these literals can be contained in float
-        data type variable?
-        <span class="rhsOptionsBtnSpan">
-          <button class="btn btn-link btn-sm rhsOptionsBtn" type="button" data-toggle="collapse" data-target="#optionSet2" aria-expanded="false"
-            aria-controls="collapseExample" style="color:#0056B3;text-decoration: none">
-            Options
-          </button>
-        </span>
-      </div>
-      <div class="col-12 col-sm-12 col-lg-12 collapse optionList" id="optionSet2">
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>1.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11 font-weight-bold">int w = (int)888.8; Which data type value is returned by all transcendental math functions?</div>
-        </div>
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>2.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11">byte x = (byte)100L;</div>
-        </div>
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>3.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11"> long y = (byte)100;</div>
-        </div>
-        <div class="row">
-          <div class="col-1 col-sm-1 col-lg-1 text-center">
-            <label>4.</label>
-          </div>
-          <div class="col-11 col-sm-11 col-lg-11">byte z = (byte)100L;</div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-lg-12">
-            <span class="rhsNoteSpan">
-              <i class="fas fa-info-circle"></i>&nbsp;&nbsp;Answers are in bold text</span>
+
+
+    <!--second part-->
+    <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="color:#808080">
+          <div class="card ts-card">
+            <div class="card-body">
+              <div class="headerTitle">Review Questions </div>
+              <table class="table">
+                <tbody *ngFor="let count of countList">
+                  <tr>
+                    <td>{{count[1]}}</td>
+                    <td>({{count[0]}})</td>
+                    <td>
+                      <button type="button" [routerLink]="['/reviewq',count[2],count[1]]" 
+                        class="btn btn-ts-primary">
+                        Review
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div style="margin-bottom: 10%">
-    <span style="float:right;">
-      <span class="badge badge-light"> Add Questions....</span>
-      <i class="fas fa-plus-circle" title="Add a question" [routerLink]="['/contributeQuestion']"
-        f></i>
-    </span>
-  </div>
-</div>
 </div>

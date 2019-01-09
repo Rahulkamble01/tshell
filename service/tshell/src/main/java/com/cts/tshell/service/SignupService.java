@@ -43,7 +43,8 @@ public class SignupService {
 		LOGGER.info("Signup service starts");
 		LOGGER.info("Set role As Learner");
 		LOGGER.debug("User: {}", user);
-		user.setSignupDate(new Date());
+		Date date =new Date(); 
+		user.setSignupDate(date.toString());
 
 		Role role = roleService.getRoleByName("Learner");
 		user.setRole(role);

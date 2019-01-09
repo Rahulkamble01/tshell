@@ -26,6 +26,7 @@ export class TopAccessedTestsComponent implements OnInit {
 
   chartData = [{ data: [], label: 'Skills' }];
   chartLabels=[];
+  error=false;
 
   constructor(private topAccessedTestService: TopAccessedTestsService) { }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChangePassword } from './ChangePassword/changepassword';
+import {environment} from './environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,19 +16,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ChangepasswordService {
-
-  url = "/getPassword/";
-  url1 = "/savePassword";
+  
+  url = environment.serviceUrlPrefix+"/user/changepassword";
 
   constructor(private http: HttpClient) { }
 
-  // getDetails(empid): Observable<any> {
-
-  //   return this.http.get<any>(this.url + empid, httpOptions);
-  // }
-
-  // savePassword(element): Observable<any> {
-  //   console.log("inside the save password service");
-  //   return this.http.post<any>(this.url1, element, httpOptions);
-  // }
+   savepassword(employeeId, currentPassword, newPassword ): Observable<any> {
+     console.log("inside the save password service");
+     console.log(this.url+'/'+employeeId+'/'+currentPassword+'/'+newPassword);
+     return this.http.get<any>(this.url+'/'+employeeId+'/'+currentPassword+'/'+newPassword, httpOptions);
+   }
 }

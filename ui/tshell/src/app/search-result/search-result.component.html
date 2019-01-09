@@ -1,214 +1,253 @@
 <div class="container">
-  <div class="row">
+  <div class="row mb-0 pt-0 pb-0">
+    <div class="col-lg-1 col-md-1 col-sm-12 col-12"></div>
+  </div>
+  <div class="row mt-0 pt-0">
     <div class="col-lg-2 col-md-2 col-12"></div>
     <div class="col-lg-8 col-md-8 col-sm-12 col-12">
-      <form class="text-center mb-0 mt-3">
+      <div class="text-center mb-0 mt-3">
         <div class="itwillflex">
-          <input name="searchSkill" placeholder="SQL" autocomplete="off" class="form-control" #searchSkill>&nbsp;&nbsp;&nbsp;
-          <i id="erase1" class="fa-addskilll fas fa-search" (click)="searchSkillByName(searchSkill.value)"></i>
+          <ng-template #rt let-r="result" let-t="term">
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+          </ng-template>
+          <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search"
+            placeholder="Search Skills" [resultTemplate]="rt" [inputFormatter]="formatter" (selectItem)="itemSelected($event)" />
         </div>
-      </form>
-      <p class="row search-heading text-center mb-0 mt-1 pl-3">Search Result for &nbsp; <span> " SQL"</span></p>
-    </div>
-    <div class="col-lg-2 col-md-2 col-12 col-sm-12">
-      <button type="button" class="btn btn-ts-primary btn-lg fa fa-plus mt-3 col-12  fa-addskilll" (click)="addSkillModel()">
-        Skill</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row">
-    <!---------------------------------->
-    <div class="col-lg-6 col-md-6 col-12 col-sm-12">
-      <div class="card mb-4" *ngFor="let item of skills">
-        <div class="card-header ">
-          <div class="row">
-            <div class="col-lg-3 col-md-4">
-              <h4> <span [routerLink]="[ '/skillpage', item ]" style="cursor: pointer;"> {{item.name}} </span></h4>
-            </div>
-            <div class="col-lg-9 col-md-8">
-              <ng-container *ngIf="item.active; then thenTemplate; else elseTemplate">
-              </ng-container>
-              <ng-template #thenTemplate>
-                <input type="button" value="Deativate" class="btn btn-ts-primary btn-ts-sm " (click)="toggllingSkill(item)" />&nbsp;&nbsp;
-                <i class="float-right fas fa-edit skilledit" (click)="editSkillModel(item)"></i>
-                <!-- <input type="button" class="btn-ts-primary float-right fas fa-edit" (click)="editSkillModel(item)"> -->
-              </ng-template>
-              <ng-template #elseTemplate>
-                <input type="button" value="Activate" class="btn btn-ts-cancel btn-ts-sm " (click)="toggllingSkill(item)">
-                <i class="float-right fas fa-edit skilledit" (click)="editSkillModel(item)" disabled></i>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-3 col-md-3">
-              <img [routerLink]="[ '/skillpage', item ]" style="cursor: pointer;" src="../../assets/images/HTML.png" height="50px" width="50px">
-            </div>
-            <div class="col-lg-9 col-md-9">
-              <div class="row">
-                <div class="col-lg-12 col-md-12">
-                  <p class="card-text mb-0 pb-0">Description of {{item.name}}</p>
-                  <p class="card-text mb-0 pb-0 mt-0 pt-0">Additional features</p>
-                  <br>
-                  <p>Topics:</p>
-                  <p class="card-text mb-0 pb-0 mt-0 pt-0">topic name, topic name,topic name, topic name,topic name, topic name,topic name, topic name,topic name, topic name</p>
-                  <br>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12">
-                  <a href="#" [routerLink]="[ '/skillpage', item ]" class="btn btn-ts-primary btn-ts-sm" style="float:left"><i class="fas fa-book-open"></i>
-                  </a>
-                  <a href="#" [routerLink]="[ '/instruction' ]" class="btn btn-ts-primary btn-ts-sm" style="float:right"><i class="fas fa-pen-nib"></i>Take test
-                  </a>
-
-                  <!-- <button type="button" class="btn btn-primary btn-lg fa fa-plus mt-3 col-12   fa-addskilll" data-toggle="modal"
-        data-target="#addskillmodal"> Skill</button> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="card-footer text-muted">
-        </div> -->
       </div>
+      <ng-container *ngIf="skills.length != 0; else searchNotFoundTemplate">
+        <p class="row search-heading text-center mb-0 mt-1 pl-3">Found Result for &nbsp; <span> "{{name}}"</span></p>
+      </ng-container>
+      <ng-template #searchNotFoundTemplate>
+        <p class="row search-heading text-center mb-0 mt-1 pl-3"></p>
+      </ng-template>
 
     </div>
-    <div class="col-lg-6 col-md-6 col-12 col-sm-12 graphpart " id="graphID">
-            <!-- <img src="../../assets/images/graph.png" width="96%" height="100%"> -->
-
+    <!-- *ngIf="userRole != 0" -->
+    <div class="col-lg-2 col-md-2 col-12 col-sm-12">
+      <button type="button" class="btn btn-ts-primary mt-3 col-12  fa-addskilll" (click)="addSkillModel()" style="margin-bottom:40px"><span
+          class=" fa fa-plus"></span>
+        Add Skill</button>
     </div>
-    <!----------------------------------->
   </div>
 </div>
+<ng-container *ngIf="skills.length < 1; else elseTemplate">
+
+</ng-container>
+<ng-template #elseTemplate>
+  <div class="container-fluid mt-3 mb-3">
+    <div class="row" style="margin-top:15px;">
+      <div class="col-lg-1 col-12 col-sm-1 col-md-1">
+
+      </div>
+      <div class="col-lg-10 col-12 col-sm-10 col-md-10">
+        <div class="row">
+          <div class="col-lg-2 col-sm-2 col-12 col-md-2" style="padding:5px;">
+            <div class="row">
+              <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
+              <div class="col-lg-12 col-md-10 col-sm-10 col-8">
+
+                <div class="avatar-upload">
+                  <form #imageForm=ngForm>
+                    <div class="avatar-edit">
+                      <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
+
+                      <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                      <img src="./../assets/images/default-skill.png" id="imagePreview" style="border-radius:50%;height:100%;width:100%;" height="450"/>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+              <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
+            </div>
+
+          </div>
+          <div class="col-lg-1 col-sm-0 col-md-1 col-xs-0"></div>
+          <div class="col-lg-9 col-sm-10 col-xs-12 col-md-9" style="padding:10px;">
+            <div class="row">
+              <div class="col-lg-9 col-sm-9 col-9 col-md-9">
+                <span style="font-size:35px; font-weight: bold;">
+                  {{skills.name}}<span class="ml-2" style="font-size:20px;">({{skills.id}}) </span>
+                </span>
+                <span style="color:blue;">
+                  <br>{{skills.description}}
+                </span>
+              </div>
+              <div class="col-lg-3 col-sm-3 col-3 col-md-3">
+
+                <span class="float-left" style="font-size:20px; color:grey;"><i class="far fa-edit" style=" margin-top: 32px; cursor: pointer; font-size: 25px"
+                    (click)="editSkillModel(skills)"></i></span>
+                <ng-container *ngIf="skills.active == 'active'; else elseTemplate">
+                    <h4><span value="Activated" class="badge badge-success float-right" (click)="toggllingSkill(skills)" style="margin-top: 32px; cursor: pointer;" >Active</span></h4>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <h4><span value="Deactivated" class="badge badge-danger float-right" (click)="toggllingSkill(skills)" style="margin-top: 32px; cursor: pointer;">Inactive</span></h4>
+                </ng-template>
 
 
 
 
 
+                <!-- <span class="float-left" style="font-size:20px; color:grey;"><i class="far fa-edit" style=" margin-top: 32px; cursor: pointer; font-size: 25px"
+                    (click)="editSkillModel(skills)"></i></span>
+                <span class="float-right" style="font-size:20px; color:grey;"><i class="fas fa-user-edit" style=" margin-top: 32px; cursor: pointer; font-size: 25px"
+                    (click)="editSkillModel(skills)"></i></span> -->
+              </div>
+            </div>
+            <br>
 
+            <h4><span class="badge badge-secondary viewskills" *ngFor="let item of skills.topics">{{item.name}}</span>
+            </h4>
+          </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="addskillmodal" style="padding-top: 2cm" role="dialog" #addskillmodal>
-  <div class="modal-dialog modal-lg">
-    <form [formGroup]="addskillform"> -->
-<!-- Modal content-->
-<!-- <div class="modal-content">
-        <div class="modal-header">
-          <h4>
-            Add Skill
-          </h4>
-          <hr>
-          <button type="button" class="close" data-dismiss="modal"> <i class="fa fa-times"></i></button>
         </div>
-        <div class="modal-body">
+      </div>
+      <div class="col-lg-1 col-12 col-sm-1 col-md-1">
 
-          <div class="container "> -->
-
-<!-- starting of a row -->
-<!-- <div class="row">
-              <div class="col-lg-4"> Name </div>
-              <div class="col-lg-5"> </div>
-              <div class="col-lg-1"></div>
-              <div class="col-lg-2"></div>
-            </div>  -->
-<!-- ending of a row -->
+      </div>
+    </div>
 
 
-<!-- starting of a row -->
-<!-- <div class="row">
+    <div class="row" style="margin-top:15px;">
+      <div class="col-lg-1 col-sm-12">
 
-              <div class="col-lg-12">
+      </div>
+      <div class="col-lg-10 col-sm-12">
 
-                <input type="text" class="form-control" formControlName="skillName" placeholder="Enter a Name"
-                  #skillName>
-                <div *ngIf="addskillform.get('skillName').touched && addskillform.get('skillName').invalid">
-                  <div *ngIf="addskillform.get('skillName').errors.required" class="aletry">* Skill Name is required</div>
-                  <div *ngIf="addskillform.get('skillName').errors.minlength" class="aletry"> Skill Name must be
-                    minimum 2
-                    characters</div>
-                  <div *ngIf="addskillform.get('skillName').errors.maxlength" class="aletry"> Skill Name must be
-                    maximun 25
-                    characters</div>
-                  <div *ngIf="addskillform.get('skillName').errors.pattern" class="aletry"> Skill Name must not
-                    contain special charecters
+        <div class="row" style="padding-bottom:15px;">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12" style="margin-top:20px;" *ngIf="toppers.length>0">
+
+            <div class=" ts-card card" style="height:100%;">
+              <div class="card-body">
+                <h2>Top {{toppers.length}} Performers</h2>
+                <hr>
+                <div class="row" *ngFor="let p of toppers">
+                  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <span class="badge " style="font-weight:400;font-size:16px;background-color:blue;color:white;opacity:0.7;">
+                      <b>{{p.user.name}}</b>
+                    </span><br>
+                    <span class="testdate">8 Dec 2018</span>
                   </div>
+                  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="p.score" aria-valuemin="10"
+                        aria-valuemax="100" [ngStyle]="{'width': p.score+'%'}">
+                        {{p.score}}%
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <!-- <div class="col-lg-5 col-5 col-sm-5">
+                        <span class="percent">80<span style="font-size:25px;">%</span></span>
+                      </div>
+                      <div class="col-lg-2 col-2 col-sm-2">
+                        <div class="vertical-center"><button data-toggle="modal" data-target="#myModal" class="fas fa-ellipsis-v show-result"></button></div>
+      
+                      </div> -->
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 col-sm-12">
 
-            </div>  -->
-<!-- ending of a row -->
+      </div>
+    </div>
 
-<!-- <br> -->
-<!-- starting of a row -->
-<!-- <div class="row">
-              <div class="col-lg-12"> Add Topics </div>
-            </div>  -->
-<!-- ending of a row -->
+  </div>
+</ng-template>
 
 
 <!-- 
-            <div class="row ">
-
-              <div class="col-lg-12 col-12 col-sm-12 col-md-12 buttonInside ">
-                <span class="itwillflex">
-                  <input type="text" class="form-control topicinput" formControlName="topicName" #topicname placeholder="Enter sub-topic and click + to add it">
-                  <button id="erase" [disabled]="!topicName.valid" (click)="addTopic(topicname.value)" class=" btn btn-info btn-sm fa fa-plus"></button>
-                </span>
-
-                <div *ngIf="addskillform.get('topicName').touched && addskillform.get('topicName').invalid">
-
-                  <div *ngIf="addskillform.get('topicName').errors.maxlength" class="aletry"> Topic Name must be
-                    maximun 60
-                    characters</div>
-                  <div *ngIf="addskillform.get('topicName').errors.pattern" class="aletry"> Topic Name must not
-                    contain numbers and special charecters
-                  </div>
-
-                </div>
-
-
-              </div>
-            </div>
+<div class="container mt-3 mb-3">
+    <div *ngIf="skills.length != 0">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12 col-sm-12 card mb-1">
+          <div class="card-header" style="background-image: linear-gradient(to right, skyblue, azure)">
             <div class="row">
-              <div class="col-lg-12">
-
-                <ul *ngFor="let topic of topics" class="list-inline marginzero" style="display:inline-block">
-                  <li class="badge badge-primary litopic">{{topic.name}} &nbsp; <i class="fa fa-times makepointer"
-                      (click)="removeTopic(topic)"></i></li>
-                </ul>
-
+              <div class="col-lg-2 col-md-3">
+                <h4 class="fontBlack"> {{skills.name}} </h4>
+              </div>
+              <div class="col-lg-10 col-md-9" *ngIf="userRole != 0">
+                <ng-container *ngIf="skills.active; then thenTemplate; else elseTemplate">
+                </ng-container>
+                <ng-template #thenTemplate>
+                  <input type="button" value="Deativate" class="btn btn-ts-primary btn-ts-sm " (click)="toggllingSkill(skills)" />&nbsp;&nbsp;
+                  <i class="float-right fas fa-edit skilledit" (click)="editSkillModel(skills)"></i>
+  
+                </ng-template>
+                <ng-template #elseTemplate>
+                  <input type="button" value="Activate" class="btn btn-ts-cancel btn-ts-sm " (click)="toggllingSkill(skills)">
+                  <i class="float-right fas fa-edit skilledit" (click)="editSkillModel(skills)" disabled></i>
+                </ng-template>
               </div>
             </div>
           </div>
+  
+          <div class="card-body">
+  
+            <div class="row">
+              <div class="col-lg-2 col-md-3">
+                <img style="cursor: pointer;" src="../../assets/images/skill.png" height="50px" width="50px">
+              </div>
+  
+              <div class="col-lg-6 col-md-9">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12">
+                    <p class="card-text mb-0 pb-0">{{skills.description}}</p>
+                    <br>
+                    <p class="d-inline-flex mb-0 pb-0 mt-0 pt-0"><b>Topics: </b></p>&nbsp;&nbsp;
+                    <div class="d-inline-flex" *ngFor="let item of skills.topics">
+                      <p class="card-text mb-2 pb-0 mt-0 pt-0">{{item.name}},</p>&nbsp;&nbsp;
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-lg-4 mt-3 mb-3">
+                <div class="card card-header card-header-success text-center">
+                  <h4 class="text-capitalize fontBlack">top 5 performers</h4>
+                </div>
+                <div class="card-body">
+                  <div class="barWrapper" *ngFor="let p of toppers">
+                    <span class="progressText">
+                      <B>{{p.user.name}}</B>
+                    </span>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="p.score" aria-valuemin="10"
+                        aria-valuemax="100" [ngStyle]="{'width': p.score+'%'}">
+                        {{p.score}}%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <ng-container *ngIf="!userLoggedInn; else elseTemplate">
+                  <a href="#" [routerLink]="[ '/login' ]" class="btn btn-ts-primary btn-ts-lg"><i class="fas fa-pen-nib"></i>Take
+                    test
+                  </a>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <a href="#" [routerLink]="[ '/assesment' ]" class="btn btn-ts-primary btn-ts-lg"><i class="fas fa-pen-nib"></i>Take
+                    test
+                  </a>
+                </ng-template>
+  
+              </div>
+            </div>
+  
+          </div>
+  
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary makecross" [disabled]="!addskillform.valid" (click)="submitSkill(skillName.value);">Save
-            Skill</button>
-        </div>
-
+  
       </div>
-    </form>
-  </div>
-</div> -->
+    </div>
+  </div> -->

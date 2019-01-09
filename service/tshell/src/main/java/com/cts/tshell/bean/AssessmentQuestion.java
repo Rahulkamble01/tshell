@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -28,15 +29,29 @@ public class AssessmentQuestion {
 	private int id;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="aq_as_id")
+	@JoinColumn(name="aq_as_id")	
 	private Assessment assessment;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="aq_qu_id")
+	@JsonView(Views.Internal.class)
 	private Question question;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="assessmentQuestion")
+	@JsonView(Views.Internal.class)
 	private List<AssessmentQuestionOption> assessmentQuestionOption;
+
+	@Column(name="aq_is_correct")
+	private boolean correct;
+	
+	
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
 
 	public int getId() {
 		return id;
@@ -69,5 +84,12 @@ public class AssessmentQuestion {
 	public void setAssessmentQuestionOption(List<AssessmentQuestionOption> assessmentQuestionOption) {
 		this.assessmentQuestionOption = assessmentQuestionOption;
 	}
+
+	@Override
+	public String toString() {
+		return "AssessmentQuestion [id=" + id + ", assessment=" + assessment + ", question=" + question
+				+ ", assessmentQuestionOption=" + assessmentQuestionOption + ", correct=" + correct + "]";
+	}
+	
 }
 

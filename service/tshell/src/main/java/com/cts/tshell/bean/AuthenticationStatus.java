@@ -5,6 +5,7 @@ public class AuthenticationStatus {
 	private boolean authenticated;
 	private User user; 
 
+
 	public User getUser() {
 		return user;
 	}
@@ -15,6 +16,7 @@ public class AuthenticationStatus {
 
 	private boolean checkEmail;
 	private boolean checkUserId;
+	private String message;
 	
 	public AuthenticationStatus() {
 		super();
@@ -26,10 +28,21 @@ public class AuthenticationStatus {
 		this.authenticated = authenticated;
 	}
 
-	public boolean isAuthenticated() {
-		return authenticated;
+	
+	public String getMessage() {
+		return message;
 	}
 
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public boolean isAuthenticated() {
+		return authenticated;
+	}	
+	
+	
+	
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
 	}
@@ -58,15 +71,5 @@ public class AuthenticationStatus {
 				+ checkUserId + "]";
 	}
 	
-	
-
-
-
-	
-
-
-
-	
-
 }
 
