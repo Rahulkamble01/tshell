@@ -39,5 +39,41 @@
 #login-link{
     padding-top:10px;text-align: center; font-size: 85%;
 }
+.otp{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.regeneratebutton{
+    color:#8B0000;
+    background-color: white;
+    padding-top: 5px;
+}
+.button{
+    width:100%;
+}
 
+   .login{
+    color:#007bff;
+   }
+   .error{
+    display: none;
+   }
+
+   .log {
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 55px;
+    margin-top: 220px;
+    }
+
+    @media screen and (max-width: 600px){
   
+        .log {
+         font-size:xx-large;
+        margin-top: 20px;
+        }
+      }
+      .button1{
+        width:100%;
+      }

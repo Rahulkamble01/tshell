@@ -17,6 +17,11 @@ public class Util {
 		return encryptedPassword;
 	}
 
+	public static int generateSignupOTP() {
+		Random rand = new Random();
+		return rand.nextInt(899999) + 100000;
+	}
+
 	public static int generateOTP() {
 		Random ramd = new Random();
 		return ramd.nextInt(899999)+100000;

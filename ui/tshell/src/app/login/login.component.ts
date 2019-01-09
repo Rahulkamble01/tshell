@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit() {
+    console.log("inside login");
   }
 
   check(employeeId: string, password: string) {

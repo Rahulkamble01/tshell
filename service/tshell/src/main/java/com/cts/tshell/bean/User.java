@@ -1,6 +1,6 @@
 package com.cts.tshell.bean;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -19,8 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -63,17 +61,16 @@ public class User {
 	@JsonView(Views.Internal.class)
 	private Role role;
 
-	@Min(value = 1, message = "Employee ID must be at least 6 digits")
-	@Max(value = 10000000000L, message = "Employee ID cannot exceed 10 digits")
+	@Size(min = 5, max = 10, message = "Employee ID  must be 5 to 10 characters")
 	@Column(name = "us_emp_id")
 	@JsonView(Views.Public.class)
 	private String employeeId;
 
-	@Column(name = "us_signup_date")
-	private String signupDate;
-
 	@Column(name = "us_image")
 	private byte[] image;
+
+	@Column(name = "us_signup_date")
+	private Date signupDate;
 
 	@Column(name = "us_last_login_time")	
 	private Date lastLoginTime;
@@ -90,8 +87,9 @@ public class User {
 	@Column(name = "us_signup_otp_time")	
 	private Date signupOtpTime;
 	
-	@Column(name = "us_signup_otp_verify_status")	
-	private String StatusVerified;
+	
+	@Column(name = "us_signup_otp_verify_status")
+	public String signupOtpVerifyStatus;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -148,36 +146,31 @@ public class User {
 		this.role = role;
 	}
 
-
 	public String getEmployeeId() {
 		return employeeId;
 	}
-
 
 	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
 
-	public String getSignupDate() {
+	public Date getSignupDate() {
 		return signupDate;
 	}
 
 
-	public void setSignupDate(String signupDate) {
+	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
-
-
+	
 	public byte[] getImage() {
 		return image;
 	}
 
-
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
 
 	public Date getLastLoginTime() {
 		return lastLoginTime;
@@ -229,16 +222,7 @@ public class User {
 	}
 
 
-	public String getStatusVerified() {
-		return StatusVerified;
-	}
-
-
-	public void setStatusVerified(String statusVerified) {
-		StatusVerified = statusVerified;
-	}
-
-
+	
 	public List<Skill> getSkills() {
 		return skills;
 	}
@@ -248,12 +232,21 @@ public class User {
 		this.skills = skills;
 	}
 
+	public String getSignupOtpVerifyStatus() {
+		return signupOtpVerifyStatus;
+	}
+
+	public void setSignupOtpVerifyStatus(String signupOtpVerifyStatus) {
+		this.signupOtpVerifyStatus = signupOtpVerifyStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
 				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
-				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + "]";
+				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + 
+				", signupOtpVerifyStatus=" + signupOtpVerifyStatus + ", signupOtp="
+				+ signupOtp + "]";
 	}
 
 }
