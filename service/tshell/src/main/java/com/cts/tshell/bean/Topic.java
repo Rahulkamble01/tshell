@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -53,6 +54,7 @@ public class Topic {
 	@JoinColumn(name = "tp_sk_id")
 	@JsonView(Views.Internal.class)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnore
 	private Skill skill;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -102,7 +102,7 @@ public class SkillService {
 		LOGGER.debug("Updated Skill", skill);
 		skillRepository.save(skill);
 	}
-
+	
 	@Transactional
 	public List<Skill> getRecent5Skills(Date date) {
 		LOGGER.info("start");
@@ -143,11 +143,34 @@ public class SkillService {
 		LOGGER.info("Fetching Reference Skill Through skillService()");
 		List<ReferenceSkill> result = refernceSkillRepository.findBySkillId(skillId);
 		
-		List<Skill> referenceSkills = new ArrayList<Skill>();
-		for (ReferenceSkill referenceSkill : result) {
-			
-		}
-		return null;
+//		List<Skill> referenceSkills = new ArrayList<Skill>();
+//		for (ReferenceSkill referenceSkill : result) {
+//			referenceSkills.add(referenceSkill.getReferenceSkill());
+//			referenceSkills.add(referenceSkill.getClassifier());
+//			LOGGER.debug("Skill Added {}", referenceSkill.getReferenceSkill());
+//			
+//		}
+		return result;
+	}
+	
+	@Transactional
+	public void addReferenceSkill(ReferenceSkill referenceSkill) {		
+//		Skill skill = 
+		LOGGER.info("saving {}", referenceSkill);
+		refernceSkillRepository.save(referenceSkill);
+		
+		LOGGER.info("ReferenceSkill Updated");
+	}
+	
+	public void deleteReferenceSkill(int refskillId) {
+		ReferenceSkill referenceSkill=new ReferenceSkill();
+		referenceSkill.setId(refskillId);		
+		refernceSkillRepository.delete(referenceSkill);		
+	}
+
+	public List<Skill> getSkillByKeys(String pressedKeys) {
+		LOGGER.info("----------Start in get count service for dropdown skill name--------");
+		return skillRepository.findSkillNames(pressedKeys);
 	}
 }
 

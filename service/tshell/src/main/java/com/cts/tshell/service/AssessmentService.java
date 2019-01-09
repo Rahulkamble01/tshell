@@ -35,7 +35,7 @@ public class AssessmentService {
 	public List<Assessment> findTop5AssessmentBasedSkill(int skillId) {
 		LOGGER.info("Start");
 		LOGGER.info("Skill Id : " + skillId);
-		Page<Assessment> assessmentsPage = assessmentRepository.findTop5BySkill(skillId, PageRequest.of(0, 5));
+		Page<Assessment> assessmentsPage = assessmentRepository.findTop5BySkill(skillId, PageRequest.of(0, 8));
 		List<Assessment> assessments = assessmentsPage.getContent();
 		LOGGER.debug("Assessments : {}", assessments);
 		LOGGER.info("End");

@@ -49,6 +49,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { ConfirmationDialogService } from './confirmation-dialog.service';
 import { NumberFormatterPipe } from './numberFormatterPipe';
 import { ViewprofileComponent } from './viewprofile/viewprofile.component';
+import { CommonModule } from '@angular/common';
+import { ReferenceSkillModelComponent } from './reference-skill-model/reference-skill-model.component';
+
 
 
 @NgModule({
@@ -90,72 +93,8 @@ import { ViewprofileComponent } from './viewprofile/viewprofile.component';
         EditskillmodalComponent,
         ConfirmationDialogComponent,
         NumberFormatterPipe,
-        ExitAssesmentComponent,
-        InstructionComponent,
-        ScoreAssesmentComponent,
-        SkillpageComponent,
-        SkillmodalComponent,
-        FooterComponent,
-        ErrorComponent,
-        DashboardComponent,
-        MostSearchedSkillsComponent,
-        AssessmenthistoryComponent,
-        SearchSkillComponent,
-        RecentlyAddedSkillsComponent,
-        LoginComponent,
-        AdminSignupComponent,
-        SignupComponent,
-        ConfirmEqualValidatorDirective,
-        HeaderComponent,
-        LearnerHomepageComponent,
-        AdminHomepageComponent,
-        ChangepasswordComponent,
-        UserprofileComponent,
-        SearchExistingQuestionsComponent,
-        PreviewQuestionsComponent,
-        CountOfQuestionsToReviewComponent,
-        HomeComponent,
-        SearchResultComponent,
-        QuestiongraphComponent,
-         ExitAssesmentComponent,
-         InstructionComponent,
-         ScoreAssesmentComponent,
-        SkillpageComponent,
-        SkillmodalComponent,
-        FooterComponent,
-    DashboardComponent,
-    MostSearchedSkillsComponent,
-    AssessmenthistoryComponent,
-    SearchSkillComponent,    
-    RecentlyAddedSkillsComponent,
-    LoginComponent,
-    AdminSignupComponent,
-    SignupComponent,
-    ConfirmEqualValidatorDirective,
-    HeaderComponent,
-    LearnerHomepageComponent,
-    AdminHomepageComponent,
-    ChangepasswordComponent,
-    UserprofileComponent,
-    SearchExistingQuestionsComponent,
-    PreviewQuestionsComponent,
-    CountOfQuestionsToReviewComponent,
-    HomeComponent,
-    SearchResultComponent,
-    QuestiongraphComponent,
-    TopAccessedTestsComponent,
-     ExitAssesmentComponent,
-     InstructionComponent,
-     ScoreAssesmentComponent,
-    SkillpageComponent,
-    SkillmodalComponent,
-    FooterComponent,
-
-    ErrorComponent,
-
-    TopAccessedTestsComponent
-
-  ],
+        ReferenceSkillModelComponent
+    ],
 
     imports: [
         BrowserModule,
@@ -165,7 +104,7 @@ import { ViewprofileComponent } from './viewprofile/viewprofile.component';
         HttpClientModule,
         ChartsModule,
         NgbModule,
-        HttpClientModule
+        CommonModule
     ],
     providers: [
         ContributeQuestionService,
@@ -173,7 +112,11 @@ import { ViewprofileComponent } from './viewprofile/viewprofile.component';
         HttpClientModule,
         ConfirmationDialogService
     ],
-    entryComponents: [SkillmodalComponent, EditskillmodalComponent, ConfirmationDialogComponent],
+    entryComponents: [
+        SkillmodalComponent,
+        EditskillmodalComponent,
+        ConfirmationDialogComponent,
+        ReferenceSkillModelComponent],
     bootstrap: [AppComponent],
     exports: [NumberFormatterPipe],
 

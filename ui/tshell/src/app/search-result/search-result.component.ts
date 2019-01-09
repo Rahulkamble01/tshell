@@ -1,20 +1,18 @@
-import { Component, OnInit, ViewChild, Input, PlatformRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Topic } from '../topic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import * as $ from 'jquery';
-import * as d3 from 'd3';
 import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
 import { AuthService } from '../auth.service';
 import { Skill } from '../skill';
 import { SkillserviceService } from '../skillservice.service';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, merge, filter } from 'rxjs/operators';
 import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
-import { ForceLink } from 'd3';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
+import { ReferenceSkillModelComponent } from '../reference-skill-model/reference-skill-model.component';
 
 
 declare var abc: any;
@@ -22,47 +20,75 @@ declare var abc: any;
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  styleUrls: ['./search-result.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SearchResultComponent implements OnInit {
   name: any;
   model: any;
   skills: any = [];
   allSkills: Skill[] = [];
+  referenceSkill: any = [];
   toppers: any[] = [];
   graphData: any[] = [];
   topics: Array<Topic>;
   userRole: any;
+  Role: any;
+  showEdit = false;
+  showActive = false;
+  showAddskill = false;
   userLoggedInn: any;
   imageUrl: string = null;
   fileToUpload: File = null;
+  @ViewChild('instance') instance: NgbTypeahead;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
   // tslint:disable-next-line:max-line-length
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) {
+  constructor(private http: HttpClient, public router: Router, private modalService: NgbModal, public authService: AuthService, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) {
 
   }
   ngOnInit() {
     this.skillService.getAll().subscribe(data => {
       this.allSkills = data;
       console.log(this.allSkills);
-      // const data1 = $("#graphID").ready(function () {
-      //   return new Promise((res, rec) => {
-      //     this.w = document.getElementById("graphID").offsetWidth;
-      //     this.h = document.getElementById("graphID").offsetHeight;
-      //   });
-      // });
-      // this.w = data1[0].offsetWidth;
-      // this.h = data1[0].offsetHeight;
-      // console.log(this.w, this.h);
-      // abc(this.w, this.h);
     });
 
-    this.userRole = this.authService.getRole();
+    /* this.userRole = this.authService.getRole();
     if (this.userRole !== undefined || this.userRole !== 'Learner') {
       this.userRole = 0;
     }
     if (this.userRole !== 'Learner' || this.userRole !== 'Admin' || this.userRole !== 'SME') {
       this.userLoggedInn = true;
+    } */
+
+    console.log("Role of user12: " + this.authService.role);
+    this.Role = this.authService.role;
+    this.userLoggedInn = this.authService.loggedIn;
+    console.log("is he logged in:  " + this.userLoggedInn);
+
+    if (this.Role === undefined) {
+      this.showEdit = false;
+      this.showActive = false;
+      this.showAddskill = false;
+
+    } else {
+      if (this.Role.toUpperCase() === "Learner".toUpperCase()) {
+        this.showEdit = false;
+        this.showActive = false;
+        this.showAddskill = false;
+      }
+      if (this.Role.toUpperCase() === "admin".toUpperCase()) {
+        this.showEdit = true;
+        this.showActive = true;
+        this.showAddskill = true;
+      }
+      if (this.Role.toUpperCase() === "sme".toUpperCase()) {
+        this.showEdit = true;
+        this.showActive = false;
+        this.showAddskill = true;
+      }
     }
+
 
   }
 
@@ -89,48 +115,45 @@ export class SearchResultComponent implements OnInit {
         }
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-
-
-
-
-
-    // if (skill.active) {
-    //   if (confirm("do you want to deactivate " + skill.name + " ?")) {
-    //     return skill.active = false;
-    //   } else {
-    //     return;
-    //   }
-    // } else {
-    //   if (confirm("do you want to activate " + skill.name + " ?")) {
-    //     return skill.active = true;
-    //   } else {
-    //     return;
-    //   }
-    // }
   }
 
   editSkillModel(item) {
     console.log(item);
-    const modalRef = this.modalService.open(EditskillmodalComponent, { centered: true });
+    const modalRef = this.modalService.open(EditskillmodalComponent);
     modalRef.componentInstance.item = item;
   }
 
   addSkillModel() {
-    const modalRef = this.modalService.open(SkillmodalComponent, { centered: true });
+    const modalRef = this.modalService.open(SkillmodalComponent);
   }
 
   formatter = (x: { name: string }) => x.name;
   search = (text$: Observable<string>) => text$.pipe(
-    debounceTime(100),
+    debounceTime(200),
     distinctUntilChanged(),
-    map(term => term === '' ? []
-      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
-    ),
-    // map(term => term === '' ? [])
+    merge(this.focus$),
+    merge(this.click$.pipe(filter(() => !this.instance.isPopupOpen()))),
+    map(term =>
+      // tslint:disable-next-line:no-unused-expression
+      (term === '' ? []
+        // this.keyPressing(this.model).filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()))
+        : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5)
+        // : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100)
+        // : console.log(this.allSkills.filter(v => v.name.toLowerCase()))
+      )
+    )
   )
-
-
-
+  // async keyPressing(model) {
+  //   console.log(model);
+  //   let allSkills1: Skill[] = [];
+  //   this.skillService.getAll().subscribe(data => {
+  //     allSkills1 = data;
+  //     console.log(data);
+  //   });
+  //   console.log(allSkills1);
+  //   await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+  //   return allSkills1;
+  // }
 
   itemSelected($event) {
     this.skills = $event.item;
@@ -138,11 +161,11 @@ export class SearchResultComponent implements OnInit {
     this.skillService.updateSearch($event.item).subscribe();
     this.skillService.getSkillTopper($event.item.id).subscribe(data => {
       this.toppers = data;
-      console.log(data);
     });
-    // this.skillService.getGraphDataOfSkill($event.item.name).subscribe(data => {
-    //   this.graphData = data;
-    // });
+    this.skillService.getReferenceSkill($event.item.id).subscribe(data => {
+      this.referenceSkill = data;
+      console.log(this.referenceSkill);
+    });
   }
 
   handleFileInput(file: FileList) {
@@ -153,37 +176,50 @@ export class SearchResultComponent implements OnInit {
       this.imageUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
-
-
-
   }
 
+  editRef(item, control) {
+    const modalRef = this.modalService.open(ReferenceSkillModelComponent);
+    console.log("inside ediref" + control);
+    const dependentSkills = [];
+    item.forEach(element => {
+      if (control === 1) {
+        if (element.classifier === 'post') {
+          dependentSkills.push(element);
+        }
+      }
+      if (control === 2) {
+        if (element.classifier === 'pre') {
+          dependentSkills.push(element);
+        }
+      }
+    });
+    modalRef.componentInstance.allReferenceSkills = dependentSkills;
+    modalRef.componentInstance.allSkills = this.allSkills;
+    modalRef.componentInstance.skill = this.skills;
+    modalRef.componentInstance.type = control;
+  }
+
+
+  gotologin() {
+    console.log("it will go to login");
+    setTimeout(() => this.router.navigate(['/login']), 3000);
+  }
+
+  deleteReferenceSkill(item) {
+    console.log(item.id);
+    // tslint:disable-next-line:max-line-length
+    this.confirmationDialogService.confirm(`Delete "${item.referenceSkill.name}"`, `Do you really want to delete ${item.referenceSkill.name} from ${item.skill.name}?`)
+      .then((confirmed) => {
+        if (confirmed) {
+          console.log('User confirmed:', confirmed);
+          this.skillService.deleteReferenceSkill(item.id).subscribe();
+        } else {
+          console.log('User confirmed:', confirmed);
+          return;
+        }
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+    this.ngOnInit();
+  }
 }
-
-
-
-// const tooltip = d3.select("#graphID")
-// .append("div")
-// .attr("class", "tooltip")
-// .style("opacity", 0);
-
-// d3.json(this.graphData, function (error, graph) {
-// if (error) { throw error; }
-// const svg = d3.select('svg'),
-//   width = +svg.attr('width'),
-//   height = +svg.attr('height');
-
-// const simulation = d3.forceSimulation()
-//   .nodes(graph.nodes)
-//   .force('link', d3.forceLink().id(d => d.id))
-//   .force('charge', d3.forceManyBody())
-//   .force('center', d3.forceCenter(width / 2, height / 2))
-//   .on('tick', ticked());
-
-// simulation.force('link')
-//   .links(graph.links);
-
-// const R = 6;
-
-
-// });

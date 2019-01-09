@@ -11,36 +11,37 @@ export class UserprofileComponent implements OnInit {
 
 
   assessmentsData: any[] = [];
-  assessmentsForQn: any[] = [];  
-  userDetails: any = {id: 0,
-  name: "",
-  email: "",
-  password: "",
-  role: {
+  assessmentsForQn: any[] = [];
+  userDetails: any = {
     id: 0,
-    name: ""
-  },
-  employeeId: 0,
-  image: null,
-  skills:[]
-};
+    name: "",
+    email: "",
+    password: "",
+    role: {
+      id: 0,
+      name: ""
+    },
+    employeeId: 0,
+    image: null,
+    skills: []
+  };
   roles: any = [];
   changedRole: any;
   constructor(private viewprofileService: ViewprofileService, private service: AuthService) { }
 
   ngOnInit() {
 
- 
+
   }
 
   searchById(searchid) {
     if (searchid != 0) {
       this.viewprofileService.getUserDetails(searchid).subscribe(
         data => {
-          if(data!=null){        
-          this.userDetails = data;
+          if (data != null) {
+            this.userDetails = data;
           }
-          else{
+          else {
             this.userDetails = {
               id: -1,
               name: "",
@@ -52,10 +53,10 @@ export class UserprofileComponent implements OnInit {
               },
               employeeId: 0,
               image: null,
-              skills:[] 
+              skills: []
             };
-            this.assessmentsData=[];
-            this.assessmentsForQn=[];
+            this.assessmentsData = [];
+            this.assessmentsForQn = [];
           }
           this.viewprofileService.getRole().subscribe(
             data => {
@@ -67,7 +68,7 @@ export class UserprofileComponent implements OnInit {
           this.viewprofileService.getUserAssessment(searchid).subscribe(
             data => {
               this.assessmentsForQn = data;
-              this.assessmentsData=[];
+              this.assessmentsData = [];
               for (let i = 0; i < data.length; i++) {
                 let skillPresent = false;
                 for (let j = 0; j < this.assessmentsData.length; j++) {
@@ -105,14 +106,24 @@ export class UserprofileComponent implements OnInit {
       this.imageUrl = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
- }
+  }
   changeRole(roleid) {
-    console.log("Role id :="+roleid);
-    
+    console.log("Role id :=" + roleid);
+
     for (let role of this.roles) {
-      if (role.id ==roleid) {
+      if (role.id == roleid) {
         this.userDetails.role = role;
-        this.viewprofileService.updateUser(this.userDetails).subscribe();
+        let json = JSON.stringify(
+          {
+            employeeId: this.userDetails.employeeId,
+            role: {
+              id: role.id,
+              name: role.name,
+            }
+
+          }
+        );
+        this.viewprofileService.updateUser(json).subscribe();
 
       }
     }

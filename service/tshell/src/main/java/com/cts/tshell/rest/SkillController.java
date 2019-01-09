@@ -46,6 +46,15 @@ public class SkillController extends TshellController {
 		LOGGER.info("Returning with Skills");
 		return skillService.getSkills();
 	}
+	
+	@RequestMapping(value = "/getSkillsOnSearch", method = RequestMethod.GET)
+	public List<Skill> skillName(@RequestBody String pressedKeys) {
+		LOGGER.debug("searchName: {}", pressedKeys);
+		LOGGER.info("------Start in count controller for getting skill for dropdown----");
+		List<Skill> skill = skillService.getSkillByKeys(pressedKeys);
+		LOGGER.debug("skill: {}", skill);
+		return skill;
+	}
 
 
 	@RequestMapping(value = "/updateSkillSearch", method = RequestMethod.POST)
@@ -179,15 +188,23 @@ public class SkillController extends TshellController {
 	public List<ReferenceSkill> getReferenceSkill(@PathVariable("skillId") int skillId){
 		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", skillId);
-		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);
-		
-		
-		
+		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);		
 		return result;
 	}
-	
-	
 
+	@RequestMapping(value = "/addreferenceskill", method = RequestMethod.POST)
+	public void addReferenceSkill(@RequestBody ReferenceSkill referenceSkill){
+		LOGGER.info("Adding ReferenceSkils");
+		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}");
+		LOGGER.info("Adding ReferenceSkils itration {}", referenceSkill.getId());
+		skillService.addReferenceSkill(referenceSkill);
+				
+	}
 	
+	@RequestMapping(value = "/deleteReferenceskill/{refskillId}", method = RequestMethod.GET)
+	public void deleteReferenceSkill(@PathVariable("refskillId") int refskillId){
+		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
+		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", refskillId);
+		skillService.deleteReferenceSkill(refskillId);		
+	}
 }
-

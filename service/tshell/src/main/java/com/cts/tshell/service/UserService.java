@@ -118,7 +118,7 @@ public class UserService {
 			return false;
 		}
 		user.setOtp(Util.encryptToMD5(String.valueOf(Util.generateOTP())));
-		user.setOtpGeneratedTime(getCurrentDateTime());
+//		user.setOtpGeneratedTime(otpGeneratedTime);
 		userRepository.save(user);
 		LOGGER.info("end");
 		return true;
@@ -138,11 +138,11 @@ public class UserService {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
-		if (validateTime(user.getOtpGeneratedTime()) && user.getOtp().equals(encryptedOTP)) {
-			LOGGER.info("end");
+//		if (validateTime(user.getOtpGeneratedTime()) && user.getOtp().equals(encryptedOTP)) {
+//			LOGGER.info("end");
 			return true;
-		}
-		return false;
+//		}
+//		return false;
 	}
 
 	@Transactional

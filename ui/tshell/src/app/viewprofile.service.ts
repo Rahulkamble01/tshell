@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../app/environment';
 
-const httpOptions={
+const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':'application/json',
+    'Content-Type': 'application/json',
   })
 }
 
@@ -24,33 +24,33 @@ export class ViewprofileService {
 
   constructor(private http: HttpClient) { }
 
-  getUserDetails(employeeId): Observable<any> {    
+  getUserDetails(employeeId): Observable<any> {
     return this.http.get<any>(this.url + employeeId);
   }
 
-  getUserAssessment(employeeId): Observable<any> {    
+  getUserAssessment(employeeId): Observable<any> {
     return this.http.get<any>(this.url1 + employeeId);
   }
 
-  save(json): Observable<any> {    
+  save(json): Observable<any> {
     console.log(json);
-    return this.http.post<any>(this.url2 ,json,httpOptions);
+    return this.http.post<any>(this.url2, json, httpOptions);
   }
 
-  getRole(): Observable<any> {    
+  getRole(): Observable<any> {
     return this.http.get<any>(this.url3);
   }
-  updateUser(user): Observable<any> {    
+  updateUser(user): Observable<any> {
     console.log("inside updateUser");
     console.log(user);
-    return this.http.post<any>(this.url4,user,httpOptions);
+    return this.http.post<any>(this.url4, user, httpOptions);
   }
-  
+
   skillsOnSearch(name): Observable<any> {
     return this.http.post<any>(this.skillnames, name, httpOptions);
   }
 
-  saveskills(user){
-    return this.http.post<any>(this.url5,user,httpOptions);
+  saveskills(user) {
+    return this.http.post<any>(this.url5, user, httpOptions);
   }
 }

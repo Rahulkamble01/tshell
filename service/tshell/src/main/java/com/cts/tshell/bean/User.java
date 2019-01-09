@@ -1,6 +1,8 @@
 package com.cts.tshell.bean;
 
+import java.sql.Date;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,8 +26,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -72,16 +72,26 @@ public class User {
 	@Column(name = "us_signup_date")
 	private String signupDate;
 
-	@Column(name = "us_last_login_time")
-	private String lastLoginTime;
 	@Column(name = "us_image")
 	private byte[] image;
 
-	@Column(name = "us_otp")
+	@Column(name = "us_last_login_time")	
+	private Date lastLoginTime;
+	
+	@Column(name = "us_otp")	
 	private String otp;
-
-	@Column(name = "us_otp_generated_time")
-	private String otpGeneratedTime;
+	
+	@Column(name = "us_otp_generated_time")	
+	private Calendar otpGeneratedTime;
+	
+	@Column(name = "us_signup_otp")	
+	private String signupOtp;
+	
+	@Column(name = "us_signup_otp_time")	
+	private Date signupOtpTime;
+	
+	@Column(name = "us_signup_otp_verify_status")	
+	private String StatusVerified;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -93,97 +103,151 @@ public class User {
 		return id;
 	}
 
-	public String getSignupDate() {
-		return signupDate;
-	}
-
-	public void setSignupDate(String signupDate) {
-		this.signupDate = signupDate;
-	}
-
-	public String getLastLoginTime() {
-		return lastLoginTime;
-	}
-
-	public void setLastLoginTime(String lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
 	public String getEmail() {
 		return email;
 	}
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+
 	public String getPassword() {
 		return password;
 	}
+
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+
 	public Role getRole() {
 		return role;
 	}
+
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
+
 	public String getEmployeeId() {
 		return employeeId;
 	}
+
 
 	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
+
+	public String getSignupDate() {
+		return signupDate;
+	}
+
+
+	public void setSignupDate(String signupDate) {
+		this.signupDate = signupDate;
+	}
+
+
 	public byte[] getImage() {
 		return image;
 	}
+
 
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
-	public List<Skill> getSkills() {
-		return skills;
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
 	}
 
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
+
 
 	public String getOtp() {
 		return otp;
 	}
 
+
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
 
-	public String getOtpGeneratedTime() {
+
+	public Calendar getOtpGeneratedTime() {
 		return otpGeneratedTime;
 	}
 
-	public void setOtpGeneratedTime(String otpGeneratedTime) {
+
+	public void setOtpGeneratedTime(Calendar otpGeneratedTime) {
 		this.otpGeneratedTime = otpGeneratedTime;
 	}
+
+
+	public String getSignupOtp() {
+		return signupOtp;
+	}
+
+
+	public void setSignupOtp(String signupOtp) {
+		this.signupOtp = signupOtp;
+	}
+
+
+	public Date getSignupOtpTime() {
+		return signupOtpTime;
+	}
+
+
+	public void setSignupOtpTime(Date signupOtpTime) {
+		this.signupOtpTime = signupOtpTime;
+	}
+
+
+	public String getStatusVerified() {
+		return StatusVerified;
+	}
+
+
+	public void setStatusVerified(String statusVerified) {
+		StatusVerified = statusVerified;
+	}
+
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
 
 	@Override
 	public String toString() {

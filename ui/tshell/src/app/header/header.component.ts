@@ -31,14 +31,14 @@ export class HeaderComponent implements OnInit {
   /* **************************************** Validations **************************************** */
 
   form = new FormGroup({
-      oldPassword: new FormControl(
+    oldPassword: new FormControl(
       '',
       [Validators.required,
       Validators.minLength(6),
       Validators.maxLength(30),
       ]),
 
-      newPassword: new FormControl(
+    newPassword: new FormControl(
       '',
       [Validators.required,
       Validators.minLength(6),
@@ -46,13 +46,13 @@ export class HeaderComponent implements OnInit {
       ]),
 
 
-      confirmPassword: new FormControl(
+    confirmPassword: new FormControl(
       '',
       [Validators.required,
       Validators.minLength(6),
       Validators.maxLength(30),
       ]),
-    });
+  });
 
   constructor(public service: AuthService, private router: Router, private passwordService: ChangepasswordService) { }
 
@@ -61,24 +61,24 @@ export class HeaderComponent implements OnInit {
 
   /* ********************************* modal closed with status & error ******************************* */
 
-   modalClose() {
+  modalClose() {
     this.form.reset();
     this.error = false;
     this.status.message = '';
     this.status.currentPasswordIncorrect = false,
-    this.status.passwordChanged = false,
-    this.status.newAndOldPasswordSame = false
-    
-  } 
+      this.status.passwordChanged = false,
+      this.status.newAndOldPasswordSame = false
+
+  }
 
   /* *********************************** Save the New Password *************************************** */
 
   savePassword() {
     console.log("inside the savePassword()");
-  
+
     this.currentPassword = this.form.value.oldPassword,
-    this.newPassword = this.form.value.confirmPassword
-   
+      this.newPassword = this.form.value.confirmPassword
+
     this.passwordService.savepassword(this.service.getEmployeeId(), this.currentPassword, this.newPassword).subscribe(
       data => {
         console.log("inside ts password");
@@ -93,21 +93,21 @@ export class HeaderComponent implements OnInit {
       },
       error => {
         this.error = true;
-      } 
+      }
 
     );
-    
+
   }
-  clickedOnModal(){
+  clickedOnModal() {
     this.error = false;
   }
-  openModal(){
+  openModal() {
     this.form.reset();
     this.error = false;
     this.status.message = '';
     this.status.currentPasswordIncorrect = false,
-    this.status.passwordChanged = false,
-    this.status.newAndOldPasswordSame = false
+      this.status.passwordChanged = false,
+      this.status.newAndOldPasswordSame = false
   }
 }
 

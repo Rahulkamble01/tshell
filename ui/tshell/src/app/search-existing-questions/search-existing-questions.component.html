@@ -14,7 +14,7 @@
                 <span class="highlightSpan">&nbsp;</span>
                 <B class="questionNumber">Question # {{question.id}} </B>&nbsp; <span class="badge badge-primary skillBadge mr-2">{{skillName}}</span>
                 <!-----------------  POSITION OF THIS ITEM IS NOT YET DECIDED( it also occurs at the end of the question description ) ----------------------------------------\>
-                <span style="float:right"> <a href="#" data-toggle="modal" data-target="#editQuestion" (click)="setQuestionForm()">
+                <span> <a href="#" data-toggle="modal" data-target="#editQuestion" (click)="setQuestionForm()">
                   <i class="fas fa-pencil-alt" data-toggle="tooltip" data-placement="top" title="edit question"></i>
                 </a></span> ---------------------------------------------------------------------------------------------------------------------------------------------------->
                 <div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -295,7 +295,7 @@
               <span *ngIf="questionList.status == 'Approved'" class="badge badge-info">Approved</span>
               <span *ngIf="questionList.status == 'Rejected'" class="badge badge-danger">Rejected</span>
               <!----------- STILL NEED TO BE WORKED ON ------------------------------------------------------------------------------------------------------------\>
-                <span style="float: right;">
+                <span>
                 <button type="button" class="btn btn-ts-primary btn-ts-sm rhsApproveBtn">Approve</button>&nbsp;
                 <button type="button" class="btn btn-ts-danger btn-ts-sm rhsRejectBtn">Reject</button>
               </span> ----------------------------------------------------------------------------------------------------------------------------------------------->

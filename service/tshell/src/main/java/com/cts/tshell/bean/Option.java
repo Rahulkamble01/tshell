@@ -13,9 +13,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name = "Option.fetchOptionDetailsById", query = "select o from Option o join o.question where o.id=:optionId")
 
 })
-
 public class Option {
 	public Option() {
 	}

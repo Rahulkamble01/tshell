@@ -115,3 +115,7 @@
 .lesspadding{
   padding-left: 0px!important;
 }
+
+.inlinetopics{
+  display: inline-block;
+}
