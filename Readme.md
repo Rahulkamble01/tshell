@@ -111,56 +111,54 @@ In case of SSL error:
 # To deploy your application on server
 
 ### Update database changes in the server
-1. Open MySql Workbench.
-2. Create your script file with appropriate sequence number according to already  
-   existing scripts in db folder in release1 and with proper naming convention    
-   such that it will indicate the modification. For Example:   
-   `002_tShell_alter_user_for_forgot_password.sql`
-3. Open Server Administration and give password:root.
-4. In the menu bar go to `Data Export`
-5. Right hand side select your tshell project in checkboxes.
-6. Move down side and select `Export to self-contained file`
-7. Your file path will be:`C:\Users\729721\Documents\dumps\002_tShell_alter_user_for_forgot_password.sql`
-8. Here your dump script file will get saved.
-9. Select option `Start Export` to create your dump.
-10. Now Open WinSCP.exe.
-11. On right hand side open folder `/home/729721` 
-12. On left hand side open folder `C:\Users\729721\Documents\dumps\002_tShell_alter_user_for_forgot_password.sql`
-13. Drag and drop this sql script on right hand side opened folder.
-14. Now your sql script will be deployed on server.
+This section is applicable only if there is any change required in the database. 
+For example, it can be for creation of new tables, new columns, remove columns, etc.
+If there are these kind of structural changes then ensure that you have a new 
+.sql file available in tshell/db folder with appropriate numbering. The following 
+steps will tell how to make necessary changes to the server database.
 
-### Creating database using Sql script on server using Putty
-1. Open putty.
-2. Give your IP address as `10.142.194.149`. Select Open.
-2. Login with your Employee Id and Password.
-3. Now give command `mysql -u root -p` and password as `mysqlCT5`.
-4. Check for your schema by command:  
-   `show schemas;`
-5. If your schema is not there then run this command:
-   `source /home/[your Employee Id]/002_tShell_alter_user_for_forgot_password.sql` .
-6. Again check for your schema.
+1. For our example, we will use the following file from db folder:   
+   `002_tShell_alter_user_for_forgot_password.sql`
+2. Open WinSCP to transfer the sql file.
+3. On right hand side open folder `/home/729721` 
+4. On left hand side open folder `d:\tshell-project\tshell\db\002_tShell_alter_user_for_forgot_password.sql`
+5. Drag and drop this sql script on right hand side opened folder.
+6. Login into `10.142.194.149` using putty.
+7. Login with your credentials
+8. Open mysql client, `mysql -u root -p` and password as `mysqlCT5`.
+9. Execute following commands:  
+   `use tshell;`
+   `set autocommit=0`
+   `source /home/[Employee Id]/002_tShell_alter_user_for_forgot_password.sql`
+10. Check the execution log and ensure that there are not errors. If there are errors  
+    execute the `rollback;` command and correct the sql file and try executing again.
+11. If there are not errors then execute the `commit` command.
 
 ### To deploy service part of tShell project
-    To deploy restful webservice, we need to create WAR and then transfer to server.
-3. Create WAR as:   
-   File -> Export -> WAR file -> give web project: `tshell` and   
-   Destination as `D:\apache-tomcat-9.0.5\apache-tomcat-9.0.5\webapps\tshell-service.war`
-4. Open WinSCP by executing WinSCP.exe.
-5. Give IP address:10.142.194.149 and port number:22
-6. Login with your employee Id and password.
-7. In the left hand side open folder where your WAR file is saved.
-8. On right hand side open folder as:`/opt/tomcat9/webapps` .
-9. Inside this folder drag and drop your WAR file from left hand side.
+To deploy restful webservice, we need to create WAR and then transfer to server.
+1. In eclipse, right click on tshell project:   
+   Export -> Export... -> WAR file -> Destination as `D:\tshell-service.war`
+2. Open 10.142.194.149 using WinSCP.
+3. Login with your credentials.
+4. In the left hand side open D: folder.
+5. On right hand side open folder `/opt/tomcat9/webapps` .
+6. Drag and drop WAR file from left hand side to right hand side.
 
 ### To deploy Your Angular Part
-1. Your need to create a dist file.
-2. For creating dist run this command by creating your base-href:
+Create a production distribution folder and transfer the contents of this folder to server.
+1. In Visual Studio Code terminal window execute below command to create dist folder:
    `ng build --prod --base-href /tshell/` 
-3. Open WinSCP.exe.
-4. On right hand side go to `/opt/tomcat9/webapps` folder.
-5. First clear existing folder with the name tshell (if already present).  
-6. Now go on left hand side in `D:\tshell-project\tShell\ui\tshell\dist` folder.  
-7. Drag and drop each files inside dist folder on right hand side.
-8. Your angular part will get deployed on server. 
+2. Open 10.142.194.149 using WinSCP.exe
+3. On right hand side go to `/opt/tomcat9/webapps/tshell` folder and remove the existing files and folder.
+4. Now go on left hand side in `D:\tshell-project\tShell\ui\tshell\dist` folder.  
+5. Select all the files and folders.
+6. Drag and drop all files and folder from left hand side to right hand side.
+7. Test if the application is working using `http://10.142.194.149:8080/tshell`
+
+### Debugging your application in server
+1. If there is a need to check the database use the mysql command specified above.
+2. To look for any errors in the tomcat log open a new putty window and use the following command:
+   `tail -f /opt/tomcat9/logs/catalina.out`
+
 
 
