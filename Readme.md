@@ -120,7 +120,7 @@ steps will tell how to make necessary changes to the server database.
 1. For our example, we will use the following file from db folder:   
    `002_tShell_alter_user_for_forgot_password.sql`
 2. Open WinSCP to transfer the sql file.
-3. On right hand side open folder `/home/729721` 
+3. On right hand side open folder `/home/[your employee Id]` 
 4. On left hand side open folder  
    `d:\tshell-project\tshell\db\002_tShell_alter_user_for_forgot_password.sql`
 5. Drag and drop this sql script on right hand side opened folder.
