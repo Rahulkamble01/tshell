@@ -35,7 +35,7 @@ In case of SSL error:
 `git checkout release1`
 
   
-# To Start the Mysql Database
+# Prepare Mysql Database
 ### Check if MySql is Running
 1. Open Task Manager
 2. In Task Manager select Services.
@@ -55,8 +55,8 @@ In case of SSL error:
 6. Open MySql Workbench and check if tShell Schema is there.
 7. Check if tables are present.
 
-# To Start with the tShell Services Part
-### To Get your tShell project in Eclipse 
+#  Start with the tShell Services Part
+### Get your tShell project in Eclipse 
 1. Open your Eclipse 
 2. Select the workspace where you want to work for tShell project.
 3. Inside Eclipse go to File -> Open projects from File System...
@@ -64,16 +64,16 @@ In case of SSL error:
    D:\tshell-project\tShell\service\tshell
 4. Now you will see your project in Eclipse.
 
-### To Get your Maven Repository
+###  Get All your Maven Repository
 1. Open your WinSCP5.9.4 .
-2. Give your IP address as 10.142.194.148 and Port Number: 22.
+2. Give your IP address: 10.142.194.148 and Port Number: 22.
 3. They will ask for permission.
 4. Choose option 'Yes' .
 5. Login with your Employee Id as UserName and your Password .
 6. In the Left Hand Side open this `C:\Users\[Your Employee Id]\.m2\repository` folder . 
 7. On Right Hand Side Navigate to `/tshell-repo` folder.
-8. Copy all 16 folder .
-9. Then Paste it on Left Hand Side 'Repository' folder already opened.
+8. Copy all 16 folders .
+9. Then Paste it on Left Hand Side 'repository' folder already opened.
 10. Now you have all Maven Repository.
 
 ### To Remove Pom.xml error in Eclipse
@@ -85,29 +85,75 @@ In case of SSL error:
 1. Go to `com.cts.tshell` -> `app.java`.
 2. Then right click on `app.java` and select `Run as` -> `Java Application`.
 
-### To run tShell project on Local Server 
-1. Select Server in the terminal of Eclipse. 
-2. Click on add server link given in the terminal.
-3. Choose folder where Apache Tomcat is present, click Next then choose tShell project and click Finish :
-   For Example: `Apache -> Tomcat v9.0 Server -> Select Next ->tShell -> select Finish .
-4. Then select 'Start the Server' option in the terminal.
 
-# To Work in Visual Studio Code
+
+# Prepare your Angular Project
 
 ### Get tShell UI Part in Visual Studio 
 1. Open visual studio.
-2. Go to File then select Open folder.
+2. Go to File then select Open Folder.
 3. Select folder `D:\tshell-project\tShell\ui\tshell`.
 4. Now you have your tshell UI part in Visual Studio.
 
-### Opening of Visual Studio Terminal
-5. For opening the terminal, click on View -> Integrated Terminal.
-4. In the Terminal run command `npm install` to get all node modules
-5. For running your application on local PC run this command:  
+### Opening of Angular in Visual Studio Code
+1. For opening the terminal, click on View -> Integrated Terminal.
+2. In the Terminal run command `npm install` to get all node modules.
+
+### For Testing tShell Project running end to end
+1. For running your application on local PC run this command:  
    `ng serve --proxy-config proxy.conf.json`.
+2. Browser will open with Local Host:4200.
+3. Check the application by Loging In to ensure that it works end to end.
 
 # To Deploy your application on Server
-1. Go to d:\\installables\[putty.exe] and and extract [WinSCP5.9.4.zip] file.
-2. double click putty and give ip address as 10.223.99.44 and port as 22 and open then choose Yes.
-3. Enter your cognizant Id and it's password.
-4.  
+
+### To deploy Service Part of tShell Project
+1. Create a War file of your tShell project.
+2. For creating the War file you need to do following steps:
+3. Open folders in Eclipse as:   
+   `File -> Export -> WAR file -> give web project: tshell and Destination where you want to save -> Finish`
+4. Open WinSCP by executing WinSCP.exe.
+5. Give IP address:10.142.194.148 and port number:22
+6. Login with your employee Id and password.
+7. In the Left Hand side open folder where your WAR file is saved.
+8. On right Hand Side open folder as:`/opt/apache-tomcat-8.0.36/webapps` .
+9. Inside this folder drag and drop your WAR file from Left Hand Side.
+
+### To deploy Your Angular Part
+1. Your need to create a dist file.
+2. For creating dist run this command by creating your base-href:
+   `ng build --prod --base-href /tShell-project` 
+3. You will find your dist file created in the folder:
+   `D:\tshell-project\tShell\ui\tshell`
+4. Inside dist you will find Index.html having base-href as the name you have given.
+5. Now again open winSCP and drag and drop this dist file on Right hand side.
+6. In the folder:`/opt/apache-tomcat-8.0.36/webapps`
+7. In the same way as you have done with your WAR file.
+8. Your angular part will get deployed on server. 
+
+### To deploy your SQL Script 
+1. You need to create the dump of your SQL script first.
+2. So, Open MySql Workbench
+3. Open Server Administration and give password:root.
+4. In the menu bar go to `Data Export`
+5. Right Hand Side Select your tshell project in checkboxes.
+6. Move down side and Select `Export to self-contained file`
+7. Your file path will be:`C:\Users\729721\Documents\dumps\tShell.sql`
+8. Here your dump script file will get saved.
+9. Select option `Start Export` to create your dump.
+10. Now Open WinSCP.exe.
+11. On right hand side open folder `/home/729721` 
+12. On left hand side open folder `C:\Users\729721\Documents\dumps\tShell.sql`
+13. Drag and drop this sql script on right hand side opened folder.
+14. Now your Sql Script will be deployed on server.
+
+### Creating database using Sql script on Server usins Putty
+1. open putty.
+2. Give your Ip address as `10.142.194.148` .Select Open.
+2. Login with your employee Id and your password.
+3. Now give command `mysql -u root -p` and password `mysqlCT5` .
+4. Check for your schema by command:  
+   `show schemas;`
+5. If your schema is not there then run this command:
+   `source /home/[your Employee Id]/tshell.sql` .
+6. Again check for your schema.
