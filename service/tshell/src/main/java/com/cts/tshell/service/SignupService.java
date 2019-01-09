@@ -9,9 +9,10 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
 import com.cts.tshell.bean.Role;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.bean.Util;

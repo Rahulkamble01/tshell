@@ -15,11 +15,11 @@ import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 })
 export class LoginComponent implements OnInit {
 
+  error = false;
   numberPattern = "^[0-9]{6}$";
   message: string;
   resendmessage:string;
   status: boolean = false;
-  error: any;
   success = true;
 
 
@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
       ])
   });
 
-  forms = new FormGroup({
+  resetRequestForm = new FormGroup({
     employeeid: new FormControl(
       '',
       [Validators.required,
       Validators.minLength(6),
-      Validators.pattern(this.numberPattern)
+     Validators.maxLength(10),
       ]
 
     )
@@ -146,8 +146,13 @@ export class LoginComponent implements OnInit {
         else{
           this.message="User doesn't exists"
         }
+      },
+      error => {
+        this.error = true;
       }
     );
+    
+    
   }
 
 
@@ -157,8 +162,8 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         if (data == true) {
+          alert("OTP resent successfully");
           this.status = true;
-          this.resendmessage="OTP resent successfully"
           this.message="";
           this.otpform.reset();
         }
@@ -172,9 +177,10 @@ export class LoginComponent implements OnInit {
     this.status = false;
     this.resetStatus = false;
     this.otpStatus = false;
-    this.forms.reset();
+    this.resetRequestForm.reset();
     this.otpform.reset();
     this.resetform.reset();
+    this.error = false;
   }
   submitOtp() {
     console.log(this.employeeId);
@@ -204,6 +210,7 @@ export class LoginComponent implements OnInit {
           this.status = true;
           this.resetStatus = true;
           this.message = "";
+          alert("Password changed successfully");
         }
         else {
           this.message = "issue in seting the password"

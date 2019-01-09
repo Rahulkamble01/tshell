@@ -19,7 +19,7 @@ alter table `tshell`.`skill` modify sk_description varchar(500);
 
 alter table `tshell`.`topic` modify tp_percentage int not null default 0;
 
-alter table `tshell`.`user` modify us_otp varchar(10) DEFAULT NULL;
+alter table `tshell`.`user` modify us_otp varchar(50) DEFAULT NULL;
 
 alter table `tshell`.`user` add us_signup_otp varchar(45) DEFAULT NULL;
 alter table `tshell`.`user` add us_signup_otp_time datetime DEFAULT NULL;

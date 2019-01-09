@@ -135,5 +135,9 @@ text-decoration: none;
   text-decoration: none;
   border: none;
   cursor: pointer;
+  float:right;
 }
 .resendButton:focus { outline: none; }
+.resethead{
+  margin-left: 20px;
+}

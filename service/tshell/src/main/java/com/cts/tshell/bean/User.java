@@ -1,5 +1,7 @@
 package com.cts.tshell.bean;
 
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -90,6 +92,7 @@ public class User {
 	
 	@Column(name = "us_signup_otp_verify_status")
 	public String signupOtpVerifyStatus;
+	
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -191,7 +194,6 @@ public class User {
 		this.otp = otp;
 	}
 
-
 	public Calendar getOtpGeneratedTime() {
 		return otpGeneratedTime;
 	}
@@ -248,5 +250,6 @@ public class User {
 				", signupOtpVerifyStatus=" + signupOtpVerifyStatus + ", signupOtp="
 				+ signupOtp + "]";
 	}
+
 
 }

@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query("select count(u.id) from User u ")
 	long totalUserCount();
 	User fetchByEmployeeId(@Param("employeeId") String employeeId);
-	User findByEmployeeId(String employeeid);
+	User findByEmployeeId(String employeeId);
 
 }
