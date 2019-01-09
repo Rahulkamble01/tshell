@@ -79,7 +79,7 @@
           <!-- <div class="col-lg-1 col-sm-0 col-md-1 co  l-xs-0"></div> -->
           <div class="col-lg-9 col-sm-10 col-xs-12 col-md-9 padding1opx">
             <div class="row" class="ml-12 mr-12">
-              <span class="inlineelements skillnameStyle">
+              <span class="col-lg-7 col-md-7 col-sm-12 col-xs-12 inlineelements skillnameStyle">
                 {{skills.name}}
                 <div *ngIf="showActive" class="inlineelements">
                   <ng-container *ngIf="skills.active == 'active'; else elseTemplate">
@@ -92,6 +92,28 @@
                 <div *ngIf="showEdit" class="inlineelements">
                   &nbsp;<span class="d-inline description-icon"><i class="far fa-edit inside-des-icon" (click)="editSkillModel(skills)"></i></span>
                 </div>
+              </span>
+              <span class="col-lg-5 col-md-5 col-sm-12 col-xs-12 float-right">
+                <!-- ========================================= -->
+                <div *ngIf="userLoggedInn" class="inlineelements">
+                  <a href="#" [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="badge badge-primary">Entry
+                    Test
+                  </a>
+                  &nbsp;
+                  <a href="#" [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="badge badge-primary">Exit
+                    Test
+                  </a>
+                </div>
+                <div *ngIf="!userLoggedInn" class="inlineelements">
+                  <a href="#" data-toggle="modal" data-target="#askforlogin" (click)="gotoLogin()" class="btn btn-ts-primary btn-ts-sm">Entry
+                    Test
+                  </a>
+                  &nbsp;
+                  <a href="#" data-toggle="modal" data-target="#askforlogin" (click)="gotoLogin()" class="btn btn-ts-primary btn-ts-sm">Exit
+                    Test
+                  </a>
+                </div>
+                <!-- ====================================== -->
               </span>
               <span class="description-style">
                 <br>{{skills.description}}

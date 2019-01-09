@@ -247,7 +247,7 @@ a {
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .dropdown-menu {
-    width: 729px;
+    width: 612px;
   }
 
   .ml-12 {
@@ -277,6 +277,11 @@ a {
   .smallScreen {
     display: none;
   }
+}
+@media (min-width: 1200px) {
+  .dropdown-menu {
+    width: 731px;
+}
 }
 
 .center1 {
