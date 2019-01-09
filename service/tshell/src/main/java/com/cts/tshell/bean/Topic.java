@@ -52,7 +52,7 @@ public class Topic {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tp_sk_id")
-	@JsonView(Views.Internal.class)
+//	@JsonView(Views.Internal.class)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JsonIgnore
 	private Skill skill;

@@ -9,7 +9,7 @@
     </div>
     <div *ngIf="recentSkillListLength>0">
       <h2 *ngFor="let recentSkill of recentSkillList" class="ngFor">
-        <a href="/skills/:id" class="badge badge-primary viewskills">{{recentSkill[1]}}</a>
+        <a [routerLink]="['/skills',recentSkill[1]]" class="badge badge-primary viewskills">{{recentSkill[1]}}</a>
       </h2>
     </div>
     <div *ngIf="error">
@@ -20,3 +20,4 @@
 
   </div>
 </div>
+

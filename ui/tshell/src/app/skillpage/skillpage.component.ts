@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SkillmodalComponent } from '../skillmodal/skillmodal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
+import { SkillService } from '../skill.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-skillpage',
@@ -10,81 +12,67 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SkillpageComponent implements OnInit {
   active: any;
-  skills: any = {
-    id: null,
-    name: '',
-    active: null,
-    top3: [
-      {
-        score: null,
-        user: { id: null, name: '' }
-      },
-      {
-        score: null,
-        user: { id: null, name: '' }
-      },
-      {
-        score: null,
-        user: { id: null, name: '' }
-      }]
-  };
-  toppers: any = [
-    {
-      score: 90,
-      user: { id: 1, name: 'Arisankar M' }
-    },
-    {
-      score: 80,
-      user: { id: 2, name: 'Joseph Vijay' }
-    },
-    {
-      score: 70,
-      user: { id: 3, name: 'Vijay Kumar' }
-    },
-    {
-      score: 60,
-      user: { name: 'Sundar' }
-    },
-    {
-      score: 50,
-      user: { name: 'Arun Kumar' }
-    }
-  ];
-  constructor(private modalService: NgbModal, private route: ActivatedRoute) { }
+  skillName:any;
+  skills:any;
+  Role:any;
+  showEdit = false;
+  showActive = false;
+  showAddskill = false;
+  userLoggedInn=false;
+  toppers:any;
+  constructor(private modalService: NgbModal,private authService : AuthService ,private route: ActivatedRoute,private skillService: SkillService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.skills = params;
-      console.log(JSON.stringify(this.skills.top3));
+    this.skillName = this.route.snapshot.paramMap.get('name');
+    
+    console.log("name from url :" + this.skillName);
+    this.skillService.getSkillbyName(this.skillName).subscribe(data => {
+      this.skills = data;
+      console.log(this.skills);
+
+      this.skillService.getSkillTopper(this.skills.id).subscribe(data => {
+        this.toppers = data;
+      });
+
     });
+
+   
+      
+    console.log("Role of user12: " + this.authService.role);
+    this.Role = this.authService.role;
+    this.userLoggedInn = this.authService.loggedIn;
+    console.log("is he logged in:  " + this.userLoggedInn);
+
+      if (this.Role === undefined) {
+        this.showEdit = false;
+        this.showActive = false;
+        this.showAddskill = false;
+  
+      } else {
+        if (this.Role.toUpperCase() === "Learner".toUpperCase()) {
+          this.showEdit = false;
+          this.showActive = false;
+          this.showAddskill = false;
+        }
+        if (this.Role.toUpperCase() === "admin".toUpperCase()) {
+          this.showEdit = true;
+          this.showActive = true;
+          this.showAddskill = true;
+        }
+        if (this.Role.toUpperCase() === "sme".toUpperCase()) {
+          this.showEdit = true;
+          this.showActive = false;
+          this.showAddskill = true;
+        }
+      }
+  
+  
+
+
   }
 
-  toggllingSkill(skill) {
-    if (skill.active) {
-      if (confirm("do you want to deactivate " + skill.name + " ?")) {
-        return skill.active = false;
-      } else {
-        return;
-      }
-    } else {
-      if (confirm("do you want to activate " + skill.name + " ?")) {
-        return skill.active = true;
-      } else {
-        return;
-      }
-    }
-  }
 
-  // editSkillModel(item) {
-  //   const modalRef = this.modalService.open(SkillmodalComponent);
-  //   this.skills.forEach(element => {
-  //     if (element.id == item.id) {
-  //       modalRef.componentInstance.item = element;
-  //       // alert(JSON.stringify(element));
-  //       modalRef.componentInstance.add = false;
-  //     }
-  //   });
 
-  // }
+  
 
 }

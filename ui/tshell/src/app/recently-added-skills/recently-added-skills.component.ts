@@ -20,7 +20,10 @@ export class RecentlyAddedSkillsComponent implements OnInit {
         this.recentSkillList = data;
         this.recentSkillListLength = this.recentSkillList.length;
 
-        console.log(data)
+        console.log("recent skill:::" + data)
+        console.log("id recent skill: "+ data[0])
+
+        
       },
       error => {
         this.error=error;
