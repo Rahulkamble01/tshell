@@ -9,8 +9,8 @@
 8. MySql Server
 
 ### PreRequisites  
-  1. Get access to this server 10.142.194.148 by raising the GSD.
-  2. Get access to this server also 10.142.194.149 by raising GSD.
+  1. Get access to both these server `10.142.194.148` and `10.142.194.149`  by raising the GSD.
+  
   
 
 # Get the project using Git
@@ -121,14 +121,15 @@ steps will tell how to make necessary changes to the server database.
    `002_tShell_alter_user_for_forgot_password.sql`
 2. Open WinSCP to transfer the sql file.
 3. On right hand side open folder `/home/729721` 
-4. On left hand side open folder `d:\tshell-project\tshell\db\002_tShell_alter_user_for_forgot_password.sql`
+4. On left hand side open folder  
+   `d:\tshell-project\tshell\db\002_tShell_alter_user_for_forgot_password.sql`
 5. Drag and drop this sql script on right hand side opened folder.
 6. Login into `10.142.194.149` using putty.
 7. Login with your credentials
 8. Open mysql client, `mysql -u root -p` and password as `mysqlCT5`.
 9. Execute following commands:  
-   `use tshell;`
-   `set autocommit=0`
+   `use tshell;`  
+   `set autocommit=0`  
    `source /home/[Employee Id]/002_tShell_alter_user_for_forgot_password.sql`
 10. Check the execution log and ensure that there are not errors. If there are errors  
     execute the `rollback;` command and correct the sql file and try executing again.
@@ -141,12 +142,13 @@ To deploy restful webservice, we need to create WAR and then transfer to server.
 2. Open 10.142.194.149 using WinSCP.
 3. Login with your credentials.
 4. In the left hand side open D: folder.
-5. On right hand side open folder `/opt/tomcat9/webapps` .
+5. On right hand side open folder  
+   `/opt/tomcat9/webapps` .
 6. Drag and drop WAR file from left hand side to right hand side.
 
-### To deploy Your Angular Part
+### To deploy Your Angular part
 Create a production distribution folder and transfer the contents of this folder to server.
-1. In Visual Studio Code terminal window execute below command to create dist folder:
+1. In Visual Studio Code terminal window execute below command to create dist folder:  
    `ng build --prod --base-href /tshell/` 
 2. Open 10.142.194.149 using WinSCP.exe
 3. On right hand side go to `/opt/tomcat9/webapps/tshell` folder and remove the existing files and folder.
@@ -157,7 +159,7 @@ Create a production distribution folder and transfer the contents of this folder
 
 ### Debugging your application in server
 1. If there is a need to check the database use the mysql command specified above.
-2. To look for any errors in the tomcat log open a new putty window and use the following command:
+2. To look for any errors in the tomcat log open a new putty window and use the following command:  
    `tail -f /opt/tomcat9/logs/catalina.out`
 
 
