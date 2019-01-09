@@ -37,7 +37,6 @@ export class SearchResultComponent implements OnInit {
   showEdit = false;
   showActive = false;
   showAddskill = false;
-  showEdittopic = false;
   userLoggedInn: any;
   imageUrl: string = null;
   fileToUpload: File = null;
@@ -70,25 +69,23 @@ export class SearchResultComponent implements OnInit {
       this.showEdit = false;
       this.showActive = false;
       this.showAddskill = false;
-      this.showEdittopic = false;
-    }
-    if (this.Role.toUpperCase() === "Learner".toUpperCase()) {
-      this.showEdit = false;
-      this.showActive = false;
-      this.showAddskill = false;
-      this.showEdittopic = false;
-    }
-    if (this.Role.toUpperCase() === "admin".toUpperCase()) {
-      this.showEdit = true;
-      this.showActive = true;
-      this.showAddskill = true;
-      this.showEdittopic = true;
-    }
-    if (this.Role.toUpperCase() === "sme".toUpperCase()) {
-      this.showEdit = true;
-      this.showActive = false;
-      this.showAddskill = true;
-      this.showEdittopic = true;
+
+    } else {
+      if (this.Role.toUpperCase() === "Learner".toUpperCase()) {
+        this.showEdit = false;
+        this.showActive = false;
+        this.showAddskill = false;
+      }
+      if (this.Role.toUpperCase() === "admin".toUpperCase()) {
+        this.showEdit = true;
+        this.showActive = true;
+        this.showAddskill = true;
+      }
+      if (this.Role.toUpperCase() === "sme".toUpperCase()) {
+        this.showEdit = true;
+        this.showActive = false;
+        this.showAddskill = true;
+      }
     }
 
 
@@ -137,25 +134,21 @@ export class SearchResultComponent implements OnInit {
     merge(this.click$.pipe(filter(() => !this.instance.isPopupOpen()))),
     map(term => (term === '' ? []
       // this.keyPressing(this.model).filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()))
-      : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+      : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5)
+      //   : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
     ))
-    // map(term => term === '' ? []
-    //   : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100),
-    // ),
-    // map(term => term === '' ? [])
-
   )
-  async keyPressing(model) {
-    console.log(model);
-    let allSkills1: Skill[] = [];
-    this.skillService.getAll().subscribe(data => {
-      allSkills1 = data;
-      console.log(data);
-    });
-    console.log(allSkills1);
-    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
-    return allSkills1;
-  }
+  // async keyPressing(model) {
+  //   console.log(model);
+  //   let allSkills1: Skill[] = [];
+  //   this.skillService.getAll().subscribe(data => {
+  //     allSkills1 = data;
+  //     console.log(data);
+  //   });
+  //   console.log(allSkills1);
+  //   await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+  //   return allSkills1;
+  // }
 
   itemSelected($event) {
     this.skills = $event.item;
@@ -203,19 +196,9 @@ export class SearchResultComponent implements OnInit {
   }
 
 
-  gotoLogin() {
-    console.log("inside gotoLogin!");
-    let timeOut: boolean;
-    timeOut = false;
-    console.log(timeOut);
-    setTimeout(function () {
-      timeOut = true;
-      console.log(timeOut);
-    }, 3000);
-
-    if (timeOut) {
-      this.router.navigate(['/login']);
-    }
+  gotologin() {
+    console.log("it will go to login");
+    setTimeout(() => this.router.navigate(['/login']), 3000);
   }
 
   deleteReferenceSkill(item) {
@@ -232,5 +215,6 @@ export class SearchResultComponent implements OnInit {
         }
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+      this.ngOnInit();
   }
 }

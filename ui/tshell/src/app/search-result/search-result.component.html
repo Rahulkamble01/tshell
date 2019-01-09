@@ -1,6 +1,8 @@
 <div class="container">
+
+  
   <div class="row mb-0 pt-0 pb-0">
-    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div>
+    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12"><h2 class="text-center mb-0">Skills</h2></div>
   </div>
   <div class="row mt-0 pt-0">
     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
@@ -125,13 +127,23 @@
               <div class="card-group">
                 <div class="card bg-white ts-card min-height-additional-skill">
                   <div class="card-body">
-                    <h6 class="text-center">You Should have Knowledge of :<span> <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill)"></i></span></h6>
+                    <h6 class="text-center">Dependent Skils<span> &nbsp;
+
+                        <span *ngIf="showEdit">
+                          <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill)"></i>
+                        </span>
+
+                      </span></h6>
                     <hr>
                     <!-- <div *ngFor="let item of referenceSkill"> -->
-                    <h6 *ngFor="let item of referenceSkill" class="text-not-center mb-0"><span class="badge badge-info mb-0"
-                        *ngIf="item.classifier == 'pre'">{{item.referenceSkill.name}}
-                        <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);"></i></span>
-                      <i class="fas fa-arrow-right arr1"></i></h6>
+                    <h6 *ngFor="let item of referenceSkill" class="text-not-center mb-0">
+
+                      <p *ngIf="item.classifier == 'pre'; let i=index">
+
+                        <span class="badge badge-info mb-0">
+                          {{item.referenceSkill.name}}
+                          <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);" *ngIf="showEdit"></i></span></p>
+                    </h6>
                     <!-- </div> -->
 
                   </div>
@@ -156,11 +168,16 @@
 
               <div class="card bg-white ts-card bigScreen min-height-additional-skill">
                 <div class="card-body text-center">
-                  <h6>Additional Skills <span> <i class="fas fa-plus-square plus"></i></span></h6>
+                  <h6>Additional Skills <span>
+                      <span *ngIf="showEdit">
+                        <i class="fas fa-plus-square plus"></i>
+
+                      </span>
+                    </span></h6>
                   <hr>
                   <div *ngFor="let item of referenceSkill">
                     <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{item.referenceSkill.name}}
-                        <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);"></i></span></h5>
+                        <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);" *ngIf="showEdit"></i></span></h5>
                   </div>
                 </div>
               </div>
@@ -183,13 +200,14 @@
               <div class="card-group">
                 <div class="card bg-white ts-card min-height-additional-skill">
                   <div class="card-body text-center">
-                    <h6>You Should have Knowledge of:<span> <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill, 2)"></i></span></h6>
+                    <h6>Pre-requisites:<span *ngIf="showEdit"> <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill, 2)"></i></span></h6>
                     <hr>
                     <!-- <div *ngFor="let item of referenceSkill"> -->
-                    <h6 *ngFor="let item of referenceSkill ; let i=index" class="mb-0 text-not-center" >
-                        &nbsp;&nbsp;<i class="fas fa-arrow-right" *ngIf="i>0 && item.classifier == 'pre'"></i> &nbsp;&nbsp;
+                    <h6 *ngFor="let item of referenceSkill ; let i=index" class="mb-0 text-not-center">
+                      &nbsp;&nbsp;<i class="fas fa-arrow-right" *ngIf="i>0 && item.classifier == 'pre'"></i>
+                      &nbsp;&nbsp;
                       <span class="badge badge-info" *ngIf="item.classifier == 'pre'">{{item.referenceSkill.name}}
-                        <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);"></i></span>
+                        <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);" *ngIf="showEdit"></i></span>
                     </h6>
                     <!-- </div> -->
 
@@ -222,11 +240,11 @@
                 <div class="col-12">
                   <div class="card bg-white ts-card  m1 min-height-additional-skill">
                     <div class="card-body text-center">
-                      <h6>Additional Skills <span> <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill, 1)"></i></span></h6>
+                      <h6>Additional Skills <span *ngIf="showEdit"> <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill, 1)"></i></span></h6>
                       <hr>
                       <div *ngFor="let item of referenceSkill">
                         <h5 *ngIf="item.classifier == 'post'"><span class="badge badge-info">{{item.referenceSkill.name}}
-                            <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);"></i></span></h5>
+                            <i class="fas fa-times cross" (click)="deleteReferenceSkill(item);" *ngIf="showEdit"></i></span></h5>
                       </div>
                     </div>
                   </div>

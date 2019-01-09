@@ -32,7 +32,7 @@ export class ReferenceSkillModelComponent implements OnInit {
   referenceSkillName: Array<ReferenceSkill> = [];
 
   // tslint:disable-next-line:max-line-length
-  constructor(private activeModal: NgbActiveModal, private fb: FormBuilder, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private skillService: SkillserviceService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
     this.allReferenceSkills.forEach(element => {
