@@ -27,7 +27,7 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 
-	@GetMapping("/allquestionid/{skillId}")
+	@GetMapping("/getassessmentquestionids/{skillId}")
 	public Set<Integer> fetchAllQuestionId(@PathVariable int skillId) {
 		LOGGER.info("START : Getting all Question Ids from fetchAllQuestionId()  of QuestionController");
 		LOGGER.debug("SkillId :  {}", skillId);

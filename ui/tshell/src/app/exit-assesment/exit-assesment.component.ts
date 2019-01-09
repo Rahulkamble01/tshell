@@ -18,6 +18,7 @@ export class ExitAssesmentComponent implements OnInit {
   assessmentDuration = 1200;   // in secs i.e.1200 = 20 mins
   questionIds: any;
   questionId: number;
+  error: any;
   question: any;
   QuesJson: any;
   employeeId: string;
@@ -67,31 +68,40 @@ export class ExitAssesmentComponent implements OnInit {
       }
     });
     console.log(this.startAssesmentJson);
-    // Creating Assessment entry in backend
-    this.assesmentService.startAssessment(this.startAssesmentJson).subscribe(d => {
-      this.assesmentDetails = d;
-      // console.log(this.assesmentDetails);
-      this.assesmentService.getQuestionId(1).subscribe(data => {
-        this.questionIds = data;
-        for (let i = 1; i <= this.questionIds.length; i++) {
-          this.questionSet.push(i);
-          this.presentStatus.push(i);
-          this.answerStatus.push(0);
-        }
-        console.log(this.questionIds);
-        this.questionId = this.questionIds[this.pager.index];
-        // console.log(this.questionId);
 
-        this.assesmentService.getQuestion(this.questionId).subscribe(q => {
-          this.question = q;
-          this.loadQuiz();
-          this.loadQuestions(this.question, this.pager.index);
-          // console.log(this.question);
+    // Retriveing the question Ids for the assessment based on skill Id.
+    this.assesmentService.getQuestionId(this.skillId).subscribe(data => {
+      this.questionIds = data;
+      for (let i = 1; i <= this.questionIds.length; i++) {
+        this.questionSet.push(i);
+        this.presentStatus.push(i);
+        this.answerStatus.push(0);
+      }
+      console.log(this.questionIds);
+      this.questionId = this.questionIds[this.pager.index];
+      // console.log(this.questionId);
+
+      // Creating Assessment entry in backend
+      this.assesmentService.startAssessment(this.startAssesmentJson).subscribe(d => {
+        this.assesmentDetails = d;
+        //  console.log(this.assesmentDetails);
+      },
+        error => {
+          console.log("Error When creating entry for assessment");
+          this.error = error;
         });
-
+      this.assesmentService.getQuestion(this.questionId).subscribe(q => {
+        this.question = q;
+        this.loadQuiz();
+        this.loadQuestions(this.question, this.pager.index);
+        // console.log(this.question);
       });
 
-    });
+    },
+      error => {
+        console.log("Error Fetching Questions ids");
+        this.error = error;
+      });
   }
 
 
@@ -104,7 +114,7 @@ export class ExitAssesmentComponent implements OnInit {
   }
 
   loadQuiz() {
-    this.pager.count = 40;
+    this.pager.count = this.questionIds.length; // Total No of Questions
     this.startTime = new Date();
     this.timer = setInterval(() => { this.tick(); }, 1000);
     this.duration = this.parseTime(this.assessmentDuration);

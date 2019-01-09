@@ -41,7 +41,8 @@ public class AssessmentController {
 	@PostMapping("/saveresponse")
 	public void saveAssesmentResponse(@RequestBody AssessmentQuestion assessmentQuestion) {
 
-		LOGGER.info("START : Saving Response for Assessment Question from saveAssesmentResponse() of AssessmentController");
+		LOGGER.info(
+				"START : Saving Response for Assessment Question from saveAssesmentResponse() of AssessmentController");
 		LOGGER.debug("AssessmentQuestionOption Object : {}", assessmentQuestion);
 		assessmentService.saveAssessmentResponse(assessmentQuestion);
 	}
@@ -54,20 +55,6 @@ public class AssessmentController {
 		assessmentService.submitAssesment(assessment);
 		LOGGER.info("Assessment with End Time And Responses Saved Successfully.......");
 		LOGGER.info("End : Saved the assessment submitAssesment() of AssessmentController");
-	}
-
-	// This Method is just to view the data for get mapping in Browser no call
-	// is made from angular.
-	@GetMapping("/score/{assessmentId}")
-	public String evaluateAssesment(@PathVariable("assessmentId") int assessmentId) throws JsonProcessingException {
-
-		LOGGER.info("START : Evaluating Score from evaluateAssesment() of AssessmentController");
-		LOGGER.debug("Assessment Id : ", assessmentId);
-		Assessment assessment = assessmentService.evaluateScore(assessmentId);
-		ObjectMapper mapper = new ObjectMapper();
-		String result = mapper.writerWithView(Views.Public.class).writeValueAsString(assessment);
-		return result;
-
 	}
 
 	@GetMapping("/topicwisescore/{assessmentId}")
@@ -83,4 +70,19 @@ public class AssessmentController {
 		LOGGER.info("End : getTopicWiseScore() of AssessmentController");
 		return topicWiseScore;
 	}
+
+	// This Method is just to view the data for get mapping in Browser no call
+	// is ever made to this method from angular.
+	@GetMapping("/score/{assessmentId}")
+	public String evaluateAssesment(@PathVariable("assessmentId") int assessmentId) throws JsonProcessingException {
+
+		LOGGER.info("START : Evaluating Score from evaluateAssesment() of AssessmentController");
+		LOGGER.debug("Assessment Id : ", assessmentId);
+		Assessment assessment = assessmentService.evaluateScore(assessmentId);
+		ObjectMapper mapper = new ObjectMapper();
+		String result = mapper.writerWithView(Views.Public.class).writeValueAsString(assessment);
+		return result;
+
+	}
+
 }

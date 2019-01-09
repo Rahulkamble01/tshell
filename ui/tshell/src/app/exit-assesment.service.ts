@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ExitAssesmentService {
-  allQuestionIdURL = environment.serviceUrlPrefix + '/question/allquestionid/';
+  allQuestionIdURL = environment.serviceUrlPrefix + '/question/getassessmentquestionids/';
   questionUrl = environment.serviceUrlPrefix + '/question/questionId/';
   startAssesmentUrl = environment.serviceUrlPrefix + '/assessment/start';
   saveResponseUrl = environment.serviceUrlPrefix + '/assessment/saveresponse';
@@ -24,8 +24,8 @@ export class ExitAssesmentService {
 
   constructor(private http: HttpClient) { }
 
-  getQuestionId(id): Observable<any> {
-    return this.http.get(this.allQuestionIdURL + id);
+  getQuestionId(skillId): Observable<any> {
+    return this.http.get(this.allQuestionIdURL + skillId);
   }
 
   getQuestion(json): Observable<any> {

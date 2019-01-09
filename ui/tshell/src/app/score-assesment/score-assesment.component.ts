@@ -17,6 +17,7 @@ export class ScoreAssesmentComponent implements OnInit {
   totalOutOf: number = 40;
   overallpecent: number = 0;
   overallClass: any;
+  error: any;
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private scoreService: AssessmentScoreService, private route: ActivatedRoute) { }
@@ -59,7 +60,10 @@ export class ScoreAssesmentComponent implements OnInit {
           this.overallClass = 'bg-success';
         }
 
-      });
+      },
+        error => {
+          this.error = error;
+        });
     });
 
 
