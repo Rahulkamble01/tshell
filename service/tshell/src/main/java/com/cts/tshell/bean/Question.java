@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 						"left join fetch q.questionDifficultyLevel t " + 
 						"left join fetch q.questionAnswerType t " + 
 						"left join fetch q.optionList t " + 
-						"left join fetch q.topicList t " + 
+						"left join fetch q.topicSet t " + 
 						"where q.status ='Approved' " + 
 						"and q.id = :questionId "+ 
 						" "),
@@ -72,7 +72,7 @@ public class Question {
 	@JoinTable( name = "topic_question", 
 				joinColumns = { @JoinColumn(name = "tq_qu_id")},
 				inverseJoinColumns = { @JoinColumn(name = "tq_tp_id")})
-	private Set<Topic> topicList; 
+	private Set<Topic> topicSet; 
 
 	public int getId() {
 		return id;
@@ -130,12 +130,12 @@ public class Question {
 		this.optionList = optionList;
 	}
 
-	public Set<Topic> getTopicList() {
-		return topicList;
+	public Set<Topic> getTopicSet() {
+		return topicSet;
 	}
 
-	public void setTopicList(Set<Topic> topicList) {
-		this.topicList = topicList;
+	public void setTopicSet(Set<Topic> topicSet) {
+		this.topicSet = topicSet;
 	}
 
 }

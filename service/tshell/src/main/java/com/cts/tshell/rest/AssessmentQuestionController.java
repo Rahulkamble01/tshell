@@ -15,24 +15,24 @@ import com.cts.tshell.bean.Question;
 import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
 import com.cts.tshell.bean.Views;
-import com.cts.tshell.service.QuestionService;
+import com.cts.tshell.service.AssessmentQuestionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
-@RequestMapping("/question")
-public class QuestionController {
+@RequestMapping("/assessmentquestion")
+public class AssessmentQuestionController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentQuestionController.class);
 	@Autowired
-	private QuestionService questionService;
+	private AssessmentQuestionService assessmentQuestionService;
 
 	@GetMapping("/getassessmentquestionids/{skillId}")
 	public Set<Integer> fetchAllQuestionId(@PathVariable int skillId) {
 		LOGGER.info("START : Getting all Question Ids from fetchAllQuestionId()  of QuestionController");
 		LOGGER.debug("SkillId :  {}", skillId);
 
-		return questionService.fetchQuestionsID(skillId);
+		return assessmentQuestionService.fetchQuestionsID(skillId);
 	}
 
 	@GetMapping("/questionId/{questionId}")
@@ -40,7 +40,7 @@ public class QuestionController {
 		LOGGER.info("START :Getting Question By Id from  fetchQuestionById()  of QuestionController");
 		LOGGER.debug("Question Id {}", questionId);
 
-		List<Question> questions = questionService.getQuestionById(questionId);
+		List<Question> questions = assessmentQuestionService.getQuestionById(questionId);
 		LOGGER.info("Start Writing JSON String using JSON VIEW CLASS");
 		ObjectMapper mapper = new ObjectMapper();
 		String result = mapper.writerWithView(Views.Public.class).writeValueAsString(questions);

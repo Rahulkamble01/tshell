@@ -15,8 +15,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ExitAssesmentService {
-  allQuestionIdURL = environment.serviceUrlPrefix + '/question/getassessmentquestionids/';
-  questionUrl = environment.serviceUrlPrefix + '/question/questionId/';
+  allQuestionIdURL = environment.serviceUrlPrefix + '/assessmentquestion/getassessmentquestionids/';
+  questionUrl = environment.serviceUrlPrefix + '/assessmentquestion/questionId/';
+  
   startAssesmentUrl = environment.serviceUrlPrefix + '/assessment/start';
   saveResponseUrl = environment.serviceUrlPrefix + '/assessment/saveresponse';
   submitAssessmentURL = environment.serviceUrlPrefix + '/assessment/submit';

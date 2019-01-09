@@ -18,7 +18,7 @@ import com.cts.tshell.repository.SkillRepository;
 import com.cts.tshell.repository.TopicRepository;
 
 @Service
-public class QuestionService {
+public class AssessmentQuestionService {
 
 	@Autowired
 	private SkillRepository skillRepository;
@@ -29,7 +29,7 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository questionRepository;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentQuestionService.class);
 
 	private static final float MAX_QUESTIONS = 40;
 
