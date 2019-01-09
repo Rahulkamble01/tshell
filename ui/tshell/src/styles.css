@@ -234,9 +234,9 @@ footer p {
   border: none;
 }
 
-a {
+/*a {
   color: white;
-}
+}*/
 
 /* BUTTONS */
 
@@ -400,6 +400,7 @@ footer p {
   color:red;
   font-size: 12px;
 }
+
 
 /* TITLE NAME */
 .titlename{

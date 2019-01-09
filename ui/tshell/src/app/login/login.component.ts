@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
   status: boolean = false;
   error: any;
   success = true;
-  employeeIdPattern = "^(0|[1-9][0-9]*)$";
+
+
 
 
   formStatus: boolean = false;
@@ -33,7 +34,9 @@ export class LoginComponent implements OnInit {
   form = new FormGroup({
     employeeId: new FormControl(
       '', [Validators.required,
-      Validators.pattern(this.employeeIdPattern)
+
+      Validators.minLength(5)
+
       ]),
 
     password: new FormControl(
@@ -89,24 +92,39 @@ export class LoginComponent implements OnInit {
     console.log(json);
     this.loginService.authenticateUser(json)
       .subscribe(data => {
+
+        console.log("incoming Data: " + data)
         console.log("incoming Data: " + data.authenticated)
+        console.log("incoming admin or not? : " + data.admin)
+
         if (data.authenticated) {
           this.service.login();
           this.service.setRole(data.user.role.name);
           this.service.setEmployeeId(data.user.employeeId);
+
           this.router.navigate(['/dashboard']);
+
         }
+
+        if (data.admin) {
+          console.log("inside Admin Signup Component");
+          this.router.navigate(['/authenticate']);
+        }
+
+
         else {
           this.success = false;
           this.error = false;
 
         }
       },
-        error => {
-          this.error = error;
-          this.success = true;
-          console.log(this.error);
-        }
+
+      error => {
+        this.error = error;
+        this.success = true;
+        console.log(this.error);
+      }
+
       );
   }
 

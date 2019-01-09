@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, config } from 'rxjs';
 import { environment } from './environment';
 
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -13,7 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LoginService {
-  url: string = environment.serviceUrlPrefix + "/authenticate";
+
+  url = environment.serviceUrlPrefix + "/authenticate";
+
   constructor(private http: HttpClient) { }
   authenticateUser(json): Observable<any> {
     console.log("in addUser()" + json);

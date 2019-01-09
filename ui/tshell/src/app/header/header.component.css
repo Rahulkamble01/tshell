@@ -55,6 +55,7 @@ h3{
 #exampleModal{
     margin-top: 20vh;
 }
+
 .customeMessage{
     color:red;
 }
@@ -78,3 +79,10 @@ h3{
 #backendErrorstatus{
     color: red;
 }
+
+
+.nav1{
+    margin-top: 5px;
+    margin-bottom: -19px;
+}
+

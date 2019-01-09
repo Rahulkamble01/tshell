@@ -14,9 +14,10 @@ import com.cts.tshell.bean.Question;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
+
 	@Query(" select count(q.id),s.name from Question q " + " join q.createdUser u " + " join u.skills s "
 			+ " join s.topics t join t.questions " + " where u.employeeId = :employeeId and t.id=q.id  group by s.name")
-	List<Question> findTotalQuestionContributedById(@Param("employeeId") int employeeId);
+	List<Question> findTotalQuestionContributedById(@Param("employeeId") String employeeId);
 
 	@Query("select count(q.id) from Question q")
 	long totalQuestionsCount();
@@ -43,4 +44,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	List<Question> fetchQuestionBasedOnKeyword(String searchedQuestion);
 
 	public Question findQuestionWithOptions(@Param("questionId") int questionId);
+
 }

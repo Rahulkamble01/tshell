@@ -57,7 +57,7 @@ public class QuestionService {
 	public void saveQuestion(Question question) {
 		LOGGER.info("starting saveQuestion method");
 		LOGGER.debug("Question (from front end): {}",question);
-		int employeeId = question.getCreatedUser().getEmployeeId();
+		String employeeId = question.getCreatedUser().getEmployeeId();
 		LOGGER.info("employeeId {}" + employeeId);
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.info("User details:{}" + user);
@@ -103,7 +103,7 @@ public class QuestionService {
 	}
 
 	@Transactional
-	public List<User> getUser(int userId) {
+	public List<User> getUser(String userId) {
 		LOGGER.info("starting getUser method");
 		List<User> userInfo = (List<User>) userRepository.findAllById(userId);
 		LOGGER.info("userInfo :{}" + userInfo);
@@ -122,7 +122,7 @@ public class QuestionService {
 	}
 
 	@Transactional
-	public List<Question> findTotalQuestionContributed(int employeeId) {
+	public List<Question> findTotalQuestionContributed(String employeeId) {
 		LOGGER.info("START");
 		List<Question> question = questionRepository.findTotalQuestionContributedById(employeeId);
 		LOGGER.debug("list of total no of question for each subject contributed : {} ", question);

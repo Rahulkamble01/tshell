@@ -52,7 +52,7 @@ public class QuestionController extends TshellController {
 	}
 
 	@GetMapping("/getUser/{userId}")
-	public List<User> getUser(@PathVariable int userId) {
+	public List<User> getUser(@PathVariable String userId) {
 		LOGGER.info("starting getUser method");
 		List<User> user = questionService.getUser(userId);
 		LOGGER.debug("User details are:{}" + user);
@@ -62,7 +62,7 @@ public class QuestionController extends TshellController {
 	}
 
 	@GetMapping("/contributed/{employeeId}")
-	public List<Question> totalQuestionContributed(@PathVariable("employeeId") int employeeId) {
+	public List<Question> totalQuestionContributed(@PathVariable("employeeId") String employeeId) {
 		LOGGER.info(" START");
 		List<Question> totalQuestion = questionService.findTotalQuestionContributed(employeeId);
 		LOGGER.debug("total no of question contributed for each subject : {} ", totalQuestion);

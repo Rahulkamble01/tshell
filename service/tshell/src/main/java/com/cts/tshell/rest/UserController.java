@@ -56,7 +56,7 @@ public class UserController extends TshellController {
 	 */
 
 	@GetMapping("/changepassword/{employeeId}/{currentPassword}/{newPassword}")
-	public ResponseEntity<ChangePasswordStatus> changePassword(@PathVariable int employeeId,
+	public ResponseEntity<ChangePasswordStatus> changePassword(@PathVariable String employeeId,
 			@PathVariable String currentPassword, @PathVariable String newPassword) throws NoSuchAlgorithmException {
 		LOGGER.info("start");
 		LOGGER.debug("employeeId:{}; currentPassword:{}; newPassword:{}", employeeId, currentPassword, newPassword);
@@ -73,24 +73,24 @@ public class UserController extends TshellController {
 	
 
 	@GetMapping("/requestpasswordreset/{employeeId}")
-	public boolean requestPasswordReset(@PathVariable int employeeId) throws NoSuchAlgorithmException {
+	public boolean requestPasswordReset(@PathVariable String employeeId) throws NoSuchAlgorithmException {
 		LOGGER.info("Start");
 		return userService.requestPasswordReset(employeeId);
 	}
 
 	@GetMapping("/verifyotp/{employeeId}/{encryptedOTP}")
-	public boolean verifyOTP(@PathVariable int employeeId, @PathVariable String encryptedOTP) {
+	public boolean verifyOTP(@PathVariable String employeeId, @PathVariable String encryptedOTP) {
 		LOGGER.info("Start");
 		return userService.verifyOTP(employeeId, encryptedOTP);
 	}
 
 	@GetMapping("/resetPassword/{employeeId}/{encryptedPassword}")
-	public boolean resetPassword(@PathVariable int employeeId, @PathVariable String encryptedPassword) {
+	public boolean resetPassword(@PathVariable String employeeId, @PathVariable String encryptedPassword) {
 		LOGGER.info("Start");
 		return userService.restPassword(employeeId, encryptedPassword);
 	}
 	@GetMapping("/getUser/{employeeId}")
-	public String getUserId(@PathVariable("employeeId") int employeeId) throws JsonProcessingException {
+	public String getUserId(@PathVariable("employeeId") String employeeId) throws JsonProcessingException {
 		LOGGER.info("start");
 		LOGGER.debug("employeeId: {} " , employeeId);
 		LOGGER.info("end");

@@ -25,7 +25,6 @@ import com.cts.tshell.repository.UserRepository;
 @Service
 public class UserService {
 
-
 	private UserRepository userRepository;
 
 	@Autowired
@@ -35,12 +34,14 @@ public class UserService {
     public SkillRepository skillRepository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+	
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+	
 	@Transactional
-	public User findByEmployeeId(int employeeId) {
+	public User findByEmployeeId(String employeeId) {
 		LOGGER.info("start");
 		LOGGER.debug("employeeId" + employeeId);
 		User user = userRepository.findByEmployeeId(employeeId);
@@ -91,7 +92,7 @@ public class UserService {
 	
 	
 	@Transactional
-	public User getUser(int employeeId) {
+	public User getUser(String employeeId) {
 		LOGGER.info("Start");
 		LOGGER.debug("EmployeeId: {}", employeeId);
 		LOGGER.info("End");
@@ -108,7 +109,8 @@ public class UserService {
 		return userCount; 
 	}
 
-	public Boolean requestPasswordReset(int employeeId) throws NoSuchAlgorithmException {
+	@Transactional
+	public Boolean requestPasswordReset(String employeeId) throws NoSuchAlgorithmException {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
@@ -122,6 +124,7 @@ public class UserService {
 		return true;
 	}
 
+	@Transactional
 	public String getCurrentDateTime() {
 		LOGGER.info("Start");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -130,7 +133,8 @@ public class UserService {
 		return formatter.format(date);
 	}
 
-	public boolean verifyOTP(int employeeId, String encryptedOTP) {
+	@Transactional
+	public boolean verifyOTP(String employeeId, String encryptedOTP) {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
@@ -141,6 +145,7 @@ public class UserService {
 		return false;
 	}
 
+	@Transactional
 	boolean validateTime(String dateStart) {
 		LOGGER.info("Start");
 		String dateStop = getCurrentDateTime();
@@ -173,7 +178,8 @@ public class UserService {
 		}
 	}
 
-	public boolean restPassword(int employeeId, String encryptedPassword) {
+	@Transactional
+	public boolean restPassword(String employeeId, String encryptedPassword) {
 		LOGGER.info("Start");
 		User user = userRepository.findByEmployeeId(employeeId);
 		LOGGER.debug(" user-> {}", user);
@@ -185,6 +191,7 @@ public class UserService {
 			return false;
 		}
 	}
+	
 	@Transactional
 	public void save(User user){
 		LOGGER.info("start");
@@ -216,7 +223,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public User getUserId(int employeeId){
+	public User getUserId(String employeeId){
 		return userRepository.fetchByEmployeeId(employeeId);
 	}
 	

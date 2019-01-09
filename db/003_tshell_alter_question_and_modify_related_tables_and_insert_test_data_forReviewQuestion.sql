@@ -84,3 +84,5 @@ INSERT INTO `tshell`.`option` (`op_description`, `op_qu_id`, `op_is_correct`) VA
 INSERT INTO `tshell`.`option` (`op_description`, `op_qu_id`, `op_is_correct`) VALUES ('Polymorphism', 18, 0);
 
 INSERT INTO `tshell`.`option` (`op_description`, `op_qu_id`, `op_is_correct`) VALUES ('Polymorphism', 18, 0);
+
+alter table `tshell`.`question` add fulltext(qu_question);

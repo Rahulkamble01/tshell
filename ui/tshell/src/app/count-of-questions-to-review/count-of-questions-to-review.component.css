@@ -27,11 +27,29 @@
     margin-top: 3%;
 }
 
+.datafield{
+    margin-top:3%;
+}
+
+.cardColour{
+    color:#808080;
+}
+
+.buttonColour{
+    background-color: #5A6268;
+}
+
+.formInput{
+    margin-left:2%;
+    margin-right:2%;
+}
+
 .cardsColumns{
     color:#808080;
     background-color: white;
     margin-bottom: 3%;
     cursor:pointer;
+    padding:3%;
 }
 .cardText1{
     font-size:20px;

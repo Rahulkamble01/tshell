@@ -10,14 +10,16 @@ import org.springframework.stereotype.Repository;
 import com.cts.tshell.bean.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
 
-	User findByEmpId(@Param("employeeId") int employeeId);
-	List<User> findAllById(@Param("id") int userId);
+public interface UserRepository extends JpaRepository<User, String> {
+
+	User findByEmpId(@Param("employeeId") String employeeId);
+	List<User> findAllById(@Param("id") String userId);
 	User getUserByEmail(String email);
-	User getUserByEmployeeId(int userId);
+	User getUserByEmployeeId(String userId);
 	@Query("select count(u.id) from User u ")
 	long totalUserCount();
-	User fetchByEmployeeId(@Param("employeeId")int employeeId);
-	User findByEmployeeId(int employeeid);
+	User fetchByEmployeeId(@Param("employeeId") String employeeId);
+	User findByEmployeeId(String employeeid);
+
 }
