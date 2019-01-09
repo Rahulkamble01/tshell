@@ -11,6 +11,8 @@
 ### PreRequisites  
   1. Get access to this server 10.142.194.148 by raising the GSD.
   2. Get access to this server also 10.142.194.149 by raising GSD.
+  
+
 # Get the project using Git
 1. Create a folder in D: drive with the name as 'tshell-project' in which you want to download the tshell project.
 2. Open Windows Explorer.
@@ -36,14 +38,14 @@ In case of SSL error:
 
   
 # Prepare Mysql Database
-### Check if MySql is Running
+### Check if MySql is running
 1. Open Task Manager
 2. In Task Manager select Services.
 3. Make the MySql status running if it is stopped.
 4. Make it run by right clicking on 'Stopped' status and selecting 'Start' option.
 5. Now your MySql will be in 'Running' status.
 
-### Prepare tShell Schema
+### Prepare tShell schema
 1. Open your command prompt:
 2. Run this command:  
    `mysql -u root -p`  
@@ -55,7 +57,7 @@ In case of SSL error:
 6. Open MySql Workbench and check if tShell Schema is there.
 7. Check if tables are present.
 
-#  Start with the tShell Services Part
+#  Start with the tShell services part
 ### Get your tShell project in Eclipse 
 1. Open your Eclipse 
 2. Select the workspace as `D:\tshell-workspace`
@@ -127,7 +129,7 @@ In case of SSL error:
 13. Drag and drop this sql script on right hand side opened folder.
 14. Now your sql script will be deployed on server.
 
-### Creating database using Sql script on Server using Putty
+### Creating database using Sql script on server using Putty
 1. Open putty.
 2. Give your IP address as `10.142.194.149`. Select Open.
 2. Login with your Employee Id and Password.
