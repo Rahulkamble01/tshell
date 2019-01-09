@@ -70,6 +70,28 @@ public class Question {
 
 	@Transient
 	private String error;
+	
+	@Transient
+	private String Topic;
+	
+	@Transient
+	private boolean validTopic;
+
+	public String getTopic() {
+		return Topic;
+	}
+
+	public void setTopic(String topic) {
+		Topic = topic;
+	}
+
+	public boolean isValidTopic() {
+		return validTopic;
+	}
+
+	public void setValidTopic(boolean validTopic) {
+		this.validTopic = validTopic;
+	}
 
 	public String getError() {
 		return error;
@@ -132,12 +154,18 @@ public class Question {
 		builder.append(empty);
 		builder.append(", lengthExceeded=");
 		builder.append(lengthExceeded);
+		builder.append(", error=");
+		builder.append(error);
+		builder.append(", Topic=");
+		builder.append(Topic);
+		builder.append(", validTopic=");
+		builder.append(validTopic);
 		builder.append("]");
 		return builder.toString();
 	}
 
 	public Question(String[] csvContent) {
-
+		Topic topic=new Topic(csvContent[0]);
 		List<Option> options = new ArrayList<Option>();
 		this.question = csvContent[1].trim();
 		if (!csvContent[2].equals("") || !csvContent[3].equals("")) {
@@ -192,8 +220,7 @@ public class Question {
 
 		if (correctAnswerCount < 1) {
 			setError("At least one option should be selected as answer");
-		} 
-		
+		}
 
 		else if (count == 2) {
 			setError("All option can not be true");

@@ -61,7 +61,7 @@ public class User {
 	@Max(value = 10000000000L, message = "Employee ID cannot exceed 10 digits")
 	@Column(name = "us_emp_id")
 	@JsonView(Views.Public.class)
-	private int employeeId;
+	private String employeeId;
 
 	@Column(name = "us_signup_date")
 	private String signupDate;
@@ -138,11 +138,13 @@ public class User {
 		this.role = role;
 	}
 
-	public int getEmployeeId() {
+	
+
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -184,5 +186,4 @@ public class User {
 				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
 				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + "]";
 	}
-
 }
