@@ -65,7 +65,7 @@ In case of SSL error:
 4. Now you will see your project in Eclipse.
 
 ###  Get All your Maven Repository
-1. Open your WinSCP5.9.4 .
+1. Open your WinSCP5.9.4 and execute WinSCP.exe application file.
 2. Give your IP address: 10.142.194.148 and Port Number: 22.
 3. They will ask for permission.
 4. Choose option 'Yes' .
@@ -126,7 +126,7 @@ In case of SSL error:
 3. You will find your dist file created in the folder:
    `D:\tshell-project\tShell\ui\tshell`
 4. Inside dist you will find Index.html having base-href as the name you have given.
-5. Now again open winSCP and drag and drop this dist file on Right hand side.
+5. Now again open winSCP.exe and drag and drop this dist file on Right hand side.
 6. In the folder:`/opt/apache-tomcat-8.0.36/webapps`
 7. In the same way as you have done with your WAR file.
 8. Your angular part will get deployed on server. 
@@ -147,9 +147,9 @@ In case of SSL error:
 13. Drag and drop this sql script on right hand side opened folder.
 14. Now your Sql Script will be deployed on server.
 
-### Creating database using Sql script on Server usins Putty
+### Creating database using Sql script on Server using Putty
 1. open putty.
-2. Give your Ip address as `10.142.194.148` .Select Open.
+2. Give your IP address as `10.142.194.148` .Select Open.
 2. Login with your employee Id and your password.
 3. Now give command `mysql -u root -p` and password `mysqlCT5` .
 4. Check for your schema by command:  
