@@ -16,6 +16,7 @@ export class ContributeQuestionService {
   url: string=environment.serviceUrlPrefix+ "/question/addQuestion";
   topicsUrl:string=environment.serviceUrlPrefix+"/question/getTopics/";
 
+
   constructor(private http: HttpClient) {
     this.http = http;
   }
@@ -26,6 +27,7 @@ export class ContributeQuestionService {
   getTopics(skillId) : Observable<any[]> {
 
     return this.http.get<any[]>(this.topicsUrl+skillId);
- 
    }
+  
+   
 }

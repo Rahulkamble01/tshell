@@ -27,4 +27,10 @@ public class UserController {
 		LOGGER.debug("totaluserscount -> {}", userCount);
 		return userCount;
 	}
+	@GetMapping("/employeedetails/{employeeId}")
+	public void getEmployeeDetails(int employeeId){
+		LOGGER.info("Start EmployeeDetails");
+		userService.getUser(employeeId);
+		LOGGER.debug("EmployeeId -> {}", employeeId);
+	}
 }

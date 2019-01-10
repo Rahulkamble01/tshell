@@ -1,10 +1,4 @@
 package com.cts.tshell.repository;
-
-
-
-
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +10,7 @@ import com.cts.tshell.bean.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByEmpId(@Param("employeeId") int employeeId);
 
+	User findByEmployeeId(int employeeId);
 List<User> findAllById(@Param("id") int userId);
 	
 	User getUserByEmail(String email);
@@ -24,5 +19,6 @@ List<User> findAllById(@Param("id") int userId);
 	
 	@Query("select count(u.id) from User u ")
 	long totalUserCount();
+	
 
 }

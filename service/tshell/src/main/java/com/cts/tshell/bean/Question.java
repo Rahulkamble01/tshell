@@ -56,15 +56,27 @@ public class Question {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
 	private List<Option> optionList;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable( name = "topic_question", 
+				joinColumns = { @JoinColumn(name = "tq_qu_id")},
+				inverseJoinColumns = { @JoinColumn(name = "tq_tp_id")})
+	private Set<Topic> topicList; 
+	
+
+
 	public Question(int id, String question, String status, QuestionDifficultyLevel questionDifficultyLevel,
-			User createdUser, List<Option> optionList) {
+			QuestionAnswerType questionAnswerType, User createdUser, List<Option> optionList, Set<Topic> topicList,
+			String topic) {
 		super();
 		this.id = id;
 		this.question = question;
 		this.status = status;
 		this.questionDifficultyLevel = questionDifficultyLevel;
+		this.questionAnswerType = questionAnswerType;
 		this.createdUser = createdUser;
 		this.optionList = optionList;
+		this.topicList = topicList;
+		this.topic = topic;
 	}
 
 	public Question() {
@@ -80,6 +92,14 @@ public class Question {
 	@Transient
 	private String topic;
 	
+	public Set<Topic> getTopicList() {
+		return topicList;
+	}
+
+	public void setTopicList(Set<Topic> topicList) {
+		this.topicList = topicList;
+	}
+
 	public String getTopic() {
 		return topic;
 	}

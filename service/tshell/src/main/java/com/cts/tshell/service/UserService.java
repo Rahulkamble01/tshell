@@ -28,6 +28,8 @@ public class UserService {
 	public User getUser(int employeeId) {
 		LOGGER.info("Start");
 		LOGGER.debug("EmployeeId: {}", employeeId);
+		 User details = userRepository.findByEmpId(employeeId);
+		 LOGGER.debug("EmployeeDetails {}",details);
 		LOGGER.info("End");
 		return userRepository.findByEmpId(employeeId);
 	}
@@ -39,5 +41,7 @@ public class UserService {
 		
 		return userCount; 
 	}
+	
+	
 
 }

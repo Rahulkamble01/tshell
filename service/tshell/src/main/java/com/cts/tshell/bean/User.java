@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -74,11 +74,13 @@ public class User {
 	@Column(name = "us_image")
 	private byte[] image;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "us_signup_date")
 	private Date signupDate;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	@Column(name = "us_last_login_time")
-	private Time lastLoginTime;
+	private Date lastLoginTime;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -98,11 +100,11 @@ public class User {
 		this.signupDate = signupDate;
 	}
 
-	public Time getLastLoginTime() {
+	public Date getLastLoginTime() {
 		return lastLoginTime;
 	}
 
-	public void setLastLoginTime(Time lastLoginTime) {
+	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
 

@@ -31,6 +31,7 @@ public class QuestionService {
 	public void setOptionsRepository(OptionsRepository optionsRepository) {
 		this.optionsRepository = optionsRepository;
 	}
+
 	@Autowired
 	public void setQuestionRepository(QuestionRepository questionRepository) {
 		this.questionRepository = questionRepository;
@@ -45,40 +46,49 @@ public class QuestionService {
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+
 	@Transactional
 	public void saveQuestion(Question question) {
 		LOGGER.info("starting saveQuestion method");
-		Topic t = topicRepository.findTopicByName(question.getTopic());		
-		if(t.getQuestions()!=null){
-			List<Question> questionList=t.getQuestions();
+		int employeeId = question.getCreatedUser().getEmployeeId();
+		LOGGER.info("employeeId {}" + employeeId);
+		User user = userRepository.findByEmployeeId(employeeId);
+		LOGGER.info("User details:{}" + user);
+		for (Option option : question.getOptionList()) {
+			option.setId(0);
+		}
+		question.setCreatedUser(user);
+		Topic t = topicRepository.findTopicByName(question.getTopic());
+		if (t.getQuestions() != null) {
+			List<Question> questionList = t.getQuestions();
 			questionList.add(question);
-			LOGGER.info("Adding a question if not null :{}"+questionList.add(question));
+			LOGGER.info("Adding a question if not null :{}" + questionList.add(question));
 			t.setQuestions(questionList);
-		}else{
-			List<Question> questionList=new ArrayList<Question>();
+		} else {
+			List<Question> questionList = new ArrayList<Question>();
 			questionList.add(question);
-			LOGGER.info("Adding a question :{}"+questionList.add(question));
+			LOGGER.info("Adding a question :{}" + questionList.add(question));
 			t.setQuestions(questionList);
 		}
 		topicRepository.save(t);
-		Question latestQn=questionRepository.fetchLatestQn();	 
-		
-		for(Option option: question.getOptionList()){
-			
+		Question latestQn = questionRepository.fetchLatestQn();
+		for (Option option : question.getOptionList()) {
+
 			option.setId(0);
 			option.setQuestion(latestQn);
 			optionsRepository.save(option);
 		}
 
 	}
+
 	@Transactional
-	public List<User> getUser(int userId){
+	public List<User> getUser(int userId) {
 		LOGGER.info("starting getUser method");
 		List<User> userInfo = (List<User>) userRepository.findAllById(userId);
-		LOGGER.info("userInfo :{}"+userInfo);
+		LOGGER.info("userInfo :{}" + userInfo);
 		LOGGER.info("end of getUser()");
 		return userInfo;
-		
+
 	}
 
 	@Transactional
@@ -89,6 +99,8 @@ public class QuestionService {
 		LOGGER.info("end of getAllTopics method");
 		return topics;
 	}
+
+
 	@Transactional
 	public List<Question> findTotalQuestionContributed(int employeeId) {
 		LOGGER.info("START");
@@ -98,15 +110,13 @@ public class QuestionService {
 		return question;
 
 	}
-	
+
 	@Transactional
-	public long getQuestionCount(){
+	public long getQuestionCount() {
 		LOGGER.info("start");
 		long questionCount = questionRepository.totalQuestionsCount();
-		LOGGER.debug("QuestionCount -> {}", questionCount );
+		LOGGER.debug("QuestionCount -> {}", questionCount);
 		return questionCount;
-}
-
-	
+	}
 
 }
