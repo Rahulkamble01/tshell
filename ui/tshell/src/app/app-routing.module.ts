@@ -26,6 +26,7 @@ import { ExitAssesmentComponent } from './exit-assesment/exit-assesment.componen
 import { InstructionComponent } from './instruction/instruction.component';
 import { ScoreAssesmentComponent } from './score-assesment/score-assesment.component';
 import { QuestiongraphComponent } from './questiongraph/questiongraph.component';
+import { ReferenceskillComponent} from './referenceskill/referenceskill.component';
 
 
 const routes: Routes = [
@@ -54,7 +55,8 @@ const routes: Routes = [
   { path: "skills/:id", component: SearchResultComponent },
   { path: "addskill", component: AddskillComponent },
   { path: "skillpage", component: SkillpageComponent },
-  { path: "graph",component:QuestiongraphComponent}
+  { path: "graph",component:QuestiongraphComponent},
+  {path: "skills", component:ReferenceskillComponent}
 ];
 
 

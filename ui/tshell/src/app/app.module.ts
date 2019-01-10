@@ -45,6 +45,8 @@ import { PasswordMachingValidatorDirective } from './header/password-matching-va
 import { PasswordNotEqualValidatorDirective } from './header/password-not-equal-validator.directive';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
+import { ReferenceskillComponent } from './referenceskill/referenceskill.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -90,7 +92,8 @@ PasswordNotEqualValidatorDirective,
     SkillpageComponent,
     SkillmodalComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    ReferenceskillComponent
   ],
 
   imports: [
@@ -100,7 +103,8 @@ PasswordNotEqualValidatorDirective,
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
-    NgbModule
+    NgbModule,
+    NgxEchartsModule
   ],
   providers: [
     ContributeQuestionService,

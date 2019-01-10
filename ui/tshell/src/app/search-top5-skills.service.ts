@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
+import {environment} from './environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchTop5SkillsService {
-  url='/tShell/skill/top4searchedskills';
+  url=environment.serviceUrlPrefix+'/skill/top4searchedskills';
   constructor(private http: HttpClient) { }
 
   getSkills():Observable<any>{
