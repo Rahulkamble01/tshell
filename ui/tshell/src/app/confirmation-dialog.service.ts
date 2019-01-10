@@ -44,4 +44,22 @@ export class ConfirmationDialogService {
     return modalRef.result;
   }
 
+  public login(
+    title: string,
+    message: string,
+    btnOkText: string = 'Login',
+    btnCancelText: string = 'Cancel',
+    dialogSize: 'sm' | 'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(ConfirmationDialogComponent,
+      // { size: dialogSize },
+      { centered: true }
+    );
+    modalRef.componentInstance.confirmDialoge = 3;
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.btnOkText = btnOkText;
+    modalRef.componentInstance.btnCancelText = "Cancel";
+    return modalRef.result;
+  }
+
 }

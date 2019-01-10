@@ -338,6 +338,7 @@ a {
 .skillnameStyle {
   font-size: 35px;
   font-weight: bold;
+  padding-left: 0px;
 }
 
 .padding1opx {
