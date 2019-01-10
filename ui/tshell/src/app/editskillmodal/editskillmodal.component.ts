@@ -126,7 +126,10 @@ export class EditskillmodalComponent implements OnInit {
   }
 
   get topicName(): any { return this.addskillform.get('topicName'); }
-  clearInput() { this.topicName.reset(); }
+  get topicPercentage(): any {
+    return this.addskillform.get('topicPercentage');
+  }
+  clearInput() { this.topicName.reset(); this.topicPercentage.reset();}
   clearAllInput() {
     this.topics = [];
   }

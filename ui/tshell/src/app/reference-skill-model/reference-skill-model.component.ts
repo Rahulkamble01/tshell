@@ -45,14 +45,15 @@ export class ReferenceSkillModelComponent implements OnInit {
     debounceTime(200),
     distinctUntilChanged(),
     map(term => (term === '' ? []
-      : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+      // : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+      : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 5)
     ))
   )
 
   itemSelected($event) {
     let counter = 0;
     this.referenceSkillName.forEach(element => {
-      if ($event.item.name.toLowerCase() === element.referenceSkill.name.toLowerCase()) {
+      if ($event.item.name === element.referenceSkill.name) {
         this.sameSkill = true;
         counter = 1;
       }

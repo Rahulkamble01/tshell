@@ -21,8 +21,6 @@ import com.cts.tshell.service.TopicService;
 
 @RestController
 @RequestMapping("/skill")
-
-
 public class SkillController extends TshellController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillController.class);
@@ -150,7 +148,7 @@ public class SkillController extends TshellController {
 		return top4SearchedSkills;
 	}
 
-	@RequestMapping(value = "/recentSkillList", method = RequestMethod.GET)
+	@RequestMapping(value = "/recentskilllist", method = RequestMethod.GET)
 	public List<Skill> getRecentSkills() {
 		LOGGER.info("start");
 		Date date=skillService.getCurrentTimeUsingCalendar();
@@ -206,5 +204,13 @@ public class SkillController extends TshellController {
 		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", refskillId);
 		skillService.deleteReferenceSkill(refskillId);		
+	}
+	
+	@RequestMapping(value = "/skillbyname/{name}", method = RequestMethod.GET)
+	public Skill getSkillsByName(@PathVariable String name)   {
+		LOGGER.info("start get SkillsbyName");
+		Skill skill = skillService.getSkillByName(name);
+		LOGGER.debug("SkillController -> {}", skill);
+		return skill;
 	}
 }

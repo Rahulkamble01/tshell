@@ -137,8 +137,8 @@ export class SearchResultComponent implements OnInit {
       // tslint:disable-next-line:no-unused-expression
       (term === '' ? []
         // this.keyPressing(this.model).filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()))
-        : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5)
-        // : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 100)
+        // : this.allSkills.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 5)
+        : this.allSkills.filter(v => new RegExp(term, 'gi').test(v.name)).slice(0, 5)
         // : console.log(this.allSkills.filter(v => v.name.toLowerCase()))
       )
     )
