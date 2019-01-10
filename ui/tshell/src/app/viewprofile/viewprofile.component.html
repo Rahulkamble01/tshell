@@ -220,7 +220,7 @@
                   <div class="col-lg-5 col-5 col-sm-5">
                     <span class="percent">{{assessment.score}}<span class="assessmentscore">%</span></span>
                   </div>
-                  <div class="col-lg-2 col-2 col-sm-2">
+                  <div class="col-lg-2 col-2 col-sm-2" *ngIf="service.role=='admin'">
                     <div class="vertical-center"><button data-toggle="modal" [attr.data-target]="'#myModal'+assessment.id"
                         class="fas fa-ellipsis-v show-result"></button></div>
 

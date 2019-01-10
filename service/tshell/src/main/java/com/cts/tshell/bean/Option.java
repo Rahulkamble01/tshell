@@ -46,6 +46,12 @@ public class Option {
 	private boolean answer;
 
 	@Transient
+	private boolean response;
+
+	@Transient
+	private int counter = 0;
+
+	@Transient
 	private boolean invalidAnswerFormat;
 
 	@Transient
@@ -86,12 +92,6 @@ public class Option {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "Option [id=" + id + ", description=" + description + ", question=" + question + ", answer=" + answer
-				+ ", invalidAnswerFormat=" + invalidAnswerFormat + ", lengthExceeded=" + lengthExceeded + "]";
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -126,6 +126,22 @@ public class Option {
 
 	public Option() {
 		super();
+	}
+
+	public boolean isResponse() {
+		return response;
+	}
+
+	public void setResponse(boolean response) {
+		this.response = response;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 
 }

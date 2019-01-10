@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "learner-homepage", component: LearnerHomepageComponent },
   { path: "recentSkills", component: RecentlyAddedSkillsComponent },
+  { path: 'dash', component: DashboardComponent },
   { path: "admin-homepage", component: AdminHomepageComponent },
   { path: "changepassword", component: ChangepasswordComponent },
   { path: "userprofile", component: UserprofileComponent },
@@ -51,14 +52,12 @@ const routes: Routes = [
   { path: "questions", component: CountOfQuestionsToReviewComponent },
   { path: 'assesment/:skillid/:skillname/:type', component: ExitAssesmentComponent },
   { path: 'instruction/:skillid/:skillname/:type', component: InstructionComponent },
-  { path: 'assesmentscore', component: ScoreAssesmentComponent },
+  { path: 'assesmentscore/:skillname/:assessmentid', component: ScoreAssesmentComponent },
   { path: "skills", component: SearchResultComponent },
   { path: "skills/:name", component: SkillpageComponent },
-
   { path: "addquestion", component: AddQuestionComponent },
   { path: "graph", component: QuestiongraphComponent },
   { path: "top5Tests", component: TopAccessedTestsComponent },
-  // { path: "skills/:id", component: SearchResultComponent },
   { path: "graph", component: QuestiongraphComponent }
 
 ];

@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 				+ "where s.name LIKE CONCAT('%',:searchSkillName,'%') "),
 
 		@NamedQuery(name = "Skill.fetchTopSearchedSkills", query = "select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc") })
+
 public class Skill {
 
 	@Id

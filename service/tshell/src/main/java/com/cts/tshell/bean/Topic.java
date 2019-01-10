@@ -16,13 +16,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @NamedQueries({
 		@NamedQuery(name = "Topic.fetchTopics", query = "select t.name from Topic t "
 				+ "join t.skill s where s.id=:skillId"),
@@ -33,8 +37,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 		@NamedQuery(name = "Topic.fetchTopicsofSkill", query = "select distinct t from Topic t "
 
-				+ "left join fetch t.skill s where s.id=:skillId")
-})
+				+ "left join fetch t.skill s where s.id=:skillId") })
 public class Topic {
 
 	@Id
@@ -50,10 +53,8 @@ public class Topic {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tp_sk_id")
-	// @JsonView(Views.Internal.class)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JsonIgnore
-	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Skill skill;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -61,6 +62,9 @@ public class Topic {
 			@JoinColumn(name = "tq_qu_id") })
 	@JsonView(Views.Internal.class)
 	private List<Question> questions;
+
+	@Transient
+	private float topicScore;
 
 	public int getId() {
 		return id;
@@ -108,6 +112,14 @@ public class Topic {
 
 	public void setPercentage(int percentage) {
 		this.percentage = percentage;
+	}
+
+	public float getTopicScore() {
+		return topicScore;
+	}
+
+	public void setTopicScore(float topicScore) {
+		this.topicScore = topicScore;
 	}
 
 	@Override

@@ -29,10 +29,10 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.countOption = this.optionList.length;
           this.message = 'undefined';
         } else {
-          this.message = 'NOPE, No questions found for review.';
+          this.message = 'fail';
         }
       }, error => {
-        this.message = 'NOPE, No questions found for review.';
+        this.message = 'fail';
       }
     )
   }
@@ -84,7 +84,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.optionList = this.question.optionList;
           this.countOption = this.optionList.length
         } else {
-          this.message = 'NOPE, No questions found for review.';
+          this.message = 'fail';
         }
       },
       error => {
@@ -114,7 +114,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.optionList = this.question.optionList;
           this.countOption = this.optionList.length;
         } else {
-          this.message = 'NOPE, No Questions found for review';
+          this.message = 'fail';
         }
       }
     )
@@ -130,7 +130,7 @@ export class SearchExistingQuestionsComponent implements OnInit {
           this.optionList = this.question.optionList;
           this.countOption = this.optionList.length;
         } else {
-          this.message = 'NOPE, No Questions found for review';
+          this.message = 'fail';
         }
       }
     )

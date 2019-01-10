@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cts.tshell.bean.Assessment;
+import com.cts.tshell.bean.TopicWiseScore;
 
 @Repository
 public interface AssessmentRepository extends JpaRepository<Assessment, Integer>{
@@ -20,5 +21,9 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Integer>
 	@Query("select count(a.id) from Assessment a ")
 	long totalAssessmentsCount();
 
+	Assessment findAssessmentById(int id);
+	
+	Assessment fetchAssesmentDetailById(@Param("assessmentId")int assessmentId);
+	
+	List<TopicWiseScore> getTopicWiseQuestionCount(@Param("assessmentId")int assessmentId);
 }
-

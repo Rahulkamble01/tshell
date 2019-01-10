@@ -1,6 +1,5 @@
 package com.cts.tshell.bean;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -215,11 +214,4 @@ public class User {
 		this.signupOtpVerifyStatus = signupOtpVerifyStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
-				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + ", signupOtpVerifyStatus="
-				+ signupOtpVerifyStatus + ", signupOtp=" + signupOtp + "]";
-	}
 }

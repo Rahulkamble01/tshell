@@ -1,11 +1,7 @@
+<div class="container-fluid mb-1">
+    <div class="titlename">Skills<hr></div>
+</div>
 <div class="container">
-
-
-  <div class="row mb-0 pt-0 pb-0">
-    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
-      <h2 class="text-center mb-0">Skills</h2>
-    </div>
-  </div>
   <div class="row mt-0 pt-0">
     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs12">
@@ -96,11 +92,11 @@
               <span class="col-lg-4 col-md-5 col-sm-12 col-xs-12 float-right">
                 <!-- ========================================= -->
                 <div *ngIf="userLoggedInn" class="inlineelements float-right">
-                  <a [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="badge badge-primary">Entry
+                  <a [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="btn btn-ts-primary btn-ts-sm">Entry
                     Test
                   </a>
                   &nbsp;
-                  <a [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="badge badge-primary">Exit
+                  <a [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="btn btn-ts-primary btn-ts-sm">Exit
                     Test
                   </a>
                 </div>
@@ -307,22 +303,22 @@
                   <h6 class="d-inline">Put Your Name Here</h6>&nbsp;<span>
 
                     <div *ngIf="userLoggedInn" class="inlineelements">
-                      <a [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="badge badge-primary">Take
+                      <a [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="btn btn-ts-primary btn-ts-sm">Take
                         Entry
                         Test
                       </a>
                       &nbsp;
-                      <a [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="badge badge-primary">Take
+                      <a [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="btn btn-ts-primary btn-ts-sm">Take
                         Exit
                         Test
                       </a>
                     </div>
                     <div *ngIf="!userLoggedInn" class="inlineelements">
-                      <a (click)="gotoLogin()" class="badge badge-primary">Take Entry
+                      <a (click)="gotoLogin()" class="btn btn-ts-primary btn-ts-sm">Take Entry
                         Test
                       </a>
                       &nbsp;
-                      <a (click)="gotoLogin()" class="badge badge-primary">Take Exit
+                      <a (click)="gotoLogin()" class="btn btn-ts-primary btn-ts-sm">Take Exit
                         Test
                       </a>
                     </div>

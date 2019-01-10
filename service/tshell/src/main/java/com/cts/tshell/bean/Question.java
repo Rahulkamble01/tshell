@@ -41,7 +41,16 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
 				+ " left join fetch q.createdUser " + "left join fetch q.optionList " + "where q.id=:questionId"),
 
-		@NamedQuery(name = "Question.findQuestionWithOptions", query = "select q from Question q join q.optionList o where q.id=:questionId")
+		@NamedQuery(name = "Question.findQuestionWithOptions", query = "select q from Question q join q.optionList o where q.id=:questionId"),
+		@NamedQuery(name = "Question.fetchQuestionById", 
+				query = "select distinct q from Question q " +
+						"left join fetch q.questionDifficultyLevel t " + 
+						"left join fetch q.questionAnswerType t " + 
+						"left join fetch q.optionList t " + 
+						"left join fetch q.topicSet t " + 
+						"where q.status ='Approved' " + 
+						"and q.id = :questionId "+ 
+						" ")
 
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
@@ -82,7 +91,7 @@ public class Question {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qu_qt_id")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private QuestionAnswerType questionAnswerType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -101,6 +110,7 @@ public class Question {
 	private Set<Topic> topicSet;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Option> optionList;
 
 	@Transient
@@ -168,21 +178,15 @@ public class Question {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", question=" + question + ", status=" + status + ", createdDate=" + createdDate
-				+ ", reviewedDate=" + reviewedDate + ", questionDifficultyLevel=" + questionDifficultyLevel
-				+ ", questionAnswerType=" + questionAnswerType + ", createdUser=" + createdUser + ", reviewedUser="
-				+ reviewedUser + ", topicSet=" + topicSet + ", optionList=" + optionList + ", topic=" + topic
-				+ ", empty=" + empty + ", lengthExceeded=" + lengthExceeded + ", error=" + error + ", Topic=" + Topic
-				+ ", validTopic=" + validTopic + ", answerType=" + answerType + "]";
-	}
 
 	public Question(String[] csvContent) {
 		Topic topic = new Topic(csvContent[0]);
 		List<Option> options = new ArrayList<Option>();
 
 		this.question = csvContent[1].trim();
+		if(csvContent[1].isEmpty()){
+			setError("Question Description is missing");
+		}
 		if (!csvContent[2].equals("") || !csvContent[3].equals("")) {
 			options.add(new Option(csvContent[2].trim(), csvContent[3].trim()));
 		}
@@ -229,23 +233,23 @@ public class Question {
 				invalidAnswerCount += 1;
 			}
 			if (option.isLengthExceeded()) {
-				setError("option description length exceeded");
+				setError("Option length exceeded");
 			}
 
 		}
 
 		if (correctAnswerCount < 1) {
-			setError("At least one option should be selected as answer");
+			setError("Atleast one option should be selected as Answer");
 		}
 
 		else if (count == 2) {
-			setError("All option can not be true");
+			setError("All option can not be Answer");
 		} else if (invalidinput > 0) {
 			setError("Option is missing");
 		} else if (optionsSet.size() != getOptionList().size()) {
-			setError("Multiple option cannot have same value");
+			setError("Options cannot have same values");
 		} else if (invalidAnswerCount > 0) {
-			setError("Answer is missing or in incorrect format");
+			setError("Answer is missing or incorrect format");
 		}
 
 		if (csvContent[2].isEmpty()) {
@@ -256,7 +260,7 @@ public class Question {
 
 		if (getQuestion().length() > 500) {
 			lengthExceeded = true;
-			setError("question length exceeded");
+			setError("Question length exceeded");
 		} else {
 			lengthExceeded = false;
 		}
@@ -275,6 +279,7 @@ public class Question {
 	public void setTopicSet(Set<Topic> topicSet) {
 		this.topicSet = topicSet;
 	}
+
 
 	public int getId() {
 		return id;
@@ -371,5 +376,7 @@ public class Question {
 	public void setAnswerType(int answerType) {
 		this.answerType = answerType;
 	}
+
+
 
 }

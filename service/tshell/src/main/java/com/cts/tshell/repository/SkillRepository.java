@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.cts.tshell.bean.Skill;
 
 @Repository
-
 public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
 	@Query("select s.name, s.searchCount from Skill s  where s.searchCount>0 order by searchCount desc")
@@ -37,4 +36,5 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
 	public List<Skill> findPendingQuestionsCount();
 
+	Skill findSkillById(int id);
 }

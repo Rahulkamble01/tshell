@@ -86,15 +86,13 @@
         </button>
       </label>
 
-
-      <div class=" card" *ngFor="let option of optionsList">
-        <div class="card-header ">
-          Option : {{option.id}}
-        </div>
-        <div class="row card-body">
+    <div class=" card" >
+      <div *ngFor="let option of optionsList">
+     
+        <div class="row" >
 
           <div class="col-lg-9 col-sm-6 col-6">
-            <pre>{{option.description}}</pre>
+            <pre>{{option.id}}. {{option.description}}</pre>
           </div>
           <div class="col-lg-1 col-sm-2 col-2">
             <a href="#" data-toggle="modal" [attr.data-target]="'#mo'+option.id">
@@ -143,6 +141,7 @@
           </div>
         </div>
       </div>
+    </div>
       <div *ngIf="count==5">
         <span class="maxOptions">*</span>Max 5 Options allowed</div>
       <div>

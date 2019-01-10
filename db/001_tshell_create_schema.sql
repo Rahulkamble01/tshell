@@ -192,7 +192,8 @@ CREATE TABLE `question_answer_type` (
 
 LOCK TABLES `question_answer_type` WRITE;
 /*!40000 ALTER TABLE `question_answer_type` DISABLE KEYS */;
-INSERT INTO `question_answer_type` VALUES (1,'a');
+INSERT INTO `question_answer_type` VALUES (1,'Single');
+INSERT INTO `question_answer_type` VALUES (2,'Multiple');
 /*!40000 ALTER TABLE `question_answer_type` ENABLE KEYS */;
 UNLOCK TABLES;
 

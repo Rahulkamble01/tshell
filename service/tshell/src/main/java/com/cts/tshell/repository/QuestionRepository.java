@@ -14,7 +14,6 @@ import com.cts.tshell.bean.Question;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
-
 	@Query(" select count(q.id),s.name from Question q " + " join q.createdUser u " + " join u.skills s "
 			+ " join s.topics t join t.questions " + " where u.employeeId = :employeeId and t.id=q.id  group by s.name")
 	List<Question> findTotalQuestionContributedById(@Param("employeeId") String employeeId);
@@ -29,8 +28,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	Question fetchQuestionDetails(@Param("questionId") int questionId);
 
 	/*
-	 * Mentioning the query using @Query annotation and passing the Pageable object
-	 * to get the limited row from database for the below method
+	 * Mentioning the query using @Query annotation and passing the Pageable
+	 * object to get the limited row from database for the below method
 	 * findReviewQuestion()
 	 */
 	@Query("select q from Question q " + "left join q.questionDifficultyLevel " + "left join q.questionAnswerType "
@@ -45,4 +44,12 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	public Question findQuestionWithOptions(@Param("questionId") int questionId);
 
+	List<Question> fetchQuestionById(@Param("questionId") int questionId);
+
+	Question findQuestionById(int id);
+
+	@Query(value = "select qu_id from question  " + "left join topic_question on tq_qu_id = qu_id  "
+			+ "left join topic on tp_id = tq_tp_id " + " " + "where qu_status = 'Approved' "
+			+ "and tq_tp_id = :topicId and tp_sk_id = :skillId " + " ", nativeQuery = true)
+	long[] getQuestionId(@Param("topicId") int topicId, @Param("skillId") int skillId);
 }

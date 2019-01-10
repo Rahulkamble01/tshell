@@ -1,7 +1,7 @@
-
-.qbody{
+.qbody {
   background-color: white !important;
 }
+
 /******   Question Palette *******/
 
 /*:host(body){
@@ -40,6 +40,9 @@ body{
   color: black;
 }
 
+.question-pre {
+  white-space: pre-wrap;
+}
 
 
 .test-name {
@@ -171,7 +174,7 @@ body{
   margin-right: 6px;
   margin-bottom: 10px;
   color: #28a745;
-  background-color:transparent;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -202,18 +205,18 @@ body{
 }
 
 /******  Custom Scrollbar CSS *******/
-#style-1::-webkit-scrollbar-track {
+#scrollbar-1::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(90, 47, 47, 0.3);
   border-radius: 10px;
   background-color: rgb(204, 204, 204);
 }
 
-#style-1::-webkit-scrollbar {
+#scrollbar-1::-webkit-scrollbar {
   width: 8px;
   background-color: rgb(204, 204, 204);
 }
 
-#style-1::-webkit-scrollbar-thumb {
+#scrollbar-1::-webkit-scrollbar-thumb {
 
 
   /* border-radius: 10px;
@@ -352,6 +355,14 @@ body{
     padding-top: 2px;
   }
 
+  .unanswered-legend-buttons {
+    height: 35px;
+  }
+
+  .answered-legend-buttons {
+    height: 35px;
+  }
+
 }
 
 /*When Media size is 767.98 -- I-pad / tablets */
@@ -390,6 +401,13 @@ body{
     font-size: 15px;
   }
 
+  .unanswered-legend-buttons {
+    height: 29px;
+  }
+
+  .answered-legend-buttons {
+    height: 29px;
+  }
 
 }
 
@@ -418,6 +436,13 @@ body{
     padding-left: 0px;
   }
 
+  .unanswered-legend-buttons {
+    height: 35px;
+  }
+
+  .answered-legend-buttons {
+    height: 35px;
+  }
 }
 
 
