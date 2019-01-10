@@ -36,7 +36,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 				+ "left join fetch t.skill s where s.id=:skillId")
 
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Topic {
 
 	@Id

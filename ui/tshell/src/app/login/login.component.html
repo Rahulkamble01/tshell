@@ -115,7 +115,7 @@
                                 <div *ngIf="otpform.get('otp').errors.required" class="danger validation">OTP is required</div>
                                 <div *ngIf="otpform.get('otp').errors.pattern" class="danger validation" >OTP should contain 6 digits</div>
                               </div>
-                                <div class="danger validate"> {{message}}</div>
+                                <div class="danger validation"> {{message}}</div>
                               </div>
                             </div>
                             <div class="modal-footer">
@@ -158,7 +158,7 @@
                                       <div *ngIf="resetform.get('confirmPassword').errors.maxlength" class="danger validation" >Password must be maximun 30 characters
                                       </div>
                                     </div>
-                                    <div class="help-block danger validate" *ngIf="resetform.get('confirmPassword').touched && resetform.get('confirmPassword').errors?.notEqual && !resetform.get('confirmPassword').errors.required
+                                    <div class="help-block danger validation" *ngIf="resetform.get('confirmPassword').touched && resetform.get('confirmPassword').errors?.notEqual && !resetform.get('confirmPassword').errors.required
                                     && !resetform.get('confirmPassword').errors.minlength && !resetform.get('confirmPassword').errors.maxlength"
                                       >
                                       Password and confirm password does not match

@@ -25,14 +25,14 @@ export class SkillserviceService {
   addReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/addreferenceskill";
   deleteReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/deleteReferenceskill/";
 
-
-
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
     return this.http.get(this.getAllSkillUrl);
   }
+
   updateSearch(json): Observable<any> {
+    console.log(json);
     return this.http.post(this.updateSearchUrl, json, httpOptions);
   }
 

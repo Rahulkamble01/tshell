@@ -237,12 +237,6 @@ a {
   .dropdown-menu {
     width: 451px;
   }
-  .ml-12 {
-    margin-left: 72px;
-  }
-  .mr-12 {
-    margin-right: 0px
-  }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -250,13 +244,25 @@ a {
     width: 612px;
   }
 
-  .ml-12 {
+  /* .ml-12 {
     margin-left: 35px;
   }
 
   .mr-12 {
     margin-right: 0px
+  } */
+}
+@media screen and (max-width: 575px) {
+  .skillnameStyle {
+    text-align: center;
   }
+  .inlineelements{
+    text-align: center
+  }
+  .description-style{
+    text-align: center!important;
+  }
+
 }
 
 @media screen and (max-width: 1001px) {

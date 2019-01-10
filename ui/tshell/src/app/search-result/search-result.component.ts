@@ -158,7 +158,7 @@ export class SearchResultComponent implements OnInit {
   itemSelected($event) {
     this.skills = $event.item;
     this.name = $event.item.name;
-    this.skillService.updateSearch($event.item).subscribe();
+    this.skillService.updateSearch($event.item.id).subscribe();
     this.skillService.getSkillTopper($event.item.id).subscribe(data => {
       this.toppers = data;
     });

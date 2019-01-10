@@ -85,7 +85,7 @@ export class EditskillmodalComponent implements OnInit {
       morethahun = 1;
     }
     this.topics.forEach(element => {
-      if (topicname.toLowerCase() === element.name.toLowerCase() || topicname === '') {
+      if (topicname === element.name || topicname === '') {
         counter = 1;
       }
     });

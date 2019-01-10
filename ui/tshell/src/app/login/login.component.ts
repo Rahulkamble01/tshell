@@ -162,9 +162,9 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         if (data == true) {
-          alert("OTP resent successfully");
+          // alert("OTP resent successfully");
           this.status = true;
-          this.message="";
+          this.message="OTP resent successfully";
           this.otpform.reset();
         }
       }
