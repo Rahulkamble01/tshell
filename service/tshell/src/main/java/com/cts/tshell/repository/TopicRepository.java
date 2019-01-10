@@ -6,17 +6,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.cts.tshell.bean.Skill;
 import com.cts.tshell.bean.Topic;
 
 @Repository
-public interface TopicRepository extends JpaRepository<Topic, Integer>{
+public interface TopicRepository extends JpaRepository<Topic, Integer> {
 
-	
-	Topic findTopicByName(@Param("name")String name);
+	public Topic findTopicByName(@Param("name") String name);
 
-	List<Topic> findTopics(@Param("skillId") int skillId);
-	
-	Topic getTopicByName(String TopicName);
+	public List<Topic> findTopics(@Param("skillId") int skillId);
+
+	public Topic getTopicByName(String TopicName);
+
+	public List<Topic> findBySkill(Skill skill);
+
+	public Topic findByName(String topicName);
+
+	public List<Topic> fetchTopics(@Param("skillId") int skillId);
 
 }
-

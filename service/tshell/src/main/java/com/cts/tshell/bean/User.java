@@ -3,8 +3,6 @@ package com.cts.tshell.bean;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,17 +28,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "user")
-@NamedQueries({ @NamedQuery(name = "User.findByEmpId", query = " select u from User u " + " left join fetch u.role r "
-		+ " where u.employeeId = :employeeId ") , 
+@NamedQueries({
+		@NamedQuery(name = "User.findByEmpId", query = " select u from User u " + " left join fetch u.role r "
+				+ " where u.employeeId = :employeeId "),
 		@NamedQuery(name = "User.fetchByEmployeeId", query = " select distinct u from User "
-		+ "u left join fetch u.skills "
-		+ "left join fetch u.role "
-		+ " where u.employeeId=:employeeId ") })
+				+ "u left join fetch u.skills " + "left join fetch u.role " + " where u.employeeId=:employeeId ") })
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "us_id")	
+	@Column(name = "us_id")
 	private int id;
 
 	@NotNull(message = "User Name cannot be empty")
@@ -74,25 +71,23 @@ public class User {
 	@Column(name = "us_signup_date")
 	private Date signupDate;
 
-	@Column(name = "us_last_login_time")	
+	@Column(name = "us_last_login_time")
 	private Date lastLoginTime;
-	
-	@Column(name = "us_otp")	
+
+	@Column(name = "us_otp")
 	private String otp;
-	
-	@Column(name = "us_otp_generated_time")	
+
+	@Column(name = "us_otp_generated_time")
 	private Calendar otpGeneratedTime;
-	
-	@Column(name = "us_signup_otp")	
+
+	@Column(name = "us_signup_otp")
 	private String signupOtp;
-	
-	@Column(name = "us_signup_otp_time")	
+
+	@Column(name = "us_signup_otp_time")
 	private Date signupOtpTime;
-	
-	
+
 	@Column(name = "us_signup_otp_verify_status")
 	public String signupOtpVerifyStatus;
-	
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_skill", joinColumns = { @JoinColumn(name = "uk_us_id") }, inverseJoinColumns = {
@@ -104,46 +99,37 @@ public class User {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public Role getRole() {
 		return role;
 	}
-
 
 	public void setRole(Role role) {
 		this.role = role;
@@ -157,16 +143,14 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-
 	public Date getSignupDate() {
 		return signupDate;
 	}
 
-
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
-	
+
 	public byte[] getImage() {
 		return image;
 	}
@@ -179,16 +163,13 @@ public class User {
 		return lastLoginTime;
 	}
 
-
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
 
-
 	public String getOtp() {
 		return otp;
 	}
-
 
 	public void setOtp(String otp) {
 		this.otp = otp;
@@ -198,37 +179,29 @@ public class User {
 		return otpGeneratedTime;
 	}
 
-
 	public void setOtpGeneratedTime(Calendar otpGeneratedTime) {
 		this.otpGeneratedTime = otpGeneratedTime;
 	}
-
 
 	public String getSignupOtp() {
 		return signupOtp;
 	}
 
-
 	public void setSignupOtp(String signupOtp) {
 		this.signupOtp = signupOtp;
 	}
-
 
 	public Date getSignupOtpTime() {
 		return signupOtpTime;
 	}
 
-
 	public void setSignupOtpTime(Date signupOtpTime) {
 		this.signupOtpTime = signupOtpTime;
 	}
 
-
-	
 	public List<Skill> getSkills() {
 		return skills;
 	}
-
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
@@ -246,10 +219,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
 				+ ", employeeId=" + employeeId + ", image=" + Arrays.toString(image) + ", otp=" + otp
-				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + 
-				", signupOtpVerifyStatus=" + signupOtpVerifyStatus + ", signupOtp="
-				+ signupOtp + "]";
+				+ ", otpGeneratedTime=" + otpGeneratedTime + ", skills=" + skills + ", signupOtpVerifyStatus="
+				+ signupOtpVerifyStatus + ", signupOtp=" + signupOtp + "]";
 	}
-
-
 }

@@ -25,17 +25,17 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
-@NamedQueries({
 
+@NamedQueries({
+		@NamedQuery(name = "Topic.fetchTopics", query = "select t.name from Topic t "
+				+ "join t.skill s where s.id=:skillId"),
 		@NamedQuery(name = "Topic.findTopicByName", query = "select distinct t from Topic t "
 				+ "left join fetch t.skill " + "left join fetch t.questions where t.name=:name"),
 
 		@NamedQuery(name = "Topic.findTopics", query = "select t.id,t.name from Topic t join t.skill s where s.id=:skillId"),
 
 		@NamedQuery(name = "Topic.fetchTopicsofSkill", query = "select distinct t from Topic t "
-				+ "left join fetch t.skill s where s.id=:skillId")
-
-})
+				+ "left join fetch t.skill s where s.id=:skillId") })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Topic {
 
@@ -52,9 +52,10 @@ public class Topic {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tp_sk_id")
-//	@JsonView(Views.Internal.class)
+	// @JsonView(Views.Internal.class)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JsonIgnore
+	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Skill skill;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -93,6 +94,14 @@ public class Topic {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}
+
+	public Topic(String name) {
+		this.name = name;
+	}
+
+	public Topic() {
+		super();
 	}
 
 	public int getPercentage() {

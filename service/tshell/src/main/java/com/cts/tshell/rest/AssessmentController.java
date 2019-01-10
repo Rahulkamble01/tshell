@@ -57,7 +57,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(AssessmentControlle
 	}
 	
 	@GetMapping("/getAssessment/{userId}")
-	public String getAssessmentsOfUserById(@PathVariable("userId") int userId) throws JsonProcessingException{
+	public String getAssessmentsOfUserById(@PathVariable("userId") String userId) throws JsonProcessingException{
 		LOGGER.info("start");
 		LOGGER.debug("userId: {} " , userId);
 		LOGGER.info("end");

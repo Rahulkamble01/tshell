@@ -1,5 +1,3 @@
 export const environment = {
-    serviceUrlPrefix : "/tshell-service"
-
+    serviceUrlPrefix: "/tshell-service"
 }
-

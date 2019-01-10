@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,14 +21,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "`option`")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @NamedQueries({
 		@NamedQuery(name = "Option.fetchOptionDetailsById", query = "select o from Option o join o.question where o.id=:optionId")
 
 })
 public class Option {
-	public Option() {
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +44,53 @@ public class Option {
 
 	@Column(name = "op_is_correct")
 	private boolean answer;
+
+	@Transient
+	private boolean invalidAnswerFormat;
+
+	@Transient
+	private boolean lengthExceeded;
+
+	public boolean isInvalidAnswerFormat() {
+		return invalidAnswerFormat;
+	}
+
+	public void setInvalidAnswerFormat(boolean invalidAnswerFormat) {
+		this.invalidAnswerFormat = invalidAnswerFormat;
+	}
+
+	public boolean isLengthExceeded() {
+		return lengthExceeded;
+	}
+
+	public void setLengthExceeded(boolean lengthExceeded) {
+		this.lengthExceeded = lengthExceeded;
+	}
+
+	public Option(String description, String answer) {
+		super();
+		this.description = description;
+		if (getDescription().length() > 200) {
+			lengthExceeded = true;
+		} else {
+			lengthExceeded = false;
+		}
+		if (answer.equalsIgnoreCase("y")) {
+			this.answer = true;
+			invalidAnswerFormat = false;
+		} else if (answer.equalsIgnoreCase("n")) {
+			this.answer = false;
+			invalidAnswerFormat = false;
+		} else {
+			invalidAnswerFormat = true;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Option [id=" + id + ", description=" + description + ", question=" + question + ", answer=" + answer
+				+ ", invalidAnswerFormat=" + invalidAnswerFormat + ", lengthExceeded=" + lengthExceeded + "]";
+	}
 
 	public int getId() {
 		return id;
@@ -78,8 +124,8 @@ public class Option {
 		this.answer = answer;
 	}
 
-	@Override
-	public String toString() {
-		return "Option [id=" + id + ", description=" + description + ", answer=" + answer + "]";
+	public Option() {
+		super();
 	}
+
 }

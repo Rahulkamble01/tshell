@@ -18,7 +18,7 @@
         <li class="nav-item ">
           <a class="nav-link" [routerLink]="['/skills']">Skills <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" *ngIf="service.role == 'Admin'">
+        <li class="nav-item" *ngIf="service.role == 'admin'">
           <a class="nav-link" [routerLink]="['/userprofile']">Users <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown ">
@@ -32,7 +32,7 @@
               Change Password</a>
           </div>
         </li>
-        <li><a class="nav-item btn btn-light col-12" routerLink="/" (click)="check(employeeId.value,password.value)">
+        <li><a class="nav-item btn btn-light col-12" [routerLink]="['/']" (click)="check(employeeId.value,password.value)">
             <i class="fas fa-power-off"></i> Logout</a></li>
       </ul>
     </ng-container>
@@ -127,7 +127,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Change
           Your Password
         </h5>
-        <button type="button" class="close" (click)="modalClose" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="modalClose()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

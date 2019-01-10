@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   error = false;
   numberPattern = "^[0-9]{6}$";
   message: string;
-  resendmessage:string;
   status: boolean = false;
   success = true;
-
+  resentmessage:string;
+  resentstatus=false;
 
 
 
@@ -162,8 +162,9 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         if (data == true) {
-          alert("OTP resent successfully");
+          this.resentmessage="OTP resent successfully";
           this.status = true;
+          this.resentstatus=true;
           this.message="";
           this.otpform.reset();
         }
@@ -173,7 +174,7 @@ export class LoginComponent implements OnInit {
 
   close() {
     this.message = "";
-    this.resendmessage="";
+    this.resentmessage="";
     this.status = false;
     this.resetStatus = false;
     this.otpStatus = false;
@@ -181,6 +182,7 @@ export class LoginComponent implements OnInit {
     this.otpform.reset();
     this.resetform.reset();
     this.error = false;
+    this.resentstatus=false;
   }
   submitOtp() {
     console.log(this.employeeId);
@@ -192,10 +194,11 @@ export class LoginComponent implements OnInit {
           this.message = "";
           this.status = true;
           this.otpStatus = true;
-          this.resendmessage="";
+          this.resentstatus=false;
         }
         else {
-          this.message = "OTP is incorrect or expried"
+          this.message = "OTP is incorrect or expried";
+          this.resentstatus=false;
         }
       }
     );
@@ -210,7 +213,7 @@ export class LoginComponent implements OnInit {
           this.status = true;
           this.resetStatus = true;
           this.message = "";
-          alert("Password changed successfully");
+          //alert("Password changed successfully");
         }
         else {
           this.message = "issue in seting the password"

@@ -1,6 +1,8 @@
 package com.cts.tshell.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,16 +21,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "question")
-@NamedQueries({
-		@NamedQuery(name = "Question.fetchLatestQuestion", query = "select q from Question q where"
-				+ " q.id=(select Max(q1.id) from Question q1)"),
+@NamedQueries({ @NamedQuery(name = "Question.fetchLatestQuestion", query = "select q from Question q where"
+		+ " q.id=(select Max(q1.id) from Question q1)"),
 
 		@NamedQuery(name = "Question.fetchAllQuestionDetails", query = "select distinct q from Question q "
 				+ "left join fetch q.questionDifficultyLevel " + "left join fetch q.questionAnswerType "
@@ -43,9 +46,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Question {
-
-	public Question() {
-	}
 
 	public Question(int id, String question, String status, QuestionDifficultyLevel questionDifficultyLevel,
 			User createdUser, List<Option> optionList) {
@@ -85,7 +85,7 @@ public class Question {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private QuestionAnswerType questionAnswerType;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "qu_created_by_us_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User createdUser;
@@ -106,12 +106,174 @@ public class Question {
 	@Transient
 	private String topic;
 
+	@Transient
+	private boolean empty;
+
+	@Transient
+	private boolean lengthExceeded;
+
+	@Transient
+	private String error;
+
+	@Transient
+	private String Topic;
+
+	@Transient
+	private boolean validTopic;
+	@JsonIgnore
+	@Transient
+	private int answerType;
+
 	public String getTopic() {
-		return topic;
+		return Topic;
 	}
 
 	public void setTopic(String topic) {
-		this.topic = topic;
+		Topic = topic;
+	}
+
+	public boolean isValidTopic() {
+		return validTopic;
+	}
+
+	public void setValidTopic(boolean validTopic) {
+		this.validTopic = validTopic;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	public boolean isEmpty() {
+		return empty;
+	}
+
+	public void setEmpty(boolean empty) {
+		this.empty = empty;
+	}
+
+	public boolean isLengthExceeded() {
+		return lengthExceeded;
+	}
+
+	public void setLengthExceeded(boolean lengthExceeded) {
+		this.lengthExceeded = lengthExceeded;
+	}
+
+	public Question() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", question=" + question + ", status=" + status + ", createdDate=" + createdDate
+				+ ", reviewedDate=" + reviewedDate + ", questionDifficultyLevel=" + questionDifficultyLevel
+				+ ", questionAnswerType=" + questionAnswerType + ", createdUser=" + createdUser + ", reviewedUser="
+				+ reviewedUser + ", topicSet=" + topicSet + ", optionList=" + optionList + ", topic=" + topic
+				+ ", empty=" + empty + ", lengthExceeded=" + lengthExceeded + ", error=" + error + ", Topic=" + Topic
+				+ ", validTopic=" + validTopic + ", answerType=" + answerType + "]";
+	}
+
+	public Question(String[] csvContent) {
+		Topic topic = new Topic(csvContent[0]);
+		List<Option> options = new ArrayList<Option>();
+
+		this.question = csvContent[1].trim();
+		if (!csvContent[2].equals("") || !csvContent[3].equals("")) {
+			options.add(new Option(csvContent[2].trim(), csvContent[3].trim()));
+		}
+		if (!csvContent[4].equals("") || !csvContent[5].equals("")) {
+			options.add(new Option(csvContent[4].trim(), csvContent[5].trim()));
+		}
+		if (!csvContent[6].equals("") || !csvContent[7].equals("")) {
+
+			options.add(new Option(csvContent[6].trim(), csvContent[7].trim()));
+		}
+		if (!csvContent[8].equals("") || !csvContent[9].equals("")) {
+			options.add(new Option(csvContent[8].trim(), csvContent[9].trim()));
+		}
+		if (!csvContent[10].equals("") || !csvContent[11].equals("")) {
+			options.add(new Option(csvContent[10].trim(), csvContent[11].trim()));
+		}
+
+		this.optionList = options;
+		int correctAnswerCount = 0;
+		int invalidinput = 0;
+		int count = 0;
+		int invalidAnswerCount = 0;
+
+		Set<String> optionsSet = new HashSet<String>();
+		for (Option option : optionList) {
+			optionsSet.add(option.getDescription().toLowerCase());
+			if (option.isAnswer()) {
+				correctAnswerCount += 1;
+			}
+			if ((option.getDescription().equals("") && !option.isInvalidAnswerFormat())) {
+				invalidinput += 1;
+			}
+			if (!option.getDescription().equals("") && ((option.getDescription().toLowerCase().equals("true")
+					|| option.getDescription().toLowerCase().equals("false"))
+					|| (option.getDescription().toLowerCase().equals("yes")
+							|| option.getDescription().toLowerCase().equals("no"))
+					|| (option.getDescription().toLowerCase().equals("active")
+							|| option.getDescription().toLowerCase().equals("inactive")))) {
+				if (option.isAnswer()) {
+					count += 1;
+				}
+			}
+			if (!option.getDescription().equals("") && option.isInvalidAnswerFormat()) {
+				invalidAnswerCount += 1;
+			}
+			if (option.isLengthExceeded()) {
+				setError("option description length exceeded");
+			}
+
+		}
+
+		if (correctAnswerCount < 1) {
+			setError("At least one option should be selected as answer");
+		}
+
+		else if (count == 2) {
+			setError("All option can not be true");
+		} else if (invalidinput > 0) {
+			setError("Option is missing");
+		} else if (optionsSet.size() != getOptionList().size()) {
+			setError("Multiple option cannot have same value");
+		} else if (invalidAnswerCount > 0) {
+			setError("Answer is missing or in incorrect format");
+		}
+
+		if (csvContent[2].isEmpty()) {
+			empty = true;
+		} else {
+			empty = false;
+		}
+
+		if (getQuestion().length() > 500) {
+			lengthExceeded = true;
+			setError("question length exceeded");
+		} else {
+			lengthExceeded = false;
+		}
+		if (correctAnswerCount > 1) {
+			setAnswerType(2);
+
+		} else {
+			setAnswerType(1);
+		}
+	}
+
+	public Set<Topic> getTopicSet() {
+		return topicSet;
+	}
+
+	public void setTopicSet(Set<Topic> topicSet) {
+		this.topicSet = topicSet;
 	}
 
 	public int getId() {
@@ -200,6 +362,14 @@ public class Question {
 
 	public void setTopicList(Set<Topic> topicSet) {
 		this.topicSet = topicSet;
+	}
+
+	public int getAnswerType() {
+		return answerType;
+	}
+
+	public void setAnswerType(int answerType) {
+		this.answerType = answerType;
 	}
 
 }

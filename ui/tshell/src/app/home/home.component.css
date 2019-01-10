@@ -36,6 +36,28 @@
   color: white;
  
 }
+
+.cardContent{
+  margin-top:2%;
+  margin-bottom: 2%;
+}
+
+.carddetail{
+  margin-left:5%;
+}
+
+.iconColor{
+  font-size:50px;
+  color: #0e5bd6"
+}
+.cardText{
+font-size:20px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+}
+
+.ml-5percent{
+  margin-left:5%;
+}
 @-webkit-keyframes blinker {
   from {
     opacity: 1.0;
@@ -54,14 +76,17 @@
   -webkit-animation-direction: alternate;
 }
 
-@media screen and (min-width: 601px) {
-  div.textcustomize {
-    font-size: 60px;
+@media screen and (min-width: 600px) {
+  .textcustomize {
+    font-size: 50px;
+  height: 120px;
+  
   }
 }
 
-@media screen and (max-width: 600px) {
-  div.textcustomize {
-    font-size: 30px;
+@media screen and (max-width: 1000px) {
+  .textcustomize {
+    font-size: 22px;
+    height: 70px
   }
-} 
+}

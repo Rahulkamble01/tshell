@@ -15,7 +15,7 @@ import com.cts.tshell.bean.Assessment;
 public interface AssessmentRepository extends JpaRepository<Assessment, Integer>{
 	
 	Page<Assessment> findTop5BySkill(@Param("skillId") int skillId, Pageable pageable);
-	List<Assessment> findUserHistory(@Param("id")int assessmentId);
+	List<Assessment> findUserHistory(@Param("id")String assessmentId);
 	Assessment findById(int assessmentId);
 	@Query("select count(a.id) from Assessment a ")
 	long totalAssessmentsCount();

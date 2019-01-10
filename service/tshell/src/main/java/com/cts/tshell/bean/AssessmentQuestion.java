@@ -29,7 +29,8 @@ public class AssessmentQuestion {
 	private int id;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="aq_as_id")	
+	@JoinColumn(name="aq_as_id")
+	@JsonView(Views.Internal.class)
 	private Assessment assessment;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)

@@ -5,6 +5,8 @@ import { CountOfPendingServiceService } from '../count-of-pending-service.servic
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CountOfPendingQuestionsService } from '../count-of-pending-questions.service';
+import { environment } from '../environment';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 @Component({
   selector: 'app-add-question',
@@ -12,35 +14,42 @@ import { CountOfPendingQuestionsService } from '../count-of-pending-questions.se
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
-
-
-  max=500;
-  empId:any;
-  skillId :number;
-  skillName:any;
-  checkedCount=0;
+  //Bulk upload Variables
+  templateUrl: string = environment.serviceUrlPrefix + '/question/template/';
+  userFile: any = File;
+  uploadForm: any = FormGroup;
+  fileName: any;
+  fileExtension: any;
+  fileExtensionError: boolean = false;
+  fileExtensionMessage: any;
+  selectedSkillId: string;
+  //Add Question Variables
+  max = 500;
+  empId: any;
+  skillId: number;
+  skillName: any;
+  checkedCount = 0;
   topicList: any[];
   isChecked: boolean = false;
   count = 1;
   temp = 0;
   question: any;
   option: any = '';
-  optionTemp:any;
-  questionTemp:any;
+  optionTemp: any;
+  questionTemp: any;
   topic: any;
   answer: any;
   status = "Pending";
   createdUser: any;
-  questionDifficultyLevel = "medium";
+  questionDifficultyLevel = "Medium";
   optionsList: any = [{ id: 1, description: '', answer: '' }];
   searchQuery: string;
   modalOption: any = '';
   modalQuestion: any = '';
 
-  userFile: any = File;
-  uploadForm: any = FormGroup;
   ngOnInit() {
     this.skillId = this.countOfPendingQuestionsService.skillId;
+    this.selectedSkillId = this.countOfPendingQuestionsService.skillId;
     this.skillName = this.countOfPendingQuestionsService.skillName;
     this.contributeQuestionService.getTopics(this.skillId).subscribe(
 
@@ -49,19 +58,17 @@ export class AddQuestionComponent implements OnInit {
         console.log(this.topicList)
       },
     );
-    this.empId=this.authService.getEmployeeId();
+    this.empId = this.authService.getEmployeeId();
     console.log(this.empId);
-
-
+    this.templateUrl = this.templateUrl + this.skillId;
   }
-  constructor(private fb: FormBuilder,
-    private contributeQuestionService: ContributeQuestionService, private router: Router,private authService:AuthService,private countOfPendingQuestionsService: CountOfPendingQuestionsService) {
+  constructor(private alertService: ConfirmationDialogService,
+    private contributeQuestionService: ContributeQuestionService, private router: Router, private authService: AuthService, private countOfPendingQuestionsService: CountOfPendingQuestionsService, private fb: FormBuilder) {
     this.uploadForm = fb.group({
       csvFile: ['', Validators.required]
     })
 
   }
-
   //Functions
   submit() {
     let json = JSON.stringify({
@@ -73,10 +80,10 @@ export class AddQuestionComponent implements OnInit {
       },
       questionAnswerType: {
         id: this.questionAnswerTypeIdFunction(),
-        type:this.questionAnswerTypeDescriptionFunction()
+        type: this.questionAnswerTypeDescriptionFunction()
       },
       createdUser: {
-        employeeId:this.empId
+        employeeId: this.empId
       },
       optionList: this.optionsList,
       topic: this.topic
@@ -87,10 +94,11 @@ export class AddQuestionComponent implements OnInit {
         console.log("Response: " + data)
       });
     console.log(this.topic);
-    alert("Question submitted succesfully for Review!")
+    this.alertService.alert(`Adding Question Confirmation`,
+      `If you click on 'ok' Question will be Added. `)
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
   }
-
-
   addOption() {
     if (this.count < 6) {
       this.count++;
@@ -110,71 +118,99 @@ export class AddQuestionComponent implements OnInit {
   }
   saveQuestion() {
     console.log(this.question);
-  
+
     this.questionDescriptionValidation();
 
   }
   saveOption() {
-    console.log("description"+this.optionsList[0].description);
+    console.log("description" + this.optionsList[0].description);
     console.log(this.optionsList);
     this.optionDescriptionValidation();
   }
-  onSelectFile(event) {
-    const file = event.target.files[0];
-    this.userFile = file;
-  }
+
   check(event) {
-   
+
     if (event.target.checked) {
       this.isChecked = true;
       this.checkedCount++;
     }
     else {
       this.isChecked = false;
-      
+
     }
-   
+
     console.log(this.isChecked);
   }
-  optionDescriptionValidation(){
+  optionDescriptionValidation() {
     console.log(this.optionsList);
-    this.optionTemp=1;
-    for(let i=0;i<this.optionsList.length;i++){
-      if(this.optionsList[i].description==''){
+    this.optionTemp = 1;
+    for (let i = 0; i < this.optionsList.length; i++) {
+      if (this.optionsList[i].description == '') {
         console.log(this.optionsList[i].description);
-         this.optionTemp=0;
+        this.optionTemp = 0;
       }
     }
     console.log(this.optionTemp);
   }
-  questionDescriptionValidation(){
-    this.questionTemp=0;
-    if(this.question.length >= this.max){
-            console.log("max length reached");
+  questionDescriptionValidation() {
+    this.questionTemp = 0;
+    if (this.question.length >= this.max) {
+      console.log("max length reached");
     }
-    if(this.question==''){
-      this.questionTemp=1;
+    if (this.question == '') {
+      this.questionTemp = 1;
     }
   }
 
-  questionAnswerTypeIdFunction(){
-    if(this.checkedCount>1){
+  questionAnswerTypeIdFunction() {
+    if (this.checkedCount > 1) {
       return 2;
-    }else{
+    } else {
       return 1;
     }
   }
-  questionAnswerTypeDescriptionFunction(){
-    if(this.checkedCount>1){
+  questionAnswerTypeDescriptionFunction() {
+    if (this.checkedCount > 1) {
       return "Multiple";
-    }else{
+    } else {
       return "Single";
     }
   }
-
-  upload(){
-    
+  isInArray(array, word) {
+    return array.indexOf(word.toLowerCase()) > -1;
+  }
+  onSelectFile(event) {
+    var file = event.target.files[0];
+    this.userFile = file;
+    console.log(this.userFile.name);
+    this.fileName = file.name;
+    var allowedExtensions = ["CSV", "csv"];
+    this.fileExtension = this.fileName.split('.').pop();
+    console.log('File extension is ' + this.fileExtension);
+    if (this.isInArray(allowedExtensions, this.fileExtension)) {
+      this.fileExtensionError = false;
+      this.fileExtensionMessage = ""
+    } else {
+      this.fileExtensionMessage = "Only CSV file is allowed!"
+      this.fileExtensionError = true;
+    }
   }
 
+  async upload() {
+    console.log('File Upload method is called!');
+    console.log('File extension error is ' + this.fileExtensionError);
+    console.log(this.fileExtensionMessage);
 
+    let formData = new FormData
+    formData.append('file', this.userFile);
+    formData.append('skillId', this.selectedSkillId);
+    this.contributeQuestionService.uploadQuestions(formData).subscribe(
+      async data => {
+        this.contributeQuestionService.csvData = await data;
+        await this.contributeQuestionService.setCsvData(data);
+        console.log(this.contributeQuestionService.getCsvData());
+      })
+    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+    this.router.navigate(['/preview']);
+  }
 }

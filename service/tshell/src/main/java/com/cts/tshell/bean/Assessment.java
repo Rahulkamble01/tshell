@@ -17,15 +17,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "assessment")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
 @NamedQueries({@NamedQuery(name="Assessment.findUserHistory",query="select distinct a from Assessment a "
 		+ "left join fetch a.skill "
 		+ "left join fetch a.user "
@@ -56,7 +56,6 @@ public class Assessment {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "as_sk_id")
-	@JsonView(Views.Internal.class)
 	private Skill skill;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -71,7 +70,6 @@ public class Assessment {
 	// inverseJoinColumns= {@JoinColumn(name="aq_qu_id")}
 	// )
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assessment")
-	@JsonView(Views.Internal.class)
 	private Set<AssessmentQuestion> assessmentQuestions;
 
 	public int getId() {

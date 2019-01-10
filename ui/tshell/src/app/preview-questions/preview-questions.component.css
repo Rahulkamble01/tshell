@@ -8,6 +8,7 @@
 }
 .card-header{
     cursor: pointer;
+    padding-top:18px ;padding-bottom:0px;
 }
 .card-body{
     margin-left: 20px ;
@@ -20,10 +21,10 @@
     color:#006600;
     font-weight: 400;
 }
-.option{
+/* .option{
     color: #07C;
     font-weight: 500;
-}
+} */
 .correctOption{
     color:#1a1a1a;
     font-weight: 500;
@@ -46,4 +47,26 @@
 }
 .btn-ts-sm{
     margin-top: 15px;
+}
+pre{white-space:pre-wrap;
+}
+.correctOption{
+    font-weight: 600;
+}
+.wrongOption{
+    font-weight: 300;
+}
+.errorbadge{
+    float:right;
+    margin-bottom: 10px;
+}
+.icon{
+    margin-left: 15px;
+    font-size:18px;
+}
+.lengtherrorbadge{
+    margin-bottom: 15px;
+}
+.topic{
+    float: right;
 }

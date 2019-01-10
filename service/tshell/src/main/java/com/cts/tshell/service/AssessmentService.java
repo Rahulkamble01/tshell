@@ -43,7 +43,7 @@ public class AssessmentService {
 	}
 
 	@Transactional
-	public List<Assessment> getAssessmentsOfUserById(int userId){
+	public List<Assessment> getAssessmentsOfUserById(String userId){
 		List<Assessment> assesments = assessmentRepository.findUserHistory(userId);
 
 		return assesments;
