@@ -24,5 +24,3 @@ alter table `tshell`.`user` modify us_otp varchar(50) DEFAULT NULL;
 alter table `tshell`.`user` add us_signup_otp varchar(45) DEFAULT NULL;
 alter table `tshell`.`user` add us_signup_otp_time datetime DEFAULT NULL;
 alter table `tshell`.`user` add us_signup_otp_verify_status varchar(6) DEFAULT NULL;
-
-INSERT INTO `skill` VALUES (8,'Java',682,'active',5,'Java is a programming language created by James Gosling from Sun Microsystems (Sun) in 1991. The target of Java is to write a program once and then run this program on multiple operating systems.',NULL,'2018-12-27'), (7,'JS',51,'active',5,'JavaScript is the programming language of HTML and the Web.',NULL,'2018-10-10'),(6,'HTML12',26,'deactive',5,'HTML stands for Hyper Text Markup Language. HTML describes the structure of Web pages using markup. HTML elements are the building blocks of HTML pages. HTML elements are represented by tags.',NULL,'2018-10-10'),(9,'Node',15,'active',5,'Node.js is an open source server environment. Node.js is free. Node.js runs on various platforms (Windows, Linux, Unix, Mac OS X, etc.). Node.js uses JavaScript on the server',NULL,'2018-10-10');

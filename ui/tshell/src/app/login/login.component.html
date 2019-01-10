@@ -118,10 +118,10 @@
                                 <div>OTP sent to Email
                                   <button (click)="resendOtp()" class="resendButton">Resend ? </button>
                                   <div *ngIf="resentstatus">
-                                      <div class="alert alert-success">{{resentmessage}}</div>
-                                    </div>
+                                    <div class="alert alert-success">{{resentmessage}}</div>
+                                  </div>
                                 </div>
-  
+
                                 <input type="text" class="form-control" formControlName="otp" placeholder="OTP" #otp>
                                 <div *ngIf="otpform.get('otp').touched && otpform.get('otp').invalid">
                                   <div *ngIf="otpform.get('otp').errors.required" class="danger validation">OTP is

@@ -52,34 +52,34 @@
       </div>
       <div class="col-lg-10 col-12 col-sm-10 col-md-10">
         <div class="row">
-          <div class="col-lg-2 col-sm-2 col-12 col-md-2 p-5px">
-            <div class="row">
-              <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
-              <div class="col-lg-12 col-md-10 col-sm-10 col-8">
-
-                <div class="avatar-upload">
-                  <form #imageForm=ngForm>
-                    <div class="avatar-edit">
-                      <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
-
-                      <label for="imageUpload"></label>
-                    </div>
-                    <div class="avatar-preview">
-                      <img src="./../assets/images/default-skill.png" id="imagePreview" class="skill-default-image"
-                        height="450" />
-                    </div>
-                  </form>
-                </div>
-
+          <!-- <div class="col-lg-2 col-sm-2 col-12 col-md-2 p-5px">
+              <div class="row">
+                <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
+                <div class="col-lg-12 col-md-10 col-sm-10 col-8">
+  
+                  <div class="avatar-upload">
+                    <form #imageForm=ngForm>
+                      <div class="avatar-edit">
+                        <input type="file" id="imageUpload"  #Image accept="image/*"  (change)="handleFileInput($event.target.files)">
+  
+                        <label for="imageUpload"></label>
+                      </div> 
+                      <div class="avatar-preview">
+                        <img src="./assets/images/default-skill.png" id="imagePreview" class="skill-default-image"
+                          height="450" />
+                      </div>
+                    </form>
+                  </div>
+  
+                </div> 
+                <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
               </div>
-              <div class="col-lg-12 col-md-1 col-sm-1 col-2"></div>
-            </div>
-
-          </div>
+  
+            </div> -->
           <!-- <div class="col-lg-1 col-sm-0 col-md-1 co  l-xs-0"></div> -->
-          <div class="col-lg-9 col-sm-10 col-xs-12 col-md-9 padding1opx">
+          <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 padding1opx">
             <div class="row" class="ml-12 mr-12">
-              <span class="inlineelements skillnameStyle">
+              <span class="col-lg-8 col-md-7 col-sm-12 col-xs-12 inlineelements skillnameStyle text-capitalize">
                 {{skills.name}}
                 <div *ngIf="showActive" class="inlineelements">
                   <ng-container *ngIf="skills.active == 'active'; else elseTemplate">
@@ -93,7 +93,29 @@
                   &nbsp;<span class="d-inline description-icon"><i class="far fa-edit inside-des-icon" (click)="editSkillModel(skills)"></i></span>
                 </div>
               </span>
-              <span class="description-style">
+              <span class="col-lg-4 col-md-5 col-sm-12 col-xs-12 float-right">
+                <!-- ========================================= -->
+                <div *ngIf="userLoggedInn" class="inlineelements float-right">
+                  <a [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="badge badge-primary">Entry
+                    Test
+                  </a>
+                  &nbsp;
+                  <a [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="badge badge-primary">Exit
+                    Test
+                  </a>
+                </div>
+                <div *ngIf="!userLoggedInn" class="inlineelements float-right">
+                  <a (click)="gotoLogin()" class="btn btn-ts-primary btn-ts-sm">Entry
+                    Test
+                  </a>
+                  &nbsp;
+                  <a (click)="gotoLogin()" class="btn btn-ts-primary btn-ts-sm">Exit
+                    Test
+                  </a>
+                </div>
+                <!-- ====================================== -->
+              </span>
+              <span class="description-style ml-5 ">
                 <br>{{skills.description}}
               </span>
             </div>
@@ -129,10 +151,10 @@
               <div class="card-group">
                 <div class="card bg-white ts-card min-height-additional-skill">
                   <div class="card-body">
-                    <h6 class="text-center">Dependent Skils<span> &nbsp;
+                    <h6 class="text-center">Dependent Skills<span> &nbsp;
 
                         <span *ngIf="showEdit">
-                          <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill)"></i>
+                          <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill, 2)"></i>
                         </span>
 
                       </span></h6>
@@ -172,7 +194,7 @@
                 <div class="card-body text-center">
                   <h6>Additional Skills <span>
                       <span *ngIf="showEdit">
-                        <i class="fas fa-plus-square plus"></i>
+                        <i class="fas fa-plus-square plus" (click)="editRef(referenceSkill, 1)"></i>
 
                       </span>
                     </span></h6>
@@ -192,8 +214,6 @@
 
 
         <!------------------------------------------Reference Skills for small screen-------------------------------------------------------------->
-
-
         <div class="container smallScreen">
           <h3>Reference Skills</h3>
           <hr>
@@ -287,24 +307,22 @@
                   <h6 class="d-inline">Put Your Name Here</h6>&nbsp;<span>
 
                     <div *ngIf="userLoggedInn" class="inlineelements">
-                      <a href="#" [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="badge badge-primary"><i
-                          class="fas fa-pen-nib"></i>Take Entry
+                      <a [routerLink]="['/instruction', skills.id, skills.name,'entry' ]" class="badge badge-primary">Take
+                        Entry
                         Test
                       </a>
                       &nbsp;
-                      <a href="#" [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="badge badge-primary"><i
-                          class="fas fa-pen-nib"></i>Take Exit
+                      <a [routerLink]="['/instruction', skills.id, skills.name, 'exit'  ]" class="badge badge-primary">Take
+                        Exit
                         Test
                       </a>
                     </div>
                     <div *ngIf="!userLoggedInn" class="inlineelements">
-                      <a href="#" data-toggle="modal" data-target="#askforlogin" (click)="gotoLogin()" class="badge badge-primary"><i
-                          class="fas fa-pen-nib"></i>Take Entry
+                      <a (click)="gotoLogin()" class="badge badge-primary">Take Entry
                         Test
                       </a>
                       &nbsp;
-                      <a href="#" data-toggle="modal" data-target="#askforlogin" (click)="gotoLogin()" class="badge badge-primary"><i
-                          class="fas fa-pen-nib"></i>Take Exit
+                      <a (click)="gotoLogin()" class="badge badge-primary">Take Exit
                         Test
                       </a>
                     </div>
@@ -322,30 +340,3 @@
 
   </div>
 </ng-template>
-
-
-<!-- The Modal -->
-<div class="modal" id="askforlogin">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <p>Log In before taking a Test!</p>
-        <small>you will be redirected to the login page in 3 sec...</small>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-ts-primary" data-dismiss="modal"><a [routerLink]="[ '/login' ]">Login</a></button>
-      </div>
-
-    </div>
-  </div>
-</div>

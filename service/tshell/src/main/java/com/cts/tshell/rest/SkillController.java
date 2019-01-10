@@ -44,7 +44,7 @@ public class SkillController extends TshellController {
 		LOGGER.info("Returning with Skills");
 		return skillService.getSkills();
 	}
-	
+
 	@RequestMapping(value = "/getSkillsOnSearch", method = RequestMethod.GET)
 	public List<Skill> skillName(@RequestBody String pressedKeys) {
 		LOGGER.debug("searchName: {}", pressedKeys);
@@ -54,12 +54,11 @@ public class SkillController extends TshellController {
 		return skill;
 	}
 
-
 	@RequestMapping(value = "/updateSkillSearch", method = RequestMethod.POST)
-	public void updateSkillSearch(@RequestBody Skill skill) {
-		LOGGER.debug("Accessing Database to update search count of {} with {}", skill.getName(),
-				skill.getSearchCount());
-		LOGGER.info("Updating skill searchCount from {} to {} ", skill.getSearchCount(), skill.getSearchCount() + 1);
+	public void updateSkillSearch(@RequestBody int skillId) {
+		LOGGER.debug("Accessing Database to update search count of {} with {}");
+		LOGGER.info("Updating skill searchCount from {} to {} ");
+		Skill skill = skillService.getSkillById(skillId);
 		skillService.updateSkillSearch(skill);
 		LOGGER.debug("Existing from updateSearch Skill with skill \n{}", skill);
 	}
@@ -104,9 +103,6 @@ public class SkillController extends TshellController {
 			skillService.addOrUpdateSkill(skill);
 			skill.setTopics(topics);
 			LOGGER.info("ending Update Skill");
-
-			// skillService.addOrUpdateNeoSkill(skillToNeoSkill.convert(skill2));
-			// System.out.println("{}"+ skillToNeoSkill);
 			addStatus = 2;
 		} else {
 			addStatus = 1;
@@ -151,20 +147,15 @@ public class SkillController extends TshellController {
 	@RequestMapping(value = "/recentskilllist", method = RequestMethod.GET)
 	public List<Skill> getRecentSkills() {
 		LOGGER.info("start");
-		Date date=skillService.getCurrentTimeUsingCalendar();
+		Date date = skillService.getCurrentTimeUsingCalendar();
 		List<Skill> skills = skillService.getRecent5Skills(date);
 		LOGGER.debug("SkillController -> {}", skills);
 		return skills;
 	}
 
-
-
-
-
 	@GetMapping("/gettop5tests")
 
-	
-	//@RequestMapping(value = "/gettop5tests", method = RequestMethod.GET)
+	// @RequestMapping(value = "/gettop5tests", method = RequestMethod.GET)
 
 	public List<Skill> getTopAccessedtests() {
 		LOGGER.info("start");
@@ -173,7 +164,7 @@ public class SkillController extends TshellController {
 		return topAccessedtests;
 
 	}
-	
+
 	@RequestMapping(value = "/skillcount", method = RequestMethod.GET)
 	public long getSkillCount() {
 		LOGGER.info("start");
@@ -181,33 +172,33 @@ public class SkillController extends TshellController {
 		LOGGER.debug("Total Skill Count -> {}", skillCount);
 		return skillCount;
 	}
-	
+
 	@RequestMapping(value = "/referenceskill/{skillId}", method = RequestMethod.GET)
-	public List<ReferenceSkill> getReferenceSkill(@PathVariable("skillId") int skillId){
+	public List<ReferenceSkill> getReferenceSkill(@PathVariable("skillId") int skillId) {
 		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", skillId);
-		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);		
+		List<ReferenceSkill> result = skillService.getRefernceSkill(skillId);
 		return result;
 	}
 
 	@RequestMapping(value = "/addreferenceskill", method = RequestMethod.POST)
-	public void addReferenceSkill(@RequestBody ReferenceSkill referenceSkill){
+	public void addReferenceSkill(@RequestBody ReferenceSkill referenceSkill) {
 		LOGGER.info("Adding ReferenceSkils");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}");
 		LOGGER.info("Adding ReferenceSkils itration {}", referenceSkill.getId());
 		skillService.addReferenceSkill(referenceSkill);
-				
+
 	}
-	
+
 	@RequestMapping(value = "/deleteReferenceskill/{refskillId}", method = RequestMethod.GET)
-	public void deleteReferenceSkill(@PathVariable("refskillId") int refskillId){
+	public void deleteReferenceSkill(@PathVariable("refskillId") int refskillId) {
 		LOGGER.info("Fetching Reference Skill Through getReferenceSkill()");
 		LOGGER.debug("Fetching Result for fetching skill for skill ID : {}", refskillId);
-		skillService.deleteReferenceSkill(refskillId);		
+		skillService.deleteReferenceSkill(refskillId);
 	}
-	
+
 	@RequestMapping(value = "/skillbyname/{name}", method = RequestMethod.GET)
-	public Skill getSkillsByName(@PathVariable String name)   {
+	public Skill getSkillsByName(@PathVariable String name) {
 		LOGGER.info("start get SkillsbyName");
 		Skill skill = skillService.getSkillByName(name);
 		LOGGER.debug("SkillController -> {}", skill);

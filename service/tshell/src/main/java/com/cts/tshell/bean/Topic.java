@@ -17,15 +17,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
-
 @NamedQueries({
 		@NamedQuery(name = "Topic.fetchTopics", query = "select t.name from Topic t "
 				+ "join t.skill s where s.id=:skillId"),
@@ -35,8 +32,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name = "Topic.findTopics", query = "select t.id,t.name from Topic t join t.skill s where s.id=:skillId"),
 
 		@NamedQuery(name = "Topic.fetchTopicsofSkill", query = "select distinct t from Topic t "
-				+ "left join fetch t.skill s where s.id=:skillId") })
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+
+				+ "left join fetch t.skill s where s.id=:skillId")
+})
 public class Topic {
 
 	@Id

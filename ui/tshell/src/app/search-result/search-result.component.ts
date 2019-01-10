@@ -158,7 +158,7 @@ export class SearchResultComponent implements OnInit {
   itemSelected($event) {
     this.skills = $event.item;
     this.name = $event.item.name;
-    this.skillService.updateSearch($event.item).subscribe();
+    this.skillService.updateSearch($event.item.id).subscribe();
     this.skillService.getSkillTopper($event.item.id).subscribe(data => {
       this.toppers = data;
     });
@@ -201,9 +201,20 @@ export class SearchResultComponent implements OnInit {
   }
 
 
-  gotologin() {
+  async gotoLogin() {
     console.log("it will go to login");
-    setTimeout(() => this.router.navigate(['/login']), 3000);
+    // setTimeout(() => this.router.navigate(['/login']), 3000);
+    await this.confirmationDialogService.login(`Not a User of tShell!`, `You have To login before you can take test!`)
+      .then((confirmed) => {
+        if (confirmed) {
+          console.log('User confirmed:', confirmed);
+          this.router.navigate(['/login']);
+        } else {
+          console.log('User confirmed:', confirmed);
+          return;
+        }
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
   deleteReferenceSkill(item) {
