@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { Topic } from '../topic';
@@ -9,10 +9,11 @@ import { AuthService } from '../auth.service';
 import { Skill } from '../skill';
 import { SkillserviceService } from '../skillservice.service';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, merge, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, merge, filter, isEmpty } from 'rxjs/operators';
 import { EditskillmodalComponent } from '../editskillmodal/editskillmodal.component';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
 import { ReferenceSkillModelComponent } from '../reference-skill-model/reference-skill-model.component';
+import { moduleDef } from '@angular/core/src/view';
 
 
 declare var abc: any;
@@ -29,6 +30,7 @@ export class SearchResultComponent implements OnInit {
   skills: any = [];
   allSkills: Skill[] = [];
   referenceSkill: any = [];
+  dependentSkill: any = [];
   toppers: any[] = [];
   graphData: any[] = [];
   topics: Array<Topic>;
@@ -143,29 +145,50 @@ export class SearchResultComponent implements OnInit {
       )
     )
   )
-  // async keyPressing(model) {
-  //   console.log(model);
-  //   let allSkills1: Skill[] = [];
-  //   this.skillService.getAll().subscribe(data => {
-  //     allSkills1 = data;
-  //     console.log(data);
-  //   });
-  //   console.log(allSkills1);
-  //   await new Promise((resolve, reject) => setTimeout(resolve, 1000));
-  //   return allSkills1;
-  // }
 
-  itemSelected($event) {
-    this.skills = $event.item;
-    this.name = $event.item.name;
-    this.skillService.updateSearch($event.item.id).subscribe();
-    this.skillService.getSkillTopper($event.item.id).subscribe(data => {
+  itemSelected($event, selectedSkill) {
+    this.toppers = [];
+    this.dependentSkill = [];
+    this.referenceSkill = [];
+    selectedSkill = this.skillService.getSkill();
+    console.log(selectedSkill);
+    console.log($event);
+
+    if ($event === undefined) {
+      this.skills = this.skillService.getSkill();
+      this.name = this.skills.name;
+      console.log('1');
+    } else if (selectedSkill !== undefined && selectedSkill.id === $event.item.id) {
+      this.skills = this.skillService.getSkill();
+      this.name = this.skills.name;
+      console.log('12');
+    } else {
+      this.skills = $event.item;
+      this.name = $event.item.name;
+      console.log('123');
+    }
+    // if (selectedSkill !== undefined && selectedSkill.id === $event.item.id) {
+    //   console.log('kfjgaflsdgfklsdjf');
+    //   this.skills = this.skillService.getSkill();
+    // } else if () {
+
+    // } else {
+    //   this.skills = $event.item;
+    // }
+    this.skillService.updateSearch(this.skills.id).subscribe();
+    this.skillService.getSkillTopper(this.skills.id).subscribe(data => {
       this.toppers = data;
     });
-    this.skillService.getReferenceSkill($event.item.id).subscribe(data => {
-      this.referenceSkill = data;
-      console.log(this.referenceSkill);
+    this.skillService.getReferenceSkill(this.skills.id).subscribe(data => {
+      data.forEach(element => {
+        if (element.classifier === 'pre') {
+          this.dependentSkill.push(element);
+        } else {
+          this.referenceSkill.push(element);
+        }
+      });
     });
+    this.skillService.setSkill(undefined);
   }
 
   handleFileInput(file: FileList) {
@@ -198,6 +221,17 @@ export class SearchResultComponent implements OnInit {
     modalRef.componentInstance.allSkills = this.allSkills;
     modalRef.componentInstance.skill = this.skills;
     modalRef.componentInstance.type = control;
+
+    // modalRef.result.then((result) => {
+    //   console.log('hellllo');
+    // }, (reason) => {
+    //   console.log(reason);
+    // });
+
+    modalRef.componentInstance.skillEvent.subscribe(async $e => {
+      this.itemSelected(undefined, $e);
+    });
+    // this.itemSelected(undefined, this.skillService.getSkill());
   }
 
 
@@ -225,6 +259,8 @@ export class SearchResultComponent implements OnInit {
         if (confirmed) {
           console.log('User confirmed:', confirmed);
           this.skillService.deleteReferenceSkill(item.id).subscribe();
+          this.skillService.setSkill(this.skills);
+          return this.itemSelected(undefined, this.skills);
         } else {
           console.log('User confirmed:', confirmed);
           return;

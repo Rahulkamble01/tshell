@@ -16,33 +16,37 @@ export class SkillserviceService {
   updateSearchUrl = environment.serviceUrlPrefix + '/skill/updateSkillSearch';
   skillToppersUrl = environment.serviceUrlPrefix + '/assessment/top5list/';
   updateSkillUrl = environment.serviceUrlPrefix + '/skill/updateSkill';
-  // graphDataUrl = environment.serviceUrlPrefix + '/skill/graph';
   addSkillurl = environment.serviceUrlPrefix + '/skill/addskill';
   deleteTopicUrl = environment.serviceUrlPrefix + '/skill/deleteTopic';
   ReferenceSkillUrl = environment.serviceUrlPrefix + '/skill/referenceskill/';
-  // graphDataOfSkillUrl = environment.serviceUrlPrefix + '/skill/graph/';
   keySearchUrl = environment.serviceUrlPrefix + "/skill/getSkillsOnSearch/";
   addReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/addreferenceskill";
   deleteReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/deleteReferenceskill/";
+  skill: any;
 
   constructor(private http: HttpClient) { }
+
+  getSkill() {
+    return this.skill;
+  }
+
+  setSkill(skill: any) {
+    this.skill = skill;
+  }
 
   getAll(): Observable<any> {
     return this.http.get(this.getAllSkillUrl);
   }
 
   updateSearch(json): Observable<any> {
-    console.log(json);
     return this.http.post(this.updateSearchUrl, json, httpOptions);
   }
 
   updateSkill(json): Observable<any> {
-    console.log(json);
     return this.http.post(this.updateSkillUrl, json, httpOptions);
   }
 
   addReferenceSkill(json): Observable<any> {
-    console.log(json);
     return this.http.post(this.addReferenceSkillUrl, json, httpOptions);
   }
 

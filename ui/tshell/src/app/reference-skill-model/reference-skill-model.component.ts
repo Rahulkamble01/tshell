@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { Skill, ReferenceSkill } from '../skill';
+import { ReferenceSkill } from '../skill';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, delay } from 'rxjs/operators';
 import { SkillserviceService } from '../skillservice.service';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
-import { error } from '@angular/compiler/src/util';
+
 
 @Component({
   selector: 'app-reference-skill-model',
@@ -19,6 +19,8 @@ export class ReferenceSkillModelComponent implements OnInit {
   @Input() allSkills: any;
   @Input() skill: any;
   @Input() type: any;
+  @Output() skillEvent = new EventEmitter();
+  // @Output() clickevent = new EventEmitter<string>();
   model: any;
   sameSkill = false;
 
@@ -74,7 +76,7 @@ export class ReferenceSkillModelComponent implements OnInit {
     this.referenceSkillName.push(skill);
   }
 
-  submitReferenceSkill() {
+  async submitReferenceSkill() {
     this.referenceSkillName.forEach(element => {
       this.addReferenceSkillForm.controls['id'].patchValue(element.id);
       this.addReferenceSkillForm.controls['skill'].patchValue(this.skill);
@@ -91,12 +93,15 @@ export class ReferenceSkillModelComponent implements OnInit {
       this.skillService.addReferenceSkill(JSON.stringify(this.addReferenceSkillForm.value)).subscribe();
     });
 
-    this.confirmationDialogService.alert(`Skills Are Added to The Dependancies..`,
-      `Skill is Added`)
-      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
-    delay(3000);
+    this.skillService.setSkill(this.skill);
+    this.skillEvent.next(this.skillService.getSkill());
+    console.log('skill Set');
     this.activeModal.dismiss('Cross click');
 
   }
 }
+
+// await this.confirmationDialogService.alert(`Skills Are Added to The Dependancies..`,
+// `Skill is Added`)
+// .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));

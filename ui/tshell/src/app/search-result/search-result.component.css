@@ -248,15 +248,21 @@ a {
     margin-right: 0px
   } */
 }
+
 @media screen and (max-width: 575px) {
   .skillnameStyle {
     text-align: center;
   }
-  .inlineelements{
+
+  .inlineelements {
     text-align: center
   }
-  .description-style{
-    text-align: center!important;
+
+  .description-style {
+    text-align: center !important;
+  }
+  .flt{
+    text-align: center;
   }
 
 }
@@ -280,10 +286,11 @@ a {
     display: none;
   }
 }
+
 @media (min-width: 1200px) {
   .dropdown-menu {
     width: 731px;
-}
+  }
 }
 
 .center1 {
@@ -326,7 +333,9 @@ a {
 
 .f1 {
   font-size: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .m1 {
@@ -416,10 +425,23 @@ a {
   color: white;
   opacity: 0.7;
 }
-.min-height-additional-skill{
+
+.min-height-additional-skill {
   min-height: 245px
 }
-.text-not-center{
-  text-align: initial!important;
+
+.text-not-center {
+  text-align: initial !important;
   display: inline;
+}
+
+.mb-between {
+  margin-bottom: .15rem !important;
+}
+
+.custom-hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, .1);
 }
