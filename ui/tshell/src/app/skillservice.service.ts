@@ -12,16 +12,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SkillserviceService {
-  getAllSkillUrl = environment.serviceUrlPrefix + '/skill/skills';
-  updateSearchUrl = environment.serviceUrlPrefix + '/skill/updateSkillSearch';
-  skillToppersUrl = environment.serviceUrlPrefix + '/assessment/top5list/';
-  updateSkillUrl = environment.serviceUrlPrefix + '/skill/updateSkill';
-  addSkillurl = environment.serviceUrlPrefix + '/skill/addskill';
-  deleteTopicUrl = environment.serviceUrlPrefix + '/skill/deleteTopic';
-  ReferenceSkillUrl = environment.serviceUrlPrefix + '/skill/referenceskill/';
-  keySearchUrl = environment.serviceUrlPrefix + "/skill/getSkillsOnSearch/";
-  addReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/addreferenceskill";
-  deleteReferenceSkillUrl = environment.serviceUrlPrefix + "/skill/deleteReferenceskill/";
+  getAllSkillUrl = `${environment.serviceUrlPrefix}/skill/skills`;
+  updateSearchUrl = `${environment.serviceUrlPrefix}/skill/updateSkillSearch`;
+  skillToppersUrl = `${environment.serviceUrlPrefix}/assessment/top5list/`;
+  updateSkillUrl = `${environment.serviceUrlPrefix}/skill/updateSkill`;
+  addSkillurl = `${environment.serviceUrlPrefix}/skill/addskill`;
+  deleteTopicUrl = `${environment.serviceUrlPrefix}/skill/deleteTopic`;
+  ReferenceSkillUrl = `${environment.serviceUrlPrefix}/skill/referenceskill/`;
+  keySearchUrl = `${environment.serviceUrlPrefix}/skill/getSkillsOnSearch/`;
+  addReferenceSkillUrl = `${environment.serviceUrlPrefix}/skill/addreferenceskill`;
+  deleteReferenceSkillUrl = `${environment.serviceUrlPrefix}/skill/deleteReferenceskill/`;
   skill: any;
 
   constructor(private http: HttpClient) { }
@@ -47,6 +47,7 @@ export class SkillserviceService {
   }
 
   addReferenceSkill(json): Observable<any> {
+    console.log('1324');
     return this.http.post(this.addReferenceSkillUrl, json, httpOptions);
   }
 
@@ -66,7 +67,7 @@ export class SkillserviceService {
 
   skillsOnSearch(key): Observable<any> {
     console.log(this.keySearchUrl + key);
-    return this.http.get(this.keySearchUrl);
+    return this.http.get(this.keySearchUrl + key);
   }
 
   // getGraphDataOfSkill(skillName): Observable<any> {

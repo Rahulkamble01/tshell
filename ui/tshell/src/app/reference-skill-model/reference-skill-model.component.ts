@@ -91,6 +91,7 @@ export class ReferenceSkillModelComponent implements OnInit {
         this.addReferenceSkillForm.controls['classifier'].patchValue('pre');
       }
       this.skillService.addReferenceSkill(JSON.stringify(this.addReferenceSkillForm.value)).subscribe();
+      delay(2000);
     });
 
 
