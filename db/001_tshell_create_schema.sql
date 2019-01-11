@@ -217,7 +217,9 @@ CREATE TABLE `question_difficulty` (
 
 LOCK TABLES `question_difficulty` WRITE;
 /*!40000 ALTER TABLE `question_difficulty` DISABLE KEYS */;
-INSERT INTO `question_difficulty` VALUES (1,'hard');
+INSERT INTO `question_difficulty` VALUES (1,'Easy');
+INSERT INTO `question_difficulty` VALUES (2,'Medium');
+INSERT INTO `question_difficulty` VALUES (3,'Hard');
 /*!40000 ALTER TABLE `question_difficulty` ENABLE KEYS */;
 UNLOCK TABLES;
 

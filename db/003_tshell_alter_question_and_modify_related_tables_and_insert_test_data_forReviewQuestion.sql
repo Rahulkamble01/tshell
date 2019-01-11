@@ -1,6 +1,3 @@
-UPDATE `tshell`.`question_difficulty` SET `qd_difficulty`='Easy' WHERE `qd_id`='1';
-
-INSERT INTO `tshell`.`question_difficulty` (`qd_id`, `qd_difficulty`) VALUES (2, 'Medium'),(3, 'Hard');
 
 
 INSERT INTO `question`(qu_qd_id,qu_question,qu_status,qu_created_date)
