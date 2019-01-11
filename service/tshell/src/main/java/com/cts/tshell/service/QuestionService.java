@@ -14,6 +14,7 @@ import com.cts.tshell.bean.Topic;
 import com.cts.tshell.bean.User;
 import com.cts.tshell.repository.OptionsRepository;
 import com.cts.tshell.repository.QuestionRepository;
+import com.cts.tshell.repository.SkillRepository;
 import com.cts.tshell.repository.TopicRepository;
 import com.cts.tshell.repository.UserRepository;
 
@@ -99,8 +100,6 @@ public class QuestionService {
 		LOGGER.info("end of getAllTopics method");
 		return topics;
 	}
-
-
 	@Transactional
 	public List<Question> findTotalQuestionContributed(int employeeId) {
 		LOGGER.info("START");
