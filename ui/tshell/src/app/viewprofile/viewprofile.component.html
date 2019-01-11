@@ -205,14 +205,14 @@
               <div *ngFor="let assessment of skill.assessments">
                 <div class="row">
                   <div class="col-lg-5 col-5 col-sm-5">
-                    <span class="badge assessmententry" *ngIf="assessment.type=='Entry'">
-                      <input type="hidden" value="assessment.skill.id" #skillid>
-                      {{assessment.type}}
+                    <span class="badge assessmententry" *ngIf="assessment.type=='entry'">
+                      <input type="hidden" value="assessment.skill.id" #skillid/>
+                      {{assessment.type | titlecase}}
                     </span>
-                    <span class="badge assessmentexit" *ngIf="assessment.type=='Exit'">
-                      {{assessment.type}}
+                    <span class="badge assessmentexit" *ngIf="assessment.type=='exit'">
+                      {{assessment.type | titlecase}}
                     </span>
-                    <div class="col-lg-7 col-7 col-sm-7" *ngIf="assessment.type!='Exit' && assessment.type=='Entry' && !assessment.skill ">
+                    <div class="col-lg-7 col-7 col-sm-7" *ngIf="assessment.type=='entry' && !assessment.skill ">
                       <span class="testdate"><span>Assessment yet to be taken</span></span>
                     </div>
                     <br><span class="testdate">{{assessment.date}}</span>

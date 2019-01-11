@@ -78,7 +78,7 @@ public class Assessment {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "as_sk_id")
-	@JsonView(Views.Internal.class)
+	@JsonView(Views.Public.class)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Skill skill;
 
