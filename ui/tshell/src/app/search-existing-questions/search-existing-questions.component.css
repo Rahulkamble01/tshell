@@ -1,3 +1,6 @@
+pre{
+    white-space: pre-wrap;
+}
 a{
     color:rgb(105, 104, 104);
 }

@@ -94,8 +94,8 @@ export class AddQuestionComponent implements OnInit {
         console.log("Response: " + data)
       });
     console.log(this.topic);
-    this.alertService.alert(`Adding Question Confirmation`,
-      `If you click on 'ok' Question will be Added. `)
+    this.alertService.alert(`Success`,
+      `Question is added successfully. `)
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
   }

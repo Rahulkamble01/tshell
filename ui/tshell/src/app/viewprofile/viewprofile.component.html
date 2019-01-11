@@ -139,11 +139,7 @@
                     <div *ngIf="updateStatus" class="alert alert-success">Updated Successfully</div>
                     <div *ngIf="!updateStatus">
 
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Employee Id:</label>
-                        <input type="text" class="form-control" formControlName="employeeId" readonly>
-                      </div>
-                      <div class="form-group">
+                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Name</label>
                         <input type="text" class="form-control" formControlName="name">
                         <div *ngIf="form1.get('name').touched && form1.get('name').invalid">
@@ -152,17 +148,7 @@
                             maximum 45 characters</div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Email</label>
-                        <input type="text" class="form-control" formControlName="email">
-                        <div *ngIf="form1.get('email').touched && form1.get('email').invalid">
-                          <div *ngIf="form1.get('email').errors.required" class="danger validation">Email is required</div>
-                          <div *ngIf="form1.get('email').errors.pattern" class="danger validation">Email pattern is not
-                            valid. Example: "tShell@cognizant.com"</div>
-                        </div>
-                      </div>
-
-                    </div>
+                     </div>
                   </div>
                   <div class="modal-footer">
                     <!-- <div *ngIf="updateStatus">

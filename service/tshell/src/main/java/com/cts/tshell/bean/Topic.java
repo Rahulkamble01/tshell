@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "topic")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @NamedQueries({
 		@NamedQuery(name = "Topic.fetchTopics", query = "select t.name from Topic t "
 				+ "join t.skill s where s.id=:skillId"),
