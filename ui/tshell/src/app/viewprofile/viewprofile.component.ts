@@ -80,6 +80,7 @@ arraycounter:any;
               if(this.assessmentsData[j].skillname==data[i].skill.name){
                 skillPresent=true;
                 this.assessmentsData[j].assessments.push(data[i]);
+                console.log(data[i].score);
               }
             }
             if(!skillPresent){

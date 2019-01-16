@@ -43,16 +43,16 @@
 }
 
 .carddetail{
-  margin-left:5%;
+  margin-right:20px ;
 }
 
 .iconColor{
   font-size:50px;
-  color: #0e5bd6"
+  color: #0e5bd6;
 }
 .cardText{
 font-size:20px;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .ml-5percent{
@@ -89,4 +89,4 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
     font-size: 22px;
     height: 70px
   }
-}
+} 
