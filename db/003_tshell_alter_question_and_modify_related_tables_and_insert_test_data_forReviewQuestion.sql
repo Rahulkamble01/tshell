@@ -98,7 +98,7 @@ alter table `tshell`.`question` add fulltext(qu_question);
 /*Important Note for adding new stopwords manually and make them work.*/
 /*If you want to add any stopword manually, 
   1) then add that word in my_stopwords table [syntax-> INSERT INTO `tshell`.`my_stopwords`(value) VALUES ('a\'s'),('able'),.......;]
-  2) to show the table create query and point out the [syntax-> SHOW CREATE TABLE `tshell`.`question`;]
+  2) to show the table create query and point out the fulltext indexed column and key name[syntax-> SHOW CREATE TABLE `tshell`.`question`;]
   3) drop the fulltext key [syntax-> alter table `tshell`.`question` drop key qu_question;]
   4) set qu_question as FULLTEXT [syntax-> ALTER TABLE `tshell`.`question` ADD FULLTEXT(qu_question);]  
 */
