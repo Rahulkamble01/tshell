@@ -19,6 +19,13 @@ import com.cts.tshell.bean.Topic;
 import com.cts.tshell.service.SkillService;
 import com.cts.tshell.service.TopicService;
 
+/**
+ * A condition evaluation report message that can logged or printed.
+ * @author Adil Ansari, 729745
+ * @author Saikat Singh Mahapatra, 729710
+ * @since 1.0.0
+ */
+
 @RestController
 @RequestMapping("/skill")
 public class SkillController extends TshellController {

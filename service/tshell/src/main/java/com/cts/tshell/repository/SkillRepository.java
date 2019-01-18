@@ -12,6 +12,13 @@ import org.springframework.stereotype.Repository;
 
 import com.cts.tshell.bean.Skill;
 
+/**
+ * A condition evaluation report message that can logged or printed.
+ * @author Adil Ansari, 729745
+ * @author Saikat Singh Mahapatra, 729710
+ * @since 1.0.0
+ */
+
 @Repository
 public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
