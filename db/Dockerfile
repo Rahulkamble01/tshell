@@ -1,0 +1,8 @@
+FROM mysql:8.0
+ADD 001_tshell_create_schema.sql /docker-entrypoint-initdb.d
+ADD 002_tshell_alter_user_table_forgotpassword.sql /docker-entrypoint-initdb.d
+ADD 003_tshell_alter_question_and_modify_related_tables_and_insert_test_data_forReviewQuestion.sql /docker-entrypoint-initdb.d
+ADD 004_alter_assessment_question_for_answer_status.sql /docker-entrypoint-initdb.d
+ADD 005_alter_user_for_adding_default_admin.sql /docker-entrypoint-initdb.d
+ADD 006_alter_skill_topic_user_for_description_percentage_otp.sql /docker-entrypoint-initdb.d
+ADD 007_insert_topic_to_test_assessment.sql /docker-entrypoint-initdb.d

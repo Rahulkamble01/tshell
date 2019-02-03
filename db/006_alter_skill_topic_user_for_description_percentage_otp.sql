@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `reference_skill`;
+DROP TABLE IF EXISTS `tshell`.`reference_skill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `reference_skill` (
+CREATE TABLE `tshell`.`reference_skill` (
   `rs_id` int(11) NOT NULL AUTO_INCREMENT,
   `rs_sk_id` int(11) NOT NULL,
   `rs_ref_id` int(11) NOT NULL,
